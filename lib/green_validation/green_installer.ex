@@ -69,7 +69,7 @@ defmodule GreenValidation.GreenInstaller do
   defp reset_formatter_exs(%Project{has_formatter_exs: false} = project) do
     project_path = Project.path(project)
 
-    System.cmd("rm", [".formatter.exs"],
+    System.cmd("rm", ["-f", ".formatter.exs"],
       cd: project_path,
       stderr_to_stdout: true
     )
