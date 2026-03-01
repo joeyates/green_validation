@@ -4,6 +4,7 @@
 
 Mix.install([
   {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+  {:helpful_options, "~> 0.4.4"},
   {:jason, "~> 1.4"}
 ])
 
@@ -14,13 +15,42 @@ defmodule GreenValidation.CLI do
 
   alias GreenValidation.{BaselineFormatter, Projects, Project, Repo, Repos, RuleValidator}
 
+  @program "bin/validate"
+
+  @commands [
+    %{commands: [], description: "Show this help message"},
+    %{commands: ["help"], description: "Show this help message"},
+    %{commands: ["check"], description: "Check all projects"},
+    %{commands: ["check", :project], description: "Check a specific project"}
+  ]
+
   def main(args) do
-    case args do
+    case HelpfulOptions.parse_commands(args, @commands) do
+      {:ok, parsed} ->
+        run(parsed)
+      {:error, reason} ->
+        IO.puts("Invalid command: #{inspect(reason)}")
+        usage()
+        System.halt(1)
+    end
+  end
+
+  defp run(%{commands: commands, switches: _switches, other: _other}) do
+    case commands do
+      [] ->
+        usage()
+      ["help"] ->
+        usage()
       ["check"] ->
         check_all()
       ["check", project_name] ->
         check(project_name)
     end
+  end
+
+  defp usage() do
+    IO.puts("Usage:\n")
+    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
   end
   
   defp check_all() do
