@@ -35,6 +35,7 @@ defmodule GreenValidation.OutputParser do
     |> String.split("\n")
     |> Enum.filter(&String.starts_with?(&1, "\e[1m\e[31m"))
     |> Enum.map(&String.trim_leading(&1, "\e[1m\e[31m"))
+    |> Enum.map(&String.trim_trailing(&1, "\e[0m"))
     |> Enum.uniq()
   end
 

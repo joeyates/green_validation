@@ -31,5 +31,27 @@ defmodule GreenValidation.OutputParserTest do
                ]
              }
     end
+
+    test "extracts file paths from changes with ANSI color codes" do
+      repo = %Repo{name: "test_project", repo: "https://example.com/test_project.git"}
+
+      root_path = [__DIR__, "..", ".."] |> Path.join() |> Path.expand()
+
+      output = """
+      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/controllers/page_controller.ex\e[0m
+      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/views/page_view.ex\e[0m
+      """
+
+      {:ok, result} = parse_output(repo, :my_rule, output)
+
+      assert result == %RuleResult{
+               rule: :my_rule,
+               changes: [
+                 "lib/my_app_web/controllers/page_controller.ex",
+                 "lib/my_app_web/views/page_view.ex"
+               ],
+               warnings: []
+             }
+    end
   end
 end
