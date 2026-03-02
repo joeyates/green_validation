@@ -11,28 +11,7 @@ The validation system:
 4. Captures detailed results as JSON with line-level granularity
 5. Generates aggregate statistics across all projects
 
-## Prerequisites
-
-The validation system requires Green to be available when running `mix format` in target projects. Currently, you need to manually add Green as a dependency to each cloned project, or use the GreenInstaller module helper functions.
-
-### Manual Setup (Simple)
-
-After cloning a project, add Green to its `mix.exs`:
-
-```elixir
-defp deps do
-  [
-    # Use path dependency to test local changes
-    {:green, path: "/path/to/green", override: true}
-    # Or use published version
-    # {:green, "~> 0.1.10"}
-  ]
-end
-```
-
-Then run `mix deps.get` in the project directory.
-
-### Automated Setup (Recommended)
+## Setup
 
 The validation system includes a `GreenInstaller` module that can automatically:
 - Add Green as a path dependency to test local changes
@@ -40,14 +19,12 @@ The validation system includes a `GreenInstaller` module that can automatically:
 - Install dependencies
 - Restore original files after validation
 
-This integration is planned for future automation.
-
 ## Quick Start
 
 The validation system automatically clones projects when they're not present.
 
-**Target Projects:**
-- elixir (Elixir language monorepo)
+**Target Repositories and projects:**
+- elixir (Elixir language monorepo): elixir, eex, ex_unit, iex, logger and mix projects,
 - phoenix (Phoenix web framework)
 - phoenix_live_view (Phoenix LiveView)
 - hexpm (Hex package manager)
