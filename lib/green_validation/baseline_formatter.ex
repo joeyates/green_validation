@@ -10,6 +10,8 @@ defmodule GreenValidation.BaselineFormatter do
 
   If not, commits the necessary changes to create a baseline for Green formatter to compare against.
   """
+  @spec ensure_clean(Project.t()) ::
+          {:ok, :clean | :created_format_commit} | {:error, String.t()}
   def ensure_clean(%Project{} = project) do
     GreenInstaller.prepare_formatter_exs(project)
     project_path = Project.path(project)
@@ -32,6 +34,7 @@ defmodule GreenValidation.BaselineFormatter do
     end
   end
 
+  @spec format(Project.t()) :: :ok | {:error, String.t()}
   defp format(%Project{} = project) do
     project_path = Project.path(project)
 
@@ -47,6 +50,7 @@ defmodule GreenValidation.BaselineFormatter do
     end
   end
 
+  @spec commit_format_changes(Project.t()) :: :ok
   defp commit_format_changes(%Project{} = project) do
     project_path = Project.path(project)
 
