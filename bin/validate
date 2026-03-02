@@ -13,7 +13,16 @@ defmodule GreenValidation.CLI do
   Command-line interface for the validation system.
   """
 
-  alias GreenValidation.{BaselineFormatter, Projects, Project, Repo, Repos, RuleValidator}
+  alias GreenValidation.{
+    BaselineFormatter,
+    Projects,
+    Project,
+    Repo,
+    Repos,
+    Result,
+    RuleValidator,
+    TestRun
+  }
 
   @program "bin/validate"
 
@@ -104,7 +113,7 @@ defmodule GreenValidation.CLI do
         project, :ok ->
           IO.puts("Checking project: #{project.name}")
           case check_project(project) do
-            :ok ->
+            {:ok, _result} ->
               :ok
             {:error, reason} ->
               IO.puts("Validation failed for #{project.name}: #{reason}")
@@ -121,7 +130,7 @@ defmodule GreenValidation.CLI do
     with {:ok, project} <- Projects.find_by_name(project_name),
          {:ok, repo} <- Project.repo(project),
          {:ok, _repo} <- Repo.clone(repo),
-         :ok <- check_project(project) do
+         {:ok, _result} <- check_project(project) do
       :ok
     else
       {:error, reason} ->
@@ -134,32 +143,94 @@ defmodule GreenValidation.CLI do
     with :ok <- Project.has_mix_exs?(project),
          :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
-         {:ok, results} <- RuleValidator.validate_all_rules(project) do
+         {:ok, rule_results} <- RuleValidator.validate_all_rules(project),
+         {:ok, repo} <- Project.repo(project),
+         {:ok, test_run} <- build_test_run(project, repo) do
+      
+      result = %Result{
+        test_run: test_run,
+        baseline: baseline_status,
+        rules: rule_results
+      }
+
+      # Print output for backwards compatibility
       if baseline_status == :created_format_commit do
         IO.puts("Baseline formatting commit created for #{project.name}.")
       end
 
       Enum.each(
-        results,
-        fn result ->
-          IO.puts("    Rule: #{result.rule}")
-          if length(result.changes) == 0 and length(result.warnings) == 0 do
+        rule_results,
+        fn rule_result ->
+          IO.puts("    Rule: #{rule_result.rule}")
+          if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
             IO.puts("      ✅ No issues found.")
           end
 
-          if length(result.changes) > 0 do
-            IO.puts("      🔧 Changes needed for #{length(result.changes)} files:")
-            Enum.each(result.changes, &IO.puts("        - #{&1}"))
+          if length(rule_result.changes) > 0 do
+            IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
+            Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
           end
 
-          if length(result.warnings) > 0 do
-            IO.puts("      ⚠️ Warnings for #{length(result.warnings)} files:")
-            Enum.each(result.warnings, &IO.puts("        - #{&1}"))
+          if length(rule_result.warnings) > 0 do
+            IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
+            Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
           end
         end
       )
 
-      :ok
+      {:ok, result}
+    end
+  end
+
+  defp build_test_run(project, repo) do
+    project_path = Project.path(project)
+    
+    with {:ok, branch} <- get_current_branch(project_path),
+         {:ok, green_version} <- get_green_version(project_path) do
+      test_run = %TestRun{
+        project_name: project.name,
+        repository: repo.repo,
+        commit_sha: repo.commit_sha,
+        branch: branch,
+        green_version: green_version
+      }
+      
+      {:ok, test_run}
+    end
+  end
+
+  defp get_current_branch(project_path) do
+    case System.cmd("git", ["rev-parse", "--abbrev-ref", "HEAD"],
+           cd: project_path,
+           stderr_to_stdout: true
+         ) do
+      {output, 0} -> {:ok, String.trim(output)}
+      {output, _} -> {:error, "Failed to get current branch: #{output}"}
+    end
+  end
+
+  defp get_green_version(project_path) do
+    mix_exs_path = Path.join(project_path, "mix.exs")
+    
+    case File.read(mix_exs_path) do
+      {:ok, content} ->
+        # Try to extract green version from mix.exs
+        # Pattern matches: {:green, "~> 0.1.10"} or {:green, path: "..."}
+        version = 
+          cond do
+            content =~ ~r/\{:green,\s*"~>\s*([^"]+)"\}/ ->
+              [_, v] = Regex.run(~r/\{:green,\s*"~>\s*([^"]+)"\}/, content)
+              v
+            content =~ ~r/\{:green,.*path:/ ->
+              "local"
+            true ->
+              "unknown"
+          end
+        
+        {:ok, version}
+      
+      {:error, _} ->
+        {:ok, "unknown"}
     end
   end
 end
