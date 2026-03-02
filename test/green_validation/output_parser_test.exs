@@ -3,10 +3,12 @@ defmodule GreenValidation.OutputParserTest do
 
   import GreenValidation.OutputParser
 
-  alias GreenValidation.RuleResult
+  alias GreenValidation.{Project, RuleResult}
 
-  describe "parse_output/2" do
+  describe "parse_output/3" do
     test "extracts file paths from warnings" do
+      project = %Project{name: "test_project", repo_name: "test_repo"}
+
       output = """
       5 | Some text
       └─ config/my_app.exs:
@@ -18,7 +20,7 @@ defmodule GreenValidation.OutputParserTest do
       └─ lib/my_app_web/controllers/page_controller.ex:
       """
 
-      {:ok, result} = parse_output(:my_rule, output)
+      {:ok, result} = parse_output(project, :my_rule, output)
 
       assert result == %RuleResult{
                rule: :my_rule,

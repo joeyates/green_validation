@@ -3,15 +3,21 @@ defmodule GreenValidation.OutputParser do
   Parses output from `mix format --check-formatted` to extract file names.
   """
 
-  alias GreenValidation.RuleResult
+  alias GreenValidation.{Project, Repo, RuleResult}
 
   @doc """
   Parses the full mix format output and extracts file paths that have formatting issues.
+  Converts absolute paths to repository-local paths.
   """
-  @spec parse_output(atom, String.t()) :: {:ok, %RuleResult{}}
-  def parse_output(rule, output) do
+  @spec parse_output(Project.t(), atom, String.t()) :: {:ok, %RuleResult{}}
+  def parse_output(project, rule, output) do
     changes_files = extract_changes_files(output)
     warnings_files = extract_warnings_files(output)
+
+    # Convert absolute paths to repository-local paths
+    base_dir = Repo.base_dir()
+    changes_files = Enum.map(changes_files, &make_repo_local(&1, base_dir))
+    warnings_files = Enum.map(warnings_files, &make_repo_local(&1, base_dir))
 
     {
       :ok,
@@ -41,5 +47,14 @@ defmodule GreenValidation.OutputParser do
     |> Enum.map(&String.trim_leading(&1, "└─ "))
     |> Enum.map(&String.replace(&1, ~r":.*", ""))
     |> Enum.uniq()
+  end
+
+  # Converts absolute path to repository-local path
+  # Example: /path/to/repos/elixir/lib/file.ex -> elixir/lib/file.ex
+  defp make_repo_local(path, base_dir) do
+    case String.split(path, base_dir, parts: 2) do
+      [_, local_path] -> String.trim_leading(local_path, "/")
+      _ -> path
+    end
   end
 end
