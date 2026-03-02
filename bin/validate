@@ -273,7 +273,8 @@ defmodule GreenValidation.CLI do
   end
 
   defp write_report(result, format, _project_identifier) do
-    output_dir = "."
+    # Save reports in the results directory
+    output_dir = "results"
     
     case ReportWriter.write(result, format, output_dir: output_dir) do
       {:ok, filepath} ->
