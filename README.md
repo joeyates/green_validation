@@ -65,10 +65,10 @@ bin/validate check --format text
 bin/validate check phoenix --format text
 ```
 
-Output files are automatically timestamped and saved to the current directory:
-- JSON: `validation_<project>_<timestamp>.json`
-- Text: `validation_<project>_<timestamp>.txt`
-- Example: `validation_phoenix_20260302T143022.json`
+Output files are automatically named using the commit SHA and saved to the `results` directory:
+- JSON: `validation_<project>_<commit-sha>.json`
+- Text: `validation_<project>_<commit-sha>.txt`
+- Example: `validation_phoenix_abc123de.json`
 
 ## Available Commands
 
@@ -143,10 +143,10 @@ When using `--format text`, results are formatted as human-readable text with:
 
 ### Result Files
 
-Results are saved with timestamped filenames:
-- Format: `validation_{project_name}_{timestamp}.{ext}`
-- Example: `validation_phoenix_20260302T143022.json`
-- Location: Current directory (where command is run)
+Results are saved with filenames based on the commit SHA:
+- Format: `validation_{project_name}_{commit_sha}.{ext}`
+- Example: `validation_phoenix_abc123de.json`
+- Location: `results/` directory
 
 ## Interpreting Results
 

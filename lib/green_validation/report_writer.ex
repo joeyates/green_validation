@@ -179,18 +179,14 @@ defmodule GreenValidation.ReportWriter do
   end
 
   defp generate_filename(result, format) do
-    timestamp = format_timestamp(DateTime.utc_now())
+    # Use commit SHA instead of timestamp for filename
+    commit_sha = result.test_run.commit_sha
+    # Take first 8 characters of commit SHA
+    short_sha = String.slice(commit_sha, 0, 8)
     extension = if format == :json, do: "json", else: "txt"
     project_slug = String.replace(result.test_run.project_name, " ", "_")
 
-    "validation_#{project_slug}_#{timestamp}.#{extension}"
-  end
-
-  defp format_timestamp(datetime) do
-    datetime
-    |> DateTime.to_iso8601(:basic)
-    |> String.replace(~r/[Z\.\-\+:]/, "")
-    |> String.slice(0, 15)
+    "validation_#{project_slug}_#{short_sha}.#{extension}"
   end
 
   defp encode_result(result) do

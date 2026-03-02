@@ -164,14 +164,16 @@ defmodule GreenValidation.ReportWriterTest do
       assert {:ok, filepath} = ReportWriter.write(result, :json, output_dir: @tmp_dir)
       assert File.exists?(filepath)
       assert String.ends_with?(filepath, ".json")
-      assert filepath =~ "validation_test_project_"
+      # Filename should contain project name and first 8 chars of commit SHA
+      assert filepath =~ "validation_test_project_abc123de.json"
     end
 
     test "writes text format with auto-generated filename", %{clean_result: result} do
       assert {:ok, filepath} = ReportWriter.write(result, :text, output_dir: @tmp_dir)
       assert File.exists?(filepath)
       assert String.ends_with?(filepath, ".txt")
-      assert filepath =~ "validation_test_project_"
+      # Filename should contain project name and first 8 chars of commit SHA
+      assert filepath =~ "validation_test_project_abc123de.txt"
     end
 
     test "uses custom filename when provided", %{clean_result: result} do
