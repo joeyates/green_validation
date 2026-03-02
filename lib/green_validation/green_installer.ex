@@ -30,6 +30,7 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
+  @spec prepare_formatter_exs(Project.t(), list() | :all | nil) :: :ok
   def prepare_formatter_exs(%Project{} = project, rules \\ nil) do
     :ok = reset_formatter_exs(project)
     project_path = Project.path(project)
@@ -42,6 +43,7 @@ defmodule GreenValidation.GreenInstaller do
     :ok
   end
 
+  @spec reset_project(Project.t()) :: :ok | {:error, String.t()}
   def reset_project(%Project{} = project) do
     project_path = Project.path(project)
 
@@ -54,6 +56,7 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
+  @spec reset_formatter_exs(Project.t()) :: :ok | {:error, String.t()}
   defp reset_formatter_exs(%Project{has_formatter_exs: true} = project) do
     project_path = Project.path(project)
 
@@ -77,6 +80,7 @@ defmodule GreenValidation.GreenInstaller do
     :ok
   end
 
+  @spec reset_mix_exs(Project.t()) :: :ok | {:error, String.t()}
   defp reset_mix_exs(%Project{} = project) do
     project_path = Project.path(project)
 
@@ -89,11 +93,13 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
+  @spec get_latest_green_version() :: {:green, String.t()}
   defp get_latest_green_version do
     # For now, hardcode version - could query hex.pm API in the future
     {:green, "0.1.10"}
   end
 
+  @spec local_green_dependency() :: {:green, binary(), keyword()}
   def local_green_dependency do
     # From test/projects/validation/lib -> root of green project
     path = [__DIR__, "..", "..", "..", "..", ".."] |> Path.join() |> Path.expand()
@@ -101,6 +107,7 @@ defmodule GreenValidation.GreenInstaller do
     {:green, ">= 0.0.0", path: path}
   end
 
+  @spec modify_mix_exs(Project.t(), tuple()) :: :ok
   defp modify_mix_exs(%Project{} = project, green_version) do
     :ok = reset_mix_exs(project)
     MixExs.add_dependency(project, green_version)
@@ -108,6 +115,7 @@ defmodule GreenValidation.GreenInstaller do
     :ok
   end
 
+  @spec parsed_formatter_config(String.t()) :: keyword()
   defp parsed_formatter_config(project_path) do
     formatter_path = Path.join(project_path, ".formatter.exs")
 
@@ -120,6 +128,7 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
+  @spec update_formatter_config(keyword(), list() | :all | nil) :: String.t()
   defp update_formatter_config(base_config, rules) do
     green_config =
       case rules do
