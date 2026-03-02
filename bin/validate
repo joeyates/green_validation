@@ -20,8 +20,20 @@ defmodule GreenValidation.CLI do
   @commands [
     %{commands: [], description: "Show this help message"},
     %{commands: ["help"], description: "Show this help message"},
-    %{commands: ["check"], description: "Check all projects"},
-    %{commands: ["check", :project], description: "Check a specific project"}
+    %{
+      commands: ["check"],
+      description: "Check all projects",
+      switches: [
+        format: %{type: :string, description: "Output format ('text'|'json')"}
+      ]
+    },
+    %{
+      commands: ["check", :project],
+      description: "Check a specific project",
+      switches: [
+        format: %{type: :string, description: "Output format ('text'|'json')"}
+      ]
+    }
   ]
 
   def main(args) do
