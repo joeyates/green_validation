@@ -44,8 +44,10 @@ defmodule GreenValidation.Repos do
   @doc """
   Returns the list of repositories to validate.
   """
+  @spec all() :: list(Repo.t())
   def all(), do: @repos
 
+  @spec find_by_name(String.t()) :: {:ok, Repo.t()} | {:error, String.t()}
   def find_by_name(name) do
     case Enum.find(all(), &(&1.name == name)) do
       nil -> {:error, "Repository not found: #{name}"}
