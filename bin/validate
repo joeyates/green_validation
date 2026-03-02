@@ -1,0 +1,155 @@
+#!/usr/bin/env elixir
+
+# Main validation script for testing Green formatter against major Elixir projects
+
+Mix.install([
+  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+  {:helpful_options, "~> 0.4.4"},
+  {:jason, "~> 1.4"}
+])
+
+defmodule GreenValidation.CLI do
+  @moduledoc """
+  Command-line interface for the validation system.
+  """
+
+  alias GreenValidation.{BaselineFormatter, Projects, Project, Repo, Repos, RuleValidator}
+
+  @program "bin/validate"
+
+  @commands [
+    %{commands: [], description: "Show this help message"},
+    %{commands: ["help"], description: "Show this help message"},
+    %{commands: ["check"], description: "Check all projects"},
+    %{commands: ["check", :project], description: "Check a specific project"}
+  ]
+
+  def main(args) do
+    case HelpfulOptions.parse_commands(args, @commands) do
+      {:ok, parsed} ->
+        run(parsed)
+      {:error, reason} ->
+        IO.puts("Invalid command: #{inspect(reason)}")
+        usage()
+        System.halt(1)
+    end
+  end
+
+  defp run(%{commands: commands, switches: _switches, other: _other}) do
+    case commands do
+      [] ->
+        usage()
+      ["help"] ->
+        usage()
+      ["check"] ->
+        check_all()
+      ["check", project_name] ->
+        check(project_name)
+    end
+  end
+
+  defp usage() do
+    IO.puts("Usage:\n")
+    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+  end
+  
+  defp check_all() do
+    with :ok <- clone_all(),
+      :ok <- check_all_projects() do
+      IO.puts("All projects validated successfully.")
+    else
+      {:error, reason} ->
+        IO.puts("Error during validation: #{reason}")
+        System.halt(1)
+    end
+  end
+
+  defp clone_all() do
+    Enum.reduce(
+      Repos.all(),
+      :ok,
+      fn
+        repo, :ok ->
+          case Repo.clone(repo) do
+            {:ok, _} ->
+              :ok
+            {:error, reason} ->
+              IO.puts("Failed to clone #{repo.name}: #{reason}")
+              {:error, reason}
+          end
+
+        _repo, {:error, _reason} = error ->
+          error
+      end
+    )
+  end
+
+  defp check_all_projects() do
+    Enum.reduce(
+      Projects.all(),
+      :ok,
+      fn
+        project, :ok ->
+          IO.puts("Checking project: #{project.name}")
+          case check_project(project) do
+            :ok ->
+              :ok
+            {:error, reason} ->
+              IO.puts("Validation failed for #{project.name}: #{reason}")
+              {:error, reason}
+          end
+
+        _project, {:error, _reason} = error ->
+          error
+      end
+    )
+  end
+
+  defp check(project_name) do
+    with {:ok, project} <- Projects.find_by_name(project_name),
+         {:ok, repo} <- Project.repo(project),
+         {:ok, _repo} <- Repo.clone(repo),
+         :ok <- check_project(project) do
+      :ok
+    else
+      {:error, reason} ->
+        IO.puts("Error: #{reason}")
+        System.halt(1)
+    end
+  end
+
+  defp check_project(project) do
+    with :ok <- Project.has_mix_exs?(project),
+         :ok <- Project.install_deps(project),
+         {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
+         {:ok, results} <- RuleValidator.validate_all_rules(project) do
+      if baseline_status == :created_format_commit do
+        IO.puts("Baseline formatting commit created for #{project.name}.")
+      end
+
+      Enum.each(
+        results,
+        fn result ->
+          IO.puts("    Rule: #{result.rule}")
+          if length(result.changes) == 0 and length(result.warnings) == 0 do
+            IO.puts("      ✅ No issues found.")
+          end
+
+          if length(result.changes) > 0 do
+            IO.puts("      🔧 Changes needed for #{length(result.changes)} files:")
+            Enum.each(result.changes, &IO.puts("        - #{&1}"))
+          end
+
+          if length(result.warnings) > 0 do
+            IO.puts("      ⚠️ Warnings for #{length(result.warnings)} files:")
+            Enum.each(result.warnings, &IO.puts("        - #{&1}"))
+          end
+        end
+      )
+
+      :ok
+    end
+  end
+end
+
+GreenValidation.CLI.main(System.argv())

@@ -1,0 +1,6 @@
+# Cloned repositories
+repos/*
+!repos/.gitkeep
+
+# Results
+results/*.json
