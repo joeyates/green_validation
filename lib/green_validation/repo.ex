@@ -8,12 +8,22 @@ defmodule GreenValidation.Repo do
   @enforce_keys [:name, :repo]
   defstruct [:name, :repo, :commit_sha, default_branch: @default_branch]
 
+  @type t :: %__MODULE__{
+          name: String.t(),
+          repo: String.t(),
+          commit_sha: String.t() | nil,
+          default_branch: String.t()
+        }
+
+  @spec base_dir() :: String.t()
   def base_dir(), do: [__DIR__, "..", "..", "repos"] |> Path.join() |> Path.expand()
 
+  @spec path(t()) :: String.t()
   def path(%__MODULE__{name: name}) do
     Path.join(base_dir(), name)
   end
 
+  @spec cloned?(t()) :: boolean()
   def cloned?(%__MODULE__{} = repo) do
     File.dir?(path(repo))
   end
@@ -23,6 +33,7 @@ defmodule GreenValidation.Repo do
 
   Returns `{:ok, metadata}` or `{:error, reason}`.
   """
+  @spec clone(t()) :: {:ok, t()} | {:error, String.t()}
   def clone(%__MODULE__{} = repo) do
     with :ok <- ensure_repo(repo),
          :ok <- checkout_tag(repo),
@@ -33,6 +44,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec ensure_repo(t()) :: :ok | {:error, String.t()}
   defp ensure_repo(%__MODULE__{} = repo) do
     if cloned?(repo) do
       IO.puts("Updating existing repository: #{repo.name}")
@@ -44,6 +56,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec clone_repo(t()) :: :ok | {:error, String.t()}
   defp clone_repo(%__MODULE__{} = repo) do
     path = path(repo)
 
@@ -53,6 +66,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec clean_repo(t()) :: :ok | {:error, String.t()}
   defp clean_repo(%__MODULE__{} = repo) do
     path = path(repo)
     origin = "origin/#{repo.default_branch}"
@@ -66,6 +80,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec update_repo(t()) :: :ok | {:error, String.t()}
   defp update_repo(%__MODULE__{} = repo) do
     path = path(repo)
 
@@ -78,6 +93,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec checkout_tag(t()) :: :ok | {:error, String.t()}
   defp checkout_tag(%__MODULE__{} = repo) do
     path = path(repo)
     tag = repo.default_branch
@@ -91,6 +107,7 @@ defmodule GreenValidation.Repo do
     end
   end
 
+  @spec get_commit_sha(t()) :: {:ok, String.t()} | {:error, String.t()}
   defp get_commit_sha(%__MODULE__{} = repo) do
     path = path(repo)
 
