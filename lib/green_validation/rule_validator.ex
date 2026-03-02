@@ -96,7 +96,8 @@ defmodule GreenValidation.RuleValidator do
         stderr_to_stdout: true
       )
 
-    parse_format_output(rule, output, exit_code)
+    {:ok, repo} = Project.repo(project)
+    parse_format_output(repo, rule, output, exit_code)
   end
 
   @doc """
@@ -117,13 +118,13 @@ defmodule GreenValidation.RuleValidator do
   - `{:ok, %RuleResult{}}` on success
   - `{:error, reason}` on failure
   """
-  def parse_format_output(rule, output, exit_code) do
+  def parse_format_output(project, rule, output, exit_code) do
     cond do
       output == "" ->
         {:ok, %RuleResult{rule: rule}}
 
       exit_code in [0, 1] ->
-        OutputParser.parse_output(rule, output)
+        OutputParser.parse_output(project, rule, output)
 
       true ->
         # Error occurred

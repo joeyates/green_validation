@@ -11,28 +11,7 @@ The validation system:
 4. Captures detailed results as JSON with line-level granularity
 5. Generates aggregate statistics across all projects
 
-## Prerequisites
-
-The validation system requires Green to be available when running `mix format` in target projects. Currently, you need to manually add Green as a dependency to each cloned project, or use the GreenInstaller module helper functions.
-
-### Manual Setup (Simple)
-
-After cloning a project, add Green to its `mix.exs`:
-
-```elixir
-defp deps do
-  [
-    # Use path dependency to test local changes
-    {:green, path: "/path/to/green", override: true}
-    # Or use published version
-    # {:green, "~> 0.1.10"}
-  ]
-end
-```
-
-Then run `mix deps.get` in the project directory.
-
-### Automated Setup (Recommended)
+## Setup
 
 The validation system includes a `GreenInstaller` module that can automatically:
 - Add Green as a path dependency to test local changes
@@ -40,24 +19,12 @@ The validation system includes a `GreenInstaller` module that can automatically:
 - Install dependencies
 - Restore original files after validation
 
-This integration is planned for future automation.
-
 ## Quick Start
 
-### 1. Clone Projects
+The validation system automatically clones projects when they're not present.
 
-Clone all target projects:
-```bash
-bin/validate clone
-```
-
-Or clone a specific project:
-```bash
-bin/validate clone phoenix
-```
-
-**Target Projects:**
-- elixir (Elixir language monorepo)
+**Target Repositories and projects:**
+- elixir (Elixir language monorepo): elixir, eex, ex_unit, iex, logger and mix projects,
 - phoenix (Phoenix web framework)
 - phoenix_live_view (Phoenix LiveView)
 - hexpm (Hex package manager)
@@ -66,209 +33,187 @@ bin/validate clone phoenix
 - broadway (Broadway data processing)
 - credo (Credo static analysis)
 
-### 2. Run Validation
+### Run Validation
 
-Run full validation (baseline + per-rule checks) for all projects:
+Check all projects:
 ```bash
-bin/validate validate
+bin/validate check
 ```
 
-Or validate a specific project:
+Or check a specific project:
 ```bash
-bin/validate validate phoenix
+bin/validate check phoenix
 ```
 
 This will:
-- Check baseline formatting (without Green)
+- Clone repositories if not already cloned
+- Check baseline formatting (creating a format commit if needed)
 - Test each Green rule individually
-- Save results as JSON in `results/` directory
+- Print results to stdout
 
-### 3. Generate Summary Report
+### Export Results to File
 
-View aggregate statistics across all validation results:
+You can save validation results to a file using the `--format` option:
+
 ```bash
-bin/validate summary
+# Save results as JSON
+bin/validate check --format json
+bin/validate check phoenix --format json
+
+# Save results as formatted text
+bin/validate check --format text
+bin/validate check phoenix --format text
 ```
 
-This displays:
-- Overall statistics (projects, targets, rules tested)
-- Baseline formatting compliance rates
-- Most commonly triggered rules
-- Per-project summaries
+Output files are automatically named using the commit SHA and saved to the `results` directory:
+- JSON: `validation_<project>_<commit-sha>.json`
+- Text: `validation_<project>_<commit-sha>.txt`
+- Example: `validation_phoenix_abc123de.json`
 
 ## Available Commands
 
-### Repository Management
+### Validation Commands
 
 ```bash
-# Clone all repositories
-bin/validate clone
+# Check all projects (prints to stdout)
+bin/validate check
 
-# Clone a specific project
-bin/validate clone <project_name>
+# Check a specific project
+bin/validate check <project_name>
+
+# Check with JSON output to file
+bin/validate check --format json
+bin/validate check <project_name> --format json
+
+# Check with text output to file  
+bin/validate check --format text
+bin/validate check <project_name> --format text
 ```
 
-### Inspection Commands
+### Help
 
 ```bash
-# Detect subprojects in monorepos
-bin/validate detect
-
-# Detect subprojects in a specific repo
-bin/validate detect <project_name>
-```
-
-### Testing Commands
-
-```bash
-# Check baseline formatting (without Green) for all projects
-bin/validate baseline
-
-# Check baseline for a specific project
-bin/validate baseline <project_name>
-
-# Validate each rule individually for all projects
-bin/validate rules
-
-# Validate rules for a specific project
-bin/validate rules <project_name>
-```
-
-### Full Validation
-
-```bash
-# Run complete validation and save JSON results
-bin/validate validate
-
-# Validate a specific project only
-bin/validate validate <project_name>
-```
-
-### Reporting
-
-```bash
-# Generate aggregate summary from all results
-bin/validate summary
+# Show all available commands and options
+bin/validate help
 ```
 
 ## Understanding Results
 
 ### JSON Result Schema
 
-Each validation run creates a JSON file in `results/` with the following structure:
+When using `--format json`, each validation creates a JSON file with the following structure:
 
 ```json
 {
-  "metadata": {
-    "project": "project_name",
-    "repository": "https://github.com/...",
-    "commit_sha": "abc123...",
-    "tag_or_branch": "v1.0.0",
-    "green_version": "0.1.10",
-    "validated_at": "2026-02-24T10:00:00Z",
-    "target_name": "lib_elixir",
-    "target_path": "/path/to/target"
+  "test_run": {
+    "project_name": "phoenix",
+    "repository": "https://github.com/phoenixframework/phoenix",
+    "commit_sha": "abc123def456...",
+    "branch": "main",
+    "green_version": "0.1.10"
   },
-  "baseline": {
-    "clean": true,
-    "files_needing_formatting": 0
-  },
+  "baseline": "clean",
   "rules": [
     {
       "rule": "avoid_needless_pipelines",
-      "files_affected": 2,
-      "total_changes": 5,
-      "files": [
-        {
-          "path": "lib/example.ex",
-          "lines": [10, 25, 30]
-        }
+      "changes": [
+        "lib/phoenix/endpoint.ex",
+        "lib/phoenix/router.ex"
+      ],
+      "warnings": []
+    },
+    {
+      "rule": "prefer_pipelines",
+      "changes": [],
+      "warnings": [
+        "test/phoenix/endpoint_test.exs"
       ]
     }
   ]
 }
 ```
 
+### Text Result Format
+
+When using `--format text`, results are formatted as human-readable text with:
+- Test run metadata (project, repository, commit, branch, Green version)
+- Baseline status (clean or created formatting commit)
+- Per-rule results showing files with changes and warnings
+- Summary statistics (total rules, rules with changes, etc.)
+
 ### Result Files
 
-Results are saved with timestamped filenames:
-- Format: `{project_name}_{YYYYMMDDTHHmmss}.json`
-- Example: `phoenix_20260224T103045.json`
-- Location: `test/projects/validation/results/`
-
-### Summary Report
-
-The summary report shows:
-
-1. **Overview**: Total projects, targets, and rules tested
-2. **Baseline Formatting**: How many projects are already clean
-3. **Rule Statistics**: Top triggered rules with counts
-4. **Per-Project Results**: Individual project compliance
+Results are saved with filenames based on the commit SHA:
+- Format: `validation_{project_name}_{commit_sha}.{ext}`
+- Example: `validation_phoenix_abc123de.json`
+- Location: `results/` directory
 
 ## Interpreting Results
 
 ### Baseline Status
 
-- **Clean**: Project is already formatted correctly (no changes needed)
-- **Needs Formatting**: Some files don't match standard Elixir formatter
+- **`:clean`**: Project is already formatted correctly (no changes needed)
+- **`:created_format_commit`**: Baseline formatting commit was created
 
 A clean baseline means the project follows standard Elixir formatting conventions.
 
 ### Rule Results
 
 For each rule:
-- **files_affected**: Number of files that would be changed by this rule
-- **total_changes**: Total line-level changes across all files
-- **files**: Detailed list of affected files and line numbers
+- **changes**: List of files that would be changed by this rule
+- **warnings**: List of files that trigger warnings but not changes
 
 ### Common Scenarios
 
-**High files_affected count**: The rule triggers frequently in real projects. May indicate:
+**Many files in changes list**: The rule triggers frequently in real projects. May indicate:
 - A common pattern that violates the style guide
 - Potential incompatibility with Elixir's standard formatter
 - A rule that may need refinement
 
-**Zero files_affected**: The rule never triggers. May indicate:
+**Empty changes and warnings**: The rule never triggers. May indicate:
 - Projects already follow this guideline
 - The rule is too specific or unusual
 - Potential bug in rule implementation
 
-**Baseline failures**: If many projects fail baseline checks:
+**Baseline requires formatting commit**: If projects need baseline formatting:
 - They may not be using `mix format` consistently
 - May need to update to latest versions
-- Could indicate formatter compatibility issues
 
 ## Workflow for Green Development
 
 ### 1. Initial Validation
 
-Run validation to establish baseline:
+Check all projects to establish baseline:
 
 ```bash
-bin/validate clone
-bin/validate validate
-bin/validate summary
+bin/validate check
 ```
 
-### 2. After Rule Changes
+### 2. Save Results for Analysis
 
-When modifying Green rules, re-run validation:
+Export results to JSON for detailed analysis:
+
 ```bash
-bin/validate validate
-bin/validate summary
+bin/validate check --format json
+bin/validate check phoenix --format json
 ```
 
-Compare results to previous runs to see impact of changes.
+### 3. After Rule Changes
 
-### 3. Investigating Issues
+When modifying Green rules, re-check to see impact:
 
-To investigate a specific rule on a specific project:
 ```bash
-# Test only that project
-bin/validate validate phoenix
+bin/validate check --format json
+```
 
-# Check the JSON result for detailed file/line information
-cat results/phoenix_*.json | grep -A 20 '"rule": "problematic_rule"'
+Compare the new JSON results to previous runs to see what changed.
+
+### 4. Investigating Specific Issues
+
+Check a single project for faster iteration:
+
+```bash
+bin/validate check phoenix
 ```
 
 ## Directory Structure

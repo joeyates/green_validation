@@ -13,15 +13,37 @@ defmodule GreenValidation.CLI do
   Command-line interface for the validation system.
   """
 
-  alias GreenValidation.{BaselineFormatter, Projects, Project, Repo, Repos, RuleValidator}
+  alias GreenValidation.{
+    BaselineFormatter,
+    Projects,
+    Project,
+    Repo,
+    ReportWriter,
+    Repos,
+    Result,
+    RuleValidator,
+    TestRun
+  }
 
   @program "bin/validate"
 
   @commands [
     %{commands: [], description: "Show this help message"},
     %{commands: ["help"], description: "Show this help message"},
-    %{commands: ["check"], description: "Check all projects"},
-    %{commands: ["check", :project], description: "Check a specific project"}
+    %{
+      commands: ["check"],
+      description: "Check all projects",
+      switches: [
+        format: %{type: :string, description: "Output format ('text'|'json')"}
+      ]
+    },
+    %{
+      commands: ["check", :project],
+      description: "Check a specific project",
+      switches: [
+        format: %{type: :string, description: "Output format ('text'|'json')"}
+      ]
+    }
   ]
 
   def main(args) do
@@ -35,16 +57,16 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp run(%{commands: commands, switches: _switches, other: _other}) do
+  defp run(%{commands: commands, switches: switches, other: _other}) do
     case commands do
       [] ->
         usage()
       ["help"] ->
         usage()
       ["check"] ->
-        check_all()
+        check_all(switches)
       ["check", project_name] ->
-        check(project_name)
+        check(project_name, switches)
     end
   end
 
@@ -53,10 +75,13 @@ defmodule GreenValidation.CLI do
     IO.puts(HelpfulOptions.help_commands!(@program, @commands))
   end
   
-  defp check_all() do
-    with :ok <- clone_all(),
-      :ok <- check_all_projects() do
+  defp check_all(switches) do
+    with {:ok, results} <- check_all_projects() do
       IO.puts("All projects validated successfully.")
+      
+      # Write report if format is specified
+      handle_format_output(results, switches, "all")
+      :ok
     else
       {:error, reason} ->
         IO.puts("Error during validation: #{reason}")
@@ -85,31 +110,34 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_all_projects() do
-    Enum.reduce(
-      Projects.all(),
-      :ok,
-      fn
-        project, :ok ->
+    results =
+      Enum.reduce_while(
+        Projects.all(),
+        [],
+        fn project, acc ->
           IO.puts("Checking project: #{project.name}")
           case check_project(project) do
-            :ok ->
-              :ok
+            {:ok, result} ->
+              {:cont, [result | acc]}
             {:error, reason} ->
               IO.puts("Validation failed for #{project.name}: #{reason}")
-              {:error, reason}
+              {:halt, {:error, reason}}
           end
+        end
+      )
 
-        _project, {:error, _reason} = error ->
-          error
-      end
-    )
+    case results do
+      {:error, _} = error -> error
+      results -> {:ok, Enum.reverse(results)}
+    end
   end
 
-  defp check(project_name) do
+  defp check(project_name, switches) do
     with {:ok, project} <- Projects.find_by_name(project_name),
-         {:ok, repo} <- Project.repo(project),
-         {:ok, _repo} <- Repo.clone(repo),
-         :ok <- check_project(project) do
+         {:ok, result} <- check_project(project) do
+      
+      # Write report if format is specified
+      handle_format_output(result, switches, project_name)
       :ok
     else
       {:error, reason} ->
@@ -119,35 +147,116 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_project(project) do
-    with :ok <- Project.has_mix_exs?(project),
+    with {:ok, repo} <- Project.repo(project),
+         {:ok, cloned_repo} <- Repo.clone(repo),
+         :ok <- Project.has_mix_exs?(project),
          :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
-         {:ok, results} <- RuleValidator.validate_all_rules(project) do
+         {:ok, rule_results} <- RuleValidator.validate_all_rules(project),
+         {:ok, test_run} <- build_test_run(project, cloned_repo) do
+      
+      result = %Result{
+        test_run: test_run,
+        baseline: baseline_status,
+        rules: rule_results
+      }
+
+      # Print output for backwards compatibility
       if baseline_status == :created_format_commit do
         IO.puts("Baseline formatting commit created for #{project.name}.")
       end
 
       Enum.each(
-        results,
-        fn result ->
-          IO.puts("    Rule: #{result.rule}")
-          if length(result.changes) == 0 and length(result.warnings) == 0 do
+        rule_results,
+        fn rule_result ->
+          IO.puts("    Rule: #{rule_result.rule}")
+          if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
             IO.puts("      ✅ No issues found.")
           end
 
-          if length(result.changes) > 0 do
-            IO.puts("      🔧 Changes needed for #{length(result.changes)} files:")
-            Enum.each(result.changes, &IO.puts("        - #{&1}"))
+          if length(rule_result.changes) > 0 do
+            IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
+            Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
           end
 
-          if length(result.warnings) > 0 do
-            IO.puts("      ⚠️ Warnings for #{length(result.warnings)} files:")
-            Enum.each(result.warnings, &IO.puts("        - #{&1}"))
+          if length(rule_result.warnings) > 0 do
+            IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
+            Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
           end
         end
       )
 
-      :ok
+      {:ok, result}
+    end
+  end
+
+  defp build_test_run(project, cloned_repo) do
+    with {:ok, green_version} <- get_green_sha() do
+      test_run = %TestRun{
+        project_name: project.name,
+        repository: cloned_repo.repo,
+        commit_sha: cloned_repo.commit_sha,
+        branch: cloned_repo.default_branch,
+        green_version: green_version
+      }
+      
+      {:ok, test_run}
+    end
+  end
+
+  defp get_green_sha() do
+    # Get the SHA of the green project itself (where this validation suite lives)
+    green_root = [__DIR__, "..", "..", ".."] |> Path.join() |> Path.expand()
+
+    case System.cmd("git", ["rev-parse", "HEAD"],
+           cd: green_root,
+           stderr_to_stdout: true
+         ) do
+      {output, 0} -> {:ok, String.trim(output)}
+      {output, _} -> {:error, "Failed to get green SHA: #{output}"}
+    end
+  end
+
+  defp handle_format_output(result_or_results, switches, project_identifier) do
+    case switches[:format] do
+      nil ->
+        # No format specified, do nothing (already printed to stdout)
+        :ok
+
+      format_string when format_string in ["json", "text"] ->
+        format = String.to_atom(format_string)
+        
+        case result_or_results do
+          # Single result
+          %Result{} = result ->
+            write_report(result, format, project_identifier)
+          
+          # List of results (from check_all)
+          results when is_list(results) ->
+            Enum.each(results, fn result ->
+              project_name = result.test_run.project_name
+              write_report(result, format, project_name)
+            end)
+        end
+
+      other ->
+        IO.puts("Warning: Unknown format '#{other}'. Supported formats: 'json', 'text'")
+        :ok
+    end
+  end
+
+  defp write_report(result, format, _project_identifier) do
+    # Save reports in the results directory
+    output_dir = "results"
+    
+    case ReportWriter.write(result, format, output_dir: output_dir) do
+      {:ok, filepath} ->
+        IO.puts("\n📄 Report saved to: #{filepath}")
+        :ok
+      
+      {:error, reason} ->
+        IO.puts("\n⚠️  Warning: Failed to write report: #{inspect(reason)}")
+        :ok
     end
   end
 end
