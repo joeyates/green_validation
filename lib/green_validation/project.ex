@@ -15,6 +15,7 @@ defmodule GreenValidation.Project do
           has_formatter_exs: boolean()
         }
 
+  @spec path(t()) :: String.t()
   def path(%__MODULE__{repo_name: repo_name, path: path}) when is_binary(path) do
     Path.join([Repo.base_dir(), repo_name, path])
   end
@@ -23,10 +24,12 @@ defmodule GreenValidation.Project do
     Path.join(Repo.base_dir(), repo_name)
   end
 
+  @spec repo(t()) :: Repo.t()
   def repo(%__MODULE__{repo_name: repo_name}) do
     Repos.find_by_name(repo_name)
   end
 
+  @spec has_mix_exs?(t()) :: :ok | {:error, String.t()}
   def has_mix_exs?(%__MODULE__{} = project) do
     project_path = path(project)
 
@@ -37,6 +40,7 @@ defmodule GreenValidation.Project do
     end
   end
 
+  @spec install_deps(t()) :: :ok | {:error, String.t()}
   def install_deps(%__MODULE__{} = project) do
     project_path = path(project)
 
@@ -49,6 +53,7 @@ defmodule GreenValidation.Project do
     end
   end
 
+  @spec compile(t()) :: :ok | {:error, String.t()}
   def compile(%__MODULE__{} = project) do
     project_path = path(project)
 
