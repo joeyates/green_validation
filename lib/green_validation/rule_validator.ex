@@ -96,7 +96,8 @@ defmodule GreenValidation.RuleValidator do
         stderr_to_stdout: true
       )
 
-    parse_format_output(project, rule, output, exit_code)
+    {:ok, repo} = Project.repo(project)
+    parse_format_output(repo, rule, output, exit_code)
   end
 
   @doc """

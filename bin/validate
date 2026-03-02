@@ -135,8 +135,6 @@ defmodule GreenValidation.CLI do
 
   defp check(project_name, switches) do
     with {:ok, project} <- Projects.find_by_name(project_name),
-         {:ok, repo} <- Project.repo(project),
-         {:ok, _repo} <- Repo.clone(repo),
          {:ok, result} <- check_project(project) do
       
       # Write report if format is specified
@@ -150,12 +148,13 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_project(project) do
-    with :ok <- Project.has_mix_exs?(project),
+    with {:ok, repo} <- Project.repo(project),
+         {:ok, cloned_repo} <- Repo.clone(repo),
+         :ok <- Project.has_mix_exs?(project),
          :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_all_rules(project),
-         {:ok, repo} <- Project.repo(project),
-         {:ok, test_run} <- build_test_run(project, repo) do
+         {:ok, test_run} <- build_test_run(project, cloned_repo) do
       
       result = %Result{
         test_run: test_run,
@@ -192,16 +191,13 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp build_test_run(project, repo) do
-    project_path = Project.path(project)
-    
-    with {:ok, branch} <- get_current_branch(project_path),
-         {:ok, green_version} <- get_green_version(project_path) do
+  defp build_test_run(project, cloned_repo) do
+    with {:ok, green_version} <- get_green_sha() do
       test_run = %TestRun{
         project_name: project.name,
-        repository: repo.repo,
-        commit_sha: repo.commit_sha,
-        branch: branch,
+        repository: cloned_repo.repo,
+        commit_sha: cloned_repo.commit_sha,
+        branch: cloned_repo.default_branch,
         green_version: green_version
       }
       
@@ -209,38 +205,16 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp get_current_branch(project_path) do
-    case System.cmd("git", ["rev-parse", "--abbrev-ref", "HEAD"],
-           cd: project_path,
+  defp get_green_sha() do
+    # Get the SHA of the green project itself (where this validation suite lives)
+    green_root = [__DIR__, "..", "..", ".."] |> Path.join() |> Path.expand()
+
+    case System.cmd("git", ["rev-parse", "HEAD"],
+           cd: green_root,
            stderr_to_stdout: true
          ) do
       {output, 0} -> {:ok, String.trim(output)}
-      {output, _} -> {:error, "Failed to get current branch: #{output}"}
-    end
-  end
-
-  defp get_green_version(project_path) do
-    mix_exs_path = Path.join(project_path, "mix.exs")
-    
-    case File.read(mix_exs_path) do
-      {:ok, content} ->
-        # Try to extract green version from mix.exs
-        # Pattern matches: {:green, "~> 0.1.10"} or {:green, path: "..."}
-        version = 
-          cond do
-            content =~ ~r/\{:green,\s*"~>\s*([^"]+)"\}/ ->
-              [_, v] = Regex.run(~r/\{:green,\s*"~>\s*([^"]+)"\}/, content)
-              v
-            content =~ ~r/\{:green,.*path:/ ->
-              "local"
-            true ->
-              "unknown"
-          end
-        
-        {:ok, version}
-      
-      {:error, _} ->
-        {:ok, "unknown"}
+      {output, _} -> {:error, "Failed to get green SHA: #{output}"}
     end
   end
 
