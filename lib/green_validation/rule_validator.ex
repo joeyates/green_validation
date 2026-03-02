@@ -6,13 +6,14 @@ defmodule GreenValidation.RuleValidator do
   then runs mix format --check-formatted to identify affected files.
   """
 
-  alias GreenValidation.{GreenInstaller, OutputParser, Project, RuleResult}
+  alias GreenValidation.{GreenInstaller, OutputParser, Project, Repo, RuleResult}
 
   @doc """
   List of all configurable Green rules.
 
   These keys correspond to the snake_case names used in .formatter.exs configuration.
   """
+  @spec all_rules() :: list(atom())
   def all_rules do
     [
       :avoid_needless_pipelines,
@@ -48,6 +49,8 @@ defmodule GreenValidation.RuleValidator do
   A `TestResult` struct containing the results of validating each rule.
 
   """
+  @spec validate_all_rules(Project.t()) ::
+          {:ok, list(RuleResult.t())} | {:error, map()}
   def validate_all_rules(%Project{} = project) do
     IO.puts("  Validating #{length(all_rules())} rules individually...")
 
@@ -103,6 +106,7 @@ defmodule GreenValidation.RuleValidator do
   @doc """
   Generates a list of rules to **disable** all rules except the specified one.
   """
+  @spec generate_config(atom()) :: list({atom(), keyword()})
   def generate_config(enabled_rule) do
     all_rules()
     |> Enum.reject(&(&1 == enabled_rule))
@@ -118,6 +122,8 @@ defmodule GreenValidation.RuleValidator do
   - `{:ok, %RuleResult{}}` on success
   - `{:error, reason}` on failure
   """
+  @spec parse_format_output(Repo.t(), atom(), String.t(), non_neg_integer()) ::
+          {:ok, RuleResult.t()} | {:error, String.t()}
   def parse_format_output(project, rule, output, exit_code) do
     cond do
       output == "" ->
