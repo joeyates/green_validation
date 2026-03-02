@@ -68,8 +68,10 @@ defmodule GreenValidation.Projects do
     }
   ]
 
+  @spec all() :: list(Project.t())
   def all(), do: @projects
 
+  @spec find_by_name(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
   def find_by_name(project_name) do
     case Enum.find(all(), &(&1.name == project_name)) do
       nil -> {:error, "Project not found: #{project_name}"}
