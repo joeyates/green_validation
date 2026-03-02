@@ -59,7 +59,8 @@ defmodule GreenValidation.ReportWriterTest do
 
       assert parsed["test_run"]["project_name"] == "test_project"
       assert parsed["baseline"] == "clean"
-      assert length(parsed["rules"]) == 2
+      # Empty rules are filtered out in JSON
+      assert length(parsed["rules"]) == 0
     end
 
     test "creates valid JSON structure", %{result_with_changes: result} do
@@ -72,7 +73,8 @@ defmodule GreenValidation.ReportWriterTest do
 
       assert parsed["test_run"]["repository"] == "https://github.com/test/project"
       assert parsed["baseline"] == "created_format_commit"
-      assert length(parsed["rules"]) == 3
+      # Only rules with changes or warnings are included (test_rule_3 is filtered out)
+      assert length(parsed["rules"]) == 2
 
       rule1 = Enum.find(parsed["rules"], &(&1["rule"] == "test_rule_1"))
       assert length(rule1["changes"]) == 2

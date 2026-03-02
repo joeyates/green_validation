@@ -194,10 +194,18 @@ defmodule GreenValidation.ReportWriter do
   end
 
   defp encode_result(result) do
+    # Filter out rules with no changes or warnings for JSON output
+    filtered_rules =
+      result.rules
+      |> Enum.reject(fn rule ->
+        length(rule.changes) == 0 and length(rule.warnings) == 0
+      end)
+      |> Enum.map(&encode_rule_result/1)
+
     %{
       test_run: encode_test_run(result.test_run),
       baseline: result.baseline,
-      rules: Enum.map(result.rules, &encode_rule_result/1)
+      rules: filtered_rules
     }
   end
 
