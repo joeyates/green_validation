@@ -5,6 +5,7 @@ defmodule GreenValidation.Installer.MixExs do
 
   alias GreenValidation.Project
 
+  @spec add_dependency(Project.t(), tuple()) :: :ok
   def add_dependency(%Project{} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
@@ -21,6 +22,7 @@ defmodule GreenValidation.Installer.MixExs do
     :ok
   end
 
+  @spec add_dependency(String.t(), tuple()) :: String.t()
   def add_dependency(content, dependency) when is_binary(content) do
     if String.contains?(content, "defp deps") do
       content
@@ -35,6 +37,7 @@ defmodule GreenValidation.Installer.MixExs do
     end
   end
 
+  @spec reformat(String.t()) :: String.t()
   defp reformat(content) do
     content
     |> Code.format_string!()
@@ -42,6 +45,7 @@ defmodule GreenValidation.Installer.MixExs do
     |> Kernel.<>("\n")
   end
 
+  @spec add_deps_block(String.t(), tuple()) :: String.t()
   defp add_deps_block(content, dependency) do
     String.replace(content, ~r/\nend\s*$/, """
 
@@ -55,15 +59,18 @@ defmodule GreenValidation.Installer.MixExs do
     """)
   end
 
+  @spec add_deps_call_to_project(String.t()) :: String.t()
   defp add_deps_call_to_project(content) do
     String.replace(content, ~r/(def project(\(\))? do[\s\n]*\[)/, "\\1\n      deps: deps(),")
   end
 
+  @spec remove_existing_dependency(String.t(), atom()) :: String.t()
   defp remove_existing_dependency(content, dep_name) do
     regex = ~r/^\s*{:\s*#{dep_name}\s*,.*?}\s*,?\s*$/m
     String.replace(content, regex, "")
   end
 
+  @spec insert_dependency(String.t(), tuple()) :: String.t()
   defp insert_dependency(content, dependency) do
     regex = ~r/
       (?<def_start>defp\sdeps(?:\(\))?\s+do\s*)

@@ -3,6 +3,8 @@ defmodule GreenValidation.ReportWriter do
   Writes validation results to JSON or text files with timestamped filenames.
   """
 
+  alias GreenValidation.{Result, RuleResult, TestRun}
+
   @doc """
   Writes validation results to a file in the specified format.
 
@@ -17,6 +19,7 @@ defmodule GreenValidation.ReportWriter do
   - `{:ok, filepath}` - Path to the written file
   - `{:error, reason}` - Error details
   """
+  @spec write(Result.t(), :json | :text, keyword()) :: {:ok, String.t()} | {:error, term()}
   def write(result, format, opts \\ []) when format in [:json, :text] do
     output_dir = Keyword.get(opts, :output_dir, ".")
     filename = Keyword.get(opts, :filename, generate_filename(result, format))
@@ -47,6 +50,7 @@ defmodule GreenValidation.ReportWriter do
   - `{:ok, filepath}` - Path to the written file
   - `{:error, reason}` - Error details
   """
+  @spec write_json(Result.t(), String.t()) :: {:ok, String.t()} | {:error, term()}
   def write_json(result, filepath) do
     content = format_json(result)
 
@@ -67,6 +71,7 @@ defmodule GreenValidation.ReportWriter do
   - `{:ok, filepath}` - Path to the written file
   - `{:error, reason}` - Error details
   """
+  @spec write_text(Result.t(), String.t()) :: {:ok, String.t()} | {:error, term()}
   def write_text(result, filepath) do
     content = format_text(result)
 
@@ -78,12 +83,14 @@ defmodule GreenValidation.ReportWriter do
 
   # Private helpers
 
+  @spec format_json(Result.t()) :: String.t()
   defp format_json(result) do
     result
     |> encode_result()
     |> Jason.encode!(pretty: true)
   end
 
+  @spec format_text(Result.t()) :: String.t()
   defp format_text(result) do
     lines = [
       "=" |> String.duplicate(80),
@@ -130,10 +137,12 @@ defmodule GreenValidation.ReportWriter do
     |> Enum.join("\n")
   end
 
+  @spec format_baseline(:clean | :created_format_commit | term()) :: String.t()
   defp format_baseline(:clean), do: "✅ Clean (no formatting needed)"
   defp format_baseline(:created_format_commit), do: "🔧 Created formatting commit"
   defp format_baseline(other), do: inspect(other)
 
+  @spec format_rule_result(RuleResult.t()) :: String.t()
   defp format_rule_result(rule_result) do
     cond do
       length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 ->
@@ -166,18 +175,22 @@ defmodule GreenValidation.ReportWriter do
     end
   end
 
+  @spec count_rules_with_changes(list(RuleResult.t())) :: non_neg_integer()
   defp count_rules_with_changes(rules) do
     Enum.count(rules, fn r -> length(r.changes) > 0 end)
   end
 
+  @spec count_rules_with_warnings(list(RuleResult.t())) :: non_neg_integer()
   defp count_rules_with_warnings(rules) do
     Enum.count(rules, fn r -> length(r.warnings) > 0 end)
   end
 
+  @spec count_clean_rules(list(RuleResult.t())) :: non_neg_integer()
   defp count_clean_rules(rules) do
     Enum.count(rules, fn r -> length(r.changes) == 0 and length(r.warnings) == 0 end)
   end
 
+  @spec generate_filename(Result.t(), :json | :text) :: String.t()
   defp generate_filename(result, format) do
     # Use commit SHA instead of timestamp for filename
     commit_sha = result.test_run.commit_sha
@@ -189,6 +202,7 @@ defmodule GreenValidation.ReportWriter do
     "validation_#{project_slug}_#{short_sha}.#{extension}"
   end
 
+  @spec encode_result(Result.t()) :: map()
   defp encode_result(result) do
     # Filter out rules with no changes or warnings for JSON output
     filtered_rules =
@@ -205,6 +219,7 @@ defmodule GreenValidation.ReportWriter do
     }
   end
 
+  @spec encode_test_run(TestRun.t()) :: map()
   defp encode_test_run(test_run) do
     %{
       project_name: test_run.project_name,
@@ -215,6 +230,7 @@ defmodule GreenValidation.ReportWriter do
     }
   end
 
+  @spec encode_rule_result(RuleResult.t()) :: map()
   defp encode_rule_result(rule_result) do
     %{
       rule: rule_result.rule,

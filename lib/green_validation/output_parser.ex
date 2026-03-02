@@ -30,6 +30,7 @@ defmodule GreenValidation.OutputParser do
   end
 
   # Changes are preceded by an ANSI escape code for red text and then a file name
+  @spec extract_changes_files(String.t()) :: list(String.t())
   defp extract_changes_files(output) do
     output
     |> String.split("\n")
@@ -41,6 +42,7 @@ defmodule GreenValidation.OutputParser do
 
   # Warnings look like this:
   # └─ test/eex_test.exs:
+  @spec extract_warnings_files(String.t()) :: list(String.t())
   defp extract_warnings_files(output) do
     output
     |> String.split("\n")
@@ -52,6 +54,7 @@ defmodule GreenValidation.OutputParser do
 
   # Converts absolute path to repository-local path
   # Example: /path/to/repos/elixir/lib/file.ex -> elixir/lib/file.ex
+  @spec make_repo_local(String.t(), String.t()) :: String.t()
   defp make_repo_local(path, base_dir) do
     case String.split(path, base_dir, parts: 2) do
       [_, local_path] -> String.trim_leading(local_path, "/")
