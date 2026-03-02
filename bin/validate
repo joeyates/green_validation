@@ -76,8 +76,7 @@ defmodule GreenValidation.CLI do
   end
   
   defp check_all(switches) do
-    with :ok <- clone_all(),
-      {:ok, results} <- check_all_projects() do
+    with {:ok, results} <- check_all_projects() do
       IO.puts("All projects validated successfully.")
       
       # Write report if format is specified
