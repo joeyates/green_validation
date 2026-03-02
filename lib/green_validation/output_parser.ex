@@ -15,9 +15,10 @@ defmodule GreenValidation.OutputParser do
     warnings_files = extract_warnings_files(output)
 
     # Convert absolute paths to repository-local paths
-    base_dir = Repo.base_dir()
-    changes_files = Enum.map(changes_files, &make_repo_local(&1, base_dir))
-    warnings_files = Enum.map(warnings_files, &make_repo_local(&1, base_dir))
+    {:ok, repo} = Project.repo(project)
+    path = Repo.path(repo)
+    changes_files = Enum.map(changes_files, &make_repo_local(&1, path))
+    warnings_files = Enum.map(warnings_files, &make_repo_local(&1, path))
 
     {
       :ok,
