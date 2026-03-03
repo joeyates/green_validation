@@ -10,14 +10,14 @@ Create a standalone executable script `bin/github_repos` that leverages the exis
 
 ## Tasks
 
-- [ ] Create `bin/github_repos` script with proper shebang and Mix.install
-- [ ] Implement CLI module with helpful_options for parameter parsing (`--output-path`, `--limit`)
-- [ ] Use existing `GreenValidation.Github.Client.get_paginated/3` to fetch repositories
-- [ ] Extract and format repository data (URL, name, owner, stars) from API response
-- [ ] Write formatted JSON output to file (default: `results/github_repos.json`)
-- [ ] Make script executable
-- [ ] Address any additional implementation details that arise during development
-- [ ] Mark the plan as "done"
+- [x] Create `bin/github_repos` script with proper shebang and Mix.install
+- [x] Implement CLI module with helpful_options for parameter parsing (`--output-path`, `--limit`)
+- [x] Use existing `GreenValidation.Github.Client.get_paginated/3` to fetch repositories
+- [x] Extract and format repository data (URL, name, owner, stars) from API response
+- [x] Write formatted JSON output to file (default: `results/github_repos.json`)
+- [x] Make script executable
+- [x] Address any additional implementation details that arise during development
+- [x] Mark the plan as "done"
 
 ## Principal Files
 
