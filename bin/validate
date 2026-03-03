@@ -190,7 +190,8 @@ defmodule GreenValidation.CLI do
         {:ok, {:green, green_arg}}
 
       File.dir?(green_arg) ->
-        {:ok, {:green, ">= 0.0.0", path: green_arg}}
+        green_path = Path.expand(green_arg)
+        {:ok, {:green, ">= 0.0.0", path: green_path}}
 
       true ->
         {:error, "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
