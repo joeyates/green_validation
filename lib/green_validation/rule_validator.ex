@@ -6,7 +6,7 @@ defmodule GreenValidation.RuleValidator do
   then runs mix format --check-formatted to identify affected files.
   """
 
-  alias GreenValidation.{GreenInstaller, OutputParser, Project, Repo, RuleResult}
+  alias GreenValidation.{GreenInstaller, OutputParser, Project, RuleResult}
 
   @doc """
   List of all configurable Green rules.
@@ -93,8 +93,7 @@ defmodule GreenValidation.RuleValidator do
         stderr_to_stdout: true
       )
 
-    {:ok, repo} = Project.repo(project)
-    parse_format_output(repo, rule, output, exit_code)
+    parse_format_output(project, rule, output, exit_code)
   end
 
   @doc """
@@ -116,15 +115,17 @@ defmodule GreenValidation.RuleValidator do
   - `{:ok, %RuleResult{}}` on success
   - `{:error, reason}` on failure
   """
-  @spec parse_format_output(Repo.t(), atom(), String.t(), non_neg_integer()) ::
+  @spec parse_format_output(Project.t(), atom(), String.t(), non_neg_integer()) ::
           {:ok, RuleResult.t()} | {:error, String.t()}
   def parse_format_output(project, rule, output, exit_code) do
+    {:ok, repo} = Project.repo(project)
+
     cond do
       output == "" ->
         {:ok, %RuleResult{rule: rule}}
 
       exit_code in [0, 1] ->
-        OutputParser.parse_output(project, rule, output)
+        OutputParser.parse_output(repo, rule, output)
 
       true ->
         # Error occurred
