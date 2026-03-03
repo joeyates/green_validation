@@ -17,7 +17,7 @@ Create a standalone executable script `bin/github_repos` that leverages the exis
 - [x] Write formatted JSON output to file (default: `results/github_repos.json`)
 - [x] Make script executable
 - [x] Address any additional implementation details that arise during development
-- [ ] Mark the plan as "done"
+- [x] Mark the plan as "done"
 
 ## Principal Files
 
