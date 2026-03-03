@@ -181,61 +181,29 @@ For each rule:
 - They may not be using `mix format` consistently
 - May need to update to latest versions
 
-## Workflow for Green Development
-
-### 1. Initial Validation
-
-Check all projects to establish baseline:
-
-```bash
-bin/validate check
-```
-
-### 2. Save Results for Analysis
-
-Export results to JSON for detailed analysis:
-
-```bash
-bin/validate check --format json
-bin/validate check phoenix --format json
-```
-
-### 3. After Rule Changes
-
-When modifying Green rules, re-check to see impact:
-
-```bash
-bin/validate check --format json
-```
-
-Compare the new JSON results to previous runs to see what changed.
-
-### 4. Investigating Specific Issues
-
-Check a single project for faster iteration:
-
-```bash
-bin/validate check phoenix
-```
-
 ## Directory Structure
 
 ```
-test/projects/validation/
-├── lib/                          # Validation modules
-│   ├── baseline_checker.ex       # Baseline formatting checks
-│   ├── diff_parser.ex            # Parse mix format output
-│   ├── green_installer.ex        # Install Green in projects
-│   ├── monorepo_detector.ex      # Detect subprojects
-│   ├── repo_cloner.ex            # Clone repositories
-│   ├── result_collector.ex       # Collect validation results
-│   ├── result_writer.ex          # Write JSON results
-│   ├── rule_validator.ex         # Per-rule validation
-│   └── summary_reporter.ex       # Generate summaries
+├── bin
+├── ├── validate                  # Main CLI script
+├── lib
+│   └── green_validation
+│       ├── baseline_formatter.ex # Run default Elixir formatter
+│       ├── green_installer.ex    # Install `green` in projects
+│       ├── installer
+│       │   └── mix_exs.ex        # Modify mix.exs to add dependencies
+│       ├── output_parser.ex      # Parse mix format output for changes/warnings
+│       ├── project.ex            # Represents a project and its metadata
+│       ├── projects.ex           # The list of target projects
+│       ├── repo.ex               # Cloning and repository management
+│       ├── report_writer.ex      # Write results to JSON/TEXT files
+│       ├── repos.ex              # The list of repositories to validate
+│       ├── result.ex             # Represents the result of validating Green's rules against a project
+│       ├── rule_result.ex        # Represents the result of validating a single rule against a project
+│       ├── rule_validator.ex     # Validates Green rules against a project
+│       └── test_run.ex           # Represents a single test run with metadata
 ├── repos/                        # Cloned repositories (gitignored)
 ├── results/                      # JSON result files (gitignored)
-├── validate.exs                  # Main CLI script
-├── .gitignore                    # Ignore repos and results
 └── README.md                     # This file
 ```
 
@@ -330,23 +298,3 @@ Potential improvements:
 - Web-based result viewer
 - CI/CD integration
 - Automatic issue detection and reporting
-
-## Current Limitations
-
-### Green Dependency Installation
-
-The current implementation requires manual setup of Green in each target project. The `GreenInstaller` module exists but is not yet integrated into the automated workflow. To use the validation system:
-
-1. Clone projects with `bin/validate clone`
-2. Manually add Green as a dependency in each project's `mix.exs`
-3. Run `mix deps.get` in each project
-4. Then run validation with `bin/validate validate`
-
-Future versions will automate this process.
-
-### Error Recovery
-
-If validation fails midway, manual cleanup may be needed:
-- Check for `.backup` files in target projects
-- Verify `mix.exs` and `.formatter.exs` are restored
-- Remove temporary Green dependencies if added manually
