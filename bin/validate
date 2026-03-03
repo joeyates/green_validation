@@ -19,6 +19,7 @@ defmodule GreenValidation.CLI do
     Project,
     Repo,
     ReportWriter,
+    Repos,
     Result,
     RuleValidator,
     TestRun
@@ -91,13 +92,16 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_all_projects(green_dependency) do
+    {:ok, cloned_repo_map} = prepare_all_repos()
+
     results =
       Enum.reduce_while(
         Projects.all(),
         [],
         fn project, acc ->
           IO.puts("Checking project: #{project.name}")
-          case check_project(project, green_dependency) do
+          cloned_repo = Map.get(cloned_repo_map, project.repo_name)
+          case check_project(cloned_repo, project, green_dependency) do
             {:ok, result} ->
               {:cont, [result | acc]}
             {:error, reason} ->
@@ -116,7 +120,9 @@ defmodule GreenValidation.CLI do
   defp check(project_name, switches) do
     with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
          {:ok, project} <- Projects.find_by_name(project_name),
-         {:ok, result} <- check_project(project, green_dependency) do
+         {:ok, repo} <- Project.repo(project),
+         {:ok, cloned_repo} <- prepare_repo(repo),
+         {:ok, result} <- check_project(cloned_repo, project, green_dependency) do
       
       handle_format_output(result, switches, project_name)
     else
@@ -126,10 +132,8 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check_project(project, green_dependency) do
-    with {:ok, repo} <- Project.repo(project),
-         {:ok, cloned_repo} <- Repo.clone(repo),
-         :ok <- Project.has_mix_exs?(project),
+  defp check_project(cloned_repo, project, green_dependency) do
+    with :ok <- Project.has_mix_exs?(project),
          :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
@@ -170,6 +174,29 @@ defmodule GreenValidation.CLI do
     end
   end
 
+  defp prepare_all_repos() do
+    Enum.reduce_while(
+      Repos.all(),
+      {:ok, %{}},
+      fn repo, {:ok, acc} ->
+        case prepare_repo(repo) do
+          {:ok, cloned_repo} ->
+            {:cont, {:ok, Map.put(acc, repo.name, cloned_repo)}}
+          {:error, reason} ->
+            IO.puts("Failed to prepare repository #{repo.name}: #{reason}")
+            {:halt, {:error, reason}}
+        end
+      end
+    )
+  end
+
+  defp prepare_repo(%Repo{} = repo) do
+    with {:ok, cloned_repo} <- Repo.clone(repo) do
+      {:ok, cloned_repo}
+    end
+  end
+
+  @spec build_test_run(Project.t(), ClonedRepo.t(), {:green, String.t()} | {:green, String.t(), path: String.t()}) :: {:ok, TestRun.t()} | {:error, String.t()}
   defp build_test_run(project, cloned_repo, green_dependency) do
     with {:ok, green_version} <- get_green_version(green_dependency) do
       test_run = %TestRun{
