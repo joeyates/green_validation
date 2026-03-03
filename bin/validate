@@ -89,26 +89,6 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp clone_all() do
-    Enum.reduce(
-      Repos.all(),
-      :ok,
-      fn
-        repo, :ok ->
-          case Repo.clone(repo) do
-            {:ok, _} ->
-              :ok
-            {:error, reason} ->
-              IO.puts("Failed to clone #{repo.name}: #{reason}")
-              {:error, reason}
-          end
-
-        _repo, {:error, _reason} = error ->
-          error
-      end
-    )
-  end
-
   defp check_all_projects() do
     results =
       Enum.reduce_while(
