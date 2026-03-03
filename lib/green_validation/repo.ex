@@ -3,15 +3,16 @@ defmodule GreenValidation.Repo do
   Handles cloning and preparing Elixir project repositories for validation.
   """
 
+  alias GreenValidation.ClonedRepo
+
   @default_branch "main"
 
   @enforce_keys [:name, :repo]
-  defstruct [:name, :repo, :commit_sha, default_branch: @default_branch]
+  defstruct [:name, :repo, default_branch: @default_branch]
 
   @type t :: %__MODULE__{
           name: String.t(),
           repo: String.t(),
-          commit_sha: String.t() | nil,
           default_branch: String.t()
         }
 
@@ -29,17 +30,20 @@ defmodule GreenValidation.Repo do
   end
 
   @doc """
-  Clones or updates a repository and checks out the default branch.
-
-  Returns `{:ok, metadata}` or `{:error, reason}`.
+  Clones or updates a repository.
   """
-  @spec clone(t()) :: {:ok, t()} | {:error, String.t()}
+  @spec clone(t()) :: {:ok, ClonedRepo.t()} | {:error, String.t()}
   def clone(%__MODULE__{} = repo) do
     with :ok <- ensure_repo(repo),
          {:ok, commit_sha} <- get_commit_sha(repo) do
-      repo = %{repo | commit_sha: commit_sha}
+      cloned_repo = %ClonedRepo{
+        name: repo.name,
+        repo: repo.repo,
+        commit_sha: commit_sha,
+        branch: repo.default_branch
+      }
 
-      {:ok, repo}
+      {:ok, cloned_repo}
     end
   end
 
