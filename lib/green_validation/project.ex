@@ -24,7 +24,7 @@ defmodule GreenValidation.Project do
     Path.join(Repo.base_dir(), repo_name)
   end
 
-  @spec repo(t()) :: Repo.t()
+  @spec repo(t()) :: {:ok, Repo.t()} | {:error, String.t()}
   def repo(%__MODULE__{repo_name: repo_name}) do
     Repos.find_by_name(repo_name)
   end
