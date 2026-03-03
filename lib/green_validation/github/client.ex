@@ -11,6 +11,7 @@ defmodule GreenValidation.Github.Client do
 
   def get(path, params \\ nil) do
     base = Path.join(@github_url, path)
+
     url =
       if params do
         encoded = URI.encode_query(params)
@@ -31,11 +32,14 @@ defmodule GreenValidation.Github.Client do
   end
 
   defp handle_paginated_response(
-    {:ok, %Req.Response{status: status, headers: %{"link" => [link]}} = response}, acc
-  ) when status == 200 do
+         {:ok, %Req.Response{status: status, headers: %{"link" => [link]}} = response},
+         acc
+       )
+       when status == 200 do
     first_headers = acc.headers || response.headers
     all_items = acc.items ++ response.body["items"]
     acc = %{acc | headers: first_headers, items: all_items}
+
     next =
       link
       |> parse_link()
@@ -44,21 +48,25 @@ defmodule GreenValidation.Github.Client do
     cond do
       is_nil(next) ->
         {:ok, PaginatedAccumulator.build_response(acc)}
+
       not PaginatedAccumulator.continue?(acc) ->
         {:ok, PaginatedAccumulator.build_response(acc)}
+
       true ->
         get_next_page(next, acc)
     end
   end
 
-  defp handle_paginated_response({:ok, %Req.Response{status: status} = response}, acc) when status == 200 do
+  defp handle_paginated_response({:ok, %Req.Response{status: status} = response}, acc)
+       when status == 200 do
     first_headers = acc.headers || response.headers
     all_items = acc.items ++ response.body["items"]
     acc = %{acc | headers: first_headers, items: all_items}
     {:ok, PaginatedAccumulator.build_response(acc)}
   end
 
-  defp handle_paginated_response({:ok, %Req.Response{status: status, body: body}}, _acc) when status >= 400 and status < 500 do
+  defp handle_paginated_response({:ok, %Req.Response{status: status, body: body}}, _acc)
+       when status >= 400 and status < 500 do
     message = body["message"] || "Failed to fetch data from Github"
     {:error, message}
   end
@@ -73,7 +81,7 @@ defmodule GreenValidation.Github.Client do
     Enum.map_join(search, " ", fn {key, value} ->
       encode_www_form(Kernel.to_string(key)) <>
         ":" <>
-          encode_www_form(Kernel.to_string(value))
+        encode_www_form(Kernel.to_string(value))
     end)
   end
 
