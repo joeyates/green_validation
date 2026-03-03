@@ -1,4 +1,6 @@
-# Green Formatter Validation System
+# Green Formatter Validation
+
+Do a survey of the formatting status of the most popular Elixir projects
 
 This validation system tests Green's formatter implementation against major Elixir projects to identify which rules are triggered and ensure formatter stability.
 
