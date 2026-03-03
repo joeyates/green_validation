@@ -46,17 +46,30 @@ defmodule GreenValidation.Repo do
   @spec ensure_repo(t()) :: :ok | {:error, String.t()}
   defp ensure_repo(%__MODULE__{} = repo) do
     if cloned?(repo) do
-      IO.puts("Updating existing repository: #{repo.name}")
-      :ok = clean_repo(repo)
-      :ok = update_repo(repo)
+      prepare_cloned(repo)
     else
-      IO.puts("Cloning repository: #{repo.name}")
-      :ok = clone_repo(repo)
+      clone_repo(repo)
+    end
+  end
+
+  defp prepare_cloned(%__MODULE__{} = repo) do
+    IO.puts("Updating existing repository: #{repo.name}")
+    with :ok <- clean_repo(repo),
+         :ok <- update_repo(repo) do
+      :ok
     end
   end
 
   @spec clone_repo(t()) :: :ok | {:error, String.t()}
   defp clone_repo(%__MODULE__{} = repo) do
+    IO.puts("Cloning repository: #{repo.name}")
+    with :ok <- do_clone(repo) do
+      :ok
+    end
+  end
+
+  @spec do_clone(t()) :: :ok | {:error, String.t()}
+  defp do_clone(%__MODULE__{} = repo) do
     path = path(repo)
 
     case System.cmd("git", ["clone", repo.repo, path], stderr_to_stdout: true) do
