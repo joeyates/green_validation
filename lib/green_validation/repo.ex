@@ -36,7 +36,6 @@ defmodule GreenValidation.Repo do
   @spec clone(t()) :: {:ok, t()} | {:error, String.t()}
   def clone(%__MODULE__{} = repo) do
     with :ok <- ensure_repo(repo),
-         :ok <- checkout_tag(repo),
          {:ok, commit_sha} <- get_commit_sha(repo) do
       repo = %{repo | commit_sha: commit_sha}
 
@@ -90,20 +89,6 @@ defmodule GreenValidation.Repo do
          ) do
       {_output, 0} -> :ok
       {output, _} -> {:error, "Failed to fetch: #{output}"}
-    end
-  end
-
-  @spec checkout_tag(t()) :: :ok | {:error, String.t()}
-  defp checkout_tag(%__MODULE__{} = repo) do
-    path = path(repo)
-    tag = repo.default_branch
-
-    case System.cmd("git", ["checkout", tag],
-           cd: path,
-           stderr_to_stdout: true
-         ) do
-      {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to checkout #{tag}: #{output}"}
     end
   end
 
