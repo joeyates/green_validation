@@ -116,9 +116,7 @@ defmodule GreenValidation.CLI do
     with {:ok, project} <- Projects.find_by_name(project_name),
          {:ok, result} <- check_project(project) do
       
-      # Write report if format is specified
       handle_format_output(result, switches, project_name)
-      :ok
     else
       {:error, reason} ->
         IO.puts("Error: #{reason}")
