@@ -49,12 +49,12 @@ defmodule GreenValidation.RuleValidator do
   A `TestResult` struct containing the results of validating each rule.
 
   """
-  @spec validate_all_rules(Project.t()) ::
+  @spec validate_all_rules(Project.t(), {:green, String.t()} | {:green, String.t(), path: String.t()}) ::
           {:ok, list(RuleResult.t())} | {:error, map()}
-  def validate_all_rules(%Project{} = project) do
+  def validate_all_rules(%Project{} = project, green_dependency) do
     IO.puts("  Validating #{length(all_rules())} rules individually...")
 
-    GreenInstaller.install_green(project, installation_type: :local)
+    GreenInstaller.install_green(project, green_version: green_dependency)
 
     Enum.reduce(
       all_rules(),
@@ -79,14 +79,8 @@ defmodule GreenValidation.RuleValidator do
     )
   end
 
-  @doc """
-  Validates a single rule for a target.
-
-  Creates a .formatter.exs that enables only the specified rule,
-  then runs mix format --check-formatted.
-  """
   @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
-  def validate_single_rule(%Project{} = project, rule) do
+  defp validate_single_rule(%Project{} = project, rule) do
     rules = generate_config(rule)
     GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
