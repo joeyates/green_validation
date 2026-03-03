@@ -1,6 +1,6 @@
 # Create GitHub Repository Scraper Script
 
-Status: [ ]
+Status: [x]
 
 ## Description
 
