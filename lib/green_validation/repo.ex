@@ -8,10 +8,11 @@ defmodule GreenValidation.Repo do
   @default_branch "main"
 
   @enforce_keys [:name, :repo]
-  defstruct [:name, :repo, default_branch: @default_branch]
+  defstruct [:name, :post_checkout, :repo, default_branch: @default_branch]
 
   @type t :: %__MODULE__{
           name: String.t(),
+          post_checkout: {atom, atom} | nil,
           repo: String.t(),
           default_branch: String.t()
         }
@@ -35,7 +36,8 @@ defmodule GreenValidation.Repo do
   @spec clone(t()) :: {:ok, ClonedRepo.t()} | {:error, String.t()}
   def clone(%__MODULE__{} = repo) do
     with :ok <- ensure_repo(repo),
-         {:ok, commit_sha} <- get_commit_sha(repo) do
+         {:ok, commit_sha} <- get_commit_sha(repo),
+         :ok <- post_checkout(repo) do
       cloned_repo = %ClonedRepo{
         name: repo.name,
         repo: repo.repo,
@@ -81,6 +83,13 @@ defmodule GreenValidation.Repo do
       {output, _} -> {:error, "Failed to clone: #{output}"}
     end
   end
+
+  @spec post_checkout(t()) :: :ok | {:error, String.t()}
+  defp post_checkout(%__MODULE__{post_checkout: {mod, fun}} = repo) do
+    apply(mod, fun, [repo])
+  end
+
+  defp post_checkout(_), do: :ok
 
   @spec clean_repo(t()) :: :ok | {:error, String.t()}
   defp clean_repo(%__MODULE__{} = repo) do
