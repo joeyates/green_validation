@@ -176,7 +176,7 @@ defmodule GreenValidation.CLI do
         project_name: project.name,
         repository: cloned_repo.repo,
         commit_sha: cloned_repo.commit_sha,
-        branch: cloned_repo.default_branch,
+        branch: cloned_repo.branch,
         green_version: green_version
       }
       
