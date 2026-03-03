@@ -1,0 +1,101 @@
+#!/usr/bin/env elixir
+
+# Script to fetch Elixir repositories from GitHub sorted by stars
+
+Mix.install([
+  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+  {:helpful_options, "~> 0.4.4"},
+  {:jason, "~> 1.4"},
+  {:req, "~> 0.5.17"}
+])
+
+defmodule GreenValidation.GithubRepos do
+  @moduledoc """
+  CLI tool to fetch Elixir repositories from GitHub sorted by stars.
+  """
+
+  alias GreenValidation.Github.Client
+
+  @program "bin/github_repos"
+
+  @commands [
+    %{
+      commands: [],
+      description: "Fetch Elixir repositories from GitHub sorted by stars",
+      switches: [
+        output_path: %{type: :string, description: "Output file path (default: results/github_repos.json)"},
+        limit: %{type: :integer, description: "Number of repositories to fetch (default: 100)"}
+      ]
+    }
+  ]
+
+  def main(args) do
+    case HelpfulOptions.parse_commands(args, @commands) do
+      {:ok, parsed} ->
+        run(parsed)
+      {:error, reason} ->
+        IO.puts("Invalid command: #{inspect(reason)}")
+        usage()
+        System.halt(1)
+    end
+  end
+
+  defp run(%{switches: switches}) do
+    output_path = Map.get(switches, :output_path, "results/github_repos.json")
+    limit = Map.get(switches, :limit, 100)
+
+    IO.puts("Fetching #{limit} Elixir repositories from GitHub...")
+
+    with {:ok, response} <- fetch_repositories(limit),
+         {:ok, formatted_data} <- format_repositories(response),
+         :ok <- write_output(output_path, formatted_data) do
+      IO.puts("Successfully wrote #{length(formatted_data)} repositories to #{output_path}")
+      :ok
+    else
+      {:error, reason} ->
+        IO.puts("Error: #{reason}")
+        System.halt(1)
+    end
+  end
+
+  defp usage() do
+    IO.puts("Usage:\n")
+    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+  end
+
+  defp fetch_repositories(limit) do
+    search_query = Client.encode_search([language: "elixir"])
+    params = %{"q" => search_query, "sort" => "stars", "order" => "desc", "per_page" => 100}
+    
+    Client.get_paginated("/search/repositories", params, limit: limit)
+  end
+
+  defp format_repositories(%Req.Response{body: %{"items" => items}}) do
+    formatted = Enum.map(items, fn repo ->
+      %{
+        name: repo["name"],
+        owner: repo["owner"]["login"],
+        url: repo["html_url"],
+        stars: repo["stargazers_count"]
+      }
+    end)
+    
+    {:ok, formatted}
+  end
+
+  defp write_output(output_path, data) do
+    # Ensure the output directory exists
+    output_path
+    |> Path.dirname()
+    |> File.mkdir_p!()
+
+    case Jason.encode(data, pretty: true) do
+      {:ok, json} ->
+        File.write(output_path, json)
+      {:error, reason} ->
+        {:error, "Failed to encode JSON: #{inspect(reason)}"}
+    end
+  end
+end
+
+GreenValidation.GithubRepos.main(System.argv())
