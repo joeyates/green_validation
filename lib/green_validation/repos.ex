@@ -8,6 +8,7 @@ defmodule GreenValidation.Repos do
   @repos [
     %Repo{
       name: "elixir",
+      post_checkout: {__MODULE__, :post_checkout_elixir},
       repo: "https://github.com/elixir-lang/elixir.git"
     },
     %Repo{
@@ -52,6 +53,18 @@ defmodule GreenValidation.Repos do
     case Enum.find(all(), &(&1.name == name)) do
       nil -> {:error, "Repository not found: #{name}"}
       repo -> {:ok, repo}
+    end
+  end
+
+  def post_checkout_elixir(%Repo{} = repo) do
+    IO.puts("Running post-checkout step, 'make', for Elixir repository...")
+    path = Repo.path(repo)
+
+    case System.cmd("make", [], cd: path, stderr_to_stdout: true) do
+      {_output, 0} ->
+        :ok
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for Elixir: #{output}"}
     end
   end
 end
