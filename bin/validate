@@ -19,7 +19,6 @@ defmodule GreenValidation.CLI do
     Project,
     Repo,
     ReportWriter,
-    Repos,
     Result,
     RuleValidator,
     TestRun
@@ -27,22 +26,23 @@ defmodule GreenValidation.CLI do
 
   @program "bin/validate"
 
+  @switches [
+    format: %{type: :string, description: "Output format for reports ('text' or 'json')"},
+    green: %{type: :string, required: true, description: "Either a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository to use for validation"}
+  ]
+
   @commands [
     %{commands: [], description: "Show this help message"},
     %{commands: ["help"], description: "Show this help message"},
     %{
       commands: ["check"],
       description: "Check all projects",
-      switches: [
-        format: %{type: :string, description: "Output format ('text'|'json')"}
-      ]
+      switches: @switches
     },
     %{
       commands: ["check", :project],
       description: "Check a specific project",
-      switches: [
-        format: %{type: :string, description: "Output format ('text'|'json')"}
-      ]
+      switches: @switches
     }
   ]
 
@@ -76,7 +76,8 @@ defmodule GreenValidation.CLI do
   end
   
   defp check_all(switches) do
-    with {:ok, results} <- check_all_projects() do
+    with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
+         {:ok, results} <- check_all_projects(green_dependency) do
       IO.puts("All projects validated successfully.")
       
       # Write report if format is specified
@@ -89,14 +90,14 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check_all_projects() do
+  defp check_all_projects(green_dependency) do
     results =
       Enum.reduce_while(
         Projects.all(),
         [],
         fn project, acc ->
           IO.puts("Checking project: #{project.name}")
-          case check_project(project) do
+          case check_project(project, green_dependency) do
             {:ok, result} ->
               {:cont, [result | acc]}
             {:error, reason} ->
@@ -113,8 +114,9 @@ defmodule GreenValidation.CLI do
   end
 
   defp check(project_name, switches) do
-    with {:ok, project} <- Projects.find_by_name(project_name),
-         {:ok, result} <- check_project(project) do
+    with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
+         {:ok, project} <- Projects.find_by_name(project_name),
+         {:ok, result} <- check_project(project, green_dependency) do
       
       handle_format_output(result, switches, project_name)
     else
@@ -124,14 +126,14 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check_project(project) do
+  defp check_project(project, green_dependency) do
     with {:ok, repo} <- Project.repo(project),
          {:ok, cloned_repo} <- Repo.clone(repo),
          :ok <- Project.has_mix_exs?(project),
          :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
-         {:ok, rule_results} <- RuleValidator.validate_all_rules(project),
-         {:ok, test_run} <- build_test_run(project, cloned_repo) do
+         {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
+         {:ok, test_run} <- build_test_run(project, cloned_repo, green_dependency) do
       
       result = %Result{
         test_run: test_run,
@@ -168,8 +170,8 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp build_test_run(project, cloned_repo) do
-    with {:ok, green_version} <- get_green_sha() do
+  defp build_test_run(project, cloned_repo, green_dependency) do
+    with {:ok, green_version} <- get_green_version(green_dependency) do
       test_run = %TestRun{
         project_name: project.name,
         repository: cloned_repo.repo,
@@ -182,12 +184,24 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp get_green_sha() do
-    # Get the SHA of the green project itself (where this validation suite lives)
-    green_root = [__DIR__, "..", "..", ".."] |> Path.join() |> Path.expand()
+  defp parse_green_dependency(green_arg) do
+    cond do
+      Regex.match?(~r"\d+\.\d+\.\d+$", green_arg) ->
+        {:ok, {:green, green_arg}}
 
+      File.dir?(green_arg) ->
+        {:ok, {:green, ">= 0.0.0", path: green_arg}}
+
+      true ->
+        {:error, "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
+    end
+  end
+
+  defp get_green_version({:green, version}) when is_binary(version), do: {:ok, version}
+
+  defp get_green_version({:green, _version, path: local_path}) do
     case System.cmd("git", ["rev-parse", "HEAD"],
-           cd: green_root,
+           cd: local_path,
            stderr_to_stdout: true
          ) do
       {output, 0} -> {:ok, String.trim(output)}
