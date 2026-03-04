@@ -133,9 +133,7 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_project(cloned_repo, project, green_dependency) do
-    with :ok <- Project.has_mix_exs?(project),
-         :ok <- Project.install_deps(project),
-         {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
+    with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
          {:ok, test_run} <- build_test_run(project, cloned_repo, green_dependency) do
       
