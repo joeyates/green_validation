@@ -6,22 +6,17 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{Repo, Repos}
 
   @enforce_keys [:name, :repo_name]
-  defstruct [:name, :repo_name, :path, :environment, has_formatter_exs: true, has_mix_exs: true]
+  defstruct [:name, :repo_name, :environment, has_formatter_exs: true, has_mix_exs: true]
 
   @type t :: %__MODULE__{
           name: String.t(),
           repo_name: String.t(),
-          path: String.t() | nil,
           environment: {atom, atom} | nil,
           has_formatter_exs: boolean(),
           has_mix_exs: boolean()
         }
 
   @spec path(t()) :: String.t()
-  def path(%__MODULE__{repo_name: repo_name, path: path}) when is_binary(path) do
-    Path.join([Repo.base_dir(), repo_name, path])
-  end
-
   def path(%__MODULE__{repo_name: repo_name}) do
     Path.join(Repo.base_dir(), repo_name)
   end
