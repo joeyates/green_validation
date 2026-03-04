@@ -22,8 +22,7 @@ defmodule GreenValidation.GreenInstaller do
 
     with :ok <- reset_project(project),
          :ok <- modify_mix_exs(project, green_version),
-         :ok <- Project.install_deps(project),
-         :ok <- Project.compile(project) do
+         :ok <- Project.install_deps(project) do
       :ok
     end
   end
