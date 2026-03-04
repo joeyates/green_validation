@@ -6,12 +6,13 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{Repo, Repos}
 
   @enforce_keys [:name, :repo_name]
-  defstruct [:name, :repo_name, :path, has_formatter_exs: true, has_mix_exs: true]
+  defstruct [:name, :repo_name, :path, :environment, has_formatter_exs: true, has_mix_exs: true]
 
   @type t :: %__MODULE__{
           name: String.t(),
           repo_name: String.t(),
           path: String.t() | nil,
+          environment: {atom, atom} | nil,
           has_formatter_exs: boolean(),
           has_mix_exs: boolean()
         }
@@ -29,6 +30,12 @@ defmodule GreenValidation.Project do
   def repo(%__MODULE__{repo_name: repo_name}) do
     Repos.find_by_name(repo_name)
   end
+
+  def environment(%__MODULE__{environment: {module, fun}} = project) do
+    apply(module, fun, [project])
+  end
+
+  def environment(%__MODULE__{}), do: []
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
   def install_deps(%__MODULE__{} = project) do

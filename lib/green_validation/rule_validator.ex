@@ -87,12 +87,14 @@ defmodule GreenValidation.RuleValidator do
     rules = generate_config(rule)
     :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
+    environment = Project.environment(project)
 
     {output, exit_code} =
       System.cmd(
         "mix",
         ["format", "--check-formatted"],
         cd: project_path,
+        env: environment,
         stderr_to_stdout: true
       )
 
