@@ -71,19 +71,6 @@ defmodule GreenValidation.GreenInstaller do
     :ok
   end
 
-  @spec reset_mix_exs(Project.t()) :: :ok | {:error, String.t()}
-  defp reset_mix_exs(%Project{} = project) do
-    project_path = Project.path(project)
-
-    case System.cmd("git", ["reset", "mix.exs"],
-           cd: project_path,
-           stderr_to_stdout: true
-         ) do
-      {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to reset mix.exs: #{output}"}
-    end
-  end
-
   @spec get_latest_green_version() :: {:green, String.t()}
   defp get_latest_green_version do
     # For now, hardcode version - could query hex.pm API in the future
@@ -92,7 +79,7 @@ defmodule GreenValidation.GreenInstaller do
 
   @spec modify_mix_exs(Project.t(), tuple()) :: :ok
   defp modify_mix_exs(%Project{} = project, green_version) do
-    :ok = reset_mix_exs(project)
+    :ok = MixExs.reset_mix_exs(project)
     MixExs.add_dependency(project, green_version)
 
     :ok
