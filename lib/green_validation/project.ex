@@ -6,12 +6,13 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{Repo, Repos}
 
   @enforce_keys [:name, :repo_name]
-  defstruct [:name, :repo_name, :environment, has_formatter_exs: true, has_mix_exs: true]
+  defstruct [:name, :repo_name, :environment, rule_config: [], has_formatter_exs: true, has_mix_exs: true]
 
   @type t :: %__MODULE__{
           name: String.t(),
           repo_name: String.t(),
           environment: {atom, atom} | nil,
+          rule_config: list({atom, keyword()}),
           has_formatter_exs: boolean(),
           has_mix_exs: boolean()
         }
@@ -31,6 +32,10 @@ defmodule GreenValidation.Project do
   end
 
   def environment(%__MODULE__{}), do: []
+
+  def rule_config(%__MODULE__{rule_config: rule_config}, rule, config) do
+    Keyword.put(config, rule, rule_config[rule])
+  end
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
   def install_deps(%__MODULE__{} = project) do
