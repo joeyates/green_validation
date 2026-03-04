@@ -84,7 +84,11 @@ defmodule GreenValidation.RuleValidator do
 
   @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
   defp validate_single_rule(%Project{} = project, rule) do
-    rules = generate_config(rule)
+    rules =
+      rule
+      |> generate_config()
+      |> then(&Project.rule_config(project, rule, &1))
+
     :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
     environment = Project.environment(project)
