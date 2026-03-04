@@ -4,7 +4,7 @@ defmodule GreenValidation.GreenInstaller do
   """
 
   alias GreenValidation.{Installer, Project}
-  alias Installer.MixExs
+  alias Installer.{MixExs, FormatterExs}
 
   @doc """
   Temporarily modifies project's mix.exs and .formatter.exs to use Green formatter.
@@ -30,14 +30,8 @@ defmodule GreenValidation.GreenInstaller do
   @spec prepare_formatter_exs(Project.t(), list() | :all | nil) :: :ok
   def prepare_formatter_exs(%Project{} = project, rules \\ nil) do
     :ok = reset_formatter_exs(project)
-    project_path = Project.path(project)
-    formatter_path = Path.join(project_path, ".formatter.exs")
-
-    parsed = parsed_formatter_config(project_path)
-    modified = update_formatter_config(parsed, rules)
-    File.write!(formatter_path, modified)
-
-    :ok
+    green_config = green_config_for_rules(rules)
+    FormatterExs.update_project_formatter(project, green_config)
   end
 
   @spec reset_project(Project.t()) :: :ok | {:error, String.t()}
@@ -54,19 +48,19 @@ defmodule GreenValidation.GreenInstaller do
   end
 
   @spec reset_formatter_exs(Project.t()) :: :ok | {:error, String.t()}
-  defp reset_formatter_exs(%Project{has_formatter_exs: true} = project) do
+  def reset_formatter_exs(%Project{has_formatter_exs: true} = project) do
     project_path = Project.path(project)
 
-    case System.cmd("git", ["reset", ".formatter.exs"],
+    case System.cmd("git", ["checkout", ".formatter.exs"],
            cd: project_path,
            stderr_to_stdout: true
          ) do
       {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to reset .formatter.exs: #{output}"}
+      {output, _} -> {:error, "Failed to revert changes to .formatter.exs: #{output}"}
     end
   end
 
-  defp reset_formatter_exs(%Project{has_formatter_exs: false} = project) do
+  def reset_formatter_exs(%Project{has_formatter_exs: false} = project) do
     project_path = Project.path(project)
 
     System.cmd("rm", ["-f", ".formatter.exs"],
@@ -104,47 +98,19 @@ defmodule GreenValidation.GreenInstaller do
     :ok
   end
 
-  @spec parsed_formatter_config(String.t()) :: keyword()
-  defp parsed_formatter_config(project_path) do
-    formatter_path = Path.join(project_path, ".formatter.exs")
+  defp green_config_for_rules(rules) do
+    case rules do
+      nil ->
+        []
 
-    if File.exists?(formatter_path) do
-      content = File.read!(formatter_path)
-      {config, _} = Code.eval_string(content)
-      config
-    else
-      []
+      :all ->
+        [plugins: [Green.Lexmag.ElixirStyleGuideFormatter]]
+
+      individual_rules when is_list(individual_rules) ->
+        [
+          plugins: [Green.Lexmag.ElixirStyleGuideFormatter],
+          green: individual_rules
+        ]
     end
-  end
-
-  @spec update_formatter_config(keyword(), list() | :all | nil) :: String.t()
-  defp update_formatter_config(base_config, rules) do
-    green_config =
-      case rules do
-        nil ->
-          []
-
-        :all ->
-          [plugins: [Green.Lexmag.ElixirStyleGuideFormatter]]
-
-        individual_rules when is_list(individual_rules) ->
-          [
-            plugins: [Green.Lexmag.ElixirStyleGuideFormatter],
-            green: individual_rules
-          ]
-      end
-
-    merged = Keyword.merge(base_config, green_config)
-
-    merged =
-      if merged[:inputs] do
-        merged
-      else
-        Keyword.put(merged, :inputs, ["{mix,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"])
-      end
-
-    """
-    #{inspect(merged, pretty: true, width: 80, limit: :infinity)}
-    """
   end
 end
