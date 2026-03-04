@@ -6,13 +6,14 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{Repo, Repos}
 
   @enforce_keys [:name, :repo_name]
-  defstruct [:name, :repo_name, :path, has_formatter_exs: true]
+  defstruct [:name, :repo_name, :path, has_formatter_exs: true, has_mix_exs: true]
 
   @type t :: %__MODULE__{
           name: String.t(),
           repo_name: String.t(),
           path: String.t() | nil,
-          has_formatter_exs: boolean()
+          has_formatter_exs: boolean(),
+          has_mix_exs: boolean()
         }
 
   @spec path(t()) :: String.t()
@@ -27,17 +28,6 @@ defmodule GreenValidation.Project do
   @spec repo(t()) :: {:ok, Repo.t()} | {:error, String.t()}
   def repo(%__MODULE__{repo_name: repo_name}) do
     Repos.find_by_name(repo_name)
-  end
-
-  @spec has_mix_exs?(t()) :: :ok | {:error, String.t()}
-  def has_mix_exs?(%__MODULE__{} = project) do
-    project_path = path(project)
-
-    if File.exists?(Path.join(project_path, "mix.exs")) do
-      :ok
-    else
-      {:error, "No mix.exs found in #{project_path}"}
-    end
   end
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
