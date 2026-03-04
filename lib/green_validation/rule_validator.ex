@@ -82,7 +82,7 @@ defmodule GreenValidation.RuleValidator do
   @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
   defp validate_single_rule(%Project{} = project, rule) do
     rules = generate_config(rule)
-    GreenInstaller.prepare_formatter_exs(project, rules)
+    :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
 
     {output, exit_code} =
@@ -94,6 +94,8 @@ defmodule GreenValidation.RuleValidator do
       )
 
     parse_format_output(project, rule, output, exit_code)
+  after
+    :ok = GreenInstaller.reset_formatter_exs(project)
   end
 
   @doc """
