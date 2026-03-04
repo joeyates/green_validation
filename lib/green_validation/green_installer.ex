@@ -12,13 +12,11 @@ defmodule GreenValidation.GreenInstaller do
 
   @spec install_green(Project.t(), keyword()) :: :ok | {:error, String.t()}
   def install_green(%Project{} = project, opts \\ []) do
-    installation_type = Keyword.get(opts, :installation_type)
     supplied_version = Keyword.get(opts, :green_version)
 
     green_version =
       cond do
         !is_nil(supplied_version) -> supplied_version
-        installation_type == :local -> local_green_dependency()
         true -> get_latest_green_version()
       end
 
@@ -97,14 +95,6 @@ defmodule GreenValidation.GreenInstaller do
   defp get_latest_green_version do
     # For now, hardcode version - could query hex.pm API in the future
     {:green, "0.1.10"}
-  end
-
-  @spec local_green_dependency() :: {:green, binary(), keyword()}
-  def local_green_dependency do
-    # From test/projects/validation/lib -> root of green project
-    path = [__DIR__, "..", "..", "..", "..", ".."] |> Path.join() |> Path.expand()
-
-    {:green, ">= 0.0.0", path: path}
   end
 
   @spec modify_mix_exs(Project.t(), tuple()) :: :ok
