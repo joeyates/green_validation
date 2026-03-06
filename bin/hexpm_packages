@@ -75,14 +75,17 @@ defmodule GreenValidation.HexpmPackages do
   end
 
   defp format_packages(packages) when is_list(packages) do
-    formatted = Enum.map(packages, fn package ->
-      %{
-        name: package["name"],
-        recent_downloads: get_in(package, ["downloads", "recent"]),
-        description: get_in(package, ["meta", "description"]),
-        repo_url: get_in(package, ["meta", "links", "GitHub"])
-      }
-    end)
+    formatted =
+      packages
+      |> Enum.map(fn package ->
+        %{
+          name: package["name"],
+          recent_downloads: get_in(package, ["downloads", "recent"]),
+          description: get_in(package, ["meta", "description"]),
+          repo_url: get_in(package, ["meta", "links", "GitHub"])
+        }
+      end)
+      |> Enum.filter(fn package -> package.repo_url != nil end)
 
     {:ok, formatted}
   end
