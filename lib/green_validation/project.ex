@@ -6,7 +6,14 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{Repo, Repos}
 
   @enforce_keys [:name, :repo_name]
-  defstruct [:name, :repo_name, :environment, rule_config: [], has_formatter_exs: true, has_mix_exs: true]
+  defstruct [
+    :name,
+    :repo_name,
+    :environment,
+    rule_config: [],
+    has_formatter_exs: true,
+    has_mix_exs: true
+  ]
 
   @type t :: %__MODULE__{
           name: String.t(),

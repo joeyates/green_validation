@@ -60,6 +60,7 @@ defmodule GreenValidation.Repo do
 
   defp prepare_cloned(%__MODULE__{} = repo) do
     IO.puts("Updating existing repository: #{repo.name}")
+
     with :ok <- clean_repo(repo),
          :ok <- update_repo(repo) do
       :ok
@@ -69,6 +70,7 @@ defmodule GreenValidation.Repo do
   @spec clone_repo(t()) :: :ok | {:error, String.t()}
   defp clone_repo(%__MODULE__{} = repo) do
     IO.puts("Cloning repository: #{repo.name}")
+
     with :ok <- do_clone(repo) do
       :ok
     end
