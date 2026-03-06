@@ -32,6 +32,7 @@ defmodule GreenValidation.HexpmPackages do
     case HelpfulOptions.parse_commands(args, @commands) do
       {:ok, parsed} ->
         run(parsed)
+
       {:error, reason} ->
         IO.puts("Invalid command: #{inspect(reason)}")
         usage()
@@ -69,8 +70,10 @@ defmodule GreenValidation.HexpmPackages do
     case Req.get(url, params: params) do
       {:ok, %Req.Response{status: 200, body: body}} ->
         {:ok, body}
+
       {:ok, %Req.Response{status: status}} ->
         {:error, "HTTP request failed with status #{status}"}
+
       {:error, reason} ->
         {:error, "HTTP request failed: #{inspect(reason)}"}
     end
@@ -112,6 +115,7 @@ defmodule GreenValidation.HexpmPackages do
     case File.mkdir_p(Path.dirname(output_path)) do
       :ok ->
         write_json(output_path, data)
+
       {:error, reason} ->
         {:error, "Failed to create output directory: #{inspect(reason)}"}
     end
