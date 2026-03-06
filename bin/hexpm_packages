@@ -43,10 +43,10 @@ defmodule GreenValidation.HexpmPackages do
 
     IO.puts("Fetching package information from hex.pm...")
 
-    # TODO: Implement write logic
     with {:ok, response} <- fetch_packages(),
-         {:ok, formatted_data} <- format_packages(response) do
-      IO.puts("Successfully formatted #{length(formatted_data)} packages")
+         {:ok, formatted_data} <- format_packages(response),
+         :ok <- write_output(output_path, formatted_data) do
+      IO.puts("Successfully wrote #{length(formatted_data)} packages to #{output_path}")
       :ok
     else
       {:error, reason} ->
@@ -88,6 +88,20 @@ defmodule GreenValidation.HexpmPackages do
   end
 
   defp format_packages(_), do: {:error, "Invalid response format"}
+
+  defp write_output(output_path, data) do
+    # Ensure the output directory exists
+    output_path
+    |> Path.dirname()
+    |> File.mkdir_p!()
+
+    case Jason.encode(data, pretty: true) do
+      {:ok, json} ->
+        File.write(output_path, json)
+      {:error, reason} ->
+        {:error, "Failed to encode JSON: #{inspect(reason)}"}
+    end
+  end
 end
 
 GreenValidation.HexpmPackages.main(System.argv())
