@@ -1,1 +1,10 @@
 #!/usr/bin/env elixir
+
+# Script to fetch package information from hex.pm
+
+Mix.install([
+  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+  {:helpful_options, "~> 0.4.4"},
+  {:jason, "~> 1.4"},
+  {:req, "~> 0.5.17"}
+])
