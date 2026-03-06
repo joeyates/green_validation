@@ -5,8 +5,47 @@ defmodule GreenValidation.Installer.MixExs do
 
   alias GreenValidation.Project
 
+  def ensure_mix_exs(%Project{has_mix_exs: true} = project) do
+    project_path = Project.path(project)
+    mix_path = Path.join(project_path, "mix.exs")
+
+    if !File.exists?(mix_path) do
+      raise "mix.exs not found in #{project_path}"
+    end
+
+    :ok
+  end
+
+  def ensure_mix_exs(%Project{has_mix_exs: false} = project) do
+    project_path = Project.path(project)
+    mix_path = Path.join(project_path, "mix.exs")
+
+    if File.exists?(mix_path) do
+      raise "mix.exs already exists in #{project_path}"
+    end
+
+    content = """
+    defmodule #{Macro.camelize(project.name)}.MixProject do
+      use Mix.Project
+
+      def project do
+        [
+          app: :elixir,
+          version: System.version(),
+          build_per_environment: false,
+          deps: []
+        ]
+      end
+    end
+    """
+
+    File.write!(mix_path, content)
+
+    :ok
+  end
+
   @spec add_dependency(Project.t(), tuple()) :: :ok
-  def add_dependency(%Project{} = project, dependency) do
+  def add_dependency(%Project{has_mix_exs: true} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
 
@@ -22,6 +61,35 @@ defmodule GreenValidation.Installer.MixExs do
     :ok
   end
 
+  def add_dependency(%Project{has_mix_exs: false} = project, dependency) do
+    project_path = Project.path(project)
+    mix_path = Path.join(project_path, "mix.exs")
+    project_module = Macro.camelize(project.name)
+
+    content = """
+    defmodule #{project_module}.MixProject do
+      use Mix.Project
+
+      def project do
+        [
+          app: :elixir,
+          version: System.version(),
+          build_per_environment: false,
+          deps: deps()
+        ]
+      end
+
+      defp deps do
+        [
+          #{inspect(dependency)}
+        ]
+      end
+    end
+    """
+
+    File.write!(mix_path, content)
+  end
+
   @spec add_dependency(String.t(), tuple()) :: String.t()
   def add_dependency(content, dependency) when is_binary(content) do
     if String.contains?(content, "defp deps") do
@@ -34,6 +102,35 @@ defmodule GreenValidation.Installer.MixExs do
       |> add_deps_block(dependency)
       |> add_deps_call_to_project()
       |> reformat()
+    end
+  end
+
+  @spec reset_mix_exs(Project.t()) :: :ok | {:error, String.t()}
+  def reset_mix_exs(%Project{has_mix_exs: true} = project) do
+    project_path = Project.path(project)
+
+    case System.cmd("git", ["reset", "mix.exs"],
+           cd: project_path,
+           stderr_to_stdout: true
+         ) do
+      {_output, 0} ->
+        :ok
+      {output, _} ->
+        {:error, "Failed to reset mix.exs: #{output}"}
+    end
+  end
+
+  def reset_mix_exs(%Project{has_mix_exs: false} = project) do
+    project_path = Project.path(project)
+
+    case System.cmd("rm", ["-f", "mix.exs"],
+           cd: project_path,
+           stderr_to_stdout: true
+         ) do
+      {_output, 0} ->
+        :ok
+      {output, _} ->
+        {:error, "Failed to reset mix.exs: #{output}"}
     end
   end
 
