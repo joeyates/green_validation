@@ -43,9 +43,10 @@ defmodule GreenValidation.HexpmPackages do
 
     IO.puts("Fetching package information from hex.pm...")
 
-    # TODO: Implement format and write logic
-    with {:ok, response} <- fetch_packages() do
-      IO.puts("Successfully fetched packages")
+    # TODO: Implement write logic
+    with {:ok, response} <- fetch_packages(),
+         {:ok, formatted_data} <- format_packages(response) do
+      IO.puts("Successfully formatted #{length(formatted_data)} packages")
       :ok
     else
       {:error, reason} ->
@@ -72,6 +73,21 @@ defmodule GreenValidation.HexpmPackages do
         {:error, "HTTP request failed: #{inspect(reason)}"}
     end
   end
+
+  defp format_packages(packages) when is_list(packages) do
+    formatted = Enum.map(packages, fn package ->
+      %{
+        name: package["name"],
+        recent_downloads: get_in(package, ["downloads", "recent"]),
+        description: get_in(package, ["meta", "description"]),
+        repo_url: get_in(package, ["meta", "links", "GitHub"])
+      }
+    end)
+
+    {:ok, formatted}
+  end
+
+  defp format_packages(_), do: {:error, "Invalid response format"}
 end
 
 GreenValidation.HexpmPackages.main(System.argv())
