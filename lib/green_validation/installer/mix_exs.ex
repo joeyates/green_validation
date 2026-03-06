@@ -204,7 +204,7 @@ defmodule GreenValidation.Installer.MixExs do
 
         "#{def_start}#{list}#{def_end}"
       end,
-      capture: [:def_start, :open, :libs, :close, :def_end]
+      capture: [:def_start, :libs, :def_end]
     )
   end
 end
