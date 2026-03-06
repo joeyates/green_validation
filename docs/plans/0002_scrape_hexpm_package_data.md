@@ -13,7 +13,7 @@ Create an Elixir script at `bin/hexpm_packages` that fetches the top 100 package
 - [x] Create executable script `bin/hexpm_packages` with proper shebang
 - [x] Set up Mix.install with dependencies (req, jason, helpful_options, green_validation)
 - [x] Define CLI interface with HelpfulOptions for `--output-path` parameter
-- [ ] Implement API fetch function to call `https://hex.pm/api/packages?sort=downloads`
+- [x] Implement API fetch function to call `https://hex.pm/api/packages?sort=downloads`
 - [ ] Parse response and extract required fields (name, recent_downloads from downloads.recent, description from meta.description, repo_url from meta.links.GitHub)
 - [ ] Format extracted data into structured maps
 - [ ] Implement JSON output writer with pretty printing to default path `repos/hexpm.json`
