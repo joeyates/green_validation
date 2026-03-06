@@ -24,7 +24,7 @@ Create an Elixir script that queries GitHub's REST API to download the URLs of a
 
 # Scrape hex.pm Package Data
 
-Status: [ ]
+Status: [x]
 
 ## Description
 
