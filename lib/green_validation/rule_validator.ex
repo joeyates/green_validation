@@ -55,7 +55,7 @@ defmodule GreenValidation.RuleValidator do
   def validate_all_rules(%Project{} = project, green_dependency) do
     IO.puts("  Validating #{length(all_rules())} rules individually...")
 
-    GreenInstaller.install_green(project, green_version: green_dependency)
+    :ok = GreenInstaller.install_green(project, green_version: green_dependency)
 
     Enum.reduce(
       all_rules(),
