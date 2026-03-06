@@ -8,3 +8,49 @@ Mix.install([
   {:jason, "~> 1.4"},
   {:req, "~> 0.5.17"}
 ])
+
+defmodule GreenValidation.HexpmPackages do
+  @moduledoc """
+  CLI tool to fetch package information from hex.pm sorted by downloads.
+  """
+
+  @program "bin/hexpm_packages"
+  @default_output_path "repos/hexpm.json"
+
+  @commands [
+    %{
+      commands: [],
+      description: "Fetch package information from hex.pm sorted by downloads",
+      switches: [
+        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"}
+      ]
+    }
+  ]
+
+  def main(args) do
+    case HelpfulOptions.parse_commands(args, @commands) do
+      {:ok, parsed} ->
+        run(parsed)
+      {:error, reason} ->
+        IO.puts("Invalid command: #{inspect(reason)}")
+        usage()
+        System.halt(1)
+    end
+  end
+
+  defp run(%{switches: switches}) do
+    output_path = Map.get(switches, :output_path, @default_output_path)
+
+    IO.puts("Fetching package information from hex.pm...")
+
+    # TODO: Implement fetch, format, and write logic
+    IO.puts("Not yet implemented")
+  end
+
+  defp usage() do
+    IO.puts("Usage:\n")
+    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+  end
+end
+
+GreenValidation.HexpmPackages.main(System.argv())
