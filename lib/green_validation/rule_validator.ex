@@ -6,7 +6,8 @@ defmodule GreenValidation.RuleValidator do
   then runs mix format --check-formatted to identify affected files.
   """
 
-  alias GreenValidation.{GreenInstaller, OutputParser, Project, Repo, RuleResult}
+  alias GreenValidation.{GreenInstaller, OutputParser, Project, RuleResult}
+  alias GreenValidation.Installer.MixExs
 
   @doc """
   List of all configurable Green rules.
@@ -54,7 +55,7 @@ defmodule GreenValidation.RuleValidator do
   def validate_all_rules(%Project{} = project, green_dependency) do
     IO.puts("  Validating #{length(all_rules())} rules individually...")
 
-    GreenInstaller.install_green(project, green_version: green_dependency)
+    :ok = GreenInstaller.install_green(project, green_version: green_dependency)
 
     Enum.reduce(
       all_rules(),
@@ -77,24 +78,33 @@ defmodule GreenValidation.RuleValidator do
           error
       end
     )
+  after
+    :ok = MixExs.reset_mix_exs(project)
   end
 
   @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
   defp validate_single_rule(%Project{} = project, rule) do
-    rules = generate_config(rule)
-    GreenInstaller.prepare_formatter_exs(project, rules)
+    rules =
+      rule
+      |> generate_config()
+      |> then(&Project.rule_config(project, rule, &1))
+
+    :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
+    environment = Project.environment(project)
 
     {output, exit_code} =
       System.cmd(
         "mix",
         ["format", "--check-formatted"],
         cd: project_path,
+        env: environment,
         stderr_to_stdout: true
       )
 
-    {:ok, repo} = Project.repo(project)
-    parse_format_output(repo, rule, output, exit_code)
+    parse_format_output(project, rule, output, exit_code)
+  after
+    :ok = GreenInstaller.reset_formatter_exs(project)
   end
 
   @doc """
@@ -111,23 +121,20 @@ defmodule GreenValidation.RuleValidator do
   Parses the output from `mix format --check-formatted`.
 
   Uses OutputParser to extract file paths and affected line numbers.
-
-  ## Returns
-  - `{:ok, %RuleResult{}}` on success
-  - `{:error, reason}` on failure
   """
-  @spec parse_format_output(Repo.t(), atom(), String.t(), non_neg_integer()) ::
+  @spec parse_format_output(Project.t(), atom(), String.t(), non_neg_integer()) ::
           {:ok, RuleResult.t()} | {:error, String.t()}
   def parse_format_output(project, rule, output, exit_code) do
+    {:ok, repo} = Project.repo(project)
+
     cond do
       output == "" ->
         {:ok, %RuleResult{rule: rule}}
 
       exit_code in [0, 1] ->
-        OutputParser.parse_output(project, rule, output)
+        OutputParser.parse_output(repo, rule, output)
 
       true ->
-        # Error occurred
         {:error, "mix format failed with exit code #{exit_code}: #{output}"}
     end
   end
