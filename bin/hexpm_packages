@@ -91,13 +91,23 @@ defmodule GreenValidation.HexpmPackages do
 
   defp write_output(output_path, data) do
     # Ensure the output directory exists
-    output_path
-    |> Path.dirname()
-    |> File.mkdir_p!()
+    case File.mkdir_p(Path.dirname(output_path)) do
+      {:ok, _} ->
+        write_json(output_path, data)
+      {:error, reason} ->
+        {:error, "Failed to create output directory: #{inspect(reason)}"}
+    end
+  end
 
+  defp write_json(output_path, data) do
     case Jason.encode(data, pretty: true) do
       {:ok, json} ->
-        File.write(output_path, json)
+        case File.write(output_path, json) do
+          :ok ->
+            :ok
+          {:error, reason} ->
+            {:error, "Failed to write file: #{inspect(reason)}"}
+        end
       {:error, reason} ->
         {:error, "Failed to encode JSON: #{inspect(reason)}"}
     end

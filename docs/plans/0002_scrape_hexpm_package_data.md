@@ -17,8 +17,8 @@ Create an Elixir script at `bin/hexpm_packages` that fetches the top 100 package
 - [x] Parse response and extract required fields (name, recent_downloads from downloads.recent, description from meta.description, repo_url from meta.links.GitHub)
 - [x] Format extracted data into structured maps
 - [x] Implement JSON output writer with pretty printing to default path `repos/hexpm.json`
-- [ ] Add error handling for API failures and JSON encoding errors
-- [ ] Make the script executable
+- [x] Add error handling for API failures and JSON encoding errors
+- [x] Make the script executable
 - [ ] Address any additional implementation details that arise during development
 - [ ] Mark the plan as "done"
 
