@@ -43,13 +43,34 @@ defmodule GreenValidation.HexpmPackages do
 
     IO.puts("Fetching package information from hex.pm...")
 
-    # TODO: Implement fetch, format, and write logic
-    IO.puts("Not yet implemented")
+    # TODO: Implement format and write logic
+    with {:ok, response} <- fetch_packages() do
+      IO.puts("Successfully fetched packages")
+      :ok
+    else
+      {:error, reason} ->
+        IO.puts("Error: #{reason}")
+        System.halt(1)
+    end
   end
 
   defp usage() do
     IO.puts("Usage:\n")
     IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+  end
+
+  defp fetch_packages() do
+    url = "https://hex.pm/api/packages"
+    params = %{"sort" => "downloads"}
+
+    case Req.get(url, params: params) do
+      {:ok, %Req.Response{status: 200, body: body}} ->
+        {:ok, body}
+      {:ok, %Req.Response{status: status}} ->
+        {:error, "HTTP request failed with status #{status}"}
+      {:error, reason} ->
+        {:error, "HTTP request failed: #{inspect(reason)}"}
+    end
   end
 end
 
