@@ -22,7 +22,8 @@ defmodule GreenValidation.HexpmPackages do
       commands: [],
       description: "Fetch package information from hex.pm sorted by downloads",
       switches: [
-        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"}
+        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"},
+        verbose: %{type: :boolean, description: "Print names of packages without a repo_url"}
       ]
     }
   ]
@@ -40,11 +41,12 @@ defmodule GreenValidation.HexpmPackages do
 
   defp run(%{switches: switches}) do
     output_path = Map.get(switches, :output_path, @default_output_path)
+    verbose = Map.get(switches, :verbose, false)
 
     IO.puts("Fetching package information from hex.pm...")
 
     with {:ok, response} <- fetch_packages(),
-         {:ok, formatted_data} <- format_packages(response),
+         {:ok, formatted_data} <- format_packages(response, verbose),
          :ok <- write_output(output_path, formatted_data) do
       IO.puts("Successfully wrote #{length(formatted_data)} packages to #{output_path}")
       :ok
@@ -74,7 +76,7 @@ defmodule GreenValidation.HexpmPackages do
     end
   end
 
-  defp format_packages(packages) when is_list(packages) do
+  defp format_packages(packages, verbose) when is_list(packages) do
     formatted =
       packages
       |> Enum.map(fn package ->
@@ -85,12 +87,25 @@ defmodule GreenValidation.HexpmPackages do
           repo_url: get_in(package, ["meta", "links", "GitHub"])
         }
       end)
+      |> optionally_list_repos_without_repo_url(verbose)
       |> Enum.filter(fn package -> package.repo_url != nil end)
 
     {:ok, formatted}
   end
 
-  defp format_packages(_), do: {:error, "Invalid response format"}
+  defp format_packages(_, _), do: {:error, "Invalid response format"}
+
+  defp optionally_list_repos_without_repo_url(packages, true) do
+    Enum.each(packages, fn package ->
+      if package.repo_url == nil do
+        IO.puts("Package without repo_url: #{package.name}")
+      end
+    end)
+
+    packages
+  end
+
+  defp optionally_list_repos_without_repo_url(packages, false), do: packages
 
   defp write_output(output_path, data) do
     # Ensure the output directory exists
