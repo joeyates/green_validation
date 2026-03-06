@@ -103,16 +103,12 @@ defmodule GreenValidation.HexpmPackages do
   end
 
   defp write_json(output_path, data) do
-    case Jason.encode(data, pretty: true) do
-      {:ok, json} ->
-        case File.write(output_path, json) do
-          :ok ->
-            :ok
-          {:error, reason} ->
-            {:error, "Failed to write file: #{inspect(reason)}"}
-        end
+    with {:ok, json} <- Jason.encode(data, pretty: true),
+         :ok <- File.write(output_path, json) do
+      :ok
+    else
       {:error, reason} ->
-        {:error, "Failed to encode JSON: #{inspect(reason)}"}
+        {:error, "Failed to save JSON file: #{inspect(reason)}"}
     end
   end
 end
