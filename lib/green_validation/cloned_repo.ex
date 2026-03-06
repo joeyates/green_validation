@@ -8,5 +8,4 @@ defmodule GreenValidation.ClonedRepo do
           commit_sha: String.t(),
           branch: String.t()
         }
-  
 end

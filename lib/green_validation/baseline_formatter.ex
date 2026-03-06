@@ -20,10 +20,10 @@ defmodule GreenValidation.BaselineFormatter do
 
     try do
       case System.cmd("mix", ["format", "--check-formatted"],
-              cd: project_path,
-              env: environment,
-              stderr_to_stdout: true
-            ) do
+             cd: project_path,
+             env: environment,
+             stderr_to_stdout: true
+           ) do
         {_output, 0} ->
           {:ok, :clean}
 

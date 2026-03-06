@@ -115,6 +115,7 @@ defmodule GreenValidation.Installer.MixExs do
          ) do
       {_output, 0} ->
         :ok
+
       {output, _} ->
         {:error, "Failed to reset mix.exs: #{output}"}
     end
@@ -129,6 +130,7 @@ defmodule GreenValidation.Installer.MixExs do
          ) do
       {_output, 0} ->
         :ok
+
       {output, _} ->
         {:error, "Failed to reset mix.exs: #{output}"}
     end

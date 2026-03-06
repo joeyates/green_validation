@@ -24,8 +24,11 @@ defmodule GreenValidation.Installer.FormatterExs do
         keyword,
         pairs,
         fn {key, value}, acc ->
-          {:__block__, _ctx, [[block]]} = Code.string_to_quoted!("[#{key}: #{inspect(value)}]", to_quoted_opts)
+          {:__block__, _ctx, [[block]]} =
+            Code.string_to_quoted!("[#{key}: #{inspect(value)}]", to_quoted_opts)
+
           index = Enum.find_index(acc, fn {{:__block__, _ctx, [key1]}, _value} -> key1 == key end)
+
           if index do
             List.replace_at(acc, index, block)
           else

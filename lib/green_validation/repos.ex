@@ -63,6 +63,7 @@ defmodule GreenValidation.Repos do
     case System.cmd("make", [], cd: path, stderr_to_stdout: true) do
       {_output, 0} ->
         :ok
+
       {output, _} ->
         {:error, "Failed to run post-checkout step for Elixir: #{output}"}
     end

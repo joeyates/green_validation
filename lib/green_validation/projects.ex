@@ -12,39 +12,49 @@ defmodule GreenValidation.Projects do
       has_mix_exs: false,
       environment: {__MODULE__, :elixir_environment},
       rule_config: [
-        avoid_needless_pipelines: [except: [{"lib/elixir/test/elixir/code_normalizer/quoted_ast_test.exs", [471, 472, 636]}]],
-        true_in_cond: [except: [
-          "lib/elixir/test/elixir/kernel/expansion_test.exs",
-          {"lib/elixir/test/elixir/kernel/guard_test.exs", 421},
-          {"lib/elixir/lib/macro.ex", 2813},
-          "lib/elixir/test/elixir/module/types/expr_test.exs",
-          "lib/elixir/test/elixir/module/types/helpers_test.exs",
-          "lib/elixir/test/elixir/kernel/special_forms_test.exs",
-          "lib/elixir/test/elixir/fixtures/dialyzer/cond.ex"
-        ]],
-        upper_camel_case_for_modules: [except: [
-          "lib/mix/test/mix/tasks/compile.erlang_test.exs",
-          "lib/iex/test/iex/autocomplete_test.exs",
-          {"lib/elixir/test/elixir/map_test.exs", 493},
-          {"lib/elixir/test/elixir/kernel_test.exs", [913, 917]},
-          {"lib/elixir/test/elixir/module_test.exs", [277, 285]}
-        ]],
-        avoid_caps: [except: [
-          "lib/elixir/test/elixir/kernel/expansion_test.exs",
-          "lib/elixir/test/elixir/kernel/alias_test.exs",
-          {"lib/iex/test/iex/helpers_test.exs", 1561},
-          "lib/elixir/test/elixir/code_normalizer/quoted_ast_test.exs",
-          "lib/iex/test/iex/autocomplete_test.exs",
-          "lib/elixir/test/elixir/kernel/string_tokenizer_test.exs",
-          "lib/elixir/test/elixir/kernel/sigils_test.exs",
-          {"lib/iex/lib/iex/pry.ex", 576},
-          "lib/elixir/lib/kernel.ex",
-          "lib/elixir/lib/string.ex",
-          "lib/elixir/test/elixir/kernel/expansion_test.exs",
-          "lib/elixir/test/elixir/inspect_test.exs",
-          "lib/elixir/unicode/unicode.ex",
-          "lib/elixir/test/elixir/kernel/quote_test.exs"
-        ]]
+        avoid_needless_pipelines: [
+          except: [
+            {"lib/elixir/test/elixir/code_normalizer/quoted_ast_test.exs", [471, 472, 636]}
+          ]
+        ],
+        true_in_cond: [
+          except: [
+            "lib/elixir/test/elixir/kernel/expansion_test.exs",
+            {"lib/elixir/test/elixir/kernel/guard_test.exs", 421},
+            {"lib/elixir/lib/macro.ex", 2813},
+            "lib/elixir/test/elixir/module/types/expr_test.exs",
+            "lib/elixir/test/elixir/module/types/helpers_test.exs",
+            "lib/elixir/test/elixir/kernel/special_forms_test.exs",
+            "lib/elixir/test/elixir/fixtures/dialyzer/cond.ex"
+          ]
+        ],
+        upper_camel_case_for_modules: [
+          except: [
+            "lib/mix/test/mix/tasks/compile.erlang_test.exs",
+            "lib/iex/test/iex/autocomplete_test.exs",
+            {"lib/elixir/test/elixir/map_test.exs", 493},
+            {"lib/elixir/test/elixir/kernel_test.exs", [913, 917]},
+            {"lib/elixir/test/elixir/module_test.exs", [277, 285]}
+          ]
+        ],
+        avoid_caps: [
+          except: [
+            "lib/elixir/test/elixir/kernel/expansion_test.exs",
+            "lib/elixir/test/elixir/kernel/alias_test.exs",
+            {"lib/iex/test/iex/helpers_test.exs", 1561},
+            "lib/elixir/test/elixir/code_normalizer/quoted_ast_test.exs",
+            "lib/iex/test/iex/autocomplete_test.exs",
+            "lib/elixir/test/elixir/kernel/string_tokenizer_test.exs",
+            "lib/elixir/test/elixir/kernel/sigils_test.exs",
+            {"lib/iex/lib/iex/pry.ex", 576},
+            "lib/elixir/lib/kernel.ex",
+            "lib/elixir/lib/string.ex",
+            "lib/elixir/test/elixir/kernel/expansion_test.exs",
+            "lib/elixir/test/elixir/inspect_test.exs",
+            "lib/elixir/unicode/unicode.ex",
+            "lib/elixir/test/elixir/kernel/quote_test.exs"
+          ]
+        ]
       ]
     },
     %Project{
