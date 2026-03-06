@@ -172,11 +172,11 @@ defmodule GreenValidation.Installer.MixExs do
   @spec insert_dependency(String.t(), tuple()) :: String.t()
   defp insert_dependency(content, dependency) do
     regex = ~r/
-      (?<def_start>defp\sdeps(?:\(\))?\s+do\s*)
+      (defp\sdeps(?:\(\))?\s+do\s*)
       \[\s*           # Start of list
-      (?<libs>.*?)
+      (.*?)
       \s*]\s*         # End of list
-      (?<def_end>\s*end)
+      (\s*end)
     /sx
     dep_string = inspect(dependency)
 
@@ -203,8 +203,7 @@ defmodule GreenValidation.Installer.MixExs do
           end
 
         "#{def_start}#{list}#{def_end}"
-      end,
-      capture: [:def_start, :libs, :def_end]
+      end
     )
   end
 end
