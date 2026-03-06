@@ -17,13 +17,14 @@ defmodule GreenValidation.GithubRepos do
   alias GreenValidation.Github.Client
 
   @program "bin/github_repos"
+  @default_output_path "repos/github.json"
 
   @commands [
     %{
       commands: [],
       description: "Fetch Elixir repositories from GitHub sorted by stars",
       switches: [
-        output_path: %{type: :string, description: "Output file path (default: results/github_repos.json)"},
+        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"},
         limit: %{type: :integer, description: "Number of repositories to fetch (default: 100)"}
       ]
     }
@@ -41,7 +42,7 @@ defmodule GreenValidation.GithubRepos do
   end
 
   defp run(%{switches: switches}) do
-    output_path = Map.get(switches, :output_path, "results/github_repos.json")
+    output_path = Map.get(switches, :output_path, @default_output_path)
     limit = Map.get(switches, :limit, 100)
 
     IO.puts("Fetching #{limit} Elixir repositories from GitHub...")
