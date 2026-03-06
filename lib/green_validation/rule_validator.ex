@@ -121,10 +121,6 @@ defmodule GreenValidation.RuleValidator do
   Parses the output from `mix format --check-formatted`.
 
   Uses OutputParser to extract file paths and affected line numbers.
-
-  ## Returns
-  - `{:ok, %RuleResult{}}` on success
-  - `{:error, reason}` on failure
   """
   @spec parse_format_output(Project.t(), atom(), String.t(), non_neg_integer()) ::
           {:ok, RuleResult.t()} | {:error, String.t()}
@@ -139,7 +135,6 @@ defmodule GreenValidation.RuleValidator do
         OutputParser.parse_output(repo, rule, output)
 
       true ->
-        # Error occurred
         {:error, "mix format failed with exit code #{exit_code}: #{output}"}
     end
   end
