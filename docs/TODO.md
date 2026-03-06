@@ -21,3 +21,24 @@ Create an Elixir script that queries GitHub's REST API to download the URLs of a
 - Output format: JSON list of repository URLs with metadata (stars, name, owner)
 - Default output path with option to override via `--output-path` parameter
 - Make script executable with proper shebang (`#!/usr/bin/env elixir`)
+
+# Scrape hex.pm Package Data
+
+Status: [ ]
+
+## Description
+
+Fetch package information from hex.pm's API including names, recent downloads, descriptions, and repository URLs. Output the data as JSON.
+
+## Technical Specifics
+
+- API endpoint: https://hex.pm/api/packages?sort=downloads
+- Returns 100 items (no pagination required)
+- Extract from each item:
+  - `name`
+  - `recent_downloads` from `downloads.recent`
+  - `description` from `meta.description`
+  - `repo_url` from `meta.links.GitHub`
+- Output format: Pretty-printed JSON file
+- Default output location: `repos/hexpm.json`
+- Implementation guide: Use [bin/github_repos](bin/github_repos) as a reference for structure and approach
