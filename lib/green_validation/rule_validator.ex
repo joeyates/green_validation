@@ -128,14 +128,12 @@ defmodule GreenValidation.RuleValidator do
   @spec parse_format_output(Project.t(), atom(), String.t(), non_neg_integer()) ::
           {:ok, RuleResult.t()} | {:error, String.t()}
   def parse_format_output(project, rule, output, exit_code) do
-    {:ok, repo} = Project.repo(project)
-
     cond do
       output == "" ->
         {:ok, %RuleResult{rule: rule}}
 
       exit_code in [0, 1] ->
-        OutputParser.parse_output(repo, rule, output)
+        OutputParser.parse_output(project, rule, output)
 
       true ->
         {:error, "mix format failed with exit code #{exit_code}: #{output}"}

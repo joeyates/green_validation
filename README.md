@@ -194,10 +194,8 @@ For each rule:
 │       │   └── mix_exs.ex        # Modify mix.exs to add dependencies
 │       ├── output_parser.ex      # Parse mix format output for changes/warnings
 │       ├── project.ex            # Represents a project and its metadata
-│       ├── projects.ex           # The list of target projects
-│       ├── repo.ex               # Cloning and repository management
+│       ├── projects.ex           # Specific configuration for certain target projects
 │       ├── report_writer.ex      # Write results to JSON/TEXT files
-│       ├── repos.ex              # The list of repositories to validate
 │       ├── result.ex             # Represents the result of validating Green's rules against a project
 │       ├── rule_result.ex        # Represents the result of validating a single rule against a project
 │       ├── rule_validator.ex     # Validates Green rules against a project
