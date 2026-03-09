@@ -25,7 +25,7 @@ defmodule GreenValidation.CLI do
 
   @program "bin/validate.exs"
 
-  @switches [
+  @common_switches [
     format: %{type: :string, description: "Output format for reports ('text' or 'json')"},
     green: %{
       type: :string,
@@ -41,12 +41,12 @@ defmodule GreenValidation.CLI do
     %{
       commands: ["check-all"],
       description: "Check all projects",
-      switches: @switches
+      switches: @common_switches
     },
     %{
-      commands: ["check-project", :project],
+      commands: ["check-project", :project_name],
       description: "Check a specific project",
-      switches: @switches
+      switches: @common_switches
     }
   ]
 
@@ -127,8 +127,9 @@ defmodule GreenValidation.CLI do
   end
 
   defp check(project_name, switches) do
+    project = Projects.load!(project_name)
+
     with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
-         {:ok, project} <- Projects.find_by_name(project_name),
          {:ok, cloned_repo} <- prepare_repo(project),
          {:ok, result} <- check_project(cloned_repo, project, green_dependency) do
       handle_format_output(result, switches, project_name)
@@ -187,10 +188,10 @@ defmodule GreenValidation.CLI do
 
   defp prepare_all_repos() do
     Enum.reduce_while(
-      Repos.all(),
+      Projects.all(),
       {:ok, %{}},
-      fn repo, {:ok, acc} ->
-        case prepare_repo(repo) do
+      fn project, {:ok, acc} ->
+        case prepare_repo(project) do
           {:ok, cloned_repo} ->
             {:cont, {:ok, Map.put(acc, project.name, cloned_repo)}}
 
