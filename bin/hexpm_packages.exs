@@ -22,7 +22,10 @@ defmodule GreenValidation.HexpmPackages do
       commands: [],
       description: "Fetch package information from hex.pm sorted by downloads",
       switches: [
-        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"},
+        output_path: %{
+          type: :string,
+          description: "Output file path (default: #{@default_output_path})"
+        },
         verbose: %{type: :boolean, description: "Print names of packages without a repo_url"}
       ]
     }
