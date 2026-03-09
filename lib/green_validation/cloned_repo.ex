@@ -1,10 +1,11 @@
 defmodule GreenValidation.ClonedRepo do
-  @enforce_keys [:name, :repo, :commit_sha, :branch]
-  defstruct [:name, :repo, :commit_sha, :branch]
+  alias GreenValidation.Project
+
+  @enforce_keys [:project, :commit_sha, :branch]
+  defstruct [:project, :commit_sha, :branch]
 
   @type t :: %__MODULE__{
-          name: String.t(),
-          repo: String.t(),
+          project: Project.t(),
           commit_sha: String.t(),
           branch: String.t()
         }
