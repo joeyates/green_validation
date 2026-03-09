@@ -5,8 +5,10 @@ defmodule GreenValidation.Projects do
 
   alias GreenValidation.Project
 
-  @projects [
-    %Project{
+  @all_projects_path "repos/merged.json"
+
+  @projects %{
+    "elixir" => %Project{
       name: "elixir",
       url: "https://github.com/elixir-lang/elixir",
       has_mix_exs: false,
@@ -57,45 +59,49 @@ defmodule GreenValidation.Projects do
           ]
         ]
       ]
-    },
-    %Project{
-      name: "phoenix",
-      repo_name: "phoenix"
-    },
-    %Project{
-      name: "phoenix_live_view",
-      repo_name: "phoenix_live_view"
-    },
-    %Project{
-      name: "hexpm",
-      repo_name: "hexpm"
-    },
-    %Project{
-      name: "nerves",
-      repo_name: "nerves"
-    },
-    %Project{
-      name: "absinthe",
-      repo_name: "absinthe"
-    },
-    %Project{
-      name: "broadway",
-      repo_name: "broadway"
-    },
-    %Project{
-      name: "credo",
-      repo_name: "credo"
     }
-  ]
+  }
 
-  @spec all() :: list(Project.t())
-  def all(), do: @projects
+  @spec load(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
+  def load(project_name) do
+    case @projects[project_name] do
+      nil ->
+        load_from_file(project_name)
 
-  @spec find_by_name(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
-  def find_by_name(project_name) do
+      project ->
+        {:ok, project}
+    end
+  end
+
+  @spec load!(String.t()) :: Project.t() | no_return()
+  def load!(project_name) do
+    case load(project_name) do
+      {:error, _reason} ->
+        raise "Project not found: #{project_name}"
+
+      {:ok, project} ->
+        project
+    end
+  end
+
+  @spec all() :: [Project.t()]
+  def all() do
+    @all_projects_path
+    |> File.read!()
+    |> Jason.decode!(keys: :atoms)
+    |> Enum.map(fn data ->
+      %Project{name: data.name, url: data.url}
+    end)
+  end
+
+  @spec load_from_file(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
+  def load_from_file(project_name) do
     case Enum.find(all(), &(&1.name == project_name)) do
-      nil -> {:error, "Project not found: #{project_name}"}
-      project -> {:ok, project}
+      nil ->
+        {:error, "Project not found: #{project_name}"}
+
+      project ->
+        {:ok, project}
     end
   end
 
