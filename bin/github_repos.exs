@@ -24,7 +24,10 @@ defmodule GreenValidation.GithubRepos do
       commands: [],
       description: "Fetch Elixir repositories from GitHub sorted by stars",
       switches: [
-        output_path: %{type: :string, description: "Output file path (default: #{@default_output_path})"},
+        output_path: %{
+          type: :string,
+          description: "Output file path (default: #{@default_output_path})"
+        },
         limit: %{type: :integer, description: "Number of repositories to fetch (default: 100)"}
       ]
     }
@@ -34,6 +37,7 @@ defmodule GreenValidation.GithubRepos do
     case HelpfulOptions.parse_commands(args, @commands) do
       {:ok, parsed} ->
         run(parsed)
+
       {:error, reason} ->
         IO.puts("Invalid command: #{inspect(reason)}")
         usage()
@@ -65,22 +69,23 @@ defmodule GreenValidation.GithubRepos do
   end
 
   defp fetch_repositories(limit) do
-    search_query = Client.encode_search([language: "elixir"])
+    search_query = Client.encode_search(language: "elixir")
     params = %{"q" => search_query, "sort" => "stars", "order" => "desc", "per_page" => 100}
-    
+
     Client.get_paginated("/search/repositories", params, limit: limit)
   end
 
   defp format_repositories(%Req.Response{body: %{"items" => items}}) do
-    formatted = Enum.map(items, fn repo ->
-      %{
-        name: repo["name"],
-        owner: repo["owner"]["login"],
-        url: repo["html_url"],
-        stars: repo["stargazers_count"]
-      }
-    end)
-    
+    formatted =
+      Enum.map(items, fn repo ->
+        %{
+          name: repo["name"],
+          owner: repo["owner"]["login"],
+          url: repo["html_url"],
+          stars: repo["stargazers_count"]
+        }
+      end)
+
     {:ok, formatted}
   end
 
@@ -93,6 +98,7 @@ defmodule GreenValidation.GithubRepos do
     case Jason.encode(data, pretty: true) do
       {:ok, json} ->
         File.write(output_path, json)
+
       {:error, reason} ->
         {:error, "Failed to encode JSON: #{inspect(reason)}"}
     end

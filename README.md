@@ -39,12 +39,12 @@ The validation system automatically clones projects when they're not present.
 
 Check all projects:
 ```bash
-bin/validate check
+bin/validate.exs check
 ```
 
 Or check a specific project:
 ```bash
-bin/validate check phoenix
+bin/validate.exs check phoenix
 ```
 
 This will:
@@ -59,12 +59,12 @@ You can save validation results to a file using the `--format` option:
 
 ```bash
 # Save results as JSON
-bin/validate check --format json
-bin/validate check phoenix --format json
+bin/validate.exs check --format json
+bin/validate.exs check phoenix --format json
 
 # Save results as formatted text
-bin/validate check --format text
-bin/validate check phoenix --format text
+bin/validate.exs check --format text
+bin/validate.exs check phoenix --format text
 ```
 
 Output files are automatically named using the commit SHA and saved to the `results` directory:
@@ -78,25 +78,25 @@ Output files are automatically named using the commit SHA and saved to the `resu
 
 ```bash
 # Check all projects (prints to stdout)
-bin/validate check
+bin/validate.exs check
 
 # Check a specific project
-bin/validate check <project_name>
+bin/validate.exs check <project_name>
 
 # Check with JSON output to file
-bin/validate check --format json
-bin/validate check <project_name> --format json
+bin/validate.exs check --format json
+bin/validate.exs check <project_name> --format json
 
 # Check with text output to file  
-bin/validate check --format text
-bin/validate check <project_name> --format text
+bin/validate.exs check --format text
+bin/validate.exs check <project_name> --format text
 ```
 
 ### Help
 
 ```bash
 # Show all available commands and options
-bin/validate help
+bin/validate.exs help
 ```
 
 ## Understanding Results
@@ -185,7 +185,7 @@ For each rule:
 
 ```
 ├── bin
-├── ├── validate                  # Main CLI script
+├── ├── validate.exs              # Main CLI script
 ├── lib
 │   └── green_validation
 │       ├── baseline_formatter.ex # Run default Elixir formatter
@@ -220,43 +220,6 @@ ls -la  # Verify mix.exs exists
 ### "Failed to clone"
 
 Check network connectivity and GitHub access. The repository may have moved or been renamed.
-
-### "No validation results found"
-
-Make sure you've run validation first:
-```bash
-bin/validate validate
-```
-
-### JSON Parse Errors
-
-If result files are corrupted, delete them and re-run validation:
-```bash
-rm results/*.json
-bin/validate validate
-```
-
-## Updating Baselines
-
-To test against new versions of projects:
-
-1. Delete the cloned repository:
-
-   ```bash
-   rm -rf repos/<project_name>
-   ```
-
-2. Re-clone to get the latest stable release:
-
-   ```bash
-   bin/validate clone <project_name>
-   ```
-
-3. Re-run validation:
-
-   ```bash
-   bin/validate validate <project_name>
-   ```
 
 ## Contributing
 

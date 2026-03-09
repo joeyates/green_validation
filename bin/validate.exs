@@ -25,11 +25,16 @@ defmodule GreenValidation.CLI do
     TestRun
   }
 
-  @program "bin/validate"
+  @program "bin/validate.exs"
 
   @switches [
     format: %{type: :string, description: "Output format for reports ('text' or 'json')"},
-    green: %{type: :string, required: true, description: "Either a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository to use for validation"}
+    green: %{
+      type: :string,
+      required: true,
+      description:
+        "Either a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository to use for validation"
+    }
   ]
 
   @commands [
@@ -51,6 +56,7 @@ defmodule GreenValidation.CLI do
     case HelpfulOptions.parse_commands(args, @commands) do
       {:ok, parsed} ->
         run(parsed)
+
       {:error, reason} ->
         IO.puts("Invalid command: #{inspect(reason)}")
         usage()
@@ -62,10 +68,13 @@ defmodule GreenValidation.CLI do
     case commands do
       [] ->
         usage()
+
       ["help"] ->
         usage()
+
       ["check-all"] ->
         check_all(switches)
+
       ["check-project", project_name] ->
         check(project_name, switches)
     end
@@ -75,12 +84,12 @@ defmodule GreenValidation.CLI do
     IO.puts("Usage:\n")
     IO.puts(HelpfulOptions.help_commands!(@program, @commands))
   end
-  
+
   defp check_all(switches) do
     with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
          {:ok, results} <- check_all_projects(green_dependency) do
       IO.puts("All projects validated successfully.")
-      
+
       # Write report if format is specified
       handle_format_output(results, switches, "all")
       :ok
@@ -101,9 +110,11 @@ defmodule GreenValidation.CLI do
         fn project, acc ->
           IO.puts("Checking project: #{project.name}")
           cloned_repo = Map.get(cloned_repo_map, project.repo_name)
+
           case check_project(cloned_repo, project, green_dependency) do
             {:ok, result} ->
               {:cont, [result | acc]}
+
             {:error, reason} ->
               IO.puts("Validation failed for #{project.name}: #{reason}")
               {:halt, {:error, reason}}
@@ -123,7 +134,6 @@ defmodule GreenValidation.CLI do
          {:ok, repo} <- Project.repo(project),
          {:ok, cloned_repo} <- prepare_repo(repo),
          {:ok, result} <- check_project(cloned_repo, project, green_dependency) do
-      
       handle_format_output(result, switches, project_name)
     else
       {:error, reason} ->
@@ -136,7 +146,6 @@ defmodule GreenValidation.CLI do
     with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
          {:ok, test_run} <- build_test_run(project, cloned_repo, green_dependency) do
-      
       result = %Result{
         test_run: test_run,
         baseline: baseline_status,
@@ -152,6 +161,7 @@ defmodule GreenValidation.CLI do
         rule_results,
         fn rule_result ->
           IO.puts("    Rule: #{rule_result.rule}")
+
           if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
             IO.puts("      ✅ No issues found.")
           end
@@ -180,6 +190,7 @@ defmodule GreenValidation.CLI do
         case prepare_repo(repo) do
           {:ok, cloned_repo} ->
             {:cont, {:ok, Map.put(acc, repo.name, cloned_repo)}}
+
           {:error, reason} ->
             IO.puts("Failed to prepare repository #{repo.name}: #{reason}")
             {:halt, {:error, reason}}
@@ -194,7 +205,11 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  @spec build_test_run(Project.t(), ClonedRepo.t(), {:green, String.t()} | {:green, String.t(), path: String.t()}) :: {:ok, TestRun.t()} | {:error, String.t()}
+  @spec build_test_run(
+          Project.t(),
+          ClonedRepo.t(),
+          {:green, String.t()} | {:green, String.t(), path: String.t()}
+        ) :: {:ok, TestRun.t()} | {:error, String.t()}
   defp build_test_run(project, cloned_repo, green_dependency) do
     with {:ok, green_version} <- get_green_version(green_dependency) do
       test_run = %TestRun{
@@ -204,7 +219,7 @@ defmodule GreenValidation.CLI do
         branch: cloned_repo.branch,
         green_version: green_version
       }
-      
+
       {:ok, test_run}
     end
   end
@@ -219,7 +234,8 @@ defmodule GreenValidation.CLI do
         {:ok, {:green, ">= 0.0.0", path: green_path}}
 
       true ->
-        {:error, "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
+        {:error,
+         "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
     end
   end
 
@@ -243,12 +259,12 @@ defmodule GreenValidation.CLI do
 
       format_string when format_string in ["json", "text"] ->
         format = String.to_atom(format_string)
-        
+
         case result_or_results do
           # Single result
           %Result{} = result ->
             write_report(result, format, project_identifier)
-          
+
           # List of results (from check_all)
           results when is_list(results) ->
             Enum.each(results, fn result ->
@@ -266,12 +282,12 @@ defmodule GreenValidation.CLI do
   defp write_report(result, format, _project_identifier) do
     # Save reports in the results directory
     output_dir = "results"
-    
+
     case ReportWriter.write(result, format, output_dir: output_dir) do
       {:ok, filepath} ->
         IO.puts("\n📄 Report saved to: #{filepath}")
         :ok
-      
+
       {:error, reason} ->
         IO.puts("\n⚠️  Warning: Failed to write report: #{inspect(reason)}")
         :ok
