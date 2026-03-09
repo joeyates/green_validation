@@ -3,19 +3,19 @@ defmodule GreenValidation.OutputParser do
   Parses output from `mix format --check-formatted` to extract file names.
   """
 
-  alias GreenValidation.{Repo, RuleResult}
+  alias GreenValidation.{Project, RuleResult}
 
   @doc """
   Parses the full mix format output and extracts file paths that have formatting issues.
   Converts absolute paths to repository-local paths.
   """
-  @spec parse_output(Repo.t(), atom, String.t()) :: {:ok, %RuleResult{}}
-  def parse_output(repo, rule, output) do
+  @spec parse_output(Project.t(), atom, String.t()) :: {:ok, %RuleResult{}}
+  def parse_output(project, rule, output) do
     changes_files = extract_changes_files(output)
     warnings_files = extract_warnings_files(output)
 
     # Convert absolute paths to repository-local paths
-    path = Repo.path(repo)
+    path = Project.path(project)
     changes_files = Enum.map(changes_files, &make_repo_local(&1, path))
     warnings_files = Enum.map(warnings_files, &make_repo_local(&1, path))
 

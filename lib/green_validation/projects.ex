@@ -8,9 +8,10 @@ defmodule GreenValidation.Projects do
   @projects [
     %Project{
       name: "elixir",
-      repo_name: "elixir",
+      url: "https://github.com/elixir-lang/elixir",
       has_mix_exs: false,
       environment: {__MODULE__, :elixir_environment},
+      post_checkout: {__MODULE__, :elixir_post_checkout},
       rule_config: [
         avoid_needless_pipelines: [
           except: [
@@ -102,5 +103,18 @@ defmodule GreenValidation.Projects do
     # For Elixir, we want to ensure that the PATH includes the local elixir bin directory
     path = Project.path(project)
     [{"PATH", "#{path}/bin:#{System.get_env("PATH")}"}]
+  end
+
+  def elixir_post_checkout(%Project{} = project) do
+    IO.puts("Running post-checkout step, 'make', for Elixir repository...")
+    path = Project.path(project)
+
+    case System.cmd("make", [], cd: path, stderr_to_stdout: true) do
+      {_output, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for Elixir: #{output}"}
+    end
   end
 end

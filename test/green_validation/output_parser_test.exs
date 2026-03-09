@@ -3,11 +3,11 @@ defmodule GreenValidation.OutputParserTest do
 
   import GreenValidation.OutputParser
 
-  alias GreenValidation.{Repo, RuleResult}
+  alias GreenValidation.{Project, RuleResult}
 
   describe "parse_output/3" do
     test "extracts file paths from warnings" do
-      repo = %Repo{name: "test_project", repo: "https://example.com/test_project.git"}
+      project = %Project{name: "test_project", url: "https://example.com/test_project.git"}
 
       output = """
       5 | Some text
@@ -20,7 +20,7 @@ defmodule GreenValidation.OutputParserTest do
       └─ lib/my_app_web/controllers/page_controller.ex:
       """
 
-      {:ok, result} = parse_output(repo, :my_rule, output)
+      {:ok, result} = parse_output(project, :my_rule, output)
 
       assert result == %RuleResult{
                rule: :my_rule,
@@ -33,7 +33,7 @@ defmodule GreenValidation.OutputParserTest do
     end
 
     test "extracts file paths from changes with ANSI color codes" do
-      repo = %Repo{name: "test_project", repo: "https://example.com/test_project.git"}
+      project = %Project{name: "test_project", url: "https://example.com/test_project.git"}
 
       root_path = [__DIR__, "..", ".."] |> Path.join() |> Path.expand()
 
@@ -42,7 +42,7 @@ defmodule GreenValidation.OutputParserTest do
       \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/views/page_view.ex\e[0m
       """
 
-      {:ok, result} = parse_output(repo, :my_rule, output)
+      {:ok, result} = parse_output(project, :my_rule, output)
 
       assert result == %RuleResult{
                rule: :my_rule,

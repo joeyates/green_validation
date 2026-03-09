@@ -17,9 +17,7 @@ defmodule GreenValidation.CLI do
     BaselineFormatter,
     Projects,
     Project,
-    Repo,
     ReportWriter,
-    Repos,
     Result,
     RuleValidator,
     TestRun
@@ -131,8 +129,7 @@ defmodule GreenValidation.CLI do
   defp check(project_name, switches) do
     with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
          {:ok, project} <- Projects.find_by_name(project_name),
-         {:ok, repo} <- Project.repo(project),
-         {:ok, cloned_repo} <- prepare_repo(repo),
+         {:ok, cloned_repo} <- prepare_repo(project),
          {:ok, result} <- check_project(cloned_repo, project, green_dependency) do
       handle_format_output(result, switches, project_name)
     else
@@ -142,6 +139,12 @@ defmodule GreenValidation.CLI do
     end
   end
 
+  @spec check_project(
+          ClonedRepo.t(),
+          Project.t(),
+          {:green, String.t()} | {:green, String.t(), path: String.t()}
+        ) ::
+          {:ok, Result.t()} | {:error, String.t()}
   defp check_project(cloned_repo, project, green_dependency) do
     with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
@@ -189,18 +192,18 @@ defmodule GreenValidation.CLI do
       fn repo, {:ok, acc} ->
         case prepare_repo(repo) do
           {:ok, cloned_repo} ->
-            {:cont, {:ok, Map.put(acc, repo.name, cloned_repo)}}
+            {:cont, {:ok, Map.put(acc, project.name, cloned_repo)}}
 
           {:error, reason} ->
-            IO.puts("Failed to prepare repository #{repo.name}: #{reason}")
+            IO.puts("Failed to prepare repository #{project.name}: #{reason}")
             {:halt, {:error, reason}}
         end
       end
     )
   end
 
-  defp prepare_repo(%Repo{} = repo) do
-    with {:ok, cloned_repo} <- Repo.clone(repo) do
+  defp prepare_repo(%Project{} = project) do
+    with {:ok, cloned_repo} <- Project.clone(project) do
       {:ok, cloned_repo}
     end
   end
@@ -214,7 +217,7 @@ defmodule GreenValidation.CLI do
     with {:ok, green_version} <- get_green_version(green_dependency) do
       test_run = %TestRun{
         project_name: project.name,
-        repository: cloned_repo.repo,
+        repository: cloned_repo.project.url,
         commit_sha: cloned_repo.commit_sha,
         branch: cloned_repo.branch,
         green_version: green_version
