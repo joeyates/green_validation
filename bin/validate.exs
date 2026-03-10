@@ -49,6 +49,11 @@ defmodule GreenValidation.CLI do
       commands: ["check-project", :project_name],
       description: "Check a specific project",
       switches: @common_switches
+    },
+    %{
+      commands: ["check-project-rule", :project_name, :rule_name],
+      description: "Check a single rule for a specific project",
+      switches: @common_switches
     }
   ]
 
@@ -77,6 +82,9 @@ defmodule GreenValidation.CLI do
 
       ["check-project", project_name] ->
         check_project(project_name, switches, green_dependency)
+
+      ["check-project-rule", project_name, rule_name] ->
+        check_project_rule(project_name, rule_name, switches, green_dependency)
     end
   end
 
@@ -133,6 +141,27 @@ defmodule GreenValidation.CLI do
 
     with {:ok, result} <- check_project_rules(project, rules, green_dependency) do
       handle_format_output(result, switches, project_name)
+    else
+      {:error, reason} ->
+        IO.puts("Error: #{reason}")
+        System.halt(1)
+    end
+  end
+
+  def check_project_rule(project_name, rule_name, switches, green_dependency) do
+    project = Projects.load!(project_name)
+    rule_atom = String.to_atom(rule_name)
+
+    if rule_atom not in RuleValidator.all_rules() do
+      IO.puts(
+        "Error: Unknown rule '#{rule_name}'. Available rules: #{Enum.join(RuleValidator.all_rules(), ", ")}"
+      )
+
+      System.halt(1)
+    end
+
+    with {:ok, result} <- check_project_rules(project, [rule_atom], green_dependency) do
+      handle_format_output(result, switches, "#{project_name}-#{rule_name}")
     else
       {:error, reason} ->
         IO.puts("Error: #{reason}")
