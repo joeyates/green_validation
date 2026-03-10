@@ -40,6 +40,33 @@ defmodule GreenValidation.Installer.FormatterExs do
     |> Kernel.<>("\n")
   end
 
+  @spec reset(Project.t()) :: :ok | {:error, String.t()}
+  def reset(%Project{has_formatter_exs: true} = project) do
+    project_path = Project.path(project)
+
+    case System.cmd("git", ["reset", ".formatter.exs"],
+           cd: project_path,
+           stderr_to_stdout: true
+         ) do
+      {_output, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to reset .formatter.exs: #{output}"}
+    end
+  end
+
+  def reset(%Project{has_formatter_exs: false} = project) do
+    project_path = Project.path(project)
+
+    System.cmd("rm", ["-f", ".formatter.exs"],
+      cd: project_path,
+      stderr_to_stdout: true
+    )
+
+    :ok
+  end
+
   defp keyword_only?({:__block__, _ctx, [[]]}), do: true
 
   defp keyword_only?(

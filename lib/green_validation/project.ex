@@ -12,6 +12,7 @@ defmodule GreenValidation.Project do
     :environment,
     :name,
     :post_checkout,
+    :formatter_exs_setup,
     :url,
     default_branch: @default_branch,
     rule_config: [],
@@ -25,6 +26,7 @@ defmodule GreenValidation.Project do
           default_branch: String.t(),
           environment: {atom, atom} | nil,
           post_checkout: {atom, atom} | nil,
+          formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
           has_formatter_exs: boolean(),
           has_mix_exs: boolean()

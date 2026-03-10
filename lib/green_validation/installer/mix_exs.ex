@@ -105,8 +105,8 @@ defmodule GreenValidation.Installer.MixExs do
     end
   end
 
-  @spec reset_mix_exs(Project.t()) :: :ok | {:error, String.t()}
-  def reset_mix_exs(%Project{has_mix_exs: true} = project) do
+  @spec reset(Project.t()) :: :ok | {:error, String.t()}
+  def reset(%Project{has_mix_exs: true} = project) do
     project_path = Project.path(project)
 
     case System.cmd("git", ["reset", "mix.exs"],
@@ -121,7 +121,7 @@ defmodule GreenValidation.Installer.MixExs do
     end
   end
 
-  def reset_mix_exs(%Project{has_mix_exs: false} = project) do
+  def reset(%Project{has_mix_exs: false} = project) do
     project_path = Project.path(project)
 
     case System.cmd("rm", ["-f", "mix.exs"],

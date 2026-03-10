@@ -29,7 +29,7 @@ defmodule GreenValidation.GreenInstaller do
 
   @spec prepare_formatter_exs(Project.t(), list() | :all | nil) :: :ok
   def prepare_formatter_exs(%Project{} = project, rules \\ nil) do
-    :ok = reset_formatter_exs(project)
+    :ok = FormatterExs.reset(project)
     green_config = green_config_for_rules(rules)
     FormatterExs.update_project_formatter(project, green_config)
   end
@@ -47,30 +47,6 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
-  @spec reset_formatter_exs(Project.t()) :: :ok | {:error, String.t()}
-  def reset_formatter_exs(%Project{has_formatter_exs: true} = project) do
-    project_path = Project.path(project)
-
-    case System.cmd("git", ["checkout", ".formatter.exs"],
-           cd: project_path,
-           stderr_to_stdout: true
-         ) do
-      {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to revert changes to .formatter.exs: #{output}"}
-    end
-  end
-
-  def reset_formatter_exs(%Project{has_formatter_exs: false} = project) do
-    project_path = Project.path(project)
-
-    System.cmd("rm", ["-f", ".formatter.exs"],
-      cd: project_path,
-      stderr_to_stdout: true
-    )
-
-    :ok
-  end
-
   @spec get_latest_green_version() :: {:green, String.t()}
   defp get_latest_green_version do
     # For now, hardcode version - could query hex.pm API in the future
@@ -79,7 +55,7 @@ defmodule GreenValidation.GreenInstaller do
 
   @spec modify_mix_exs(Project.t(), tuple()) :: :ok
   defp modify_mix_exs(%Project{} = project, green_version) do
-    :ok = MixExs.reset_mix_exs(project)
+    :ok = MixExs.reset(project)
     MixExs.add_dependency(project, green_version)
 
     :ok

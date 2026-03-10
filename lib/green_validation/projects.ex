@@ -4,6 +4,7 @@ defmodule GreenValidation.Projects do
   """
 
   alias GreenValidation.Project
+  alias GreenValidation.Installer.FormatterExs
 
   @all_projects_path "repos/merged.json"
 
@@ -59,6 +60,11 @@ defmodule GreenValidation.Projects do
           ]
         ]
       ]
+    },
+    "phoenix" => %Project{
+      name: "phoenix",
+      url: "https://github.com/phoenixframework/phoenix",
+      formatter_exs_setup: {__MODULE__, :phoenix_formatter_exs_setup}
     }
   }
 
@@ -90,7 +96,11 @@ defmodule GreenValidation.Projects do
     |> File.read!()
     |> Jason.decode!(keys: :atoms)
     |> Enum.map(fn data ->
-      %Project{name: data.name, url: data.url}
+      if Map.has_key?(@projects, data.name) do
+        @projects[data.name]
+      else
+        %Project{name: data.name, url: data.url}
+      end
     end)
   end
 
@@ -122,5 +132,13 @@ defmodule GreenValidation.Projects do
       {output, _} ->
         {:error, "Failed to run post-checkout step for Elixir: #{output}"}
     end
+  end
+
+  def phoenix_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["mix.exs", "{config,lib,test}/**/*.{ex,exs}"]
+    ]
+
+    FormatterExs.update_project_formatter(project, inputs)
   end
 end

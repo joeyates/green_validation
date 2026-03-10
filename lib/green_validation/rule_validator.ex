@@ -7,7 +7,7 @@ defmodule GreenValidation.RuleValidator do
   """
 
   alias GreenValidation.{GreenInstaller, OutputParser, Project, RuleResult}
-  alias GreenValidation.Installer.MixExs
+  alias GreenValidation.Installer.{FormatterExs, MixExs}
 
   @doc """
   List of all configurable Green rules.
@@ -83,7 +83,7 @@ defmodule GreenValidation.RuleValidator do
       end
     )
   after
-    :ok = MixExs.reset_mix_exs(project)
+    :ok = MixExs.reset(project)
   end
 
   @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
@@ -92,6 +92,11 @@ defmodule GreenValidation.RuleValidator do
       rule
       |> generate_config()
       |> then(&Project.rule_config(project, rule, &1))
+
+    if project.formatter_exs_setup do
+      {mod, fun} = project.formatter_exs_setup
+      apply(mod, fun, [project])
+    end
 
     :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
@@ -108,7 +113,7 @@ defmodule GreenValidation.RuleValidator do
 
     parse_format_output(project, rule, output, exit_code)
   after
-    :ok = GreenInstaller.reset_formatter_exs(project)
+    :ok = FormatterExs.reset(project)
   end
 
   @doc """

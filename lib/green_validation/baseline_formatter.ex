@@ -4,7 +4,7 @@ defmodule GreenValidation.BaselineFormatter do
   """
 
   alias GreenValidation.Project
-  alias GreenValidation.Installer.MixExs
+  alias GreenValidation.Installer.{FormatterExs, MixExs}
 
   @doc """
   Checks if a project is already formatted according to Elixir's standard formatter.
@@ -15,6 +15,12 @@ defmodule GreenValidation.BaselineFormatter do
           {:ok, :clean | :created_format_commit} | {:error, String.t()}
   def ensure_clean(%Project{} = project) do
     MixExs.ensure_mix_exs(project)
+
+    if project.formatter_exs_setup do
+      {mod, fun} = project.formatter_exs_setup
+      apply(mod, fun, [project])
+    end
+
     project_path = Project.path(project)
     environment = Project.environment(project)
 
@@ -43,7 +49,8 @@ defmodule GreenValidation.BaselineFormatter do
   end
 
   defp cleanup(project) do
-    :ok = MixExs.reset_mix_exs(project)
+    :ok = MixExs.reset(project)
+    :ok = FormatterExs.reset(project)
   end
 
   @spec format(Project.t()) :: :ok | {:error, String.t()}
