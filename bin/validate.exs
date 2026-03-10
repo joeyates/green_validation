@@ -23,6 +23,8 @@ defmodule GreenValidation.CLI do
     TestRun
   }
 
+  require GreenValidation.RuleValidator
+
   @program "bin/validate.exs"
 
   @common_switches [
@@ -51,10 +53,10 @@ defmodule GreenValidation.CLI do
   ]
 
   def main(args) do
-    case HelpfulOptions.parse_commands(args, @commands) do
-      {:ok, parsed} ->
-        run(parsed)
-
+    with {:ok, parsed} <- HelpfulOptions.parse_commands(args, @commands),
+         {:ok, green_dependency} <- parse_green_dependency(parsed.switches[:green]) do
+      run(parsed, green_dependency)
+    else
       {:error, reason} ->
         IO.puts("Invalid command: #{inspect(reason)}")
         usage()
@@ -62,7 +64,7 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp run(%{commands: commands, switches: switches, other: _other}) do
+  defp run(%{commands: commands, switches: switches}, green_dependency) do
     case commands do
       [] ->
         usage()
@@ -71,10 +73,10 @@ defmodule GreenValidation.CLI do
         usage()
 
       ["check-all"] ->
-        check_all(switches)
+        check_all(switches, green_dependency)
 
       ["check-project", project_name] ->
-        check(project_name, switches)
+        check_project(project_name, switches, green_dependency)
     end
   end
 
@@ -83,15 +85,15 @@ defmodule GreenValidation.CLI do
     IO.puts(HelpfulOptions.help_commands!(@program, @commands))
   end
 
-  defp check_all(switches) do
-    with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
-         {:ok, results} <- check_all_projects(green_dependency) do
-      IO.puts("All projects validated successfully.")
+  defp check_all(switches, green_dependency) do
+    case check_all_projects(green_dependency) do
+      {:ok, results} ->
+        IO.puts("All projects validated successfully.")
 
-      # Write report if format is specified
-      handle_format_output(results, switches, "all")
-      :ok
-    else
+        # Write report if format is specified
+        handle_format_output(results, switches, "all")
+        :ok
+
       {:error, reason} ->
         IO.puts("Error during validation: #{reason}")
         System.halt(1)
@@ -99,7 +101,7 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_all_projects(green_dependency) do
-    {:ok, cloned_repo_map} = prepare_all_repos()
+    rules = RuleValidator.all_rules()
 
     results =
       Enum.reduce_while(
@@ -107,9 +109,8 @@ defmodule GreenValidation.CLI do
         [],
         fn project, acc ->
           IO.puts("Checking project: #{project.name}")
-          cloned_repo = Map.get(cloned_repo_map, project.repo_name)
 
-          case check_project(cloned_repo, project, green_dependency) do
+          case check_project_rules(project, rules, green_dependency) do
             {:ok, result} ->
               {:cont, [result | acc]}
 
@@ -126,12 +127,11 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check(project_name, switches) do
+  defp check_project(project_name, switches, green_dependency) do
     project = Projects.load!(project_name)
+    rules = RuleValidator.all_rules()
 
-    with {:ok, green_dependency} <- parse_green_dependency(switches[:green]),
-         {:ok, cloned_repo} <- prepare_repo(project),
-         {:ok, result} <- check_project(cloned_repo, project, green_dependency) do
+    with {:ok, result} <- check_project_rules(project, rules, green_dependency) do
       handle_format_output(result, switches, project_name)
     else
       {:error, reason} ->
@@ -140,15 +140,16 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  @spec check_project(
-          ClonedRepo.t(),
+  @spec check_project_rules(
           Project.t(),
+          [atom],
           {:green, String.t()} | {:green, String.t(), path: String.t()}
         ) ::
           {:ok, Result.t()} | {:error, String.t()}
-  defp check_project(cloned_repo, project, green_dependency) do
-    with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
-         {:ok, rule_results} <- RuleValidator.validate_all_rules(project, green_dependency),
+  defp check_project_rules(project, rules, green_dependency) do
+    with {:ok, cloned_repo} <- Project.clone(project),
+         {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
+         {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, green_dependency),
          {:ok, test_run} <- build_test_run(project, cloned_repo, green_dependency) do
       result = %Result{
         test_run: test_run,
@@ -183,29 +184,6 @@ defmodule GreenValidation.CLI do
       )
 
       {:ok, result}
-    end
-  end
-
-  defp prepare_all_repos() do
-    Enum.reduce_while(
-      Projects.all(),
-      {:ok, %{}},
-      fn project, {:ok, acc} ->
-        case prepare_repo(project) do
-          {:ok, cloned_repo} ->
-            {:cont, {:ok, Map.put(acc, project.name, cloned_repo)}}
-
-          {:error, reason} ->
-            IO.puts("Failed to prepare repository #{project.name}: #{reason}")
-            {:halt, {:error, reason}}
-        end
-      end
-    )
-  end
-
-  defp prepare_repo(%Project{} = project) do
-    with {:ok, cloned_repo} <- Project.clone(project) do
-      {:ok, cloned_repo}
     end
   end
 
