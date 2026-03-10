@@ -55,7 +55,7 @@ defmodule GreenValidation.Installer.MixExs do
 
     mix_path
     |> File.read!()
-    |> add_dependency(dependency)
+    |> add_dependency_to_content(dependency)
     |> then(&File.write!(mix_path, &1))
 
     :ok
@@ -90,8 +90,8 @@ defmodule GreenValidation.Installer.MixExs do
     File.write!(mix_path, content)
   end
 
-  @spec add_dependency(String.t(), tuple()) :: String.t()
-  def add_dependency(content, dependency) when is_binary(content) do
+  @spec add_dependency_to_content(String.t(), tuple()) :: String.t()
+  def add_dependency_to_content(content, dependency) when is_binary(content) do
     if String.contains?(content, "defp deps") do
       content
       |> remove_existing_dependency(elem(dependency, 0))
@@ -174,35 +174,18 @@ defmodule GreenValidation.Installer.MixExs do
     regex = ~r/
       (defp\sdeps(?:\(\))?\s+do\s*)
       \[\s*           # Start of list
-      (.*?)
-      \s*]\s*         # End of list
-      (\s*end)
     /sx
     dep_string = inspect(dependency)
 
     Regex.replace(
       regex,
       content,
-      fn _match, def_start, libs, def_end ->
-        libs = String.trim(libs)
-
-        list =
-          if libs == "" do
-            """
-            [
-              #{dep_string}
-            ]
-            """
-          else
-            """
-            [
-              #{libs},
-              #{dep_string}
-            ]
-            """
-          end
-
-        "#{def_start}#{list}#{def_end}"
+      fn _match, def_start ->
+        """
+        #{def_start}
+          [
+            #{dep_string},
+        """
       end
     )
   end
