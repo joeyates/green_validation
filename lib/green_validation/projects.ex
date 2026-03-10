@@ -9,6 +9,12 @@ defmodule GreenValidation.Projects do
   @all_projects_path "repos/merged.json"
 
   @projects %{
+    "ecto" => %Project{
+      name: "ecto",
+      url: "https://github.com/elixir-ecto/ecto",
+      default_branch: "master",
+      formatter_exs_setup: {__MODULE__, :ecto_formatter_exs_setup}
+    },
     "elixir" => %Project{
       name: "elixir",
       url: "https://github.com/elixir-lang/elixir",
@@ -120,6 +126,14 @@ defmodule GreenValidation.Projects do
       project ->
         {:ok, project}
     end
+  end
+
+  def ecto_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["{mix,.formatter}.exs", "{lib,test}/**/*.{ex,exs}"]
+    ]
+
+    FormatterExs.update_project_formatter(project, inputs)
   end
 
   def elixir_environment(%Project{} = project) do
