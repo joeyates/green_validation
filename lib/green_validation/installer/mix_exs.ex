@@ -92,7 +92,7 @@ defmodule GreenValidation.Installer.MixExs do
 
   @spec add_dependency_to_content(String.t(), tuple()) :: String.t()
   def add_dependency_to_content(content, dependency) when is_binary(content) do
-    if String.contains?(content, "defp deps") do
+    if Regex.match?(~r"defp? deps", content) do
       content
       |> remove_existing_dependency(elem(dependency, 0))
       |> insert_dependency(dependency)
@@ -172,7 +172,7 @@ defmodule GreenValidation.Installer.MixExs do
   @spec insert_dependency(String.t(), tuple()) :: String.t()
   defp insert_dependency(content, dependency) do
     regex = ~r/
-      (defp\sdeps(?:\(\))?\s+do\s*)
+      (defp?\sdeps(?:\(\))?\s+do\s*)
       \[\s*           # Start of list
     /sx
     dep_string = inspect(dependency)
