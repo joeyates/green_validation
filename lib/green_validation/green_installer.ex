@@ -30,6 +30,12 @@ defmodule GreenValidation.GreenInstaller do
   @spec prepare_formatter_exs(Project.t(), list() | :all | nil) :: :ok
   def prepare_formatter_exs(%Project{} = project, rules \\ nil) do
     :ok = FormatterExs.reset(project)
+
+    if project.formatter_exs_setup do
+      {mod, fun} = project.formatter_exs_setup
+      apply(mod, fun, [project])
+    end
+
     green_config = green_config_for_rules(rules)
     FormatterExs.update_project_formatter(project, green_config)
   end

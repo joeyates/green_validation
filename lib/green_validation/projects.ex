@@ -61,6 +61,13 @@ defmodule GreenValidation.Projects do
         ]
       ]
     },
+    "jason" => %Project{
+      name: "jason",
+      url: "https://github.com/michalmuskala/jason",
+      default_branch: "master",
+      has_formatter_exs: false,
+      formatter_exs_setup: {__MODULE__, :jason_formatter_exs_setup}
+    },
     "phoenix" => %Project{
       name: "phoenix",
       url: "https://github.com/phoenixframework/phoenix",
@@ -132,6 +139,14 @@ defmodule GreenValidation.Projects do
       {output, _} ->
         {:error, "Failed to run post-checkout step for Elixir: #{output}"}
     end
+  end
+
+  def jason_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["mix.exs", "{bench,lib,test}/**/*.{ex,exs}"]
+    ]
+
+    FormatterExs.create_project_formatter(project, inputs)
   end
 
   def phoenix_formatter_exs_setup(%Project{} = project) do

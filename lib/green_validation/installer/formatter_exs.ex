@@ -3,8 +3,17 @@ defmodule GreenValidation.Installer.FormatterExs do
 
   @line_length 98
 
+  def create_project_formatter(project, keyword) do
+    formatter_exs_path = formatter_exs_path(project)
+    content = keyword |> inspect() |> Kernel.<>("\n")
+
+    File.write!(formatter_exs_path, content)
+
+    :ok
+  end
+
   def update_project_formatter(project, keyword) do
-    formatter_exs_path = project |> Project.path() |> Path.join(".formatter.exs")
+    formatter_exs_path = formatter_exs_path(project)
 
     updated_code =
       formatter_exs_path
@@ -121,5 +130,9 @@ defmodule GreenValidation.Installer.FormatterExs do
         end
       end
     )
+  end
+
+  defp formatter_exs_path(%Project{} = project) do
+    project |> Project.path() |> Path.join(".formatter.exs")
   end
 end

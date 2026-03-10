@@ -93,11 +93,6 @@ defmodule GreenValidation.RuleValidator do
       |> generate_config()
       |> then(&Project.rule_config(project, rule, &1))
 
-    if project.formatter_exs_setup do
-      {mod, fun} = project.formatter_exs_setup
-      apply(mod, fun, [project])
-    end
-
     :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
     environment = Project.environment(project)
