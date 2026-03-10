@@ -58,10 +58,10 @@ defmodule GreenValidation.CLI do
   ]
 
   def main(args) do
-    with {:ok, parsed} <- HelpfulOptions.parse_commands(args, @commands),
-         {:ok, green_dependency} <- parse_green_dependency(parsed.switches[:green]) do
-      run(parsed, green_dependency)
-    else
+    case HelpfulOptions.parse_commands(args, @commands) do
+      {:ok, parsed} ->
+        run(parsed)
+
       {:error, reason} ->
         IO.puts("Invalid command: #{inspect(reason)}")
         usage()
@@ -69,7 +69,7 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp run(%{commands: commands, switches: switches}, green_dependency) do
+  defp run(%{commands: commands, switches: switches}) do
     case commands do
       [] ->
         usage()
@@ -78,12 +78,15 @@ defmodule GreenValidation.CLI do
         usage()
 
       ["check-all"] ->
+        {:ok, green_dependency} = parse_green_dependency(switches[:green])
         check_all(switches, green_dependency)
 
       ["check-project", project_name] ->
+        {:ok, green_dependency} = parse_green_dependency(switches[:green])
         check_project(project_name, switches, green_dependency)
 
       ["check-project-rule", project_name, rule_name] ->
+        {:ok, green_dependency} = parse_green_dependency(switches[:green])
         check_project_rule(project_name, rule_name, switches, green_dependency)
     end
   end
