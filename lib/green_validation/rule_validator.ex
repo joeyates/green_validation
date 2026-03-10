@@ -50,18 +50,19 @@ defmodule GreenValidation.RuleValidator do
   A `TestResult` struct containing the results of validating each rule.
 
   """
-  @spec validate_all_rules(
+  @spec validate_rules(
           Project.t(),
+          [atom],
           {:green, String.t()} | {:green, String.t(), path: String.t()}
         ) ::
           {:ok, list(RuleResult.t())} | {:error, map()}
-  def validate_all_rules(%Project{} = project, green_dependency) do
-    IO.puts("  Validating #{length(all_rules())} rules individually...")
+  def validate_rules(%Project{} = project, rules, green_dependency) do
+    IO.puts("  Validating #{length(rules)} rules individually...")
 
     :ok = GreenInstaller.install_green(project, green_version: green_dependency)
 
     Enum.reduce(
-      all_rules(),
+      rules,
       {:ok, []},
       fn
         rule, {:ok, acc} ->
