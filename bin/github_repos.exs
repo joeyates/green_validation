@@ -38,7 +38,6 @@ defmodule GreenValidation.GithubRepos do
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm
   # The GitHub rate limit is 60 requests/hour, so a single run of this script will stay below that
   @low_star_additions [
-    "beam-telemetry/telemetry",
     "elixir-plug/mime",
     "elixir-plug/plug_crypto",
     "falood/file_system",
