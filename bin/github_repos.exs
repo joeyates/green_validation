@@ -4,19 +4,22 @@
 # We also add 12 repos that, while they have few stars on GitHub, have a lot of donwloads
 # on hex.pm
 
-Mix.install([
-  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
-  {:helpful_options, "~> 0.4.4"},
-  {:jason, "~> 1.4"},
-  {:req, "~> 0.5.17"}
-])
+Mix.install(
+  [
+    {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+    {:helpful_options, "~> 0.4.4"},
+    {:jason, "~> 1.4"},
+    {:req, "~> 0.5.17"}
+  ],
+  consolidate_protocols: false
+)
 
 defmodule GreenValidation.GithubRepos do
   @moduledoc """
   CLI tool to fetch Elixir repositories from GitHub sorted by stars.
   """
 
-  alias GreenValidation.Github.Client
+  alias GreenValidation.Github.{Client, Repo}
 
   @program "bin/github_repos"
   @default_output_path "repos/github.json"
@@ -96,7 +99,7 @@ defmodule GreenValidation.GithubRepos do
   end
 
   defp format_repositories(%Req.Response{body: %{"items" => items}}) do
-    formatted = Enum.map(items, &format_repository/1)
+    formatted = Enum.map(items, &to_repo/1)
 
     {:ok, formatted}
   end
@@ -106,7 +109,7 @@ defmodule GreenValidation.GithubRepos do
       @low_star_additions
       |> Enum.map(&fetch_repository/1)
       |> Enum.filter(&match?({:ok, _}, &1))
-      |> Enum.map(fn {:ok, repo} -> format_repository(repo) end)
+      |> Enum.map(fn {:ok, repo} -> to_repo(repo) end)
 
     {:ok, results}
   end
@@ -123,8 +126,8 @@ defmodule GreenValidation.GithubRepos do
     end
   end
 
-  defp format_repository(repo) do
-    %{
+  defp to_repo(repo) do
+    %Repo{
       name: repo["name"],
       owner: repo["owner"]["login"],
       url: repo["html_url"],
