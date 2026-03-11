@@ -1,9 +1,13 @@
 #!/usr/bin/env elixir
 
-Mix.install([
-  {:helpful_options, "~> 0.4.4"},
-  {:jason, "~> 1.4"}
-])
+Mix.install(
+  [
+    {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+    {:helpful_options, "~> 0.4.4"},
+    {:jason, "~> 1.4"}
+  ],
+  consolidate_protocols: false
+)
 
 defmodule GreenValidation.MergeSources do
   @moduledoc """
@@ -11,6 +15,10 @@ defmodule GreenValidation.MergeSources do
   1. the most starred Elixir repos on GitHub
   2. the most downloaded Projects on hex.pm
   """
+
+  alias GreenValidation.Github.Repo
+  alias GreenValidation.Hexpm.Package
+  alias GreenValidation.Project
 
   @switches [
     github_path: %{
@@ -52,8 +60,8 @@ defmodule GreenValidation.MergeSources do
     output_path = Map.get(switches, :output_path)
     hexpm_only_path = Map.get(switches, :hexpm_only_path)
 
-    with {:ok, github_data} <- read_json(github_path),
-         {:ok, hexpm_data} <- read_json(hexpm_path),
+    with {:ok, github_data} <- read_github(github_path),
+         {:ok, hexpm_data} <- read_hexpm(hexpm_path),
          {:ok, merged_data, hexpm_only} <- merge_and_sort(github_data, hexpm_data),
          :ok <- write_output(output_path, merged_data),
          :ok <- write_output(hexpm_only_path, hexpm_only) do
@@ -66,48 +74,75 @@ defmodule GreenValidation.MergeSources do
     end
   end
 
-  defp read_json(path) do
-    case File.read(path) do
-      {:ok, content} ->
-        case Jason.decode(content) do
-          {:ok, data} -> {:ok, data}
-          {:error, reason} -> {:error, "Failed to decode JSON from #{path}: #{reason}"}
-        end
+  defp read_github(path) do
+    with {:ok, data} <- read_json(path),
+         {:ok, repos} <- to_repos(data) do
+      {:ok, repos}
+    end
+  end
 
-      {:error, reason} ->
-        {:error, "Failed to read file #{path}: #{reason}"}
+  defp to_repos(data) do
+    data
+    |> Enum.map(&struct!(Repo, &1))
+    |> then(&{:ok, &1})
+  end
+
+  defp read_hexpm(path) do
+    with {:ok, data} <- read_json(path),
+         {:ok, packages} <- to_packages(data) do
+      {:ok, packages}
+    end
+  end
+
+  defp to_packages(data) do
+    data
+    |> Enum.map(&struct!(Package, &1))
+    |> then(&{:ok, &1})
+  end
+
+  defp read_json(path) do
+    with {:ok, content} <- File.read(path),
+         {:ok, data} <- Jason.decode(content, keys: :atoms) do
+      {:ok, data}
     end
   end
 
   defp merge_and_sort(github_data, hexpm_data) do
     hexpm_map =
       hexpm_data
-      |> Enum.map(fn project -> {project["name"], project} end)
+      |> Enum.map(fn package -> {package.name, package} end)
       |> Enum.into(%{})
 
     {both, hexpm_unmatched} =
       Enum.reduce(
         github_data,
         {[], hexpm_map},
-        fn github_repo, {results, hexpm_unmatched} ->
-          {hexpm_info, hexpm_unmatched} = Map.pop(hexpm_unmatched, github_repo["name"])
+        fn repo, {results, hexpm_unmatched} ->
+          {package, hexpm_unmatched} = Map.pop(hexpm_unmatched, repo.name)
 
-          if hexpm_info do
-            if hexpm_info["repo_url"] != github_repo["url"] do
-              IO.puts(
-                "Warning: URL mismatch for #{github_repo["name"]}: " <>
-                  "GitHub URL is #{github_repo["url"]}, but Hex.pm URL is #{hexpm_info["repo_url"]}"
-              )
+          recent_downloads =
+            if package do
+              if package.repo_url != repo.url do
+                raise ArgumentError,
+                      "Warning: URL mismatch for #{repo.name}: " <>
+                        "GitHub URL is #{repo.url}, but Hex.pm URL is #{package.repo_url}"
+              end
+
+              package.recent_downloads
+            else
+              0
             end
-          end
 
-          merged = Map.merge(github_repo, hexpm_info || %{})
+          project =
+            %Project{
+              name: repo.name,
+              url: repo.url,
+              default_branch: repo.default_branch
+            }
 
-          sort_key =
-            Map.get(merged, "stars", 0) / @github_scaling +
-              Map.get(merged, "recent_downloads", 0) / @hexpm_scaling
+          sort_key = repo.stars / @github_scaling + recent_downloads / @hexpm_scaling
 
-          result = Map.put(merged, "sort_key", sort_key)
+          result = {project, sort_key}
           {[result | results], hexpm_unmatched}
         end
       )
@@ -115,13 +150,16 @@ defmodule GreenValidation.MergeSources do
     hexpm_only =
       hexpm_unmatched
       |> Map.values()
-      |> Enum.sort_by(fn project -> Map.get(project, "recent_downloads", 0) end, :desc)
+      |> Enum.sort_by(& &1.recent_downloads, :desc)
 
     IO.puts(
       "Found #{length(both)} projects in both sources, and #{length(hexpm_only)} only in Hex.pm"
     )
 
-    sorted = Enum.sort_by(both, fn item -> item["sort_key"] end, :desc)
+    sorted =
+      both
+      |> Enum.sort_by(&elem(&1, 1), :desc)
+      |> Enum.map(&elem(&1, 0))
 
     {:ok, sorted, hexpm_only}
   end

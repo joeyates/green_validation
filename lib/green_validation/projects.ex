@@ -112,7 +112,7 @@ defmodule GreenValidation.Projects do
       if Map.has_key?(@projects, data.name) do
         @projects[data.name]
       else
-        %Project{name: data.name, url: data.url}
+        struct!(Project, data)
       end
     end)
   end

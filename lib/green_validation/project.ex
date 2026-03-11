@@ -7,6 +7,7 @@ defmodule GreenValidation.Project do
 
   @default_branch "main"
 
+  @derive {Jason.Encoder, only: [:name, :url, :default_branch]}
   @enforce_keys [:name, :url]
   defstruct [
     :environment,

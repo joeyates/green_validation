@@ -12,12 +12,12 @@ Mix.install(
   consolidate_protocols: false
 )
 
-alias GreenValidation.Hexpm.Package
-
 defmodule GreenValidation.HexpmPackages do
   @moduledoc """
   CLI tool to fetch package information from hex.pm sorted by downloads.
   """
+
+  alias GreenValidation.Hexpm.Package
 
   @program "bin/hexpm_packages"
   @default_output_path "repos/hexpm.json"
