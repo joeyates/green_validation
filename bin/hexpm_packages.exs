@@ -2,12 +2,17 @@
 
 # Script to fetch package information from hex.pm
 
-Mix.install([
-  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
-  {:helpful_options, "~> 0.4.4"},
-  {:jason, "~> 1.4"},
-  {:req, "~> 0.5.17"}
-])
+Mix.install(
+  [
+    {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+    {:helpful_options, "~> 0.4.4"},
+    {:jason, "~> 1.4"},
+    {:req, "~> 0.5.17"}
+  ],
+  consolidate_protocols: false
+)
+
+alias GreenValidation.Hexpm.Package
 
 defmodule GreenValidation.HexpmPackages do
   @moduledoc """
@@ -50,7 +55,7 @@ defmodule GreenValidation.HexpmPackages do
     IO.puts("Fetching package information from hex.pm...")
 
     with {:ok, response} <- fetch_packages(),
-         {:ok, formatted_data} <- format_packages(response, verbose),
+         {:ok, formatted_data} <- to_packages(response, verbose),
          :ok <- write_output(output_path, formatted_data) do
       IO.puts("Successfully wrote #{length(formatted_data)} packages to #{output_path}")
       :ok
@@ -82,11 +87,11 @@ defmodule GreenValidation.HexpmPackages do
     end
   end
 
-  defp format_packages(packages, verbose) when is_list(packages) do
+  defp to_packages(packages, verbose) when is_list(packages) do
     formatted =
       packages
       |> Enum.map(fn package ->
-        %{
+        %Package{
           name: package["name"],
           recent_downloads: get_in(package, ["downloads", "recent"]),
           description: get_in(package, ["meta", "description"]),
@@ -99,7 +104,7 @@ defmodule GreenValidation.HexpmPackages do
     {:ok, formatted}
   end
 
-  defp format_packages(_, _), do: {:error, "Invalid response format"}
+  defp to_packages(_, _), do: {:error, "Invalid response format"}
 
   defp optionally_list_repos_without_repo_url(packages, true) do
     Enum.each(packages, fn package ->
