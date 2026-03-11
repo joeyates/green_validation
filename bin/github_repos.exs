@@ -128,6 +128,7 @@ defmodule GreenValidation.GithubRepos do
 
   defp to_repo(repo) do
     %Repo{
+      default_branch: repo["default_branch"],
       name: repo["name"],
       owner: repo["owner"]["login"],
       url: repo["html_url"],
