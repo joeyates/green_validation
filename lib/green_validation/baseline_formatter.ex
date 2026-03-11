@@ -14,6 +14,7 @@ defmodule GreenValidation.BaselineFormatter do
   @spec ensure_clean(Project.t()) ::
           {:ok, :clean | :created_format_commit} | {:error, String.t()}
   def ensure_clean(%Project{} = project) do
+    IO.puts("  Checking baseline formatting")
     MixExs.ensure_mix_exs(project)
 
     if project.formatter_exs_setup do

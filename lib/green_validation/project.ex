@@ -168,6 +168,7 @@ defmodule GreenValidation.Project do
   defp install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
 
   defp install_deps(%__MODULE__{} = project) do
+    IO.puts("  Installing dependencies")
     project_path = path(project)
 
     case System.cmd("mix", ["deps.get"],
