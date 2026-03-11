@@ -24,8 +24,10 @@ defmodule GreenValidation.Installer.MixExs do
       raise "mix.exs already exists in #{project_path}"
     end
 
+    module = project.name |> String.replace(~r/[^a-zA-Z0-9_\.]/, "_") |> Macro.camelize()
+
     content = """
-    defmodule #{Macro.camelize(project.name)}.MixProject do
+    defmodule #{module}.MixProject do
       use Mix.Project
 
       def project do
