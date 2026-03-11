@@ -9,6 +9,14 @@ defmodule GreenValidation.Projects do
   @all_projects_path "repos/merged.json"
 
   @projects %{
+    "awesome-elixir" => %Project{
+      name: "awesome-elixir",
+      url: "https://github.com/h4cc/awesome-elixir",
+      default_branch: "master",
+      has_mix_exs: false,
+      has_formatter_exs: false,
+      formatter_exs_setup: {__MODULE__, :awesome_elixir_formatter_exs_setup}
+    },
     "ecto" => %Project{
       name: "ecto",
       url: "https://github.com/elixir-ecto/ecto",
@@ -126,6 +134,14 @@ defmodule GreenValidation.Projects do
       project ->
         {:ok, project}
     end
+  end
+
+  def awesome_elixir_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["test/**/*.{ex,exs}"]
+    ]
+
+    FormatterExs.create_project_formatter(project, inputs)
   end
 
   def ecto_formatter_exs_setup(%Project{} = project) do
