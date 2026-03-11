@@ -12,6 +12,7 @@ defmodule GreenValidation.Project do
   defstruct [
     :environment,
     :name,
+    :path,
     :post_checkout,
     :formatter_exs_setup,
     :url,
@@ -37,8 +38,12 @@ defmodule GreenValidation.Project do
   def repos_dir(), do: [__DIR__, "..", "..", "repos"] |> Path.join() |> Path.expand()
 
   @spec path(t()) :: String.t()
-  def path(%__MODULE__{name: name}) do
+  def path(%__MODULE__{name: name, path: nil}) do
     Path.join(repos_dir(), name)
+  end
+
+  def path(%__MODULE__{name: name, path: path}) do
+    Path.join([repos_dir(), name, path])
   end
 
   def environment(%__MODULE__{environment: {module, fun}} = project) do
