@@ -53,12 +53,13 @@ defmodule GreenValidation.RuleValidator do
   @spec validate_rules(
           Project.t(),
           [atom],
-          {:green, String.t()} | {:green, String.t(), path: String.t()}
+          keyword
         ) ::
           {:ok, list(RuleResult.t())} | {:error, map()}
-  def validate_rules(%Project{} = project, rules, green_dependency) do
+  def validate_rules(%Project{} = project, rules, opts) do
     IO.puts("  Validating #{length(rules)} rules individually...")
 
+    green_dependency = Keyword.fetch!(opts, :green_dependency)
     :ok = GreenInstaller.install_green(project, green_version: green_dependency)
 
     Enum.reduce(
@@ -68,7 +69,7 @@ defmodule GreenValidation.RuleValidator do
         rule, {:ok, acc} ->
           IO.write("    #{rule}... ")
 
-          case validate_single_rule(project, rule) do
+          case validate_single_rule(project, rule, opts) do
             {:ok, result} ->
               IO.puts("OK")
               {:ok, [result | acc]}
@@ -86,21 +87,26 @@ defmodule GreenValidation.RuleValidator do
     :ok = MixExs.reset(project)
   end
 
-  @spec validate_single_rule(Project.t(), atom) :: {:ok, RuleResult.t()} | {:error, String.t()}
-  defp validate_single_rule(%Project{} = project, rule) do
-    rules =
-      rule
-      |> generate_config()
-      |> then(&Project.rule_config(project, rule, &1))
-
+  @spec validate_single_rule(Project.t(), atom, keyword) ::
+          {:ok, RuleResult.t()} | {:error, String.t()}
+  defp validate_single_rule(%Project{} = project, rule, opts) do
+    rules = project_rule_config(project, rule)
+    file_path = Keyword.get(opts, :file_path)
     :ok = GreenInstaller.prepare_formatter_exs(project, rules)
     project_path = Project.path(project)
     environment = Project.environment(project)
 
+    params =
+      if file_path do
+        ["format", "--check-formatted", file_path]
+      else
+        ["format", "--check-formatted"]
+      end
+
     {output, exit_code} =
       System.cmd(
         "mix",
-        ["format", "--check-formatted"],
+        params,
         cd: project_path,
         env: environment,
         stderr_to_stdout: true
@@ -111,24 +117,22 @@ defmodule GreenValidation.RuleValidator do
     :ok = FormatterExs.reset(project)
   end
 
-  @doc """
-  Generates a list of rules to **disable** all rules except the specified one.
-  """
+  @spec project_rule_config(Project.t(), atom()) :: list({atom(), keyword()})
+  defp project_rule_config(%Project{} = project, enabled_rule) do
+    generic_config = generate_config(enabled_rule)
+    Project.rule_config(project, enabled_rule, generic_config)
+  end
+
   @spec generate_config(atom()) :: list({atom(), keyword()})
-  def generate_config(enabled_rule) do
+  defp generate_config(enabled_rule) do
     all_rules()
     |> Enum.reject(&(&1 == enabled_rule))
     |> Enum.map(fn rule -> {rule, [enabled: false]} end)
   end
 
-  @doc """
-  Parses the output from `mix format --check-formatted`.
-
-  Uses OutputParser to extract file paths and affected line numbers.
-  """
   @spec parse_format_output(Project.t(), atom(), String.t(), non_neg_integer()) ::
           {:ok, RuleResult.t()} | {:error, String.t()}
-  def parse_format_output(project, rule, output, exit_code) do
+  defp parse_format_output(project, rule, output, exit_code) do
     cond do
       output == "" ->
         {:ok, %RuleResult{rule: rule}}

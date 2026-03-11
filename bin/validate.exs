@@ -37,6 +37,14 @@ defmodule GreenValidation.CLI do
     }
   ]
 
+  @check_project_switches [
+    rule: %{
+      type: :string,
+      description: "Specific rule to check (e.g. 'avoid_needless_pipelines')"
+    },
+    path: %{type: :string, description: "Path to a specific file to check with the rule"}
+  ]
+
   @commands [
     %{commands: [], description: "Show this help message"},
     %{commands: ["help"], description: "Show this help message"},
@@ -48,12 +56,7 @@ defmodule GreenValidation.CLI do
     %{
       commands: ["check-project", :project_name],
       description: "Check a specific project",
-      switches: @common_switches
-    },
-    %{
-      commands: ["check-project-rule", :project_name, :rule_name],
-      description: "Check a single rule for a specific project",
-      switches: @common_switches
+      switches: @check_project_switches ++ @common_switches
     }
   ]
 
@@ -78,16 +81,10 @@ defmodule GreenValidation.CLI do
         usage()
 
       ["check-all"] ->
-        {:ok, green_dependency} = parse_green_dependency(switches[:green])
-        check_all(switches, green_dependency)
+        check_all(switches)
 
       ["check-project", project_name] ->
-        {:ok, green_dependency} = parse_green_dependency(switches[:green])
-        check_project(project_name, switches, green_dependency)
-
-      ["check-project-rule", project_name, rule_name] ->
-        {:ok, green_dependency} = parse_green_dependency(switches[:green])
-        check_project_rule(project_name, rule_name, switches, green_dependency)
+        check_project(project_name, switches)
     end
   end
 
@@ -96,8 +93,8 @@ defmodule GreenValidation.CLI do
     IO.puts(HelpfulOptions.help_commands!(@program, @commands))
   end
 
-  defp check_all(switches, green_dependency) do
-    case check_all_projects(green_dependency) do
+  defp check_all(switches) do
+    case check_all_projects(switches) do
       {:ok, results} ->
         IO.puts("All projects validated successfully.")
 
@@ -111,8 +108,10 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check_all_projects(green_dependency) do
+  defp check_all_projects(switches) do
+    {:ok, green_dependency} = parse_green_dependency(switches[:green])
     rules = RuleValidator.all_rules()
+    opts = [green_dependency: green_dependency]
 
     results =
       Enum.reduce_while(
@@ -121,7 +120,7 @@ defmodule GreenValidation.CLI do
         fn project, acc ->
           IO.puts("Checking project: #{project.name}")
 
-          case check_project_rules(project, rules, green_dependency) do
+          case check_project_rules(project, rules, opts) do
             {:ok, result} ->
               {:cont, [result | acc]}
 
@@ -138,11 +137,16 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp check_project(project_name, switches, green_dependency) do
+  defp check_project(project_name, switches) do
     project = Projects.load!(project_name)
-    rules = RuleValidator.all_rules()
 
-    with {:ok, result} <- check_project_rules(project, rules, green_dependency) do
+    with {:ok, green_dependency} = parse_green_dependency(switches[:green]),
+         {:ok, rules} = prepare_rules(switches[:rule]),
+         opts = [
+           file_path: switches[:path],
+           green_dependency: green_dependency
+         ],
+         {:ok, result} <- check_project_rules(project, rules, opts) do
       handle_format_output(result, switches, project_name)
     else
       {:error, reason} ->
@@ -151,38 +155,28 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  def check_project_rule(project_name, rule_name, switches, green_dependency) do
-    project = Projects.load!(project_name)
-    rule_atom = String.to_atom(rule_name)
+  defp prepare_rules(rule_name) do
+    if rule_name do
+      rule_atom = String.to_atom(rule_name)
 
-    if rule_atom not in RuleValidator.all_rules() do
-      IO.puts(
-        "Error: Unknown rule '#{rule_name}'. Available rules: #{Enum.join(RuleValidator.all_rules(), ", ")}"
-      )
-
-      System.halt(1)
-    end
-
-    with {:ok, result} <- check_project_rules(project, [rule_atom], green_dependency) do
-      handle_format_output(result, switches, "#{project_name}-#{rule_name}")
+      if rule_atom in RuleValidator.all_rules() do
+        {:ok, [rule_atom]}
+      else
+        {:error,
+         "Unknown rule '#{rule_name}'. Available rules: #{Enum.join(RuleValidator.all_rules(), ", ")}"}
+      end
     else
-      {:error, reason} ->
-        IO.puts("Error: #{reason}")
-        System.halt(1)
+      {:ok, RuleValidator.all_rules()}
     end
   end
 
-  @spec check_project_rules(
-          Project.t(),
-          [atom],
-          {:green, String.t()} | {:green, String.t(), path: String.t()}
-        ) ::
+  @spec check_project_rules(Project.t(), [atom], keyword) ::
           {:ok, Result.t()} | {:error, String.t()}
-  defp check_project_rules(project, rules, green_dependency) do
+  defp check_project_rules(project, rules, opts) do
     with {:ok, cloned_repo} <- Project.clone(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
-         {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, green_dependency),
-         {:ok, test_run} <- build_test_run(project, cloned_repo, green_dependency) do
+         {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
+         {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
       result = %Result{
         test_run: test_run,
         baseline: baseline_status,
