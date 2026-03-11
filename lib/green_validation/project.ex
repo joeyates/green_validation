@@ -62,6 +62,7 @@ defmodule GreenValidation.Project do
   def clone(%__MODULE__{} = project) do
     with :ok <- ensure_repo(project),
          {:ok, commit_sha} <- get_commit_sha(project),
+         :ok <- install_deps(project),
          :ok <- post_checkout(project) do
       cloned_repo = %ClonedRepo{
         project: project,
@@ -158,7 +159,9 @@ defmodule GreenValidation.Project do
   defp post_checkout(_), do: :ok
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
-  def install_deps(%__MODULE__{} = project) do
+  defp install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
+
+  defp install_deps(%__MODULE__{} = project) do
     project_path = path(project)
 
     case System.cmd("mix", ["deps.get"],
