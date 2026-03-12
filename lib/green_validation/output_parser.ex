@@ -3,7 +3,7 @@ defmodule GreenValidation.OutputParser do
   Parses output from `mix format --check-formatted` to extract file names.
   """
 
-  alias GreenValidation.{Project, RuleResult, Warning}
+  alias GreenValidation.{Change, Project, RuleResult, Warning}
 
   @doc """
   Parses the full mix format output and extracts file paths that have formatting issues.
@@ -11,31 +11,40 @@ defmodule GreenValidation.OutputParser do
   """
   @spec parse_output(Project.t(), atom, String.t()) :: {:ok, %RuleResult{}}
   def parse_output(project, rule, output) do
-    changes_files = extract_changes_files(output)
-    warnings = extract_warnings(output)
-
     path = Project.path(project)
-    changes_files = Enum.map(changes_files, &make_repo_local(&1, path))
+    changes = extract_changes(output, path)
+    warnings = extract_warnings(output)
 
     {
       :ok,
       %RuleResult{
         rule: rule,
-        changes: changes_files,
+        changes: changes,
         warnings: warnings
       }
     }
   end
 
-  # Changes are preceded by an ANSI escape code for red text and then a file name
-  @spec extract_changes_files(String.t()) :: list(String.t())
-  defp extract_changes_files(output) do
-    output
-    |> String.split("\n")
-    |> Enum.filter(&String.starts_with?(&1, "\e[1m\e[31m"))
-    |> Enum.map(&String.trim_leading(&1, "\e[1m\e[31m"))
-    |> Enum.map(&String.trim_trailing(&1, "\e[0m"))
-    |> Enum.uniq()
+  # Changes are preceded by an ANSI escape code for red text and then a file name,
+  # followed by the diff of the changes.
+  @spec extract_changes(String.t(), Path.t()) :: list(Change.t())
+  defp extract_changes(output, root) do
+    regex = ~r/
+      \e\[1m\e\[31m(?<path>[^\n]+)\n
+      \e\[0m\n
+      (?<diff>[^\e]*)
+    /sx
+
+    regex
+    |> Regex.scan(output, capture: [:path, :diff])
+    |> Enum.map(fn [path, diff] ->
+      local_path = make_repo_local(path, root)
+
+      %Change{
+        path: local_path,
+        diff: diff
+      }
+    end)
   end
 
   # Warnings look like this:

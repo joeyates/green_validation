@@ -265,7 +265,14 @@ defmodule GreenValidation.CLI do
 
         if length(rule_result.changes) > 0 do
           IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
-          Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
+
+          Enum.each(rule_result.changes, fn change ->
+            if verbose do
+              IO.puts("        - #{change}")
+            else
+              IO.puts("        - #{change.path}")
+            end
+          end)
         end
 
         if length(rule_result.warnings) > 0 do
