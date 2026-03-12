@@ -15,15 +15,17 @@ defmodule GreenValidation.CLI do
 
   alias GreenValidation.{
     BaselineFormatter,
+    GreenDependency,
     Projects,
     Project,
     ReportWriter,
     Result,
+    Rules,
     RuleValidator,
     TestRun
   }
 
-  require GreenValidation.RuleValidator
+  require GreenValidation.Rules
 
   @program "bin/validate.exs"
 
@@ -98,9 +100,7 @@ defmodule GreenValidation.CLI do
       {:ok, results} ->
         IO.puts("All projects validated successfully.")
 
-        # Write report if format is specified
-        handle_format_output(results, switches, "all")
-        :ok
+        handle_format_output(results, switches)
 
       {:error, reason} ->
         IO.puts("Error during validation: #{reason}")
@@ -109,8 +109,8 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_all_projects(switches) do
-    {:ok, green_dependency} = parse_green_dependency(switches[:green])
-    rules = RuleValidator.all_rules()
+    {:ok, green_dependency} = GreenDependency.new(switches[:green])
+    rules = Rules.all()
     opts = [green_dependency: green_dependency]
 
     results =
@@ -121,8 +121,8 @@ defmodule GreenValidation.CLI do
           IO.puts("Checking project: #{project.name}")
 
           case check_project_rules(project, rules, opts) do
-            {:ok, result} ->
-              {:cont, [result | acc]}
+            {:ok, results} ->
+              {:cont, results ++ acc}
 
             {:error, reason} ->
               IO.puts("Validation failed for #{project.name}: #{reason}")
@@ -140,14 +140,14 @@ defmodule GreenValidation.CLI do
   defp check_project(project_name, switches) do
     project = Projects.load!(project_name)
 
-    with {:ok, green_dependency} = parse_green_dependency(switches[:green]),
+    with {:ok, green_dependency} = GreenDependency.new(switches[:green]),
          {:ok, rules} = prepare_rules(switches[:rule]),
          opts = [
            file_path: switches[:path],
            green_dependency: green_dependency
          ],
-         {:ok, result} <- check_project_rules(project, rules, opts) do
-      handle_format_output(result, switches, project_name)
+         {:ok, results} <- check_project_rules(project, rules, opts) do
+      handle_format_output(results, switches)
     else
       {:error, reason} ->
         IO.puts("Error: #{reason}")
@@ -159,21 +159,29 @@ defmodule GreenValidation.CLI do
     if rule_name do
       rule_atom = String.to_atom(rule_name)
 
-      if rule_atom in RuleValidator.all_rules() do
+      if rule_atom in Rules.all() do
         {:ok, [rule_atom]}
       else
-        {:error,
-         "Unknown rule '#{rule_name}'. Available rules: #{Enum.join(RuleValidator.all_rules(), ", ")}"}
+        {:error, "Unknown rule '#{rule_name}'. Available rules: #{Enum.join(Rules.all(), ", ")}"}
       end
     else
-      {:ok, RuleValidator.all_rules()}
+      {:ok, Rules.all()}
     end
   end
 
   @spec check_project_rules(Project.t(), [atom], keyword) ::
-          {:ok, Result.t()} | {:error, String.t()}
+          {:ok, [Result.t()]} | {:error, String.t()}
   defp check_project_rules(project, rules, opts) do
     with {:ok, cloned_repo} <- Project.clone(project),
+         {:ok, results} <- validate_rules(cloned_repo, project, rules, opts) do
+      {:ok, results}
+    end
+  end
+
+  @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
+          {:ok, [Result.t()]} | {:error, String.t()}
+  defp validate_rules(cloned_repo, %Project{subprojects: []} = project, rules, opts) do
+    with :ok <- Project.install_deps(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
          {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
@@ -183,43 +191,42 @@ defmodule GreenValidation.CLI do
         rules: rule_results
       }
 
-      # Print output for backwards compatibility
-      if baseline_status == :created_format_commit do
-        IO.puts("Baseline formatting commit created for #{project.name}.")
-      end
-
-      Enum.each(
-        rule_results,
-        fn rule_result ->
-          IO.puts("    Rule: #{rule_result.rule}")
-
-          if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
-            IO.puts("      ✅ No issues found.")
-          end
-
-          if length(rule_result.changes) > 0 do
-            IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
-            Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
-          end
-
-          if length(rule_result.warnings) > 0 do
-            IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
-            Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
-          end
-        end
-      )
-
-      {:ok, result}
+      log_results(result)
+      {:ok, [result]}
     end
   end
 
-  @spec build_test_run(
-          Project.t(),
-          ClonedRepo.t(),
-          {:green, String.t()} | {:green, String.t(), path: String.t()}
-        ) :: {:ok, TestRun.t()} | {:error, String.t()}
+  defp validate_rules(cloned_repo, %Project{subprojects: subprojects} = project, rules, opts) do
+    import Access, only: [key: 1]
+
+    # Treat each subproject as a separate project for validation purposes,
+    # but reuse the same cloned repository
+    subprojects
+    |> Enum.map(fn subproject ->
+      fake_project = %{
+        project
+        | path: subproject.path,
+          mix_exs_add_dependency: subproject.mix_exs_add_dependency,
+          subprojects: []
+      }
+
+      IO.puts("Running validation on #{subproject.path} subproject of #{project.name}")
+
+      {:ok, [result]} = validate_rules(cloned_repo, fake_project, rules, opts)
+
+      update_in(
+        result,
+        [key(:test_run), key(:project_name)],
+        fn _existing -> "#{project.name} (#{subproject.path})" end
+      )
+    end)
+    |> then(&{:ok, &1})
+  end
+
+  @spec build_test_run(Project.t(), ClonedRepo.t(), GreenDependency.t()) ::
+          {:ok, TestRun.t()} | {:error, String.t()}
   defp build_test_run(project, cloned_repo, green_dependency) do
-    with {:ok, green_version} <- get_green_version(green_dependency) do
+    with {:ok, green_version} <- GreenDependency.get_version(green_dependency) do
       test_run = %TestRun{
         project_name: project.name,
         repository: cloned_repo.project.url,
@@ -232,34 +239,34 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp parse_green_dependency(green_arg) do
-    cond do
-      Regex.match?(~r"\d+\.\d+\.\d+$", green_arg) ->
-        {:ok, {:green, green_arg}}
-
-      File.dir?(green_arg) ->
-        green_path = Path.expand(green_arg)
-        {:ok, {:green, ">= 0.0.0", path: green_path}}
-
-      true ->
-        {:error,
-         "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
+  defp log_results(%Result{} = result) do
+    if result.baseline == :created_format_commit do
+      IO.puts("Baseline formatting commit created for #{result.test_run.project_name}.")
     end
+
+    Enum.each(
+      result.rules,
+      fn rule_result ->
+        IO.puts("    Rule: #{rule_result.rule}")
+
+        if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
+          IO.puts("      ✅ No issues found.")
+        end
+
+        if length(rule_result.changes) > 0 do
+          IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
+          Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
+        end
+
+        if length(rule_result.warnings) > 0 do
+          IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
+          Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
+        end
+      end
+    )
   end
 
-  defp get_green_version({:green, version}) when is_binary(version), do: {:ok, version}
-
-  defp get_green_version({:green, _version, path: local_path}) do
-    case System.cmd("git", ["rev-parse", "HEAD"],
-           cd: local_path,
-           stderr_to_stdout: true
-         ) do
-      {output, 0} -> {:ok, String.trim(output)}
-      {output, _} -> {:error, "Failed to get green SHA: #{output}"}
-    end
-  end
-
-  defp handle_format_output(result_or_results, switches, project_identifier) do
+  defp handle_format_output(results, switches) do
     case switches[:format] do
       nil ->
         # No format specified, do nothing (already printed to stdout)
@@ -268,18 +275,9 @@ defmodule GreenValidation.CLI do
       format_string when format_string in ["json", "text"] ->
         format = String.to_atom(format_string)
 
-        case result_or_results do
-          # Single result
-          %Result{} = result ->
-            write_report(result, format, project_identifier)
-
-          # List of results (from check_all)
-          results when is_list(results) ->
-            Enum.each(results, fn result ->
-              project_name = result.test_run.project_name
-              write_report(result, format, project_name)
-            end)
-        end
+        Enum.each(results, fn result ->
+          write_report(result, format)
+        end)
 
       other ->
         IO.puts("Warning: Unknown format '#{other}'. Supported formats: 'json', 'text'")
@@ -287,8 +285,7 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp write_report(result, format, _project_identifier) do
-    # Save reports in the results directory
+  defp write_report(result, format) do
     output_dir = "results"
 
     case ReportWriter.write(result, format, output_dir: output_dir) do

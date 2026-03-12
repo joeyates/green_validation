@@ -46,7 +46,17 @@ defmodule GreenValidation.Installer.MixExs do
     :ok
   end
 
-  @spec add_dependency(Project.t(), tuple()) :: :ok
+  @type dependency_option :: {:path, String.t()}
+  @type dependency ::
+          {atom(), String.t()}
+          | {atom(), String.t(), [dependency_option]}
+          | {atom(), [dependency_option]}
+
+  @spec add_dependency(Project.t(), dependency) :: :ok
+  def add_dependency(%Project{mix_exs_add_dependency: {mod, fun}} = project, dependency) do
+    apply(mod, fun, [project, dependency])
+  end
+
   def add_dependency(%Project{has_mix_exs: true} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
@@ -92,7 +102,7 @@ defmodule GreenValidation.Installer.MixExs do
     File.write!(mix_path, content)
   end
 
-  @spec add_dependency_to_content(String.t(), tuple()) :: String.t()
+  @spec add_dependency_to_content(String.t(), dependency) :: String.t()
   def add_dependency_to_content(content, dependency) when is_binary(content) do
     if Regex.match?(~r"defp? deps", content) do
       content
@@ -139,14 +149,14 @@ defmodule GreenValidation.Installer.MixExs do
   end
 
   @spec reformat(String.t()) :: String.t()
-  defp reformat(content) do
+  def reformat(content) do
     content
     |> Code.format_string!()
     |> IO.iodata_to_binary()
     |> Kernel.<>("\n")
   end
 
-  @spec add_deps_block(String.t(), tuple()) :: String.t()
+  @spec add_deps_block(String.t(), dependency) :: String.t()
   defp add_deps_block(content, dependency) do
     String.replace(content, ~r/\nend\s*$/, """
 
