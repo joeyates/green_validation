@@ -173,7 +173,15 @@ defmodule GreenValidation.CLI do
           {:ok, [Result.t()]} | {:error, String.t()}
   defp check_project_rules(project, rules, opts) do
     with {:ok, cloned_repo} <- Project.clone(project),
-         {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
+         {:ok, results} <- validate_rules(cloned_repo, project, rules, opts) do
+      {:ok, results}
+    end
+  end
+
+  @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
+          {:ok, [Result.t()]} | {:error, String.t()}
+  defp validate_rules(cloned_repo, project, rules, opts) do
+    with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
          {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
       result = %Result{
@@ -182,32 +190,7 @@ defmodule GreenValidation.CLI do
         rules: rule_results
       }
 
-      # Print output for backwards compatibility
-      if baseline_status == :created_format_commit do
-        IO.puts("Baseline formatting commit created for #{project.name}.")
-      end
-
-      Enum.each(
-        rule_results,
-        fn rule_result ->
-          IO.puts("    Rule: #{rule_result.rule}")
-
-          if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
-            IO.puts("      ✅ No issues found.")
-          end
-
-          if length(rule_result.changes) > 0 do
-            IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
-            Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
-          end
-
-          if length(rule_result.warnings) > 0 do
-            IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
-            Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
-          end
-        end
-      )
-
+      log_results(result)
       {:ok, [result]}
     end
   end
@@ -226,6 +209,33 @@ defmodule GreenValidation.CLI do
 
       {:ok, test_run}
     end
+  end
+
+  defp log_results(%Result{} = result) do
+    if result.baseline == :created_format_commit do
+      IO.puts("Baseline formatting commit created for #{result.test_run.project_name}.")
+    end
+
+    Enum.each(
+      result.rules,
+      fn rule_result ->
+        IO.puts("    Rule: #{rule_result.rule}")
+
+        if length(rule_result.changes) == 0 and length(rule_result.warnings) == 0 do
+          IO.puts("      ✅ No issues found.")
+        end
+
+        if length(rule_result.changes) > 0 do
+          IO.puts("      🔧 Changes needed for #{length(rule_result.changes)} files:")
+          Enum.each(rule_result.changes, &IO.puts("        - #{&1}"))
+        end
+
+        if length(rule_result.warnings) > 0 do
+          IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
+          Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
+        end
+      end
+    )
   end
 
   defp handle_format_output(results, switches) do
