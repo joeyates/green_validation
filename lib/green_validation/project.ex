@@ -14,6 +14,7 @@ defmodule GreenValidation.Project do
     :name,
     :path,
     :post_checkout,
+    :mix_exs_add_dependency,
     :formatter_exs_setup,
     :url,
     default_branch: @default_branch,
@@ -28,6 +29,7 @@ defmodule GreenValidation.Project do
           default_branch: String.t(),
           environment: {atom, atom} | nil,
           post_checkout: {atom, atom} | nil,
+          mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
           has_formatter_exs: boolean(),
@@ -68,7 +70,6 @@ defmodule GreenValidation.Project do
   def clone(%__MODULE__{} = project) do
     with :ok <- ensure_repo(project),
          {:ok, commit_sha} <- get_commit_sha(project),
-         :ok <- install_deps(project),
          :ok <- post_checkout(project) do
       cloned_repo = %ClonedRepo{
         project: project,
@@ -157,6 +158,13 @@ defmodule GreenValidation.Project do
     end
   end
 
+  @spec mix_exs_add_dependency(t()) :: :ok | {:error, String.t()}
+  def mix_exs_add_dependency(%__MODULE__{mix_exs_add_dependency: {mod, fun}} = project) do
+    apply(mod, fun, [project])
+  end
+
+  def mix_exs_add_dependency(_), do: :ok
+
   @spec post_checkout(t()) :: :ok | {:error, String.t()}
   defp post_checkout(%__MODULE__{post_checkout: {mod, fun}} = project) do
     apply(mod, fun, [project])
@@ -165,9 +173,9 @@ defmodule GreenValidation.Project do
   defp post_checkout(_), do: :ok
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
-  defp install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
+  def install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
 
-  defp install_deps(%__MODULE__{} = project) do
+  def install_deps(%__MODULE__{} = project) do
     IO.puts("  Installing dependencies")
     project_path = path(project)
 

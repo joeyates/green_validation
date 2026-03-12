@@ -53,6 +53,10 @@ defmodule GreenValidation.Installer.MixExs do
           | {atom(), [dependency_option]}
 
   @spec add_dependency(Project.t(), dependency) :: :ok
+  def add_dependency(%Project{mix_exs_add_dependency: {mod, fun}} = project, dependency) do
+    apply(mod, fun, [project, dependency])
+  end
+
   def add_dependency(%Project{has_mix_exs: true} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
@@ -145,7 +149,7 @@ defmodule GreenValidation.Installer.MixExs do
   end
 
   @spec reformat(String.t()) :: String.t()
-  defp reformat(content) do
+  def reformat(content) do
     content
     |> Code.format_string!()
     |> IO.iodata_to_binary()

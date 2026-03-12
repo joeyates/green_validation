@@ -4,7 +4,7 @@ defmodule GreenValidation.Projects do
   """
 
   alias GreenValidation.Project
-  alias GreenValidation.Installer.FormatterExs
+  alias GreenValidation.Installer.{FormatterExs, MixExs}
 
   @all_projects_path "repos/merged.json"
 
