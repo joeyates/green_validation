@@ -86,6 +86,11 @@ defmodule GreenValidation.Projects do
       name: "phoenix",
       url: "https://github.com/phoenixframework/phoenix",
       formatter_exs_setup: {__MODULE__, :phoenix_formatter_exs_setup}
+    },
+    "symphony" => %Project{
+      name: "symphony",
+      url: "https://github.com/openai/symphony",
+      path: "elixir"
     }
   }
 
