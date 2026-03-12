@@ -3,7 +3,7 @@ defmodule GreenValidation.Project do
   A struct representing a project in a repository.
   """
 
-  alias GreenValidation.ClonedRepo
+  alias GreenValidation.{ClonedRepo, Subproject}
 
   @default_branch "main"
 
@@ -20,7 +20,8 @@ defmodule GreenValidation.Project do
     default_branch: @default_branch,
     rule_config: [],
     has_formatter_exs: true,
-    has_mix_exs: true
+    has_mix_exs: true,
+    subprojects: []
   ]
 
   @type t :: %__MODULE__{
@@ -33,7 +34,8 @@ defmodule GreenValidation.Project do
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
           has_formatter_exs: boolean(),
-          has_mix_exs: boolean()
+          has_mix_exs: boolean(),
+          subprojects: list(Subproject.t())
         }
 
   @spec repos_dir() :: String.t()

@@ -180,8 +180,9 @@ defmodule GreenValidation.CLI do
 
   @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
           {:ok, [Result.t()]} | {:error, String.t()}
-  defp validate_rules(cloned_repo, project, rules, opts) do
-    with {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
+  defp validate_rules(cloned_repo, %Project{subprojects: []} = project, rules, opts) do
+    with :ok <- Project.install_deps(project),
+         {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
          {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
       result = %Result{
@@ -193,6 +194,33 @@ defmodule GreenValidation.CLI do
       log_results(result)
       {:ok, [result]}
     end
+  end
+
+  defp validate_rules(cloned_repo, %Project{subprojects: subprojects} = project, rules, opts) do
+    import Access, only: [key: 1]
+
+    # Treat each subproject as a separate project for validation purposes,
+    # but reuse the same cloned repository
+    subprojects
+    |> Enum.map(fn subproject ->
+      fake_project = %{
+        project
+        | path: subproject.path,
+          mix_exs_add_dependency: subproject.mix_exs_add_dependency,
+          subprojects: []
+      }
+
+      IO.puts("Running validation on #{subproject.path} subproject of #{project.name}")
+
+      {:ok, [result]} = validate_rules(cloned_repo, fake_project, rules, opts)
+
+      update_in(
+        result,
+        [key(:test_run), key(:project_name)],
+        fn _existing -> "#{project.name} (#{subproject.path})" end
+      )
+    end)
+    |> then(&{:ok, &1})
   end
 
   @spec build_test_run(Project.t(), ClonedRepo.t(), GreenDependency.t()) ::
