@@ -19,11 +19,12 @@ defmodule GreenValidation.CLI do
     Project,
     ReportWriter,
     Result,
+    Rules,
     RuleValidator,
     TestRun
   }
 
-  require GreenValidation.RuleValidator
+  require GreenValidation.Rules
 
   @program "bin/validate.exs"
 
@@ -110,7 +111,7 @@ defmodule GreenValidation.CLI do
 
   defp check_all_projects(switches) do
     {:ok, green_dependency} = parse_green_dependency(switches[:green])
-    rules = RuleValidator.all_rules()
+    rules = Rules.all()
     opts = [green_dependency: green_dependency]
 
     results =
@@ -159,14 +160,13 @@ defmodule GreenValidation.CLI do
     if rule_name do
       rule_atom = String.to_atom(rule_name)
 
-      if rule_atom in RuleValidator.all_rules() do
+      if rule_atom in Rules.all() do
         {:ok, [rule_atom]}
       else
-        {:error,
-         "Unknown rule '#{rule_name}'. Available rules: #{Enum.join(RuleValidator.all_rules(), ", ")}"}
+        {:error, "Unknown rule '#{rule_name}'. Available rules: #{Enum.join(Rules.all(), ", ")}"}
       end
     else
-      {:ok, RuleValidator.all_rules()}
+      {:ok, Rules.all()}
     end
   end
 
