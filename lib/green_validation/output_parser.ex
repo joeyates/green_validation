@@ -3,7 +3,7 @@ defmodule GreenValidation.OutputParser do
   Parses output from `mix format --check-formatted` to extract file names.
   """
 
-  alias GreenValidation.{Project, RuleResult}
+  alias GreenValidation.{Project, RuleResult, Warning}
 
   @doc """
   Parses the full mix format output and extracts file paths that have formatting issues.
@@ -12,19 +12,17 @@ defmodule GreenValidation.OutputParser do
   @spec parse_output(Project.t(), atom, String.t()) :: {:ok, %RuleResult{}}
   def parse_output(project, rule, output) do
     changes_files = extract_changes_files(output)
-    warnings_files = extract_warnings_files(output)
+    warnings = extract_warnings(output)
 
-    # Convert absolute paths to repository-local paths
     path = Project.path(project)
     changes_files = Enum.map(changes_files, &make_repo_local(&1, path))
-    warnings_files = Enum.map(warnings_files, &make_repo_local(&1, path))
 
     {
       :ok,
       %RuleResult{
         rule: rule,
         changes: changes_files,
-        warnings: warnings_files
+        warnings: warnings
       }
     }
   end
@@ -41,15 +39,30 @@ defmodule GreenValidation.OutputParser do
   end
 
   # Warnings look like this:
-  # └─ test/eex_test.exs:
-  @spec extract_warnings_files(String.t()) :: list(String.t())
-  defp extract_warnings_files(output) do
-    output
-    |> String.split("\n")
-    |> Enum.filter(&String.starts_with?(&1, "└─ "))
-    |> Enum.map(&String.trim_leading(&1, "└─ "))
-    |> Enum.map(&String.replace(&1, ~r":.*", ""))
-    |> Enum.uniq()
+  #
+  #     warning: some warning message
+  #     41 | some_code_here()
+  #
+  #     └─ path/name.ex: (file)
+  @spec extract_warnings(String.t()) :: list(String.t())
+  defp extract_warnings(output) do
+    regex =
+      ~r/
+        warning:\s*(?<message>.*)\n
+        (?<line>\d+)\s*\|\s*(?<code>.*)\s*\n*
+        └─\s*(?<file>[^:]+):.*
+      /x
+
+    regex
+    |> Regex.scan(output, capture: [:message, :line, :code, :file])
+    |> Enum.map(fn [message, line, code, file] ->
+      %Warning{
+        message: message,
+        line: String.to_integer(line),
+        code: code,
+        file: file
+      }
+    end)
   end
 
   # Converts absolute path to repository-local path

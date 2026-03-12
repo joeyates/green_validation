@@ -2,11 +2,14 @@
 
 # Main validation script for testing Green formatter against major Elixir projects
 
-Mix.install([
-  {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
-  {:helpful_options, "~> 0.4.4"},
-  {:jason, "~> 1.4"}
-])
+Mix.install(
+  [
+    {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
+    {:helpful_options, "~> 0.4.4"},
+    {:jason, "~> 1.4"}
+  ],
+  consolidate_protocols: false
+)
 
 defmodule GreenValidation.CLI do
   @moduledoc """
@@ -111,7 +114,11 @@ defmodule GreenValidation.CLI do
   defp check_all_projects(switches) do
     {:ok, green_dependency} = GreenDependency.new(switches[:green])
     rules = Rules.all()
-    opts = [green_dependency: green_dependency]
+
+    opts = [
+      green_dependency: green_dependency,
+      verbose: switches[:verbose] || false
+    ]
 
     results =
       Enum.reduce_while(
@@ -144,7 +151,8 @@ defmodule GreenValidation.CLI do
          {:ok, rules} = prepare_rules(switches[:rule]),
          opts = [
            file_path: switches[:path],
-           green_dependency: green_dependency
+           green_dependency: green_dependency,
+           verbose: switches[:verbose] || false
          ],
          {:ok, results} <- check_project_rules(project, rules, opts) do
       handle_format_output(results, switches)
@@ -191,7 +199,7 @@ defmodule GreenValidation.CLI do
         rules: rule_results
       }
 
-      log_results(result)
+      log_results(result, opts)
       {:ok, [result]}
     end
   end
@@ -239,7 +247,9 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp log_results(%Result{} = result) do
+  defp log_results(%Result{} = result, opts) do
+    verbose = Keyword.get(opts, :verbose, false)
+
     if result.baseline == :created_format_commit do
       IO.puts("Baseline formatting commit created for #{result.test_run.project_name}.")
     end
@@ -260,7 +270,14 @@ defmodule GreenValidation.CLI do
 
         if length(rule_result.warnings) > 0 do
           IO.puts("      ⚠️ Warnings for #{length(rule_result.warnings)} files:")
-          Enum.each(rule_result.warnings, &IO.puts("        - #{&1}"))
+
+          Enum.each(rule_result.warnings, fn warning ->
+            if verbose do
+              IO.puts("        - #{warning}")
+            else
+              IO.puts("        - #{warning.file}")
+            end
+          end)
         end
       end
     )
