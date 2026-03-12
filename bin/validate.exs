@@ -15,6 +15,7 @@ defmodule GreenValidation.CLI do
 
   alias GreenValidation.{
     BaselineFormatter,
+    GreenDependency,
     Projects,
     Project,
     ReportWriter,
@@ -108,7 +109,7 @@ defmodule GreenValidation.CLI do
   end
 
   defp check_all_projects(switches) do
-    {:ok, green_dependency} = parse_green_dependency(switches[:green])
+    {:ok, green_dependency} = GreenDependency.new(switches[:green])
     rules = Rules.all()
     opts = [green_dependency: green_dependency]
 
@@ -139,7 +140,7 @@ defmodule GreenValidation.CLI do
   defp check_project(project_name, switches) do
     project = Projects.load!(project_name)
 
-    with {:ok, green_dependency} = parse_green_dependency(switches[:green]),
+    with {:ok, green_dependency} = GreenDependency.new(switches[:green]),
          {:ok, rules} = prepare_rules(switches[:rule]),
          opts = [
            file_path: switches[:path],
@@ -211,13 +212,10 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  @spec build_test_run(
-          Project.t(),
-          ClonedRepo.t(),
-          {:green, String.t()} | {:green, String.t(), path: String.t()}
-        ) :: {:ok, TestRun.t()} | {:error, String.t()}
+  @spec build_test_run(Project.t(), ClonedRepo.t(), GreenDependency.t()) ::
+          {:ok, TestRun.t()} | {:error, String.t()}
   defp build_test_run(project, cloned_repo, green_dependency) do
-    with {:ok, green_version} <- get_green_version(green_dependency) do
+    with {:ok, green_version} <- GreenDependency.get_version(green_dependency) do
       test_run = %TestRun{
         project_name: project.name,
         repository: cloned_repo.project.url,
@@ -227,33 +225,6 @@ defmodule GreenValidation.CLI do
       }
 
       {:ok, test_run}
-    end
-  end
-
-  defp parse_green_dependency(green_arg) do
-    cond do
-      Regex.match?(~r"\d+\.\d+\.\d+$", green_arg) ->
-        {:ok, {:green, green_arg}}
-
-      File.dir?(green_arg) ->
-        green_path = Path.expand(green_arg)
-        {:ok, {:green, ">= 0.0.0", path: green_path}}
-
-      true ->
-        {:error,
-         "Invalid --green argument. Must be a version tag (e.g. '0.1.0') or a path to a local checkout of the Green repository."}
-    end
-  end
-
-  defp get_green_version({:green, version}) when is_binary(version), do: {:ok, version}
-
-  defp get_green_version({:green, _version, path: local_path}) do
-    case System.cmd("git", ["rev-parse", "HEAD"],
-           cd: local_path,
-           stderr_to_stdout: true
-         ) do
-      {output, 0} -> {:ok, String.trim(output)}
-      {output, _} -> {:error, "Failed to get green SHA: #{output}"}
     end
   end
 

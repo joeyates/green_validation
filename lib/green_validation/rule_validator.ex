@@ -19,11 +19,7 @@ defmodule GreenValidation.RuleValidator do
   A `TestResult` struct containing the results of validating each rule.
 
   """
-  @spec validate_rules(
-          Project.t(),
-          [atom],
-          keyword
-        ) ::
+  @spec validate_rules(Project.t(), [atom], keyword) ::
           {:ok, list(RuleResult.t())} | {:error, map()}
   def validate_rules(%Project{} = project, rules, opts) do
     IO.puts("  Validating #{length(rules)} rules individually...")
