@@ -3,7 +3,7 @@ defmodule GreenValidation.Projects do
   The projects handled by the validation suite. This module defines the list of projects to validate and provides helper functions to access their paths and metadata.
   """
 
-  alias GreenValidation.Project
+  alias GreenValidation.{Project, Subproject}
   alias GreenValidation.Installer.{FormatterExs, MixExs}
 
   @all_projects_path "repos/merged.json"
@@ -22,6 +22,24 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/elixir-ecto/ecto",
       default_branch: "master",
       formatter_exs_setup: {__MODULE__, :ecto_formatter_exs_setup}
+    },
+    "electric" => %Project{
+      name: "electric",
+      post_checkout: {__MODULE__, :electric_post_checkout},
+      url: "https://github.com/electric-sql/electric",
+      subprojects: [
+        %Subproject{
+          path: "packages/electric-telemetry",
+          mix_exs_add_dependency: {__MODULE__, :electric_mix_exs_add_dependency}
+        },
+        %Subproject{
+          path: "packages/elixir-client"
+        },
+        %Subproject{
+          path: "packages/sync-service",
+          mix_exs_add_dependency: {__MODULE__, :electric_mix_exs_add_dependency}
+        }
+      ]
     },
     "elixir" => %Project{
       name: "elixir",
@@ -155,6 +173,65 @@ defmodule GreenValidation.Projects do
     ]
 
     FormatterExs.update_project_formatter(project, inputs)
+  end
+
+  def electric_post_checkout(%Project{} = project) do
+    # electric uses .tool-versions
+    IO.puts(
+      "Running post-checkout step, 'asdf install' and 'mix local.hex --force', for Electric repository..."
+    )
+
+    path = Project.path(project)
+
+    with {_output1, 0} <- System.cmd("asdf", ["install"], cd: path, stderr_to_stdout: true),
+         {_output2, 0} <-
+           System.cmd(
+             "asdf",
+             ["exec", "mix", "local.hex", "--force"],
+             cd: path,
+             stderr_to_stdout: true
+           ) do
+      :ok
+    else
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for Electric: #{output}"}
+    end
+  end
+
+  def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
+    IO.puts("Adding Green dependency to Electric's #{project.path}/mix.exs...")
+
+    mix_path =
+      project
+      |> Project.path()
+      |> Path.join("mix.exs")
+
+    content = File.read!(mix_path)
+
+    regex = ~r/
+      (
+        defp\sdeps\sdo\s*
+        List.flatten\([\[\s]*
+      )
+    /sx
+    dep_string = inspect(dependency)
+
+    updated_content =
+      regex
+      |> Regex.replace(
+        content,
+        fn _match, def_start ->
+          """
+          #{def_start}
+              #{dep_string},
+          """
+        end
+      )
+      |> MixExs.reformat()
+
+    File.write!(mix_path, updated_content)
+
+    :ok
   end
 
   def elixir_environment(%Project{} = project) do
