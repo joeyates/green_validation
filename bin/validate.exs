@@ -99,9 +99,7 @@ defmodule GreenValidation.CLI do
       {:ok, results} ->
         IO.puts("All projects validated successfully.")
 
-        # Write report if format is specified
-        handle_format_output(results, switches, "all")
-        :ok
+        handle_format_output(results, switches)
 
       {:error, reason} ->
         IO.puts("Error during validation: #{reason}")
@@ -122,8 +120,8 @@ defmodule GreenValidation.CLI do
           IO.puts("Checking project: #{project.name}")
 
           case check_project_rules(project, rules, opts) do
-            {:ok, result} ->
-              {:cont, [result | acc]}
+            {:ok, results} ->
+              {:cont, results ++ acc}
 
             {:error, reason} ->
               IO.puts("Validation failed for #{project.name}: #{reason}")
@@ -147,8 +145,8 @@ defmodule GreenValidation.CLI do
            file_path: switches[:path],
            green_dependency: green_dependency
          ],
-         {:ok, result} <- check_project_rules(project, rules, opts) do
-      handle_format_output(result, switches, project_name)
+         {:ok, results} <- check_project_rules(project, rules, opts) do
+      handle_format_output(results, switches)
     else
       {:error, reason} ->
         IO.puts("Error: #{reason}")
@@ -171,7 +169,7 @@ defmodule GreenValidation.CLI do
   end
 
   @spec check_project_rules(Project.t(), [atom], keyword) ::
-          {:ok, Result.t()} | {:error, String.t()}
+          {:ok, [Result.t()]} | {:error, String.t()}
   defp check_project_rules(project, rules, opts) do
     with {:ok, cloned_repo} <- Project.clone(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
@@ -209,7 +207,7 @@ defmodule GreenValidation.CLI do
         end
       )
 
-      {:ok, result}
+      {:ok, [result]}
     end
   end
 
@@ -259,7 +257,7 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp handle_format_output(result_or_results, switches, project_identifier) do
+  defp handle_format_output(results, switches) do
     case switches[:format] do
       nil ->
         # No format specified, do nothing (already printed to stdout)
@@ -268,18 +266,9 @@ defmodule GreenValidation.CLI do
       format_string when format_string in ["json", "text"] ->
         format = String.to_atom(format_string)
 
-        case result_or_results do
-          # Single result
-          %Result{} = result ->
-            write_report(result, format, project_identifier)
-
-          # List of results (from check_all)
-          results when is_list(results) ->
-            Enum.each(results, fn result ->
-              project_name = result.test_run.project_name
-              write_report(result, format, project_name)
-            end)
-        end
+        Enum.each(results, fn result ->
+          write_report(result, format)
+        end)
 
       other ->
         IO.puts("Warning: Unknown format '#{other}'. Supported formats: 'json', 'text'")
@@ -287,8 +276,7 @@ defmodule GreenValidation.CLI do
     end
   end
 
-  defp write_report(result, format, _project_identifier) do
-    # Save reports in the results directory
+  defp write_report(result, format) do
     output_dir = "results"
 
     case ReportWriter.write(result, format, output_dir: output_dir) do
