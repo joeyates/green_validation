@@ -73,11 +73,11 @@ defmodule GreenValidation.GithubRepos do
     IO.puts("Fetching #{limit} Elixir repositories from GitHub...")
 
     with {:ok, response} <- fetch_repositories_by_stars(limit),
-         {:ok, formatted_data} <- format_repositories(response),
+         {:ok, repos} <- format_repositories(response),
          {:ok, low_star_additions} <- fetch_low_star_additions(),
-         formatted_data = formatted_data ++ low_star_additions,
-         :ok <- write_output(output_path, formatted_data) do
-      IO.puts("Successfully wrote #{length(formatted_data)} repositories to #{output_path}")
+         repos = repos ++ low_star_additions,
+         :ok <- write_output(output_path, repos) do
+      IO.puts("Successfully wrote #{length(repos)} repositories to #{output_path}")
       :ok
     else
       {:error, reason} ->
@@ -136,13 +136,13 @@ defmodule GreenValidation.GithubRepos do
     }
   end
 
-  defp write_output(output_path, data) do
+  defp write_output(output_path, repos) do
     # Ensure the output directory exists
     output_path
     |> Path.dirname()
     |> File.mkdir_p!()
 
-    case Jason.encode(data, pretty: true) do
+    case Jason.encode(repos, pretty: true) do
       {:ok, json} ->
         File.write(output_path, json)
 
