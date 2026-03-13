@@ -56,6 +56,13 @@ defmodule GreenValidation.Project do
 
   def environment(%__MODULE__{}), do: []
 
+  def module_name(%__MODULE__{name: name}) do
+    name
+    |> String.replace(~r/[^a-zA-Z0-9_\.]/, "_")
+    |> String.replace(~r/^([0-9])/, "X\\1")
+    |> Macro.camelize()
+  end
+
   def rule_config(%__MODULE__{rule_config: rule_config}, rule, config) do
     Keyword.put(config, rule, rule_config[rule])
   end

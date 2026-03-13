@@ -24,7 +24,7 @@ defmodule GreenValidation.Installer.MixExs do
       raise "mix.exs already exists in #{project_path}"
     end
 
-    module = project.name |> String.replace(~r/[^a-zA-Z0-9_\.]/, "_") |> Macro.camelize()
+    module = Project.module_name(project)
 
     content = """
     defmodule #{module}.MixProject do
@@ -76,10 +76,10 @@ defmodule GreenValidation.Installer.MixExs do
   def add_dependency(%Project{has_mix_exs: false} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
-    project_module = Macro.camelize(project.name)
+    module = Project.module_name(project)
 
     content = """
-    defmodule #{project_module}.MixProject do
+    defmodule #{module}.MixProject do
       use Mix.Project
 
       def project do
