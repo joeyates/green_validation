@@ -38,6 +38,12 @@ defmodule GreenValidation.GithubRepos do
     }
   ]
 
+  @skip [
+    # magnetissimo uses an old Erlang+Elixir combination and old dependencies.
+    # Unable to compile
+    "magnetissimo"
+  ]
+
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm
   # The GitHub rate limit is 60 requests/hour, so a single run of this script will stay below that
   @low_star_additions [
@@ -76,6 +82,7 @@ defmodule GreenValidation.GithubRepos do
          {:ok, repos} <- format_repositories(response),
          {:ok, low_star_additions} <- fetch_low_star_additions(),
          repos = repos ++ low_star_additions,
+         repos = Enum.reject(repos, &(&1.name in @skip)),
          :ok <- write_output(output_path, repos) do
       IO.puts("Successfully wrote #{length(repos)} repositories to #{output_path}")
       :ok
