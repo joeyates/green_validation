@@ -4,6 +4,7 @@ defmodule GreenValidation.Project do
   """
 
   alias GreenValidation.{ClonedRepo, Subproject}
+  alias GreenValidation.Installer.FormatterExs
 
   @default_branch "main"
 
@@ -19,7 +20,6 @@ defmodule GreenValidation.Project do
     :url,
     default_branch: @default_branch,
     rule_config: [],
-    has_formatter_exs: true,
     has_mix_exs: true,
     subprojects: []
   ]
@@ -33,7 +33,6 @@ defmodule GreenValidation.Project do
           mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
-          has_formatter_exs: boolean(),
           has_mix_exs: boolean(),
           subprojects: list(Subproject.t())
         }
@@ -50,6 +49,10 @@ defmodule GreenValidation.Project do
     Path.join([repos_dir(), name, path])
   end
 
+  def formatter_exs_path(%__MODULE__{} = project) do
+    project |> path() |> Path.join(".formatter.exs")
+  end
+
   def environment(%__MODULE__{environment: {module, fun}} = project) do
     apply(module, fun, [project])
   end
@@ -61,6 +64,25 @@ defmodule GreenValidation.Project do
     |> String.replace(~r/[^a-zA-Z0-9_\.]/, "_")
     |> String.replace(~r/^([0-9])/, "X\\1")
     |> Macro.camelize()
+  end
+
+  @spec set_up_formatter_exs(t()) :: {:ok, :none | :created | :updated}
+  def set_up_formatter_exs(%__MODULE__{formatter_exs_setup: {mod, fun}} = project) do
+    apply(mod, fun, [project])
+  end
+
+  def set_up_formatter_exs(%__MODULE__{} = project) do
+    path = formatter_exs_path(project)
+
+    if File.exists?(path) do
+      {:ok, :none}
+    else
+      inputs = [
+        inputs: ["{.formatter,mix}.exs", "**/*.{ex,exs}"]
+      ]
+
+      FormatterExs.create_project_formatter(project, inputs)
+    end
   end
 
   def rule_config(%__MODULE__{rule_config: rule_config}, rule, config) do

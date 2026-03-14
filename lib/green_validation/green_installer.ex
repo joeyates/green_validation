@@ -26,17 +26,15 @@ defmodule GreenValidation.GreenInstaller do
     end
   end
 
-  @spec prepare_formatter_exs(Project.t(), list() | :all | nil) :: :ok
+  @spec prepare_formatter_exs(Project.t(), list() | :all | nil) ::
+          {:ok, :none | :created | :updated}
   def prepare_formatter_exs(%Project{} = project, rules \\ nil) do
-    :ok = FormatterExs.reset(project)
-
-    if project.formatter_exs_setup do
-      {mod, fun} = project.formatter_exs_setup
-      apply(mod, fun, [project])
-    end
-
+    {:ok, formatter_setup_action} = Project.set_up_formatter_exs(project)
     green_config = green_config_for_rules(rules)
     FormatterExs.update_project_formatter(project, green_config)
+    combined_action = if formatter_setup_action == :created, do: :created, else: :updated
+
+    {:ok, combined_action}
   end
 
   @spec reset_project(Project.t()) :: :ok | {:error, String.t()}

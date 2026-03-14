@@ -4,16 +4,16 @@ defmodule GreenValidation.Installer.FormatterExs do
   @line_length 98
 
   def create_project_formatter(project, keyword) do
-    formatter_exs_path = formatter_exs_path(project)
+    formatter_exs_path = Project.formatter_exs_path(project)
     content = keyword |> inspect() |> Kernel.<>("\n")
 
     File.write!(formatter_exs_path, content)
 
-    :ok
+    {:ok, :created}
   end
 
   def update_project_formatter(project, keyword) do
-    formatter_exs_path = formatter_exs_path(project)
+    formatter_exs_path = Project.formatter_exs_path(project)
 
     updated_code =
       formatter_exs_path
@@ -22,7 +22,7 @@ defmodule GreenValidation.Installer.FormatterExs do
 
     File.write!(formatter_exs_path, updated_code)
 
-    :ok
+    {:ok, :updated}
   end
 
   def update_formatter_exs_code(code, keyword) do
@@ -49,8 +49,10 @@ defmodule GreenValidation.Installer.FormatterExs do
     |> Kernel.<>("\n")
   end
 
-  @spec reset(Project.t()) :: :ok | {:error, String.t()}
-  def reset(%Project{has_formatter_exs: true} = project) do
+  @spec reset(Project.t(), :none | :updated | :created) :: :ok | {:error, String.t()}
+  def reset(%Project{} = _project, :none), do: :ok
+
+  def reset(%Project{} = project, :updated) do
     project_path = Project.path(project)
 
     case System.cmd("git", ["reset", ".formatter.exs"],
@@ -65,7 +67,7 @@ defmodule GreenValidation.Installer.FormatterExs do
     end
   end
 
-  def reset(%Project{has_formatter_exs: false} = project) do
+  def reset(%Project{} = project, :created) do
     project_path = Project.path(project)
 
     System.cmd("rm", ["-f", ".formatter.exs"],
@@ -130,9 +132,5 @@ defmodule GreenValidation.Installer.FormatterExs do
         end
       end
     )
-  end
-
-  defp formatter_exs_path(%Project{} = project) do
-    project |> Project.path() |> Path.join(".formatter.exs")
   end
 end

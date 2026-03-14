@@ -14,7 +14,6 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/seven1m/30-days-of-elixir",
       default_branch: "master",
       has_mix_exs: false,
-      has_formatter_exs: false,
       formatter_exs_setup: {__MODULE__, :thirty_days_of_elixir_formatter_exs_setup}
     },
     "awesome-elixir" => %Project{
@@ -22,7 +21,6 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/h4cc/awesome-elixir",
       default_branch: "master",
       has_mix_exs: false,
-      has_formatter_exs: false,
       formatter_exs_setup: {__MODULE__, :awesome_elixir_formatter_exs_setup}
     },
     "ecto" => %Project{
@@ -105,7 +103,6 @@ defmodule GreenValidation.Projects do
       name: "elixir_style_guide",
       url: "https://github.com/christopheradams/elixir_style_guide",
       default_branch: "master",
-      has_formatter_exs: false,
       formatter_exs_setup: {__MODULE__, :elixir_style_guide_formatter_exs_setup}
     },
     "expert" => %Project{
@@ -135,7 +132,6 @@ defmodule GreenValidation.Projects do
       name: "jason",
       url: "https://github.com/michalmuskala/jason",
       default_branch: "master",
-      has_formatter_exs: false,
       formatter_exs_setup: {__MODULE__, :jason_formatter_exs_setup}
     },
     "nx" => %Project{

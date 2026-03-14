@@ -57,29 +57,32 @@ defmodule GreenValidation.RuleValidator do
   defp validate_single_rule(%Project{} = project, rule, opts) do
     rules = project_rule_config(project, rule)
     file_path = Keyword.get(opts, :file_path)
-    :ok = GreenInstaller.prepare_formatter_exs(project, rules)
-    project_path = Project.path(project)
-    environment = Project.environment(project)
+    {:ok, formatter_setup_action} = GreenInstaller.prepare_formatter_exs(project, rules)
 
-    params =
-      if file_path do
-        ["format", "--check-formatted", file_path]
-      else
-        ["format", "--check-formatted"]
-      end
+    try do
+      project_path = Project.path(project)
+      environment = Project.environment(project)
 
-    {output, exit_code} =
-      System.cmd(
-        "mix",
-        params,
-        cd: project_path,
-        env: environment,
-        stderr_to_stdout: true
-      )
+      params =
+        if file_path do
+          ["format", "--check-formatted", file_path]
+        else
+          ["format", "--check-formatted"]
+        end
 
-    parse_format_output(project, rule, output, exit_code)
-  after
-    :ok = FormatterExs.reset(project)
+      {output, exit_code} =
+        System.cmd(
+          "mix",
+          params,
+          cd: project_path,
+          env: environment,
+          stderr_to_stdout: true
+        )
+
+      parse_format_output(project, rule, output, exit_code)
+    after
+      :ok = FormatterExs.reset(project, formatter_setup_action)
+    end
   end
 
   @spec project_rule_config(Project.t(), atom()) :: list({atom(), keyword()})

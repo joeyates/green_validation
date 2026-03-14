@@ -16,11 +16,7 @@ defmodule GreenValidation.BaselineFormatter do
   def ensure_clean(%Project{} = project) do
     IO.puts("  Checking baseline formatting")
     MixExs.ensure_mix_exs(project)
-
-    if project.formatter_exs_setup do
-      {mod, fun} = project.formatter_exs_setup
-      apply(mod, fun, [project])
-    end
+    {:ok, formatter_setup_action} = Project.set_up_formatter_exs(project)
 
     project_path = Project.path(project)
     environment = Project.environment(project)
@@ -36,7 +32,7 @@ defmodule GreenValidation.BaselineFormatter do
 
         {_output, 1} ->
           with :ok <- format(project),
-               :ok <- cleanup(project),
+               :ok <- cleanup(project, formatter_setup_action),
                :ok <- commit_format_changes(project) do
             {:ok, :created_format_commit}
           end
@@ -45,13 +41,13 @@ defmodule GreenValidation.BaselineFormatter do
           {:error, "mix format failed with exit code #{exit_code}: #{output}"}
       end
     after
-      :ok = cleanup(project)
+      :ok = cleanup(project, formatter_setup_action)
     end
   end
 
-  defp cleanup(project) do
+  defp cleanup(project, formatter_setup_action) do
     :ok = MixExs.reset(project)
-    :ok = FormatterExs.reset(project)
+    :ok = FormatterExs.reset(project, formatter_setup_action)
   end
 
   @spec format(Project.t()) :: :ok | {:error, String.t()}
