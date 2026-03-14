@@ -9,6 +9,14 @@ defmodule GreenValidation.Projects do
   @all_projects_path "repos/merged.json"
 
   @projects %{
+    "30-days-of-elixir" => %Project{
+      name: "30-days-of-elixir",
+      url: "https://github.com/seven1m/30-days-of-elixir",
+      default_branch: "master",
+      has_mix_exs: false,
+      has_formatter_exs: false,
+      formatter_exs_setup: {__MODULE__, :thirty_days_of_elixir_formatter_exs_setup}
+    },
     "awesome-elixir" => %Project{
       name: "awesome-elixir",
       url: "https://github.com/h4cc/awesome-elixir",
@@ -93,12 +101,57 @@ defmodule GreenValidation.Projects do
         ]
       ]
     },
+    "elixir_style_guide" => %Project{
+      name: "elixir_style_guide",
+      url: "https://github.com/christopheradams/elixir_style_guide",
+      default_branch: "master",
+      has_formatter_exs: false,
+      formatter_exs_setup: {__MODULE__, :elixir_style_guide_formatter_exs_setup}
+    },
+    "expert" => %Project{
+      name: "expert",
+      url: "https://github.com/elixir-lang/expert",
+      subprojects: [
+        %Subproject{
+          path: "apps/engine"
+        },
+        %Subproject{
+          path: "apps/expert"
+        },
+        %Subproject{
+          path: "apps/expert_credo"
+        },
+        %Subproject{
+          path: "apps/forge"
+        }
+      ]
+    },
+    "firezone" => %Project{
+      name: "firezone",
+      url: "https://github.com/firezone/firezone",
+      path: "elixir"
+    },
     "jason" => %Project{
       name: "jason",
       url: "https://github.com/michalmuskala/jason",
       default_branch: "master",
       has_formatter_exs: false,
       formatter_exs_setup: {__MODULE__, :jason_formatter_exs_setup}
+    },
+    "nx" => %Project{
+      name: "nx",
+      url: "https://github.com/elixir-nx/nx",
+      subprojects: [
+        %Subproject{
+          path: "exla"
+        },
+        %Subproject{
+          path: "nx"
+        },
+        %Subproject{
+          path: "torchx"
+        }
+      ]
     },
     "phoenix" => %Project{
       name: "phoenix",
@@ -159,6 +212,14 @@ defmodule GreenValidation.Projects do
     end
   end
 
+  def thirty_days_of_elixir_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["*.exs"]
+    ]
+
+    FormatterExs.create_project_formatter(project, inputs)
+  end
+
   def awesome_elixir_formatter_exs_setup(%Project{} = project) do
     inputs = [
       inputs: ["test/**/*.{ex,exs}"]
@@ -176,26 +237,8 @@ defmodule GreenValidation.Projects do
   end
 
   def electric_post_checkout(%Project{} = project) do
-    # electric uses .tool-versions
-    IO.puts(
-      "Running post-checkout step, 'asdf install' and 'mix local.hex --force', for Electric repository..."
-    )
-
-    path = Project.path(project)
-
-    with {_output1, 0} <- System.cmd("asdf", ["install"], cd: path, stderr_to_stdout: true),
-         {_output2, 0} <-
-           System.cmd(
-             "asdf",
-             ["exec", "mix", "local.hex", "--force"],
-             cd: path,
-             stderr_to_stdout: true
-           ) do
-      :ok
-    else
-      {output, _} ->
-        {:error, "Failed to run post-checkout step for Electric: #{output}"}
-    end
+    run_asdf_install(project)
+    run_mix_local_hex(project)
   end
 
   def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
@@ -253,6 +296,14 @@ defmodule GreenValidation.Projects do
     end
   end
 
+  def elixir_style_guide_formatter_exs_setup(%Project{} = project) do
+    inputs = [
+      inputs: ["mix.exs"]
+    ]
+
+    FormatterExs.create_project_formatter(project, inputs)
+  end
+
   def jason_formatter_exs_setup(%Project{} = project) do
     inputs = [
       inputs: ["mix.exs", "{bench,lib,test}/**/*.{ex,exs}"]
@@ -267,5 +318,47 @@ defmodule GreenValidation.Projects do
     ]
 
     FormatterExs.update_project_formatter(project, inputs)
+  end
+
+  def run_asdf_install(%Project{} = project) do
+    IO.puts("Running 'asdf install', for #{project.name} repository...")
+
+    path = Project.path(project)
+
+    case System.shell("asdf install", cd: path, stderr_to_stdout: true) do
+      {_output1, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for #{project.name}: #{output}"}
+    end
+  end
+
+  def run_mix_local_hex(%Project{} = project) do
+    IO.puts("Running 'mix local.hex --force' for #{project.name} repository...")
+
+    path = Project.path(project)
+
+    case System.cmd("mix", ["local.hex", "--force"], cd: path, stderr_to_stdout: true) do
+      {_output, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to run 'mix local.hex' for #{project.name}: #{output}"}
+    end
+  end
+
+  def run_mix_local_rebar(%Project{} = project) do
+    IO.puts("Running 'mix local.rebar --force' for #{project.name} repository...")
+
+    path = Project.path(project)
+
+    case System.cmd("mix", ["local.rebar", "--force"], cd: path, stderr_to_stdout: true) do
+      {_output, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to run 'mix local.rebar' for #{project.name}: #{output}"}
+    end
   end
 end

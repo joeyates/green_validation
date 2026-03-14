@@ -41,7 +41,10 @@ defmodule GreenValidation.GithubRepos do
   @skip [
     # magnetissimo uses an old Erlang+Elixir combination and old dependencies.
     # Unable to compile
-    "magnetissimo"
+    "magnetissimo",
+    # Failed to compile asciinema-server. Requires Rust, but .tool-versions doesn't specify
+    # a Rust version
+    "asciinema-server"
   ]
 
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm
