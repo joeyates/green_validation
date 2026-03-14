@@ -14,6 +14,7 @@ defmodule Green.Validation.MixProject do
 
   defp deps() do
     [
+      {:green, "~> 0.1.10"},
       {:helpful_options, "~> 0.4.4"},
       {:jason, "~> 1.4"},
       {:req, "~> 0.5.17"}

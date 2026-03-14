@@ -69,7 +69,7 @@ defmodule GreenValidation.Project do
 
   @spec cloned?(t()) :: boolean()
   def cloned?(%__MODULE__{} = project) do
-    File.dir?(path(project))
+    project |> path() |> File.dir?()
   end
 
   @doc """

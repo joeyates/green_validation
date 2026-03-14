@@ -28,7 +28,7 @@ defmodule GreenValidation.Github.Client do
 
   def get_paginated(path, params \\ nil, opts \\ []) do
     limit = Keyword.get(opts, :limit, 100)
-    handle_paginated_response(get(path, params), %PaginatedAccumulator{limit: limit})
+    path |> get(params) |> handle_paginated_response(%PaginatedAccumulator{limit: limit})
   end
 
   defp handle_paginated_response(
@@ -74,14 +74,14 @@ defmodule GreenValidation.Github.Client do
   defp handle_paginated_response(result, _acc), do: result
 
   defp get_next_page(next, acc) do
-    handle_paginated_response(Req.get(next), acc)
+    next |> Req.get() |> handle_paginated_response(acc)
   end
 
   def encode_search(search) when is_list(search) do
     Enum.map_join(search, " ", fn {key, value} ->
-      encode_www_form(Kernel.to_string(key)) <>
+      (key |> Kernel.to_string() |> encode_www_form()) <>
         ":" <>
-        encode_www_form(Kernel.to_string(value))
+        (value |> Kernel.to_string() |> encode_www_form())
     end)
   end
 

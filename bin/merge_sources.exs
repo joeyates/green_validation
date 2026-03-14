@@ -2,6 +2,7 @@
 
 Mix.install(
   [
+    {:green, "~> 0.1.10"},
     {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
     {:helpful_options, "~> 0.4.4"},
     {:jason, "~> 1.4"}

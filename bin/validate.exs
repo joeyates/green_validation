@@ -4,6 +4,7 @@
 
 Mix.install(
   [
+    {:green, "~> 0.1.10"},
     {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
     {:helpful_options, "~> 0.4.4"},
     {:jason, "~> 1.4"}
@@ -95,7 +96,7 @@ defmodule GreenValidation.CLI do
 
   defp usage() do
     IO.puts("Usage:\n")
-    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+    @program |> HelpfulOptions.help_commands!(@commands) |> IO.puts()
   end
 
   defp check_all(switches) do

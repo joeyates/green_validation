@@ -53,7 +53,7 @@ defmodule GreenValidation.GreenInstaller do
   end
 
   @spec get_latest_green_version() :: GreenDependency.t()
-  defp get_latest_green_version do
+  defp get_latest_green_version() do
     # For now, hardcode version - could query hex.pm API in the future
     %GreenDependency{version: "0.1.10"}
   end

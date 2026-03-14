@@ -4,6 +4,7 @@
 
 Mix.install(
   [
+    {:green, "~> 0.1.10"},
     {:green_validation, path: __DIR__ |> Path.join("..") |> Path.expand()},
     {:helpful_options, "~> 0.4.4"},
     {:jason, "~> 1.4"},
@@ -68,7 +69,7 @@ defmodule GreenValidation.HexpmPackages do
 
   defp usage() do
     IO.puts("Usage:\n")
-    IO.puts(HelpfulOptions.help_commands!(@program, @commands))
+    @program |> HelpfulOptions.help_commands!(@commands) |> IO.puts()
   end
 
   defp fetch_packages() do
@@ -120,7 +121,7 @@ defmodule GreenValidation.HexpmPackages do
 
   defp write_output(output_path, data) do
     # Ensure the output directory exists
-    case File.mkdir_p(Path.dirname(output_path)) do
+    case output_path |> Path.dirname() |> File.mkdir_p() do
       :ok ->
         write_json(output_path, data)
 

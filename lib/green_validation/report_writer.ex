@@ -150,25 +150,29 @@ defmodule GreenValidation.ReportWriter do
 
       length(rule_result.changes) > 0 and length(rule_result.warnings) == 0 ->
         changes_text =
-          Enum.map(rule_result.changes, &"    - #{&1}")
+          rule_result.changes
+          |> Enum.map(&"    - #{&1}")
           |> Enum.join("\n")
 
         "  🔧 Changes needed for #{length(rule_result.changes)} files:\n#{changes_text}"
 
       length(rule_result.changes) == 0 and length(rule_result.warnings) > 0 ->
         warnings_text =
-          Enum.map(rule_result.warnings, &"    - #{&1}")
+          rule_result.warnings
+          |> Enum.map(&"    - #{&1}")
           |> Enum.join("\n")
 
         "  ⚠️  Warnings for #{length(rule_result.warnings)} files:\n#{warnings_text}"
 
       true ->
         changes_text =
-          Enum.map(rule_result.changes, &"    - #{&1}")
+          rule_result.changes
+          |> Enum.map(&"    - #{&1}")
           |> Enum.join("\n")
 
         warnings_text =
-          Enum.map(rule_result.warnings, &"    - #{&1}")
+          rule_result.warnings
+          |> Enum.map(&"    - #{&1}")
           |> Enum.join("\n")
 
         "  🔧 Changes needed for #{length(rule_result.changes)} files:\n#{changes_text}\n  ⚠️  Warnings for #{length(rule_result.warnings)} files:\n#{warnings_text}"
