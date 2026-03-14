@@ -53,6 +53,10 @@ defmodule GreenValidation.Project do
     project |> path() |> Path.join(".formatter.exs")
   end
 
+  def mix_exs_path(%__MODULE__{} = project) do
+    project |> path() |> Path.join("mix.exs")
+  end
+
   def environment(%__MODULE__{environment: {module, fun}} = project) do
     apply(module, fun, [project])
   end

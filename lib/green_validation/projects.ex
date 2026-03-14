@@ -23,6 +23,11 @@ defmodule GreenValidation.Projects do
       has_mix_exs: false,
       formatter_exs_setup: {__MODULE__, :awesome_elixir_formatter_exs_setup}
     },
+    "desktop" => %Project{
+      name: "desktop",
+      url: "https://github.com/elixir-desktop/desktop",
+      mix_exs_add_dependency: {__MODULE__, :desktop_mix_exs_add_dependency}
+    },
     "ecto" => %Project{
       name: "ecto",
       url: "https://github.com/elixir-ecto/ecto",
@@ -235,6 +240,38 @@ defmodule GreenValidation.Projects do
   def electric_post_checkout(%Project{} = project) do
     run_asdf_install(project)
     run_mix_local_hex(project)
+  end
+
+  def desktop_mix_exs_add_dependency(%Project{} = project, dependency) do
+    IO.puts("Adding Green dependency to Desktop's #{project.path}/mix.exs...")
+
+    mix_path = Project.mix_exs_path(project)
+    content = File.read!(mix_path)
+
+    regex = ~r/
+      (
+        defp\sdeps\(\)\sdo\s*
+        desktop\s=\s\[
+      )
+    /sx
+    dep_string = inspect(dependency)
+
+    updated_content =
+      regex
+      |> Regex.replace(
+        content,
+        fn _match, def_start ->
+          """
+          #{def_start}
+              #{dep_string},
+          """
+        end
+      )
+      |> MixExs.reformat()
+
+    File.write!(mix_path, updated_content)
+
+    :ok
   end
 
   def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
