@@ -222,4 +222,17 @@ defmodule GreenValidation.Project do
       {output, _} -> {:error, "Failed to install deps: #{output}"}
     end
   end
+
+  def compile(%__MODULE__{} = project) do
+    IO.puts("  Compiling project")
+    project_path = path(project)
+
+    case System.cmd("mix", ["compile"],
+           cd: project_path,
+           stderr_to_stdout: true
+         ) do
+      {_output, 0} -> :ok
+      {output, _} -> {:error, "Failed to compile: #{output}"}
+    end
+  end
 end

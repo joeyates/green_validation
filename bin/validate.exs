@@ -191,6 +191,7 @@ defmodule GreenValidation.CLI do
           {:ok, [Result.t()]} | {:error, String.t()}
   defp validate_rules(cloned_repo, %Project{subprojects: []} = project, rules, opts) do
     with :ok <- Project.install_deps(project),
+         :ok <- Project.compile(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
          {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
