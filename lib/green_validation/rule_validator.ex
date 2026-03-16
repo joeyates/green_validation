@@ -35,15 +35,15 @@ defmodule GreenValidation.RuleValidator do
         {:ok, []},
         fn
           rule, {:ok, acc} ->
-            IO.write("    #{rule}... ")
+            Logger.info("#{rule}...")
 
             case validate_single_rule(project, rule, opts) do
               {:ok, result} ->
-                Logger.info("OK")
                 {:ok, [result | acc]}
 
               {:error, reason} ->
                 Logger.info("ERROR: #{reason}")
+                Logger.flush()
                 {:error, %{rule: rule, error: reason}}
             end
 
