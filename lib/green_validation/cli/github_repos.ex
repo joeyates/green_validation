@@ -37,7 +37,9 @@ defmodule GreenValidation.CLI.GithubRepos do
     # elixirscript seems abandoned
     "elixirscript",
     # 'mix compile' fails
-    "bors-ng"
+    "bors-ng",
+    # papercups seems abandoned
+    "papercups"
   ]
 
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm

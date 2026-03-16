@@ -1,6 +1,9 @@
 defmodule GreenValidation.Projects do
   @moduledoc """
-  The projects handled by the validation suite. This module defines the list of projects to validate and provides helper functions to access their paths and metadata.
+  The projects handled by the validation suite.
+
+  This module loads a generated list of projects, then applies overrides.
+  It also provides helper functions to access their paths and metadata.
   """
 
   alias GreenValidation.{Project, Subproject}
@@ -16,6 +19,20 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/seven1m/30-days-of-elixir",
       default_branch: "master",
       formatter_exs_setup: {__MODULE__, :thirty_days_of_elixir_formatter_exs_setup}
+    },
+    "anoma" => %Project{
+      name: "anoma",
+      url: "https://github.com/anoma/anoma",
+      default_branch: "base",
+      subprojects: [
+        # 5 of the 6 packages have problems with compiling lib/google_protos/struct.pb.ex
+        # %Subproject{path: "apps/anoma_client"},
+        # %Subproject{path: "apps/anoma_lib"},
+        # %Subproject{path: "apps/anoma_node"},
+        # %Subproject{path: "apps/anoma_protobuf"},
+        %Subproject{path: "apps/compile_protoc"}
+        # %Subproject{path: "apps/event_broker"}
+      ]
     },
     "awesome-elixir" => %Project{
       name: "awesome-elixir",
@@ -191,6 +208,15 @@ defmodule GreenValidation.Projects do
       name: "phoenix",
       url: "https://github.com/phoenixframework/phoenix",
       formatter_exs_setup: {__MODULE__, :phoenix_formatter_exs_setup}
+    },
+    "semaphore" => %Project{
+      name: "semaphore",
+      url: "https://github.com/semaphoreio/semaphore",
+      subprojects: [
+        %Subproject{
+          path: "auth"
+        }
+      ]
     },
     "symphony" => %Project{
       name: "symphony",
