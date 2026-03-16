@@ -477,6 +477,11 @@ defmodule GreenValidation.Projects do
     end
   end
 
+  def run_asdf_mix(%Project{} = project, command) do
+    path = Project.path(project)
+    System.shell("asdf exec mix #{command}", cd: path, stderr_to_stdout: true)
+  end
+
   def run_mix_local_hex(%Project{} = project) do
     Logger.info("Running 'mix local.hex --force' for #{project.name} repository...")
 

@@ -64,24 +64,14 @@ defmodule GreenValidation.RuleValidator do
     {:ok, formatter_setup_action} = GreenInstaller.prepare_formatter_exs(project, rules)
 
     try do
-      project_path = Project.path(project)
-      environment = Project.environment(project)
-
-      params =
+      command =
         if file_path do
-          ["format", "--check-formatted", file_path]
+          "format --check-formatted #{file_path}"
         else
-          ["format", "--check-formatted"]
+          "format --check-formatted"
         end
 
-      {output, exit_code} =
-        System.cmd(
-          "mix",
-          params,
-          cd: project_path,
-          env: environment,
-          stderr_to_stdout: true
-        )
+      {output, exit_code} = Project.mix_command(project, command)
 
       parse_format_output(project, rule, output, exit_code)
     after

@@ -20,15 +20,8 @@ defmodule GreenValidation.BaselineFormatter do
     mix_exs_action = MixExs.ensure_mix_exs(project)
     {:ok, formatter_setup_action} = Project.set_up_formatter_exs(project)
 
-    project_path = Project.path(project)
-    environment = Project.environment(project)
-
     try do
-      case System.cmd("mix", ["format", "--check-formatted"],
-             cd: project_path,
-             env: environment,
-             stderr_to_stdout: true
-           ) do
+      case Project.mix_command(project, "format --check-formatted") do
         {_output, 0} ->
           {:ok, :clean}
 
@@ -54,14 +47,7 @@ defmodule GreenValidation.BaselineFormatter do
 
   @spec format(Project.t()) :: :ok | {:error, String.t()}
   defp format(%Project{} = project) do
-    project_path = Project.path(project)
-    environment = Project.environment(project)
-
-    case System.cmd("mix", ["format"],
-           cd: project_path,
-           env: environment,
-           stderr_to_stdout: true
-         ) do
+    case Project.mix_command(project, "format") do
       {_output, 0} ->
         :ok
 

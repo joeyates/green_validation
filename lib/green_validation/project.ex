@@ -17,6 +17,7 @@ defmodule GreenValidation.Project do
     :name,
     :path,
     :post_checkout,
+    :mix_command,
     :mix_exs_add_dependency,
     :formatter_exs_setup,
     :url,
@@ -31,6 +32,7 @@ defmodule GreenValidation.Project do
           default_branch: String.t(),
           environment: {atom, atom} | nil,
           post_checkout: {atom, atom} | nil,
+          mix_command: {atom, atom} | nil,
           mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
@@ -236,25 +238,30 @@ defmodule GreenValidation.Project do
   def compile(%__MODULE__{} = project) do
     Logger.info("  Compiling project")
     mix_exs_action = MixExs.ensure_mix_exs(project)
-    project_path = path(project)
-    environment = environment(project)
 
     result =
-      case System.cmd("mix", ["compile"],
-             cd: project_path,
-             env: environment,
-             stderr_to_stdout: true
-           ) do
+      case mix_command(project, "compile") do
         {_output, 0} ->
           :ok
 
-        {output, _} ->
-          Logger.error("Failed to compile #{project.name}:\n#{output}")
-          {:error, "Failed to compile: #{output}"}
+        {output, _error_code} ->
+          message = "Failed to compile #{project.name}:\n#{output}"
+          Logger.error(message)
+          {:error, message}
       end
 
     :ok = MixExs.reset(project, mix_exs_action)
-
     result
+  end
+
+  def mix_command(%__MODULE__{mix_command: {mod, fun}} = project, command) do
+    apply(mod, fun, [project, command])
+  end
+
+  def mix_command(%__MODULE__{} = project, command) do
+    project_path = path(project)
+    environment = environment(project)
+
+    System.shell("mix #{command}", cd: project_path, env: environment, stderr_to_stdout: true)
   end
 end
