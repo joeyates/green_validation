@@ -7,5 +7,5 @@ defmodule GreenValidation.Subproject do
   """
 
   @enforce_keys [:path]
-  defstruct [:mix_exs_add_dependency, :path, has_mix_exs: true]
+  defstruct [:mix_exs_add_dependency, :path]
 end

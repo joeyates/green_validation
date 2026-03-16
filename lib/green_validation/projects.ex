@@ -15,14 +15,12 @@ defmodule GreenValidation.Projects do
       name: "30-days-of-elixir",
       url: "https://github.com/seven1m/30-days-of-elixir",
       default_branch: "master",
-      has_mix_exs: false,
       formatter_exs_setup: {__MODULE__, :thirty_days_of_elixir_formatter_exs_setup}
     },
     "awesome-elixir" => %Project{
       name: "awesome-elixir",
       url: "https://github.com/h4cc/awesome-elixir",
       default_branch: "master",
-      has_mix_exs: false,
       formatter_exs_setup: {__MODULE__, :awesome_elixir_formatter_exs_setup}
     },
     "benchee" => %Project{
@@ -62,7 +60,6 @@ defmodule GreenValidation.Projects do
     "elixir" => %Project{
       name: "elixir",
       url: "https://github.com/elixir-lang/elixir",
-      has_mix_exs: false,
       environment: {__MODULE__, :elixir_environment},
       post_checkout: {__MODULE__, :elixir_post_checkout},
       rule_config: [
@@ -171,8 +168,7 @@ defmodule GreenValidation.Projects do
           path: "codecov_example"
         },
         %Subproject{
-          path: "examples",
-          has_mix_exs: false
+          path: "examples"
         }
       ]
     },
@@ -308,7 +304,7 @@ defmodule GreenValidation.Projects do
 
     File.write!(mix_path, updated_content)
 
-    :ok
+    :updated
   end
 
   def desktop_mix_exs_add_dependency(%Project{} = project, dependency) do
@@ -340,7 +336,7 @@ defmodule GreenValidation.Projects do
 
     File.write!(mix_path, updated_content)
 
-    :ok
+    :updated
   end
 
   def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
@@ -376,7 +372,7 @@ defmodule GreenValidation.Projects do
 
     File.write!(mix_path, updated_content)
 
-    :ok
+    :updated
   end
 
   def elixir_environment(%Project{} = project) do

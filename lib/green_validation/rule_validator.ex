@@ -27,31 +27,33 @@ defmodule GreenValidation.RuleValidator do
     Logger.info("  Validating #{length(rules)} rules individually...")
 
     green_dependency = Keyword.fetch!(opts, :green_dependency)
-    :ok = GreenInstaller.install_green(project, green_version: green_dependency)
+    mix_exs_action = GreenInstaller.install_green(project, green_version: green_dependency)
 
-    Enum.reduce(
-      rules,
-      {:ok, []},
-      fn
-        rule, {:ok, acc} ->
-          IO.write("    #{rule}... ")
+    try do
+      Enum.reduce(
+        rules,
+        {:ok, []},
+        fn
+          rule, {:ok, acc} ->
+            IO.write("    #{rule}... ")
 
-          case validate_single_rule(project, rule, opts) do
-            {:ok, result} ->
-              Logger.info("OK")
-              {:ok, [result | acc]}
+            case validate_single_rule(project, rule, opts) do
+              {:ok, result} ->
+                Logger.info("OK")
+                {:ok, [result | acc]}
 
-            {:error, reason} ->
-              Logger.info("ERROR: #{reason}")
-              {:error, %{rule: rule, error: reason}}
-          end
+              {:error, reason} ->
+                Logger.info("ERROR: #{reason}")
+                {:error, %{rule: rule, error: reason}}
+            end
 
-        _rule, {:error, _} = error ->
-          error
-      end
-    )
-  after
-    :ok = MixExs.reset(project)
+          _rule, {:error, _} = error ->
+            error
+        end
+      )
+    after
+      :ok = MixExs.reset(project, mix_exs_action)
+    end
   end
 
   @spec validate_single_rule(Project.t(), atom, keyword) ::

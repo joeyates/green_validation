@@ -205,7 +205,6 @@ defmodule GreenValidation.CLI.Validate do
       fake_project = %{
         project
         | path: subproject.path,
-          has_mix_exs: subproject.has_mix_exs,
           mix_exs_add_dependency: subproject.mix_exs_add_dependency,
           subprojects: []
       }

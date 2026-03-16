@@ -4,7 +4,7 @@ defmodule GreenValidation.Project do
   """
 
   alias GreenValidation.{ClonedRepo, Subproject}
-  alias GreenValidation.Installer.FormatterExs
+  alias GreenValidation.Installer.{FormatterExs, MixExs}
 
   require Logger
 
@@ -22,7 +22,6 @@ defmodule GreenValidation.Project do
     :url,
     default_branch: @default_branch,
     rule_config: [],
-    has_mix_exs: true,
     subprojects: []
   ]
 
@@ -35,7 +34,6 @@ defmodule GreenValidation.Project do
           mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
-          has_mix_exs: boolean(),
           subprojects: list(Subproject.t())
         }
 
@@ -210,31 +208,53 @@ defmodule GreenValidation.Project do
   defp post_checkout(_), do: :ok
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
-  def install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
-
   def install_deps(%__MODULE__{} = project) do
     Logger.info("  Installing dependencies")
+    mix_exs_action = MixExs.ensure_mix_exs(project)
     project_path = path(project)
+    environment = environment(project)
 
-    case System.cmd("mix", ["deps.get"],
-           cd: project_path,
-           stderr_to_stdout: true
-         ) do
-      {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to install deps: #{output}"}
-    end
+    result =
+      case System.cmd("mix", ["deps.get"],
+             cd: project_path,
+             env: environment,
+             stderr_to_stdout: true
+           ) do
+        {_output, 0} ->
+          :ok
+
+        {output, _} ->
+          Logger.error("Failed to install dependencies for #{project.name}: #{output}")
+          {:error, "Failed to install deps: #{output}"}
+      end
+
+    :ok = MixExs.reset(project, mix_exs_action)
+
+    result
   end
 
   def compile(%__MODULE__{} = project) do
     Logger.info("  Compiling project")
+    mix_exs_action = MixExs.ensure_mix_exs(project)
     project_path = path(project)
+    environment = environment(project)
 
-    case System.cmd("mix", ["compile"],
-           cd: project_path,
-           stderr_to_stdout: true
-         ) do
-      {_output, 0} -> :ok
-      {output, _} -> {:error, "Failed to compile: #{output}"}
-    end
+    result =
+      case System.cmd("mix", ["compile"],
+             cd: project_path,
+             env: environment,
+             stderr_to_stdout: true
+           ) do
+        {_output, 0} ->
+          :ok
+
+        {output, _} ->
+          Logger.error("Failed to compile #{project.name}:\n#{output}")
+          {:error, "Failed to compile: #{output}"}
+      end
+
+    :ok = MixExs.reset(project, mix_exs_action)
+
+    result
   end
 end

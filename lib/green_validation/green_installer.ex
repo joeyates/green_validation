@@ -10,7 +10,7 @@ defmodule GreenValidation.GreenInstaller do
   Temporarily modifies project's mix.exs and .formatter.exs to use Green formatter.
   """
 
-  @spec install_green(Project.t(), keyword()) :: :ok | {:error, String.t()}
+  @spec install_green(Project.t(), keyword()) :: :updated | :created | {:error, String.t()}
   def install_green(%Project{} = project, opts \\ []) do
     supplied_version = Keyword.get(opts, :green_version)
 
@@ -20,9 +20,8 @@ defmodule GreenValidation.GreenInstaller do
         true -> supplied_version
       end
 
-    with :ok <- reset_project(project),
-         :ok <- modify_mix_exs(project, green_version) do
-      :ok
+    with :ok <- reset_project(project) do
+      MixExs.add_dependency(project, GreenDependency.to_dep(green_version))
     end
   end
 
@@ -54,14 +53,6 @@ defmodule GreenValidation.GreenInstaller do
   defp get_latest_green_version() do
     # For now, hardcode version - could query hex.pm API in the future
     %GreenDependency{version: "0.1.10"}
-  end
-
-  @spec modify_mix_exs(Project.t(), GreenDependency.t()) :: :ok
-  defp modify_mix_exs(%Project{} = project, green_version) do
-    :ok = MixExs.reset(project)
-    MixExs.add_dependency(project, GreenDependency.to_dep(green_version))
-
-    :ok
   end
 
   defp green_config_for_rules(rules) do

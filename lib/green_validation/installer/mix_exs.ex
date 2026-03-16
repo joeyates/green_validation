@@ -5,45 +5,35 @@ defmodule GreenValidation.Installer.MixExs do
 
   alias GreenValidation.Project
 
-  def ensure_mix_exs(%Project{has_mix_exs: true} = project) do
-    project_path = Project.path(project)
-    mix_path = Path.join(project_path, "mix.exs")
-
-    if !File.exists?(mix_path) do
-      raise "mix.exs not found in #{project_path}"
-    end
-
-    :ok
-  end
-
-  def ensure_mix_exs(%Project{has_mix_exs: false} = project) do
+  @spec ensure_mix_exs(Project.t()) :: :none | :created
+  def ensure_mix_exs(%Project{} = project) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
 
     if File.exists?(mix_path) do
-      raise "mix.exs already exists in #{project_path}"
-    end
+      :none
+    else
+      module = Project.module_name(project)
 
-    module = Project.module_name(project)
+      content = """
+      defmodule #{module}.MixProject do
+        use Mix.Project
 
-    content = """
-    defmodule #{module}.MixProject do
-      use Mix.Project
-
-      def project do
-        [
-          app: :elixir,
-          version: System.version(),
-          build_per_environment: false,
-          deps: []
-        ]
+        def project do
+          [
+            app: :elixir,
+            version: System.version(),
+            build_per_environment: false,
+            deps: []
+          ]
+        end
       end
+      """
+
+      File.write!(mix_path, content)
+
+      :created
     end
-    """
-
-    File.write!(mix_path, content)
-
-    :ok
   end
 
   @type dependency_option :: {:path, String.t()}
@@ -52,28 +42,28 @@ defmodule GreenValidation.Installer.MixExs do
           | {atom(), String.t(), [dependency_option]}
           | {atom(), [dependency_option]}
 
-  @spec add_dependency(Project.t(), dependency) :: :ok
+  @spec add_dependency(Project.t(), dependency) :: :none | :created | :updated
   def add_dependency(%Project{mix_exs_add_dependency: {mod, fun}} = project, dependency) do
     apply(mod, fun, [project, dependency])
   end
 
-  def add_dependency(%Project{has_mix_exs: true} = project, dependency) do
+  def add_dependency(%Project{} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
 
-    if !File.exists?(mix_path) do
-      raise "mix.exs not found in #{project_path}"
+    if File.exists?(mix_path) do
+      mix_path
+      |> File.read!()
+      |> add_dependency_to_content(dependency)
+      |> then(&File.write!(mix_path, &1))
+
+      :updated
+    else
+      create_with_dependency(project, dependency)
     end
-
-    mix_path
-    |> File.read!()
-    |> add_dependency_to_content(dependency)
-    |> then(&File.write!(mix_path, &1))
-
-    :ok
   end
 
-  def add_dependency(%Project{has_mix_exs: false} = project, dependency) do
+  def create_with_dependency(%Project{} = project, dependency) do
     project_path = Project.path(project)
     mix_path = Path.join(project_path, "mix.exs")
     module = Project.module_name(project)
@@ -100,6 +90,8 @@ defmodule GreenValidation.Installer.MixExs do
     """
 
     File.write!(mix_path, content)
+
+    :created
   end
 
   @spec add_dependency_to_content(String.t(), dependency) :: String.t()
@@ -117,8 +109,16 @@ defmodule GreenValidation.Installer.MixExs do
     end
   end
 
-  @spec reset(Project.t()) :: :ok | {:error, String.t()}
-  def reset(%Project{has_mix_exs: true} = project) do
+  @spec reset(Project.t(), :created | :updated | :none) :: :ok | {:error, String.t()}
+  def reset(%Project{} = project, modification_action) do
+    case modification_action do
+      :created -> remove_mix_exs(project)
+      :updated -> reset_mix_exs(project)
+      :none -> :ok
+    end
+  end
+
+  defp reset_mix_exs(%Project{} = project) do
     project_path = Project.path(project)
 
     case System.cmd("git", ["reset", "mix.exs"],
@@ -133,7 +133,7 @@ defmodule GreenValidation.Installer.MixExs do
     end
   end
 
-  def reset(%Project{has_mix_exs: false} = project) do
+  defp remove_mix_exs(%Project{} = project) do
     project_path = Project.path(project)
 
     case System.cmd("rm", ["-f", "mix.exs"],
