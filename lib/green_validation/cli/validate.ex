@@ -61,7 +61,7 @@ defmodule GreenValidation.CLI.Validate do
       {:error, reason} ->
         Logger.info("Invalid command: #{inspect(reason)}")
         usage()
-        System.halt(1)
+        halt(1)
     end
   end
 
@@ -97,7 +97,7 @@ defmodule GreenValidation.CLI.Validate do
 
       {:error, reason} ->
         Logger.info("Error during validation: #{reason}")
-        System.halt(1)
+        halt(1)
     end
   end
 
@@ -149,7 +149,7 @@ defmodule GreenValidation.CLI.Validate do
     else
       {:error, reason} ->
         Logger.info("Error: #{reason}")
-        System.halt(1)
+        halt(1)
     end
   end
 
@@ -312,5 +312,10 @@ defmodule GreenValidation.CLI.Validate do
         Logger.info("\n⚠️  Warning: Failed to write report: #{inspect(reason)}")
         :ok
     end
+  end
+
+  defp halt(exit_code) do
+    Logger.flush()
+    System.halt(exit_code)
   end
 end

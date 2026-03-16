@@ -43,7 +43,6 @@ defmodule GreenValidation.RuleValidator do
 
               {:error, reason} ->
                 Logger.info("ERROR: #{reason}")
-                Logger.flush()
                 {:error, %{rule: rule, error: reason}}
             end
 
