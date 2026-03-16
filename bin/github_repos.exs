@@ -22,6 +22,8 @@ defmodule GreenValidation.GithubRepos do
 
   alias GreenValidation.Github.{Client, Repo}
 
+  require Logger
+
   @program "bin/github_repos"
   @default_output_path "repos/github.json"
 
@@ -74,7 +76,7 @@ defmodule GreenValidation.GithubRepos do
         run(parsed)
 
       {:error, reason} ->
-        IO.puts("Invalid command: #{inspect(reason)}")
+        Logger.info("Invalid command: #{inspect(reason)}")
         usage()
         System.halt(1)
     end
@@ -84,7 +86,7 @@ defmodule GreenValidation.GithubRepos do
     output_path = Map.get(switches, :output_path, @default_output_path)
     limit = Map.get(switches, :limit, 100)
 
-    IO.puts("Fetching #{limit} Elixir repositories from GitHub...")
+    Logger.info("Fetching #{limit} Elixir repositories from GitHub...")
 
     with {:ok, response} <- fetch_repositories_by_stars(limit),
          {:ok, repos} <- format_repositories(response),
@@ -92,18 +94,20 @@ defmodule GreenValidation.GithubRepos do
          repos = repos ++ low_star_additions,
          repos = Enum.reject(repos, &(&1.name in @skip)),
          :ok <- write_output(output_path, repos) do
-      IO.puts("Successfully wrote #{length(repos)} repositories to #{output_path}")
+      Logger.info("Successfully wrote #{length(repos)} repositories to #{output_path}")
       :ok
     else
       {:error, reason} ->
-        IO.puts("Error: #{reason}")
+        Logger.info("Error: #{reason}")
         System.halt(1)
     end
   end
 
   defp usage() do
-    IO.puts("Usage:\n")
-    @program |> HelpfulOptions.help_commands!(@commands) |> IO.puts()
+    IO.puts("""
+    Usage:
+      #{HelpfulOptions.help_commands!(@program, @commands)}
+    """)
   end
 
   defp fetch_repositories_by_stars(limit) do

@@ -9,6 +9,8 @@ defmodule GreenValidation.RuleValidator do
   alias GreenValidation.{GreenInstaller, OutputParser, Project, RuleResult, Rules}
   alias GreenValidation.Installer.{FormatterExs, MixExs}
 
+  require Logger
+
   @doc """
   Validates all rules for a given target (can be a subproject).
 
@@ -22,7 +24,7 @@ defmodule GreenValidation.RuleValidator do
   @spec validate_rules(Project.t(), [atom], keyword) ::
           {:ok, list(RuleResult.t())} | {:error, map()}
   def validate_rules(%Project{} = project, rules, opts) do
-    IO.puts("  Validating #{length(rules)} rules individually...")
+    Logger.info("  Validating #{length(rules)} rules individually...")
 
     green_dependency = Keyword.fetch!(opts, :green_dependency)
     :ok = GreenInstaller.install_green(project, green_version: green_dependency)
@@ -36,11 +38,11 @@ defmodule GreenValidation.RuleValidator do
 
           case validate_single_rule(project, rule, opts) do
             {:ok, result} ->
-              IO.puts("OK")
+              Logger.info("OK")
               {:ok, [result | acc]}
 
             {:error, reason} ->
-              IO.puts("ERROR: #{reason}")
+              Logger.info("ERROR: #{reason}")
               {:error, %{rule: rule, error: reason}}
           end
 

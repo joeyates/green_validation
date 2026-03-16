@@ -6,6 +6,8 @@ defmodule GreenValidation.Project do
   alias GreenValidation.{ClonedRepo, Subproject}
   alias GreenValidation.Installer.FormatterExs
 
+  require Logger
+
   @default_branch "main"
 
   @derive {Jason.Encoder, only: [:name, :url, :default_branch]}
@@ -126,7 +128,7 @@ defmodule GreenValidation.Project do
   end
 
   defp prepare_cloned(%__MODULE__{} = project) do
-    IO.puts("Updating existing repository: #{project.name}")
+    Logger.info("Updating existing repository: #{project.name}")
 
     with :ok <- clean_repo(project),
          :ok <- update_repo(project) do
@@ -136,7 +138,7 @@ defmodule GreenValidation.Project do
 
   @spec clone_repo(t()) :: :ok | {:error, String.t()}
   defp clone_repo(%__MODULE__{} = project) do
-    IO.puts("Cloning repository: #{project.name}")
+    Logger.info("Cloning repository: #{project.name}")
 
     with :ok <- do_clone(project) do
       :ok
@@ -211,7 +213,7 @@ defmodule GreenValidation.Project do
   def install_deps(%__MODULE__{has_mix_exs: false}), do: :ok
 
   def install_deps(%__MODULE__{} = project) do
-    IO.puts("  Installing dependencies")
+    Logger.info("  Installing dependencies")
     project_path = path(project)
 
     case System.cmd("mix", ["deps.get"],
@@ -224,7 +226,7 @@ defmodule GreenValidation.Project do
   end
 
   def compile(%__MODULE__{} = project) do
-    IO.puts("  Compiling project")
+    Logger.info("  Compiling project")
     project_path = path(project)
 
     case System.cmd("mix", ["compile"],

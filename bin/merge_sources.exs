@@ -21,6 +21,8 @@ defmodule GreenValidation.MergeSources do
   alias GreenValidation.Hexpm.Package
   alias GreenValidation.Project
 
+  require Logger
+
   @switches [
     github_path: %{
       type: :string,
@@ -49,7 +51,7 @@ defmodule GreenValidation.MergeSources do
         run(parsed)
 
       {:error, reason} ->
-        IO.puts("Invalid switches: #{inspect(reason)}")
+        Logger.info("Invalid switches: #{inspect(reason)}")
         usage()
         System.halt(1)
     end
@@ -66,11 +68,11 @@ defmodule GreenValidation.MergeSources do
          {:ok, merged_data, hexpm_only} <- merge_and_sort(github_data, hexpm_data),
          :ok <- write_output(output_path, merged_data),
          :ok <- write_output(hexpm_only_path, hexpm_only) do
-      IO.puts("Successfully wrote merged data to #{output_path}")
+      Logger.info("Successfully wrote merged data to #{output_path}")
       :ok
     else
       {:error, reason} ->
-        IO.puts("Error: #{reason}")
+        Logger.info("Error: #{reason}")
         System.halt(1)
     end
   end
@@ -153,7 +155,7 @@ defmodule GreenValidation.MergeSources do
       |> Map.values()
       |> Enum.sort_by(& &1.recent_downloads, :desc)
 
-    IO.puts(
+    Logger.info(
       "Found #{length(both)} projects in both sources, and #{length(hexpm_only)} only in Hex.pm"
     )
 
@@ -181,12 +183,8 @@ defmodule GreenValidation.MergeSources do
 
   defp usage() do
     IO.puts("""
-    Usage: merge_sources [options]
-
-    Options:
-    --github-path PATH   Path to the GitHub JSON file (default: repos/github.json)
-    --hexpm-path PATH   Path to the Hex.pm JSON file (default: repos/hexpm.json)
-    --output-path PATH  Output file path (default: repos/merged.json)
+    Usage:
+      #{HelpfulOptions.help_commands!(@program, @commands)}
     """)
   end
 end

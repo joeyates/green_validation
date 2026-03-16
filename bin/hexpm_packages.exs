@@ -20,6 +20,8 @@ defmodule GreenValidation.HexpmPackages do
 
   alias GreenValidation.Hexpm.Package
 
+  require Logger
+
   @program "bin/hexpm_packages"
   @default_output_path "repos/hexpm.json"
 
@@ -43,7 +45,7 @@ defmodule GreenValidation.HexpmPackages do
         run(parsed)
 
       {:error, reason} ->
-        IO.puts("Invalid command: #{inspect(reason)}")
+        Logger.info("Invalid command: #{inspect(reason)}")
         usage()
         System.halt(1)
     end
@@ -53,23 +55,25 @@ defmodule GreenValidation.HexpmPackages do
     output_path = Map.get(switches, :output_path, @default_output_path)
     verbose = Map.get(switches, :verbose, false)
 
-    IO.puts("Fetching package information from hex.pm...")
+    Logger.info("Fetching package information from hex.pm...")
 
     with {:ok, response} <- fetch_packages(),
          {:ok, formatted_data} <- to_packages(response, verbose),
          :ok <- write_output(output_path, formatted_data) do
-      IO.puts("Successfully wrote #{length(formatted_data)} packages to #{output_path}")
+      Logger.info("Successfully wrote #{length(formatted_data)} packages to #{output_path}")
       :ok
     else
       {:error, reason} ->
-        IO.puts("Error: #{reason}")
+        Logger.info("Error: #{reason}")
         System.halt(1)
     end
   end
 
   defp usage() do
-    IO.puts("Usage:\n")
-    @program |> HelpfulOptions.help_commands!(@commands) |> IO.puts()
+    IO.puts("""
+    Usage:
+      #{HelpfulOptions.help_commands!(@program, @commands)}
+    """
   end
 
   defp fetch_packages() do
@@ -110,7 +114,7 @@ defmodule GreenValidation.HexpmPackages do
   defp optionally_list_repos_without_repo_url(packages, true) do
     Enum.each(packages, fn package ->
       if package.repo_url == nil do
-        IO.puts("Package without repo_url: #{package.name}")
+        Logger.info("Package without repo_url: #{package.name}")
       end
     end)
 

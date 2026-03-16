@@ -6,6 +6,8 @@ defmodule GreenValidation.Projects do
   alias GreenValidation.{Project, Subproject}
   alias GreenValidation.Installer.{FormatterExs, MixExs}
 
+  require Logger
+
   @all_projects_path "repos/merged.json"
 
   @projects %{
@@ -278,7 +280,7 @@ defmodule GreenValidation.Projects do
   end
 
   def benchee_mix_exs_add_dependency(%Project{} = project, dependency) do
-    IO.puts("Adding Green dependency to Benchee's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to Benchee's #{project.path}/mix.exs...")
 
     mix_path = Project.mix_exs_path(project)
     content = File.read!(mix_path)
@@ -310,7 +312,7 @@ defmodule GreenValidation.Projects do
   end
 
   def desktop_mix_exs_add_dependency(%Project{} = project, dependency) do
-    IO.puts("Adding Green dependency to Desktop's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to Desktop's #{project.path}/mix.exs...")
 
     mix_path = Project.mix_exs_path(project)
     content = File.read!(mix_path)
@@ -342,7 +344,7 @@ defmodule GreenValidation.Projects do
   end
 
   def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
-    IO.puts("Adding Green dependency to Electric's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to Electric's #{project.path}/mix.exs...")
 
     mix_path =
       project
@@ -384,7 +386,7 @@ defmodule GreenValidation.Projects do
   end
 
   def elixir_post_checkout(%Project{} = project) do
-    IO.puts("Running post-checkout step, 'make', for Elixir repository...")
+    Logger.info("Running post-checkout step, 'make', for Elixir repository...")
     path = Project.path(project)
 
     case System.cmd("make", [], cd: path, stderr_to_stdout: true) do
@@ -413,7 +415,7 @@ defmodule GreenValidation.Projects do
   end
 
   def learn_elixir_post_checkout(%Project{} = project) do
-    IO.puts("Running post-checkout step for learn-elixir repository...")
+    Logger.info("Running post-checkout step for learn-elixir repository...")
     path = Project.path(project)
 
     # The file examples/lists/sum1.exs has syntax errors
@@ -440,7 +442,7 @@ defmodule GreenValidation.Projects do
   end
 
   def run_asdf_install(%Project{} = project) do
-    IO.puts("Running 'asdf install', for #{project.name} repository...")
+    Logger.info("Running 'asdf install', for #{project.name} repository...")
 
     path = Project.path(project)
 
@@ -454,7 +456,7 @@ defmodule GreenValidation.Projects do
   end
 
   def run_mix_local_hex(%Project{} = project) do
-    IO.puts("Running 'mix local.hex --force' for #{project.name} repository...")
+    Logger.info("Running 'mix local.hex --force' for #{project.name} repository...")
 
     path = Project.path(project)
 
@@ -468,7 +470,7 @@ defmodule GreenValidation.Projects do
   end
 
   def run_mix_local_rebar(%Project{} = project) do
-    IO.puts("Running 'mix local.rebar --force' for #{project.name} repository...")
+    Logger.info("Running 'mix local.rebar --force' for #{project.name} repository...")
 
     path = Project.path(project)
 

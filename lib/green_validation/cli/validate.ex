@@ -16,6 +16,7 @@ defmodule GreenValidation.CLI.Validate do
   }
 
   require GreenValidation.Rules
+  require Logger
 
   @program "bin/validate.exs"
 
@@ -58,7 +59,7 @@ defmodule GreenValidation.CLI.Validate do
         run(parsed)
 
       {:error, reason} ->
-        IO.puts("Invalid command: #{inspect(reason)}")
+        Logger.info("Invalid command: #{inspect(reason)}")
         usage()
         System.halt(1)
     end
@@ -81,19 +82,21 @@ defmodule GreenValidation.CLI.Validate do
   end
 
   defp usage() do
-    IO.puts("Usage:\n")
-    @program |> HelpfulOptions.help_commands!(@commands) |> IO.puts()
+    IO.puts("""
+    Usage:
+      #{HelpfulOptions.help_commands!(@program, @commands)}
+    """)
   end
 
   defp check_all(switches) do
     case check_all_projects(switches) do
       {:ok, results} ->
-        IO.puts("All projects validated successfully.")
+        Logger.info("All projects validated successfully.")
 
         handle_format_output(results, switches)
 
       {:error, reason} ->
-        IO.puts("Error during validation: #{reason}")
+        Logger.info("Error during validation: #{reason}")
         System.halt(1)
     end
   end
@@ -112,14 +115,14 @@ defmodule GreenValidation.CLI.Validate do
         Projects.all(),
         [],
         fn project, acc ->
-          IO.puts("Checking project: #{project.name}")
+          Logger.info("Checking project: #{project.name}")
 
           case check_project_rules(project, rules, opts) do
             {:ok, results} ->
               {:cont, results ++ acc}
 
             {:error, reason} ->
-              IO.puts("Validation failed for #{project.name}: #{reason}")
+              Logger.info("Validation failed for #{project.name}: #{reason}")
               {:halt, {:error, reason}}
           end
         end
@@ -145,7 +148,7 @@ defmodule GreenValidation.CLI.Validate do
       handle_format_output(results, switches)
     else
       {:error, reason} ->
-        IO.puts("Error: #{reason}")
+        Logger.info("Error: #{reason}")
         System.halt(1)
     end
   end
@@ -187,7 +190,7 @@ defmodule GreenValidation.CLI.Validate do
         rules: rule_results
       }
 
-      log_results(result, opts)
+      print_results(result, opts)
       {:ok, [result]}
     end
   end
@@ -207,7 +210,7 @@ defmodule GreenValidation.CLI.Validate do
           subprojects: []
       }
 
-      IO.puts("Running validation on #{subproject.path} subproject of #{project.name}")
+      Logger.info("Running validation on #{subproject.path} subproject of #{project.name}")
 
       {:ok, [result]} = validate_rules(cloned_repo, fake_project, rules, opts)
 
@@ -236,7 +239,7 @@ defmodule GreenValidation.CLI.Validate do
     end
   end
 
-  defp log_results(%Result{} = result, opts) do
+  defp print_results(%Result{} = result, opts) do
     verbose = Keyword.get(opts, :verbose, false)
 
     if result.baseline == :created_format_commit do
@@ -293,7 +296,7 @@ defmodule GreenValidation.CLI.Validate do
         end)
 
       other ->
-        IO.puts("Warning: Unknown format '#{other}'. Supported formats: 'json', 'text'")
+        Logger.info("Warning: Unknown format '#{other}'. Supported formats: 'json', 'text'")
         :ok
     end
   end
@@ -303,11 +306,11 @@ defmodule GreenValidation.CLI.Validate do
 
     case ReportWriter.write(result, format, output_dir: output_dir) do
       {:ok, filepath} ->
-        IO.puts("\n📄 Report saved to: #{filepath}")
+        Logger.info("\n📄 Report saved to: #{filepath}")
         :ok
 
       {:error, reason} ->
-        IO.puts("\n⚠️  Warning: Failed to write report: #{inspect(reason)}")
+        Logger.info("\n⚠️  Warning: Failed to write report: #{inspect(reason)}")
         :ok
     end
   end
