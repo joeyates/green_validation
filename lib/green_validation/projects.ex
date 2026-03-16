@@ -23,6 +23,11 @@ defmodule GreenValidation.Projects do
       has_mix_exs: false,
       formatter_exs_setup: {__MODULE__, :awesome_elixir_formatter_exs_setup}
     },
+    "benchee" => %Project{
+      name: "benchee",
+      url: "https://github.com/bencheeorg/benchee",
+      mix_exs_add_dependency: {__MODULE__, :benchee_mix_exs_add_dependency}
+    },
     "desktop" => %Project{
       name: "desktop",
       url: "https://github.com/elixir-desktop/desktop",
@@ -133,11 +138,41 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/firezone/firezone",
       path: "elixir"
     },
+    "grpc" => %Project{
+      name: "grpc",
+      url: "https://github.com/elixir-grpc/grpc",
+      default_branch: "master",
+      subprojects: [
+        %Subproject{
+          path: "grpc_core"
+        },
+        %Subproject{
+          path: "grpc_server"
+        },
+        %Subproject{
+          path: "grpc_client"
+        }
+      ]
+    },
     "jason" => %Project{
       name: "jason",
       url: "https://github.com/michalmuskala/jason",
       default_branch: "master",
       formatter_exs_setup: {__MODULE__, :jason_formatter_exs_setup}
+    },
+    "learn-elixir" => %Project{
+      name: "learn-elixir",
+      url: "https://github.com/dwyl/learn-elixir",
+      post_checkout: {__MODULE__, :learn_elixir_post_checkout},
+      subprojects: [
+        %Subproject{
+          path: "codecov_example"
+        },
+        %Subproject{
+          path: "examples",
+          has_mix_exs: false
+        }
+      ]
     },
     "nx" => %Project{
       name: "nx",
@@ -242,6 +277,38 @@ defmodule GreenValidation.Projects do
     run_mix_local_hex(project)
   end
 
+  def benchee_mix_exs_add_dependency(%Project{} = project, dependency) do
+    IO.puts("Adding Green dependency to Benchee's #{project.path}/mix.exs...")
+
+    mix_path = Project.mix_exs_path(project)
+    content = File.read!(mix_path)
+
+    regex = ~r/
+      (
+        defp\sdeps\sdo\s*
+        deps\s=\s\[
+      )
+    /sx
+    dep_string = inspect(dependency)
+
+    updated_content =
+      regex
+      |> Regex.replace(
+        content,
+        fn _match, def_start ->
+          """
+          #{def_start}
+            #{dep_string},
+          """
+        end
+      )
+      |> MixExs.reformat()
+
+    File.write!(mix_path, updated_content)
+
+    :ok
+  end
+
   def desktop_mix_exs_add_dependency(%Project{} = project, dependency) do
     IO.puts("Adding Green dependency to Desktop's #{project.path}/mix.exs...")
 
@@ -343,6 +410,25 @@ defmodule GreenValidation.Projects do
     ]
 
     FormatterExs.create_project_formatter(project, inputs)
+  end
+
+  def learn_elixir_post_checkout(%Project{} = project) do
+    IO.puts("Running post-checkout step for learn-elixir repository...")
+    path = Project.path(project)
+
+    # The file examples/lists/sum1.exs has syntax errors
+    with {_output, 0} <-
+           System.shell("git rm examples/lists/sum1.exs", cd: path, stderr_to_stdout: true),
+         {_output, 0} <-
+           System.shell(~s(git commit -m "Remove file with syntax errors"),
+             cd: path,
+             stderr_to_stdout: true
+           ) do
+      :ok
+    else
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for learn-elixir: #{output}"}
+    end
   end
 
   def phoenix_formatter_exs_setup(%Project{} = project) do

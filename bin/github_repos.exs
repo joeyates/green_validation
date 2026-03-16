@@ -45,7 +45,11 @@ defmodule GreenValidation.GithubRepos do
     "magnetissimo",
     # Failed to compile asciinema-server. Requires Rust, but .tool-versions doesn't specify
     # a Rust version
-    "asciinema-server"
+    "asciinema-server",
+    # elixirscript seems abandoned
+    "elixirscript",
+    # 'mix compile' fails
+    "bors-ng"
   ]
 
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm
