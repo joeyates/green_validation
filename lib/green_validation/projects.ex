@@ -50,6 +50,13 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/elixir-desktop/desktop",
       mix_exs_add_dependency: {__MODULE__, :desktop_mix_exs_add_dependency}
     },
+    "distillery" => %Project{
+      name: "distillery",
+      url: "https://github.com/bitwalker/distillery",
+      default_branch: "master",
+      post_checkout: {__MODULE__, :distillery_post_checkout},
+      mix_command: {__MODULE__, :run_asdf_mix}
+    },
     "ecto" => %Project{
       name: "ecto",
       url: "https://github.com/elixir-ecto/ecto",
@@ -286,6 +293,30 @@ defmodule GreenValidation.Projects do
     ]
 
     FormatterExs.create_project_formatter(project, inputs)
+  end
+
+  def distillery_post_checkout(%Project{} = project) do
+    Logger.info(
+      "Running post-checkout step, to use an older Elixir, for Distillery repository..."
+    )
+
+    path = Project.path(project)
+    tool_versions_path = Path.join(path, ".tool-versions")
+    File.write!(tool_versions_path, "elixir 1.17.0\n")
+
+    with {_output, 0} <- System.shell("git add .tool-versions", cd: path, stderr_to_stdout: true),
+         {_output, 0} <-
+           System.shell(~s(git commit -m "Add .tool-versions with Elixir 1.17.0"),
+             cd: path,
+             stderr_to_stdout: true
+           ),
+         {_output, 0} <- System.shell("asdf install", cd: path, stderr_to_stdout: true) do
+      :ok
+    else
+      {output, _} ->
+        Logger.error("Failed to run post-checkout step for Distillery: #{output}")
+        {:error, "Failed to run post-checkout step for Distillery: #{output}"}
+    end
   end
 
   def ecto_formatter_exs_setup(%Project{} = project) do
