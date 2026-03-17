@@ -214,14 +214,14 @@ defmodule GreenValidation.Project do
     Logger.info("  Installing dependencies")
     mix_exs_action = MixExs.ensure_mix_exs(project)
     project_path = path(project)
-    environment = environment(project)
+
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
 
     result =
-      case System.cmd("mix", ["deps.get"],
-             cd: project_path,
-             env: environment,
-             stderr_to_stdout: true
-           ) do
+      case System.shell("mix deps.get", cd: project_path, stderr_to_stdout: true, into: streamer) do
         {_output, 0} ->
           :ok
 
