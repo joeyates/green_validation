@@ -183,6 +183,12 @@ defmodule GreenValidation.Projects do
       default_branch: "master",
       formatter_exs_setup: {__MODULE__, :jason_formatter_exs_setup}
     },
+    "kaffy" => %Project{
+      name: "kaffy",
+      url: "https://github.com/aesmail/kaffy",
+      default_branch: "master",
+      post_checkout: {__MODULE__, :kaffy_post_checkout}
+    },
     "learn-elixir" => %Project{
       name: "learn-elixir",
       url: "https://github.com/dwyl/learn-elixir",
@@ -487,6 +493,22 @@ defmodule GreenValidation.Projects do
     ]
 
     FormatterExs.create_project_formatter(project, inputs)
+  end
+
+  def kaffy_post_checkout(%Project{} = project) do
+    Logger.info("Running post-checkout step for Kaffy repository...")
+    path = Project.path(project)
+
+    with {_output, 0} <- Project.mix_command(project, "deps.update ecto"),
+         {_output, 0} <-
+           System.shell(~s(git add mix.lock), cd: path, stderr_to_stdout: true),
+         {_output, 0} <-
+           System.shell(~s(git commit -m "Update ecto"), cd: path, stderr_to_stdout: true) do
+      :ok
+    else
+      {output, _} ->
+        {:error, "Failed to run post-checkout step for Kaffy: #{output}"}
+    end
   end
 
   def learn_elixir_post_checkout(%Project{} = project) do
