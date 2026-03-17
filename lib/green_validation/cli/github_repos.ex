@@ -30,17 +30,17 @@ defmodule GreenValidation.CLI.GithubRepos do
   # These repos have few GitHub stars, but have a lot of downloads on hex.pm
   # The GitHub rate limit is 60 requests/hour, so a single run of this script will stay below that
   @low_star_additions [
-    "elixir-plug/mime",
-    "elixir-plug/plug_crypto",
-    "falood/file_system",
-    "elixir-mint/castore",
-    "rrrene/bunt",
-    "elixir-plug/plug_cowboy",
-    "lau/tzdata",
     "christhekeele/erlex",
+    "elixir-plug/mime",
     "elixir-makeup/makeup_elixir",
+    "elixir-mint/castore",
+    "elixir-plug/plug_crypto",
+    "elixir-plug/plug_cowboy",
     "ex-aws/ex_aws_s3",
-    "getsentry/sentry-elixir"
+    "falood/file_system",
+    "getsentry/sentry-elixir",
+    "lau/tzdata",
+    "rrrene/bunt"
   ]
 
   def main(args) do
