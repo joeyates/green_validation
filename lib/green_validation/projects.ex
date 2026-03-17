@@ -537,7 +537,11 @@ defmodule GreenValidation.Projects do
 
   def run_asdf_mix(%Project{} = project, command) do
     path = Project.path(project)
-    streamer = CollectableStreamer.new(fn line -> Logger.debug("=> #{line}") end, collect: true)
+
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
 
     {streamer, exit_code} =
       System.shell("asdf exec mix #{command}", cd: path, stderr_to_stdout: true, into: streamer)
