@@ -222,15 +222,6 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/phoenixframework/phoenix",
       formatter_exs_setup: {__MODULE__, :phoenix_formatter_exs_setup}
     },
-    "semaphore" => %Project{
-      name: "semaphore",
-      url: "https://github.com/semaphoreio/semaphore",
-      subprojects: [
-        %Subproject{
-          path: "auth"
-        }
-      ]
-    },
     "symphony" => %Project{
       name: "symphony",
       url: "https://github.com/openai/symphony",
@@ -252,7 +243,9 @@ defmodule GreenValidation.Projects do
     # papercups seems abandoned
     "papercups",
     # Unable to compile
-    "supavisor"
+    "supavisor",
+    # Unable to compile any of the subprojects
+    "semaphore"
   ]
 
   @spec load(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
