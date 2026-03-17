@@ -18,7 +18,7 @@ defmodule GreenValidation.CLI.Validate do
   require GreenValidation.Rules
   require Logger
 
-  @program "bin/validate.exs"
+  @program "mix green_validation.validate"
 
   @common_switches [
     format: %{type: :string, description: "Output format for reports ('text' or 'json')"},
