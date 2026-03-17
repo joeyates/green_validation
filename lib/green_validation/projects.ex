@@ -521,7 +521,12 @@ defmodule GreenValidation.Projects do
 
     path = Project.path(project)
 
-    case System.shell("asdf install", cd: path, stderr_to_stdout: true) do
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
+
+    case System.shell("asdf install", cd: path, stderr_to_stdout: true, into: streamer) do
       {_output1, 0} ->
         :ok
 
