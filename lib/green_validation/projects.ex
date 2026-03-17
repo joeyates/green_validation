@@ -297,6 +297,30 @@ defmodule GreenValidation.Projects do
     end
   end
 
+  defp create_tool_versions(%Project{} = project, content) do
+    Logger.info("Creating .tool-versions for #{project.name} repository")
+    Logger.debug(".tool-versions content:\n#{content}")
+
+    path = Project.path(project)
+    tool_versions_path = Path.join(path, ".tool-versions")
+    File.write!(tool_versions_path, content)
+
+    with {_output, 0} <- System.shell("git add .tool-versions", cd: path, stderr_to_stdout: true),
+         {_output, 0} <-
+           System.shell(~s(git commit -m "Add .tool-versions"),
+             cd: path,
+             stderr_to_stdout: true
+           ),
+         {_output, 0} <- System.shell("asdf install", cd: path, stderr_to_stdout: true) do
+      :ok
+    else
+      {output, _} ->
+        message = "Failed to create .tool-versions for #{project.name}: #{output}"
+        Logger.error(message)
+        {:error, message}
+    end
+  end
+
   def thirty_days_of_elixir_formatter_exs_setup(%Project{} = project) do
     inputs = [
       inputs: ["*.exs"]
@@ -314,27 +338,7 @@ defmodule GreenValidation.Projects do
   end
 
   def distillery_post_checkout(%Project{} = project) do
-    Logger.info(
-      "Running post-checkout step, to use an older Elixir, for Distillery repository..."
-    )
-
-    path = Project.path(project)
-    tool_versions_path = Path.join(path, ".tool-versions")
-    File.write!(tool_versions_path, "elixir 1.17.0\n")
-
-    with {_output, 0} <- System.shell("git add .tool-versions", cd: path, stderr_to_stdout: true),
-         {_output, 0} <-
-           System.shell(~s(git commit -m "Add .tool-versions with Elixir 1.17.0"),
-             cd: path,
-             stderr_to_stdout: true
-           ),
-         {_output, 0} <- System.shell("asdf install", cd: path, stderr_to_stdout: true) do
-      :ok
-    else
-      {output, _} ->
-        Logger.error("Failed to run post-checkout step for Distillery: #{output}")
-        {:error, "Failed to run post-checkout step for Distillery: #{output}"}
-    end
+    create_tool_versions(project, "elixir 1.17.0\n")
   end
 
   def ecto_formatter_exs_setup(%Project{} = project) do
