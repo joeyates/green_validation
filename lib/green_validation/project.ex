@@ -262,6 +262,19 @@ defmodule GreenValidation.Project do
     project_path = path(project)
     environment = environment(project)
 
-    System.shell("mix #{command}", cd: project_path, env: environment, stderr_to_stdout: true)
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
+
+    {updated, exit_code} =
+      System.shell("mix #{command}",
+        cd: project_path,
+        env: environment,
+        stderr_to_stdout: true,
+        into: streamer
+      )
+
+    {to_string(updated), exit_code}
   end
 end
