@@ -149,7 +149,15 @@ defmodule GreenValidation.Project do
   defp do_clone(%__MODULE__{} = project) do
     path = path(project)
 
-    case System.cmd("git", ["clone", project.url, path], stderr_to_stdout: true) do
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
+
+    case System.cmd("git", ["clone", "--depth", "1", project.url, path],
+           stderr_to_stdout: true,
+           into: streamer
+         ) do
       {_output, 0} -> :ok
       {output, _} -> {:error, "Failed to clone: #{output}"}
     end
