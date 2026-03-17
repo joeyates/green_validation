@@ -232,6 +232,23 @@ defmodule GreenValidation.Projects do
     }
   }
 
+  @skip [
+    # magnetissimo uses an old Erlang+Elixir combination and old dependencies.
+    # Unable to compile
+    "magnetissimo",
+    # Failed to compile asciinema-server. Requires Rust, but .tool-versions doesn't specify
+    # a Rust version
+    "asciinema-server",
+    # elixirscript seems abandoned
+    "elixirscript",
+    # 'mix compile' fails
+    "bors-ng",
+    # papercups seems abandoned
+    "papercups",
+    # Unable to compile
+    "supavisor"
+  ]
+
   @spec load(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
   def load(project_name) do
     case @projects[project_name] do
@@ -259,6 +276,7 @@ defmodule GreenValidation.Projects do
     @all_projects_path
     |> File.read!()
     |> Jason.decode!(keys: :atoms)
+    |> Enum.filter(fn data -> data.name not in @skip end)
     |> Enum.map(fn data ->
       if Map.has_key?(@projects, data.name) do
         @projects[data.name]
