@@ -176,6 +176,11 @@ defmodule GreenValidation.Projects do
         }
       ]
     },
+    "hologram" => %Project{
+      name: "hologram",
+      url: "https://github.com/bartblast/hologram",
+      default_branch: "dev"
+    },
     "jason" => %Project{
       name: "jason",
       url: "https://github.com/michalmuskala/jason",
@@ -201,6 +206,12 @@ defmodule GreenValidation.Projects do
         }
       ]
     },
+    "live_beats" => %Project{
+      name: "live_beats",
+      url: "https://github.com/fly-apps/live_beats",
+      default_branch: "master",
+      environment: {__MODULE__, :live_beats_environment}
+    },
     "nx" => %Project{
       name: "nx",
       url: "https://github.com/elixir-nx/nx",
@@ -225,6 +236,11 @@ defmodule GreenValidation.Projects do
       name: "symphony",
       url: "https://github.com/openai/symphony",
       path: "elixir"
+    },
+    "uneebee" => %Project{
+      name: "uneebee",
+      url: "https://github.com/zoonk/uneebee",
+      post_checkout: {__MODULE__, :uneebee_post_checkout}
     }
   }
 
@@ -244,7 +260,11 @@ defmodule GreenValidation.Projects do
     # Unable to compile
     "supavisor",
     # Unable to compile any of the subprojects
-    "semaphore"
+    "semaphore",
+    # Unable to compile, not updated since 2019
+    "hound",
+    # Unable to compile, not updated since 2023
+    "coherence"
   ]
 
   @spec load(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
@@ -511,6 +531,13 @@ defmodule GreenValidation.Projects do
     end
   end
 
+  def live_beats_environment(%Project{} = _project) do
+    [
+      {"LIVE_BEATS_GITHUB_CLIENT_SECRET", "123"},
+      {"LIVE_BEATS_GITHUB_CLIENT_ID", "123"}
+    ]
+  end
+
   def phoenix_formatter_exs_setup(%Project{} = project) do
     inputs = [
       inputs: ["mix.exs", "{config,lib,test}/**/*.{ex,exs}"]
@@ -519,23 +546,16 @@ defmodule GreenValidation.Projects do
     FormatterExs.update_project_formatter(project, inputs)
   end
 
-  def run_asdf_install(%Project{} = project) do
-    Logger.info("Running 'asdf install', for #{project.name} repository...")
+  end
 
-    path = Project.path(project)
-
-    streamer =
-      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
-        collect: true
-      )
-
-    case System.shell("asdf install", cd: path, stderr_to_stdout: true, into: streamer) do
-      {_output1, 0} ->
-        :ok
-
-      {output, _} ->
-        {:error, "Failed to run post-checkout step for #{project.name}: #{output}"}
-    end
+  def uneebee_post_checkout(%Project{} = project) do
+    create_tool_versions(
+      project,
+      """
+      erlang 26.2.1
+      elixir 1.17.0
+      """
+    )
   end
 
   def run_asdf_mix(%Project{} = project, command) do
