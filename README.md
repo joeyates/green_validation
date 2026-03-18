@@ -25,26 +25,17 @@ The validation system includes a `GreenInstaller` module that can automatically:
 
 The validation system automatically clones projects when they're not present.
 
-**Target Repositories and projects:**
-- elixir (Elixir language monorepo): elixir, eex, ex_unit, iex, logger and mix projects,
-- phoenix (Phoenix web framework)
-- phoenix_live_view (Phoenix LiveView)
-- hexpm (Hex package manager)
-- nerves (Nerves embedded framework)
-- absinthe (Absinthe GraphQL)
-- broadway (Broadway data processing)
-- credo (Credo static analysis)
-
 ### Run Validation
 
 Check all projects:
+
 ```bash
-bin/validate.exs check
+mix green_validation.validate check-all
 ```
 
 Or check a specific project:
 ```bash
-bin/validate.exs check phoenix
+mix green_validation.validate check-project phoenix
 ```
 
 This will:
@@ -59,12 +50,12 @@ You can save validation results to a file using the `--format` option:
 
 ```bash
 # Save results as JSON
-bin/validate.exs check --format json
-bin/validate.exs check phoenix --format json
+mix green_validation.validate check-all --format json
+mix green_validation.validate check-project phoenix --format json
 
 # Save results as formatted text
-bin/validate.exs check --format text
-bin/validate.exs check phoenix --format text
+mix green_validation.validate check-all --format text
+mix green_validation.validate check-project phoenix --format text
 ```
 
 Output files are automatically named using the commit SHA and saved to the `results` directory:
@@ -78,25 +69,25 @@ Output files are automatically named using the commit SHA and saved to the `resu
 
 ```bash
 # Check all projects (prints to stdout)
-bin/validate.exs check
+mix green_validation.validate check-all
 
 # Check a specific project
-bin/validate.exs check <project_name>
+mix green_validation.validate check-project <project_name>
 
 # Check with JSON output to file
-bin/validate.exs check --format json
-bin/validate.exs check <project_name> --format json
+mix green_validation.validate check-all --format json
+mix green_validation.validate check-project <project_name> --format json
 
 # Check with text output to file  
-bin/validate.exs check --format text
-bin/validate.exs check <project_name> --format text
+mix green_validation.validate check-all --format text
+mix green_validation.validate check-project <project_name> --format text
 ```
 
 ### Help
 
 ```bash
 # Show all available commands and options
-bin/validate.exs help
+mix green_validation.validate help
 ```
 
 ## Understanding Results
@@ -184,8 +175,6 @@ For each rule:
 ## Directory Structure
 
 ```
-├── bin
-├── ├── validate.exs              # Main CLI script
 ├── lib
 │   └── green_validation
 │       ├── baseline_formatter.ex # Run default Elixir formatter
