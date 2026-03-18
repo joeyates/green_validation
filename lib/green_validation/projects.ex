@@ -489,18 +489,7 @@ defmodule GreenValidation.Projects do
 
   def kaffy_post_checkout(%Project{} = project) do
     Logger.info("Running post-checkout step for Kaffy repository...")
-    path = Project.path(project)
-
-    with {_output, 0} <- Project.mix_command(project, "deps.update ecto"),
-         {_output, 0} <-
-           System.shell(~s(git add mix.lock), cd: path, stderr_to_stdout: true),
-         {_output, 0} <-
-           System.shell(~s(git commit -m "Update ecto"), cd: path, stderr_to_stdout: true) do
-      :ok
-    else
-      {output, _} ->
-        {:error, "Failed to run post-checkout step for Kaffy: #{output}"}
-    end
+    :ok = update_dependency(project, "ecto")
   end
 
   def learn_elixir_post_checkout(%Project{} = project) do
@@ -588,6 +577,25 @@ defmodule GreenValidation.Projects do
 
       {output, _} ->
         {:error, "Failed to run 'mix local.rebar' for #{project.name}: #{output}"}
+    end
+  end
+
+  defp update_dependency(%Project{} = project, dependency) do
+    Logger.info("Updating #{dependency} dependency for #{project.name} repository...")
+    path = Project.path(project)
+
+    with {_output, 0} <- Project.mix_command(project, "deps.update #{dependency}"),
+         {_output, 0} <-
+           System.shell(~s(git add mix.lock), cd: path, stderr_to_stdout: true),
+         {_output, 0} <-
+           System.shell(~s(git commit -m "Update #{dependency}"),
+             cd: path,
+             stderr_to_stdout: true
+           ) do
+      :ok
+    else
+      {output, _} ->
+        {:error, "Failed to update #{dependency} for #{project.name}: #{output}"}
     end
   end
 end
