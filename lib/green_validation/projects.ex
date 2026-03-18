@@ -54,8 +54,7 @@ defmodule GreenValidation.Projects do
       name: "distillery",
       url: "https://github.com/bitwalker/distillery",
       default_branch: "master",
-      post_checkout: {__MODULE__, :distillery_post_checkout},
-      mix_command: {__MODULE__, :run_asdf_mix}
+      post_checkout: {__MODULE__, :distillery_post_checkout}
     },
     "ecto" => %Project{
       name: "ecto",
@@ -310,7 +309,7 @@ defmodule GreenValidation.Projects do
              cd: path,
              stderr_to_stdout: true
            ),
-         {_output, 0} <- System.shell("asdf install", cd: path, stderr_to_stdout: true) do
+         :ok <- Project.run_asdf_install(project) do
       :ok
     else
       {output, _} ->
@@ -349,7 +348,7 @@ defmodule GreenValidation.Projects do
   end
 
   def electric_post_checkout(%Project{} = project) do
-    run_asdf_install(project)
+    Project.run_asdf_install(project)
     run_mix_local_hex(project)
   end
 

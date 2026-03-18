@@ -17,7 +17,6 @@ defmodule GreenValidation.Project do
     :name,
     :path,
     :post_checkout,
-    :mix_command,
     :mix_exs_add_dependency,
     :formatter_exs_setup,
     :url,
@@ -32,7 +31,6 @@ defmodule GreenValidation.Project do
           default_branch: String.t(),
           environment: {atom, atom} | nil,
           post_checkout: {atom, atom} | nil,
-          mix_command: {atom, atom} | nil,
           mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
           rule_config: list({atom, keyword()}),
@@ -57,6 +55,10 @@ defmodule GreenValidation.Project do
 
   def mix_exs_path(%__MODULE__{} = project) do
     project |> path() |> Path.join("mix.exs")
+  end
+
+  def tool_versions_path(%__MODULE__{} = project) do
+    project |> path() |> Path.join(".tool-versions")
   end
 
   def environment(%__MODULE__{environment: {module, fun}} = project) do
@@ -215,7 +217,17 @@ defmodule GreenValidation.Project do
     apply(mod, fun, [project])
   end
 
-  defp post_checkout(_), do: :ok
+  defp post_checkout(%__MODULE__{} = project) do
+    if uses_asdf?(project) do
+      run_asdf_install(project)
+    end
+
+    :ok
+  end
+
+  def uses_asdf?(%__MODULE__{} = project) do
+    project |> tool_versions_path() |> File.exists?()
+  end
 
   @spec install_deps(t()) :: :ok | {:error, String.t()}
   def install_deps(%__MODULE__{} = project) do
@@ -262,13 +274,19 @@ defmodule GreenValidation.Project do
     result
   end
 
-  def mix_command(%__MODULE__{mix_command: {mod, fun}} = project, command) do
-    apply(mod, fun, [project, command])
-  end
-
   def mix_command(%__MODULE__{} = project, command) do
     project_path = path(project)
     environment = environment(project)
+
+    prefix =
+      if uses_asdf?(project) do
+        "asdf exec "
+      else
+        ""
+      end
+
+    full_command = "#{prefix}mix #{command}"
+    Logger.debug("Running command: #{full_command} for #{project.name} in #{project_path}")
 
     streamer =
       CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
@@ -276,7 +294,8 @@ defmodule GreenValidation.Project do
       )
 
     {updated, exit_code} =
-      System.shell("mix #{command}",
+      System.shell(
+        full_command,
         cd: project_path,
         env: environment,
         stderr_to_stdout: true,
@@ -284,5 +303,23 @@ defmodule GreenValidation.Project do
       )
 
     {to_string(updated), exit_code}
+  end
+
+  def run_asdf_install(%__MODULE__{} = project) do
+    Logger.debug("Running 'asdf install', for #{project.name} repository...")
+    path = path(project)
+
+    streamer =
+      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
+        collect: true
+      )
+
+    case System.shell("asdf install", cd: path, stderr_to_stdout: true, into: streamer) do
+      {_output1, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error, "Failed to run 'asdf install' for #{project.name}: #{output}"}
+    end
   end
 end
