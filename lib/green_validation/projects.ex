@@ -546,8 +546,6 @@ defmodule GreenValidation.Projects do
     FormatterExs.update_project_formatter(project, inputs)
   end
 
-  end
-
   def uneebee_post_checkout(%Project{} = project) do
     create_tool_versions(
       project,
@@ -556,20 +554,6 @@ defmodule GreenValidation.Projects do
       elixir 1.17.0
       """
     )
-  end
-
-  def run_asdf_mix(%Project{} = project, command) do
-    path = Project.path(project)
-
-    streamer =
-      CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
-        collect: true
-      )
-
-    {streamer, exit_code} =
-      System.shell("asdf exec mix #{command}", cd: path, stderr_to_stdout: true, into: streamer)
-
-    {to_string(streamer), exit_code}
   end
 
   def run_mix_local_hex(%Project{} = project) do
