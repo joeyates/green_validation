@@ -23,17 +23,22 @@ The validation system includes a `GreenInstaller` module that can automatically:
 
 ## Quick Start
 
-The validation system automatically clones projects when they're not present.
+Setup:
 
-### Run Validation
+```bash
+mix green_validation.github_repos
+mix green_validation.hexpm_packages
+mix green_validation.merge_sources
+```
 
-Check all projects:
+### Full Validation Run
 
 ```bash
 mix green_validation.validate check-all
 ```
 
-Or check a specific project:
+### Check a Specific Project
+
 ```bash
 mix green_validation.validate check-project phoenix
 ```
