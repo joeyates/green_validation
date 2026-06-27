@@ -211,17 +211,17 @@ defmodule GreenValidation.ReportWriter do
 
   @spec count_rules_with_changes(list(RuleResult.t())) :: non_neg_integer()
   defp count_rules_with_changes(rules) do
-    Enum.count(rules, fn r -> length(r.changes) > 0 end)
+    Enum.count(rules, fn rule -> length(rule.changes) > 0 end)
   end
 
   @spec count_rules_with_warnings(list(RuleResult.t())) :: non_neg_integer()
   defp count_rules_with_warnings(rules) do
-    Enum.count(rules, fn r -> length(r.warnings) > 0 end)
+    Enum.count(rules, fn rule -> length(rule.warnings) > 0 end)
   end
 
   @spec count_clean_rules(list(RuleResult.t())) :: non_neg_integer()
   defp count_clean_rules(rules) do
-    Enum.count(rules, fn r -> length(r.changes) == 0 and length(r.warnings) == 0 end)
+    Enum.count(rules, fn rule -> length(rule.changes) == 0 and length(rule.warnings) == 0 end)
   end
 
   @spec generate_filename(Result.t(), :json | :text) :: String.t()

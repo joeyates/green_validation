@@ -223,7 +223,7 @@ defmodule GreenValidation.ReportWriterTest do
   describe "report_exists?/4" do
     test "is true when a matching report already exists in the output dir" do
       filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
-      File.write!(Path.join(@tmp_dir, filename), "{}")
+      @tmp_dir |> Path.join(filename) |> File.write!("{}")
 
       assert ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
                output_dir: @tmp_dir
@@ -238,7 +238,7 @@ defmodule GreenValidation.ReportWriterTest do
 
     test "matches only the same commit SHA" do
       filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
-      File.write!(Path.join(@tmp_dir, filename), "{}")
+      @tmp_dir |> Path.join(filename) |> File.write!("{}")
 
       refute ReportWriter.report_exists?("phoenix", "999999999999", :json, output_dir: @tmp_dir)
     end
