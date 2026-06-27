@@ -234,7 +234,7 @@ defmodule GreenValidation.Project do
     Logger.info("  Installing dependencies")
     mix_exs_action = MixExs.ensure_mix_exs(project)
     project_path = path(project)
-    environment = environment(project)
+    environment = command_env(project)
 
     streamer =
       CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
@@ -282,7 +282,7 @@ defmodule GreenValidation.Project do
 
   def mix_command(%__MODULE__{} = project, command) do
     project_path = path(project)
-    environment = environment(project)
+    environment = command_env(project)
 
     prefix =
       if uses_asdf?(project) do
@@ -312,7 +312,10 @@ defmodule GreenValidation.Project do
   end
 
   def run_asdf_install(%__MODULE__{} = project) do
-    Logger.debug("Running 'asdf install', for #{project.name} repository...")
+    run_command(project, "asdf install")
+  end
+
+  def run_command(%__MODULE__{} = project, command) do
     path = path(project)
 
     streamer =
@@ -320,12 +323,58 @@ defmodule GreenValidation.Project do
         collect: true
       )
 
-    case System.shell("asdf install", cd: path, stderr_to_stdout: true, into: streamer) do
+    Logger.debug("Running command: #{inspect(command)} for #{project.name} in #{inspect(path)}")
+
+    case System.shell(command, cd: path, stderr_to_stdout: true, into: streamer) do
       {_output1, 0} ->
         :ok
 
       {output, _} ->
         {:error, "Failed to run 'asdf install' for #{project.name}: #{output}"}
+    end
+  end
+
+  @leaked_runtime_vars ~w(
+    ROOTDIR BINDIR EMU PROGNAME
+    ASDF_INSTALL_VERSION ASDF_INSTALL_TYPE ASDF_INSTALL_PATH
+    MIX_HOME MIX_ARCHIVES
+  )
+
+  defp sanitize_asdf_env(env) do
+    path = env_value(env, "PATH") || System.get_env("PATH") || ""
+
+    env
+    |> List.keystore("PATH", 0, {"PATH", clean_asdf_path(path)})
+    |> unset_leaked_vars()
+  end
+
+  defp clean_asdf_path(path) do
+    path
+    |> String.split(":")
+    |> Enum.reject(&String.contains?(&1, ["/.asdf/installs/", "/.asdf/plugins/"]))
+    |> Enum.join(":")
+  end
+
+  defp unset_leaked_vars(env) do
+    Enum.reduce(@leaked_runtime_vars, env, fn var, acc ->
+      List.keystore(acc, var, 0, {var, nil})
+    end)
+  end
+
+  defp env_value(env, key) do
+    case List.keyfind(env, key, 0) do
+      {^key, value} -> value
+      nil -> nil
+    end
+  end
+
+  defp command_env(%__MODULE__{} = project) do
+    environment = environment(project)
+
+    if uses_asdf?(project) do
+      sanitize_asdf_env(environment)
+    else
+      environment
     end
   end
 end
