@@ -20,20 +20,6 @@ defmodule GreenValidation.Projects do
       default_branch: "master",
       formatter_exs_setup: {__MODULE__, :thirty_days_of_elixir_formatter_exs_setup}
     },
-    "anoma" => %Project{
-      name: "anoma",
-      url: "https://github.com/anoma/anoma",
-      default_branch: "base",
-      subprojects: [
-        # 5 of the 6 packages have problems with compiling lib/google_protos/struct.pb.ex
-        # %Subproject{path: "apps/anoma_client"},
-        # %Subproject{path: "apps/anoma_lib"},
-        # %Subproject{path: "apps/anoma_node"},
-        # %Subproject{path: "apps/anoma_protobuf"},
-        %Subproject{path: "apps/compile_protoc"}
-        # %Subproject{path: "apps/event_broker"}
-      ]
-    },
     "awesome-elixir" => %Project{
       name: "awesome-elixir",
       url: "https://github.com/h4cc/awesome-elixir",
@@ -264,7 +250,10 @@ defmodule GreenValidation.Projects do
     # Unable to compile, not updated since 2019
     "hound",
     # Unable to compile, not updated since 2023
-    "coherence"
+    "coherence",
+    # Depends on the Rust crate 'cairo', which fetches 'cairo-platinum-prover'
+    # over SSH from a git repository that cannot be authenticated. Unable to compile.
+    "anoma"
   ]
 
   @spec load(String.t()) :: {:ok, Project.t()} | {:error, String.t()}
