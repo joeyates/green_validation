@@ -229,6 +229,11 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/phoenixframework/phoenix",
       formatter_exs_setup: {__MODULE__, :phoenix_formatter_exs_setup}
     },
+    "realtime" => %Project{
+      name: "realtime",
+      url: "https://github.com/supabase/realtime",
+      post_checkout: {__MODULE__, :realtime_post_checkout}
+    },
     "symphony" => %Project{
       name: "symphony",
       url: "https://github.com/openai/symphony",
@@ -552,6 +557,18 @@ defmodule GreenValidation.Projects do
       """
       erlang 26.2.1
       elixir 1.17.0
+      """
+    )
+  end
+
+  def realtime_post_checkout(%Project{} = project) do
+    # The repository pins imprecise versions (e.g. "erlang 27") that asdf cannot
+    # resolve, and a nodejs version that isn't needed for formatting.
+    create_tool_versions(
+      project,
+      """
+      erlang 27.3.4.6
+      elixir 1.18.4-otp-27
       """
     )
   end
