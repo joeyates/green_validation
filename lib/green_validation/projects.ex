@@ -150,6 +150,13 @@ defmodule GreenValidation.Projects do
       url: "https://github.com/firezone/firezone",
       path: "elixir"
     },
+    "floki" => %Project{
+      name: "floki",
+      url: "https://github.com/philss/floki",
+      # Floki's optional `fast_html` dependency builds native code with CMake.
+      # Formatting checks don't need it compiled.
+      compile: false
+    },
     "grpc" => %Project{
       name: "grpc",
       url: "https://github.com/elixir-grpc/grpc",
