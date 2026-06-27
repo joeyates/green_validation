@@ -203,6 +203,47 @@ defmodule GreenValidation.ReportWriterTest do
     end
   end
 
+  describe "filename/3" do
+    test "builds the JSON filename from project name and short commit SHA" do
+      assert ReportWriter.filename("phoenix", "abc123def456789", :json) ==
+               "validation_phoenix_abc123de.json"
+    end
+
+    test "builds the text filename" do
+      assert ReportWriter.filename("phoenix", "abc123def456789", :text) ==
+               "validation_phoenix_abc123de.txt"
+    end
+
+    test "replaces spaces in the project name" do
+      assert ReportWriter.filename("my project", "abc123def456789", :json) ==
+               "validation_my_project_abc123de.json"
+    end
+  end
+
+  describe "report_exists?/4" do
+    test "is true when a matching report already exists in the output dir" do
+      filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
+      File.write!(Path.join(@tmp_dir, filename), "{}")
+
+      assert ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
+               output_dir: @tmp_dir
+             )
+    end
+
+    test "is false when no matching report exists" do
+      refute ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
+               output_dir: @tmp_dir
+             )
+    end
+
+    test "matches only the same commit SHA" do
+      filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
+      File.write!(Path.join(@tmp_dir, filename), "{}")
+
+      refute ReportWriter.report_exists?("phoenix", "999999999999", :json, output_dir: @tmp_dir)
+    end
+  end
+
   describe "write/3" do
     test "writes JSON format with auto-generated filename", %{clean_result: result} do
       assert {:ok, filepath} = ReportWriter.write(result, :json, output_dir: @tmp_dir)

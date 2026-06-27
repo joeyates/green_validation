@@ -81,6 +81,36 @@ defmodule GreenValidation.ReportWriter do
     end
   end
 
+  @doc """
+  Builds the report filename for a project and commit SHA.
+
+  The name follows the convention `validation_<project_slug>_<short_sha>.<ext>`,
+  where the short SHA is the first 8 characters of the commit SHA.
+  """
+  @spec filename(String.t(), String.t(), :json | :text) :: String.t()
+  def filename(project_name, commit_sha, format) when format in [:json, :text] do
+    short_sha = String.slice(commit_sha, 0, 8)
+    extension = if format == :json, do: "json", else: "txt"
+    project_slug = String.replace(project_name, " ", "_")
+
+    "validation_#{project_slug}_#{short_sha}.#{extension}"
+  end
+
+  @doc """
+  Returns `true` if a report for the given project and commit SHA already exists.
+
+  ## Options
+  - `:output_dir` - Directory to look in (default: current directory)
+  """
+  @spec report_exists?(String.t(), String.t(), :json | :text, keyword()) :: boolean()
+  def report_exists?(project_name, commit_sha, format, opts \\ []) do
+    output_dir = Keyword.get(opts, :output_dir, ".")
+
+    output_dir
+    |> Path.join(filename(project_name, commit_sha, format))
+    |> File.exists?()
+  end
+
   # Private helpers
 
   @spec format_json(Result.t()) :: String.t()
@@ -196,14 +226,7 @@ defmodule GreenValidation.ReportWriter do
 
   @spec generate_filename(Result.t(), :json | :text) :: String.t()
   defp generate_filename(result, format) do
-    # Use commit SHA instead of timestamp for filename
-    commit_sha = result.test_run.commit_sha
-    # Take first 8 characters of commit SHA
-    short_sha = String.slice(commit_sha, 0, 8)
-    extension = if format == :json, do: "json", else: "txt"
-    project_slug = String.replace(result.test_run.project_name, " ", "_")
-
-    "validation_#{project_slug}_#{short_sha}.#{extension}"
+    filename(result.test_run.project_name, result.test_run.commit_sha, format)
   end
 
   @spec encode_result(Result.t()) :: map()

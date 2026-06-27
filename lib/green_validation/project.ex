@@ -132,8 +132,8 @@ defmodule GreenValidation.Project do
   defp prepare_cloned(%__MODULE__{} = project) do
     Logger.info("Updating existing repository: #{project.name}")
 
-    with :ok <- clean_repo(project),
-         :ok <- update_repo(project) do
+    with :ok <- update_repo(project),
+         :ok <- clean_repo(project) do
       :ok
     end
   end

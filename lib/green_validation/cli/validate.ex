@@ -5,6 +5,7 @@ defmodule GreenValidation.CLI.Validate do
 
   alias GreenValidation.{
     BaselineFormatter,
+    ClonedRepo,
     GreenDependency,
     Projects,
     Project,
@@ -19,6 +20,8 @@ defmodule GreenValidation.CLI.Validate do
   require Logger
 
   @program "mix green_validation.validate"
+
+  @results_dir "results"
 
   @common_switches [
     format: %{type: :string, description: "Output format for reports ('text' or 'json')"},
@@ -107,7 +110,8 @@ defmodule GreenValidation.CLI.Validate do
 
     opts = [
       green_dependency: green_dependency,
-      verbose: switches[:verbose] || false
+      verbose: switches[:verbose] || false,
+      skip_existing: switches[:format] == "json"
     ]
 
     results =
@@ -118,6 +122,9 @@ defmodule GreenValidation.CLI.Validate do
           Logger.info("Checking project: #{project.name}")
 
           case check_project_rules(project, rules, opts) do
+            {:ok, :skipped} ->
+              {:cont, acc}
+
             {:ok, results} ->
               {:cont, results ++ acc}
 
@@ -168,12 +175,27 @@ defmodule GreenValidation.CLI.Validate do
   end
 
   @spec check_project_rules(Project.t(), [atom], keyword) ::
-          {:ok, [Result.t()]} | {:error, String.t()}
+          {:ok, [Result.t()] | :skipped} | {:error, String.t()}
   defp check_project_rules(project, rules, opts) do
-    with {:ok, cloned_repo} <- Project.clone(project),
-         {:ok, results} <- validate_rules(cloned_repo, project, rules, opts) do
-      {:ok, results}
+    with {:ok, cloned_repo} <- Project.clone(project) do
+      if skip_existing?(project, cloned_repo, opts) do
+        Logger.info(
+          "Skipping #{project.name}: JSON report already exists for commit #{cloned_repo.commit_sha}"
+        )
+
+        {:ok, :skipped}
+      else
+        validate_rules(cloned_repo, project, rules, opts)
+      end
     end
+  end
+
+  @spec skip_existing?(Project.t(), ClonedRepo.t(), keyword) :: boolean
+  defp skip_existing?(project, cloned_repo, opts) do
+    Keyword.get(opts, :skip_existing, false) and
+      ReportWriter.report_exists?(project.name, cloned_repo.commit_sha, :json,
+        output_dir: @results_dir
+      )
   end
 
   @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
@@ -301,9 +323,7 @@ defmodule GreenValidation.CLI.Validate do
   end
 
   defp write_report(result, format) do
-    output_dir = "results"
-
-    case ReportWriter.write(result, format, output_dir: output_dir) do
+    case ReportWriter.write(result, format, output_dir: @results_dir) do
       {:ok, filepath} ->
         Logger.info("\n📄 Report saved to: #{filepath}")
         :ok
