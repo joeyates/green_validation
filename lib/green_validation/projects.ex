@@ -69,6 +69,10 @@ defmodule GreenValidation.Projects do
     "elixir" => %Project{
       name: "elixir",
       url: "https://github.com/elixir-lang/elixir",
+      # Elixir is built with `make` during post-checkout; running `mix compile`
+      # against a synthesized mix.exs would recompile the whole source tree
+      # (including conflicting test fixtures) and fail.
+      compile: false,
       environment: {__MODULE__, :elixir_environment},
       post_checkout: {__MODULE__, :elixir_post_checkout},
       rule_config: [

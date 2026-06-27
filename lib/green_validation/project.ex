@@ -20,6 +20,7 @@ defmodule GreenValidation.Project do
     :mix_exs_add_dependency,
     :formatter_exs_setup,
     :url,
+    compile: true,
     default_branch: @default_branch,
     rule_config: [],
     subprojects: []
@@ -33,6 +34,7 @@ defmodule GreenValidation.Project do
           post_checkout: {atom, atom} | nil,
           mix_exs_add_dependency: {atom, atom} | nil,
           formatter_exs_setup: {atom, atom} | nil,
+          compile: boolean(),
           rule_config: list({atom, keyword()}),
           subprojects: list(Subproject.t())
         }
@@ -259,6 +261,11 @@ defmodule GreenValidation.Project do
     :ok = MixExs.reset(project, mix_exs_action)
 
     result
+  end
+
+  def compile(%__MODULE__{compile: false}) do
+    Logger.info("  Skipping compilation")
+    :ok
   end
 
   def compile(%__MODULE__{} = project) do

@@ -41,6 +41,14 @@ defmodule GreenValidation.ProjectTest do
     end
   end
 
+  describe "compile/1" do
+    test "skips compilation when the project is configured not to compile" do
+      project = %Project{name: "elixir", url: "https://example.com/elixir.git", compile: false}
+
+      assert Project.compile(project) == :ok
+    end
+  end
+
   defp upstream_head(upstream) do
     {sha, 0} = System.cmd("git", ["rev-parse", "HEAD"], cd: upstream)
     String.trim(sha)
