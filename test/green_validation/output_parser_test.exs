@@ -3,21 +3,20 @@ defmodule GreenValidation.OutputParserTest do
 
   import GreenValidation.OutputParser
 
-  alias GreenValidation.{Project, RuleResult}
+  alias GreenValidation.{Change, Project, RuleResult, Warning}
 
   describe "parse_output/3" do
-    test "extracts file paths from warnings" do
+    test "extracts warnings" do
       project = %Project{name: "test_project", url: "https://example.com/test_project.git"}
 
       output = """
-      5 | Some text
-      └─ config/my_app.exs:
+      warning: some warning
+      5 | some_code()
+      └─ config/my_app.exs: (file)
 
-      8 | Some other text
-      └─ lib/my_app_web/controllers/page_controller.ex:
-
-      12 | More text, same file
-      └─ lib/my_app_web/controllers/page_controller.ex:
+      warning: another warning
+      8 | other_code()
+      └─ lib/my_app_web/controllers/page_controller.ex: (file)
       """
 
       {:ok, result} = parse_output(project, :my_rule, output)
@@ -26,20 +25,34 @@ defmodule GreenValidation.OutputParserTest do
                rule: :my_rule,
                changes: [],
                warnings: [
-                 "config/my_app.exs",
-                 "lib/my_app_web/controllers/page_controller.ex"
+                 %Warning{
+                   message: "some warning",
+                   line: 5,
+                   code: "some_code()",
+                   file: "config/my_app.exs"
+                 },
+                 %Warning{
+                   message: "another warning",
+                   line: 8,
+                   code: "other_code()",
+                   file: "lib/my_app_web/controllers/page_controller.ex"
+                 }
                ]
              }
     end
 
-    test "extracts file paths from changes with ANSI color codes" do
+    test "extracts changes with ANSI color codes" do
       project = %Project{name: "test_project", url: "https://example.com/test_project.git"}
 
       root_path = [__DIR__, "..", ".."] |> Path.join() |> Path.expand()
 
       output = """
-      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/controllers/page_controller.ex\e[0m
-      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/views/page_view.ex\e[0m
+      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/controllers/page_controller.ex
+      \e[0m
+      diff one
+      \e[1m\e[31m#{root_path}/repos/test_project/lib/my_app_web/views/page_view.ex
+      \e[0m
+      diff two
       """
 
       {:ok, result} = parse_output(project, :my_rule, output)
@@ -47,8 +60,14 @@ defmodule GreenValidation.OutputParserTest do
       assert result == %RuleResult{
                rule: :my_rule,
                changes: [
-                 "lib/my_app_web/controllers/page_controller.ex",
-                 "lib/my_app_web/views/page_view.ex"
+                 %Change{
+                   path: "lib/my_app_web/controllers/page_controller.ex",
+                   diff: "diff one\n"
+                 },
+                 %Change{
+                   path: "lib/my_app_web/views/page_view.ex",
+                   diff: "diff two\n"
+                 }
                ],
                warnings: []
              }

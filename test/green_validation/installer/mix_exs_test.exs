@@ -3,7 +3,7 @@ defmodule GreenValidation.Installer.MixExsTest do
 
   import GreenValidation.Installer.MixExs
 
-  describe "add_dependency/2" do
+  describe "add_dependency_to_content/2" do
     test "adds dependency to content without deps block" do
       content = """
       defmodule MyProject.MixProject do
@@ -18,7 +18,7 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       expected = """
         defp deps() do
@@ -45,7 +45,7 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       expected = """
         def project() do
@@ -81,12 +81,12 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       expected = """
           [
-            {:ex_unit, \"~> 1.0\"},
-            {:green_formatter, \"~> 0.1\"}
+            {:green_formatter, \"~> 0.1\"},
+            {:ex_unit, \"~> 1.0\"}
           ]
       """
 
@@ -112,7 +112,7 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       expected = """
           [
@@ -144,7 +144,7 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       expected = """
           [
@@ -169,7 +169,7 @@ defmodule GreenValidation.Installer.MixExsTest do
       end
       """
 
-      updated = add_dependency(content, {:green_formatter, "~> 0.1"})
+      updated = add_dependency_to_content(content, {:green_formatter, "~> 0.1"})
 
       assert String.ends_with?(updated, "end\n")
     end
