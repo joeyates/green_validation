@@ -305,7 +305,7 @@ defmodule GreenValidation.Projects do
   end
 
   defp create_tool_versions(%Project{} = project, content) do
-    Logger.info("Creating .tool-versions for #{project.name} repository")
+    Logger.info("Creating .tool-versions file")
     Logger.debug(".tool-versions content:\n#{content}")
 
     path = Project.path(project)
@@ -362,7 +362,7 @@ defmodule GreenValidation.Projects do
   end
 
   def benchee_mix_exs_add_dependency(%Project{} = project, dependency) do
-    Logger.info("Adding Green dependency to Benchee's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to #{project.path}/mix.exs...")
 
     mix_path = Project.mix_exs_path(project)
     content = File.read!(mix_path)
@@ -394,7 +394,7 @@ defmodule GreenValidation.Projects do
   end
 
   def desktop_mix_exs_add_dependency(%Project{} = project, dependency) do
-    Logger.info("Adding Green dependency to Desktop's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to #{project.path}/mix.exs...")
 
     mix_path = Project.mix_exs_path(project)
     content = File.read!(mix_path)
@@ -426,7 +426,7 @@ defmodule GreenValidation.Projects do
   end
 
   def electric_mix_exs_add_dependency(%Project{} = project, dependency) do
-    Logger.info("Adding Green dependency to Electric's #{project.path}/mix.exs...")
+    Logger.info("Adding Green dependency to #{project.path}/mix.exs...")
 
     mix_path =
       project
@@ -468,7 +468,7 @@ defmodule GreenValidation.Projects do
   end
 
   def elixir_post_checkout(%Project{} = project) do
-    Logger.info("Running post-checkout step, 'make', for Elixir repository...")
+    Logger.info("Running post-checkout step, 'make'...")
     path = Project.path(project)
 
     case System.cmd("make", [], cd: path, stderr_to_stdout: true) do
@@ -497,12 +497,12 @@ defmodule GreenValidation.Projects do
   end
 
   def kaffy_post_checkout(%Project{} = project) do
-    Logger.info("Running post-checkout step for Kaffy repository...")
+    Logger.info("Running post-checkout step...")
     :ok = update_dependency(project, "ecto")
   end
 
   def learn_elixir_post_checkout(%Project{} = project) do
-    Logger.info("Running post-checkout step for learn-elixir repository...")
+    Logger.info("Running post-checkout step...")
     path = Project.path(project)
 
     # The file examples/lists/sum1.exs has syntax errors
@@ -546,7 +546,7 @@ defmodule GreenValidation.Projects do
   end
 
   def run_mix_local_hex(%Project{} = project) do
-    Logger.info("Running 'mix local.hex --force' for #{project.name} repository...")
+    Logger.info("Running 'mix local.hex --force'...")
 
     path = Project.path(project)
 
@@ -560,7 +560,7 @@ defmodule GreenValidation.Projects do
   end
 
   def run_mix_local_rebar(%Project{} = project) do
-    Logger.info("Running 'mix local.rebar --force' for #{project.name} repository...")
+    Logger.info("Running 'mix local.rebar --force'...")
 
     path = Project.path(project)
 
@@ -574,7 +574,7 @@ defmodule GreenValidation.Projects do
   end
 
   defp update_dependency(%Project{} = project, dependency) do
-    Logger.info("Updating #{dependency} dependency for #{project.name} repository...")
+    Logger.info("Updating #{dependency} dependency...")
     path = Project.path(project)
 
     with {_output, 0} <- Project.mix_command(project, "deps.update #{dependency}"),

@@ -56,7 +56,18 @@ defmodule GreenValidation.CLI.Validate do
     }
   ]
 
+  # Mix tasks boot the default Logger handler with the built-in formatter, which
+  # ignores the `:default_formatter` config. Apply our configured formatter (which
+  # prints the `:project` metadata) to the running handler so it takes effect.
+  @doc false
+  def configure_logger() do
+    formatter = :logger |> Application.get_env(:default_formatter, []) |> Logger.Formatter.new()
+    :logger.update_handler_config(:default, :formatter, formatter)
+  end
+
   def main(args) do
+    configure_logger()
+
     case HelpfulOptions.parse_commands(args, @commands) do
       {:ok, parsed} ->
         run(parsed)
@@ -117,7 +128,8 @@ defmodule GreenValidation.CLI.Validate do
         Projects.all(),
         [],
         fn project, acc ->
-          Logger.info("Checking project: #{project.name}")
+          Logger.metadata(project: project.name)
+          Logger.info("Checking project")
 
           case check_project_rules(project, rules, opts) do
             {:ok, :skipped} ->
@@ -128,7 +140,7 @@ defmodule GreenValidation.CLI.Validate do
               {:cont, results ++ acc}
 
             {:error, reason} ->
-              Logger.info("Validation failed for #{project.name}: #{reason}")
+              Logger.info("Validation failed: #{reason}")
               {:halt, {:error, reason}}
           end
         end
@@ -142,6 +154,7 @@ defmodule GreenValidation.CLI.Validate do
 
   defp check_project(project_name, switches) do
     project = Projects.load!(project_name)
+    Logger.metadata(project: project.name)
 
     with {:ok, green_dependency} = GreenDependency.new(switches[:green]),
          {:ok, rules} = prepare_rules(switches[:rule]),
@@ -230,7 +243,7 @@ defmodule GreenValidation.CLI.Validate do
           subprojects: []
       }
 
-      Logger.info("Running validation on #{subproject.path} subproject of #{project.name}")
+      Logger.info("Running validation on subproject #{subproject.path}")
 
       {:ok, [result]} = validate_rules(cloned_repo, fake_project, rules, opts)
 

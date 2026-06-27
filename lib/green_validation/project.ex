@@ -130,7 +130,7 @@ defmodule GreenValidation.Project do
   end
 
   defp prepare_cloned(%__MODULE__{} = project) do
-    Logger.info("Updating existing repository: #{project.name}")
+    Logger.info("Updating existing repository")
 
     with :ok <- update_repo(project),
          :ok <- clean_repo(project) do
@@ -140,7 +140,7 @@ defmodule GreenValidation.Project do
 
   @spec clone_repo(t()) :: :ok | {:error, String.t()}
   defp clone_repo(%__MODULE__{} = project) do
-    Logger.info("Cloning repository: #{project.name}")
+    Logger.info("Cloning repository")
 
     with :ok <- do_clone(project) do
       :ok
@@ -252,7 +252,7 @@ defmodule GreenValidation.Project do
           :ok
 
         {output, _} ->
-          Logger.error("Failed to install dependencies for #{project.name}: #{output}")
+          Logger.error("Failed to install dependencies: #{output}")
           {:error, "Failed to install deps: #{output}"}
       end
 
@@ -292,7 +292,7 @@ defmodule GreenValidation.Project do
       end
 
     full_command = "#{prefix}mix #{command}"
-    Logger.debug("Running command: #{full_command} for #{project.name} in #{project_path}")
+    Logger.debug("Running command: #{full_command} in #{project_path}")
 
     streamer =
       CollectableStreamer.new(fn line -> Logger.debug("=> #{String.trim_trailing(line)}") end,
@@ -323,7 +323,7 @@ defmodule GreenValidation.Project do
         collect: true
       )
 
-    Logger.debug("Running command: #{inspect(command)} for #{project.name} in #{inspect(path)}")
+    Logger.debug("Running command: #{inspect(command)} in #{inspect(path)}")
 
     case System.shell(command, cd: path, stderr_to_stdout: true, into: streamer) do
       {_output1, 0} ->
