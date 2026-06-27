@@ -93,10 +93,8 @@ defmodule GreenValidation.CLI.Validate do
 
   defp check_all(switches) do
     case check_all_projects(switches) do
-      {:ok, results} ->
+      {:ok, _results} ->
         Logger.info("All projects validated successfully.")
-
-        handle_format_output(results, switches)
 
       {:error, reason} ->
         Logger.info("Error during validation: #{reason}")
@@ -126,6 +124,7 @@ defmodule GreenValidation.CLI.Validate do
               {:cont, acc}
 
             {:ok, results} ->
+              handle_format_output(results, switches)
               {:cont, results ++ acc}
 
             {:error, reason} ->
