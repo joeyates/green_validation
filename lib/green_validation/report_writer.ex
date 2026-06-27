@@ -3,7 +3,7 @@ defmodule GreenValidation.ReportWriter do
   Writes validation results to JSON or text files with timestamped filenames.
   """
 
-  alias GreenValidation.{Result, RuleResult, TestRun}
+  alias GreenValidation.{Change, Result, RuleResult, TestRun, Warning}
 
   @doc """
   Writes validation results to a file in the specified format.
@@ -238,8 +238,16 @@ defmodule GreenValidation.ReportWriter do
   defp encode_rule_result(rule_result) do
     %{
       rule: rule_result.rule,
-      changes: rule_result.changes,
-      warnings: rule_result.warnings
+      changes: Enum.map(rule_result.changes, &change_path/1),
+      warnings: Enum.map(rule_result.warnings, &warning_path/1)
     }
   end
+
+  @spec change_path(Change.t() | String.t()) :: String.t()
+  defp change_path(%Change{path: path}), do: path
+  defp change_path(path) when is_binary(path), do: path
+
+  @spec warning_path(Warning.t() | String.t()) :: String.t()
+  defp warning_path(%Warning{file: file}), do: file
+  defp warning_path(file) when is_binary(file), do: file
 end

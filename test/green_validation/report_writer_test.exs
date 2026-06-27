@@ -1,7 +1,7 @@
 defmodule GreenValidation.ReportWriterTest do
   use ExUnit.Case, async: true
 
-  alias GreenValidation.{ReportWriter, Result, RuleResult, TestRun}
+  alias GreenValidation.{Change, ReportWriter, Result, RuleResult, TestRun, Warning}
 
   @tmp_dir "/tmp/green_validation_test"
 
@@ -79,6 +79,50 @@ defmodule GreenValidation.ReportWriterTest do
       rule1 = Enum.find(parsed["rules"], &(&1["rule"] == "test_rule_1"))
       assert length(rule1["changes"]) == 2
       assert "lib/file1.ex" in rule1["changes"]
+    end
+
+    test "serializes Change and Warning structs as file paths matching the schema" do
+      test_run = %TestRun{
+        project_name: "test_project",
+        repository: "https://github.com/test/project",
+        commit_sha: "abc123def456",
+        branch: "main",
+        green_version: "0.1.0"
+      }
+
+      result = %Result{
+        test_run: test_run,
+        baseline: :clean,
+        rules: [
+          %RuleResult{
+            rule: :avoid_needless_pipelines,
+            changes: [
+              %Change{path: "lib/phoenix/endpoint.ex", diff: "-foo\n+bar"},
+              %Change{path: "lib/phoenix/router.ex", diff: "-baz\n+qux"}
+            ],
+            warnings: [
+              %Warning{
+                code: "some_code()",
+                file: "test/phoenix/endpoint_test.exs",
+                line: 42,
+                message: "a warning"
+              }
+            ]
+          }
+        ]
+      }
+
+      filepath = Path.join(@tmp_dir, "test_structs.json")
+
+      assert {:ok, ^filepath} = ReportWriter.write_json(result, filepath)
+
+      {:ok, content} = File.read(filepath)
+      {:ok, parsed} = Jason.decode(content)
+
+      rule = Enum.find(parsed["rules"], &(&1["rule"] == "avoid_needless_pipelines"))
+
+      assert rule["changes"] == ["lib/phoenix/endpoint.ex", "lib/phoenix/router.ex"]
+      assert rule["warnings"] == ["test/phoenix/endpoint_test.exs"]
     end
 
     test "returns error for invalid filepath" do
