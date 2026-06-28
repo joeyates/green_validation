@@ -3,12 +3,7 @@ defmodule GreenValidation.ReportWriterTest do
 
   alias GreenValidation.{Change, ReportWriter, Result, RuleResult, TestRun, Warning}
 
-  @tmp_dir "/tmp/green_validation_test"
-
   setup do
-    File.rm_rf!(@tmp_dir)
-    File.mkdir_p!(@tmp_dir)
-
     test_run = %TestRun{
       project_name: "test_project",
       repository: "https://github.com/test/project",
@@ -48,8 +43,9 @@ defmodule GreenValidation.ReportWriterTest do
   end
 
   describe "write_json/2" do
-    test "writes JSON file successfully", %{clean_result: result} do
-      filepath = Path.join(@tmp_dir, "test_result.json")
+    @tag :tmp_dir
+    test "writes JSON file successfully", %{clean_result: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_result.json")
 
       assert {:ok, ^filepath} = ReportWriter.write_json(result, filepath)
       assert File.exists?(filepath)
@@ -63,8 +59,9 @@ defmodule GreenValidation.ReportWriterTest do
       assert length(parsed["rules"]) == 0
     end
 
-    test "creates valid JSON structure", %{result_with_changes: result} do
-      filepath = Path.join(@tmp_dir, "test_result_changes.json")
+    @tag :tmp_dir
+    test "creates valid JSON structure", %{result_with_changes: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_result_changes.json")
 
       assert {:ok, ^filepath} = ReportWriter.write_json(result, filepath)
 
@@ -81,7 +78,10 @@ defmodule GreenValidation.ReportWriterTest do
       assert "lib/file1.ex" in rule1["changes"]
     end
 
-    test "serializes Change and Warning structs as file paths matching the schema" do
+    @tag :tmp_dir
+    test "serializes Change and Warning structs as file paths matching the schema", %{
+      tmp_dir: tmp_dir
+    } do
       test_run = %TestRun{
         project_name: "test_project",
         repository: "https://github.com/test/project",
@@ -112,7 +112,7 @@ defmodule GreenValidation.ReportWriterTest do
         ]
       }
 
-      filepath = Path.join(@tmp_dir, "test_structs.json")
+      filepath = Path.join(tmp_dir, "test_structs.json")
 
       assert {:ok, ^filepath} = ReportWriter.write_json(result, filepath)
 
@@ -144,8 +144,9 @@ defmodule GreenValidation.ReportWriterTest do
   end
 
   describe "write_text/2" do
-    test "writes text file successfully", %{clean_result: result} do
-      filepath = Path.join(@tmp_dir, "test_result.txt")
+    @tag :tmp_dir
+    test "writes text file successfully", %{clean_result: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_result.txt")
 
       assert {:ok, ^filepath} = ReportWriter.write_text(result, filepath)
       assert File.exists?(filepath)
@@ -157,8 +158,9 @@ defmodule GreenValidation.ReportWriterTest do
       assert content =~ "test_rule_2"
     end
 
-    test "formats baseline status correctly", %{result_with_changes: result} do
-      filepath = Path.join(@tmp_dir, "test_baseline.txt")
+    @tag :tmp_dir
+    test "formats baseline status correctly", %{result_with_changes: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_baseline.txt")
 
       assert {:ok, ^filepath} = ReportWriter.write_text(result, filepath)
 
@@ -166,8 +168,12 @@ defmodule GreenValidation.ReportWriterTest do
       assert content =~ "Baseline Status: 🔧 Created formatting commit"
     end
 
-    test "includes changes and warnings in output", %{result_with_changes: result} do
-      filepath = Path.join(@tmp_dir, "test_details.txt")
+    @tag :tmp_dir
+    test "includes changes and warnings in output", %{
+      result_with_changes: result,
+      tmp_dir: tmp_dir
+    } do
+      filepath = Path.join(tmp_dir, "test_details.txt")
 
       assert {:ok, ^filepath} = ReportWriter.write_text(result, filepath)
 
@@ -179,8 +185,9 @@ defmodule GreenValidation.ReportWriterTest do
       assert content =~ "Warnings for 1 files"
     end
 
-    test "includes summary statistics", %{result_with_changes: result} do
-      filepath = Path.join(@tmp_dir, "test_summary.txt")
+    @tag :tmp_dir
+    test "includes summary statistics", %{result_with_changes: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_summary.txt")
 
       assert {:ok, ^filepath} = ReportWriter.write_text(result, filepath)
 
@@ -192,8 +199,9 @@ defmodule GreenValidation.ReportWriterTest do
       assert content =~ "Rules with No Issues: 1"
     end
 
-    test "formats clean results", %{clean_result: result} do
-      filepath = Path.join(@tmp_dir, "test_clean.txt")
+    @tag :tmp_dir
+    test "formats clean results", %{clean_result: result, tmp_dir: tmp_dir} do
+      filepath = Path.join(tmp_dir, "test_clean.txt")
 
       assert {:ok, ^filepath} = ReportWriter.write_text(result, filepath)
 
@@ -221,57 +229,70 @@ defmodule GreenValidation.ReportWriterTest do
   end
 
   describe "report_exists?/4" do
-    test "is true when a matching report already exists in the output dir" do
+    @tag :tmp_dir
+    test "is true when a matching report already exists in the output dir", %{tmp_dir: tmp_dir} do
       filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
-      @tmp_dir |> Path.join(filename) |> File.write!("{}")
+      tmp_dir |> Path.join(filename) |> File.write!("{}")
 
       assert ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
-               output_dir: @tmp_dir
+               output_dir: tmp_dir
              )
     end
 
-    test "is false when no matching report exists" do
+    @tag :tmp_dir
+    test "is false when no matching report exists", %{tmp_dir: tmp_dir} do
       refute ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
-               output_dir: @tmp_dir
+               output_dir: tmp_dir
              )
     end
 
-    test "matches only the same commit SHA" do
+    @tag :tmp_dir
+    test "matches only the same commit SHA", %{tmp_dir: tmp_dir} do
       filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
-      @tmp_dir |> Path.join(filename) |> File.write!("{}")
+      tmp_dir |> Path.join(filename) |> File.write!("{}")
 
-      refute ReportWriter.report_exists?("phoenix", "999999999999", :json, output_dir: @tmp_dir)
+      refute ReportWriter.report_exists?("phoenix", "999999999999", :json, output_dir: tmp_dir)
     end
   end
 
   describe "write/3" do
-    test "writes JSON format with auto-generated filename", %{clean_result: result} do
-      assert {:ok, filepath} = ReportWriter.write(result, :json, output_dir: @tmp_dir)
+    @tag :tmp_dir
+    test "writes JSON format with auto-generated filename", %{
+      clean_result: result,
+      tmp_dir: tmp_dir
+    } do
+      assert {:ok, filepath} = ReportWriter.write(result, :json, output_dir: tmp_dir)
       assert File.exists?(filepath)
       assert String.ends_with?(filepath, ".json")
       # Filename should contain project name and first 8 chars of commit SHA
       assert filepath =~ "validation_test_project_abc123de.json"
     end
 
-    test "writes text format with auto-generated filename", %{clean_result: result} do
-      assert {:ok, filepath} = ReportWriter.write(result, :text, output_dir: @tmp_dir)
+    @tag :tmp_dir
+    test "writes text format with auto-generated filename", %{
+      clean_result: result,
+      tmp_dir: tmp_dir
+    } do
+      assert {:ok, filepath} = ReportWriter.write(result, :text, output_dir: tmp_dir)
       assert File.exists?(filepath)
       assert String.ends_with?(filepath, ".txt")
       # Filename should contain project name and first 8 chars of commit SHA
       assert filepath =~ "validation_test_project_abc123de.txt"
     end
 
-    test "uses custom filename when provided", %{clean_result: result} do
+    @tag :tmp_dir
+    test "uses custom filename when provided", %{clean_result: result, tmp_dir: tmp_dir} do
       custom_name = "my_custom_report.json"
 
       assert {:ok, filepath} =
-               ReportWriter.write(result, :json, output_dir: @tmp_dir, filename: custom_name)
+               ReportWriter.write(result, :json, output_dir: tmp_dir, filename: custom_name)
 
       assert String.ends_with?(filepath, custom_name)
     end
 
-    test "creates output directory if it doesn't exist", %{clean_result: result} do
-      nested_dir = Path.join(@tmp_dir, "nested/deep/path")
+    @tag :tmp_dir
+    test "creates output directory if it doesn't exist", %{clean_result: result, tmp_dir: tmp_dir} do
+      nested_dir = Path.join(tmp_dir, "nested/deep/path")
       refute File.exists?(nested_dir)
 
       assert {:ok, filepath} = ReportWriter.write(result, :json, output_dir: nested_dir)
