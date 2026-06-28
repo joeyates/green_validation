@@ -13,6 +13,9 @@ The validation system:
 4. Captures detailed results as JSON with line-level granularity
 5. Generates aggregate statistics across all projects
 
+For a walkthrough of how a run flows from the command line through validation to
+the written report, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ## Setup
 
 ### Dependencies
