@@ -13,6 +13,7 @@ defmodule GreenValidation.CLI.Validate do
     Result,
     Rules,
     RuleValidator,
+    Subproject,
     TestRun
   }
 
@@ -243,6 +244,7 @@ defmodule GreenValidation.CLI.Validate do
           subprojects: []
       }
 
+      Logger.metadata(project: subproject_metadata_label(project, subproject))
       Logger.info("Running validation on subproject #{subproject.path}")
 
       {:ok, [result]} = validate_rules(cloned_repo, fake_project, rules, opts)
@@ -254,6 +256,10 @@ defmodule GreenValidation.CLI.Validate do
       )
     end)
     |> then(&{:ok, &1})
+  end
+
+  defp subproject_metadata_label(%Project{} = project, %Subproject{} = subproject) do
+    "#{project.name}.#{subproject.path}"
   end
 
   @spec build_test_run(Project.t(), ClonedRepo.t(), GreenDependency.t()) ::
