@@ -13,7 +13,10 @@ defmodule GreenValidation.ProjectTest do
 
       File.mkdir_p!(upstream)
 
-      on_exit(fn -> File.rm_rf!(clone_path) end)
+      on_exit(fn ->
+        File.rm_rf!(clone_path)
+        File.rm_rf!(tmp_dir)
+      end)
 
       git!(["init", "-b", "main"], upstream)
       git!(["config", "user.email", "test@example.com"], upstream)

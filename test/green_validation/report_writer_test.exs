@@ -42,6 +42,14 @@ defmodule GreenValidation.ReportWriterTest do
     {:ok, clean_result: clean_result, result_with_changes: result_with_changes}
   end
 
+  setup context do
+    if tmp_dir = context[:tmp_dir] do
+      on_exit(fn -> File.rm_rf!(tmp_dir) end)
+    end
+
+    :ok
+  end
+
   describe "write_json/2" do
     @tag :tmp_dir
     test "writes JSON file successfully", %{clean_result: result, tmp_dir: tmp_dir} do
