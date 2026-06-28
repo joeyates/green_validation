@@ -167,9 +167,6 @@ defmodule GreenValidation.Projects do
         },
         %Subproject{
           path: "grpc_server"
-        },
-        %Subproject{
-          path: "grpc_client"
         }
       ]
     },
