@@ -1,7 +1,31 @@
 defmodule GreenValidation.ProjectTest do
   use ExUnit.Case
 
-  alias GreenValidation.Project
+  alias GreenValidation.{Project, Subproject}
+
+  describe "report_names/1" do
+    test "returns the project name for a project without subprojects" do
+      project = %Project{name: "phoenix", url: "https://example.com/phoenix.git"}
+
+      assert Project.report_names(project) == ["phoenix"]
+    end
+
+    test "returns a qualified name per subproject when the project has subprojects" do
+      project = %Project{
+        name: "electric",
+        url: "https://example.com/electric.git",
+        subprojects: [
+          %Subproject{path: "packages/electric-telemetry"},
+          %Subproject{path: "packages/elixir-client"}
+        ]
+      }
+
+      assert Project.report_names(project) == [
+               "electric (packages/electric-telemetry)",
+               "electric (packages/elixir-client)"
+             ]
+    end
+  end
 
   describe "clone/1 with an existing repository" do
     @describetag :tmp_dir

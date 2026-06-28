@@ -206,9 +206,11 @@ defmodule GreenValidation.CLI.Validate do
   @spec skip_existing?(Project.t(), ClonedRepo.t(), keyword) :: boolean
   defp skip_existing?(project, cloned_repo, opts) do
     Keyword.get(opts, :skip_existing, false) and
-      ReportWriter.report_exists?(project.name, cloned_repo.commit_sha, :json,
-        output_dir: @results_dir
-      )
+      Enum.all?(Project.report_names(project), fn report_name ->
+        ReportWriter.report_exists?(report_name, cloned_repo.commit_sha, :json,
+          output_dir: @results_dir
+        )
+      end)
   end
 
   @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
@@ -252,7 +254,7 @@ defmodule GreenValidation.CLI.Validate do
       update_in(
         result,
         [key(:test_run), key(:project_name)],
-        fn _existing -> "#{project.name} (#{subproject.path})" end
+        fn _existing -> Project.report_name(project, subproject) end
       )
     end)
     |> then(&{:ok, &1})

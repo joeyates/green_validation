@@ -99,6 +99,29 @@ defmodule GreenValidation.Project do
     Keyword.put(config, rule, rule_config[rule])
   end
 
+  @doc """
+  Returns the report name(s) a project produces.
+
+  A project without subprojects yields a single name (its own name). A project
+  with subprojects yields one name per subproject, each qualified with the
+  subproject path. These names match those used as `TestRun.project_name` when
+  writing reports.
+  """
+  @spec report_names(t()) :: [String.t()]
+  def report_names(%__MODULE__{subprojects: []} = project), do: [project.name]
+
+  def report_names(%__MODULE__{subprojects: subprojects} = project) do
+    Enum.map(subprojects, &report_name(project, &1))
+  end
+
+  @doc """
+  Returns the qualified report name for a subproject of a project.
+  """
+  @spec report_name(t(), Subproject.t()) :: String.t()
+  def report_name(%__MODULE__{} = project, %Subproject{} = subproject) do
+    "#{project.name} (#{subproject.path})"
+  end
+
   @spec cloned?(t()) :: boolean()
   def cloned?(%__MODULE__{} = project) do
     project |> path() |> File.dir?()
