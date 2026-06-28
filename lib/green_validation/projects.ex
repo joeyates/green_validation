@@ -206,6 +206,11 @@ defmodule GreenValidation.Projects do
       default_branch: "master",
       environment: {__MODULE__, :live_beats_environment}
     },
+    "nerves" => %Project{
+      name: "nerves",
+      url: "https://github.com/nerves-project/nerves",
+      post_checkout: {__MODULE__, :nerves_post_checkout}
+    },
     "nx" => %Project{
       name: "nx",
       url: "https://github.com/elixir-nx/nx",
@@ -558,6 +563,10 @@ defmodule GreenValidation.Projects do
     )
   end
 
+  def nerves_post_checkout(%Project{} = project) do
+    run_mix_archive_install(project, "nerves_bootstrap")
+  end
+
   def realtime_post_checkout(%Project{} = project) do
     # The repository pins imprecise versions (e.g. "erlang 27") that asdf cannot
     # resolve, and a nodejs version that isn't needed for formatting.
@@ -581,6 +590,24 @@ defmodule GreenValidation.Projects do
 
       {output, _} ->
         {:error, "Failed to run 'mix local.hex' for #{project.name}: #{output}"}
+    end
+  end
+
+  def run_mix_archive_install(%Project{} = project, archive) do
+    Logger.info("Running 'mix archive.install hex #{archive} --force'...")
+
+    path = Project.path(project)
+
+    case System.cmd("mix", ["archive.install", "hex", archive, "--force"],
+           cd: path,
+           stderr_to_stdout: true
+         ) do
+      {_output, 0} ->
+        :ok
+
+      {output, _} ->
+        {:error,
+         "Failed to run 'mix archive.install hex #{archive}' for #{project.name}: #{output}"}
     end
   end
 
