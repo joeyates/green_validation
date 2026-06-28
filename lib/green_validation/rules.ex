@@ -3,6 +3,8 @@ defmodule GreenValidation.Rules do
   Green's rules.
   """
 
+  alias GreenValidation.Project
+
   @doc """
   Returns a list of all Green rules.
 
@@ -31,5 +33,19 @@ defmodule GreenValidation.Rules do
       :avoid_caps,
       :use_parentheses_with_zero_arity_functions
     ]
+  end
+
+  @doc """
+  Returns all Green rules as a config list with every rule enabled, folding in
+  any project-specific setup from the project's `rule_config`.
+
+  The shape matches what `.formatter.exs` expects under the `:green` key, e.g.
+  `[avoid_needless_pipelines: [enabled: true, except: [...]], ...]`.
+  """
+  @spec all_enabled(Project.t()) :: list({atom(), keyword()})
+  def all_enabled(%Project{rule_config: rule_config}) do
+    Enum.map(all(), fn rule ->
+      {rule, Keyword.merge([enabled: true], rule_config[rule] || [])}
+    end)
   end
 end

@@ -7,6 +7,7 @@ defmodule GreenValidation.CLI.Validate do
     BaselineFormatter,
     ClonedRepo,
     GreenDependency,
+    GreenInstaller,
     Projects,
     Project,
     ReportWriter,
@@ -54,6 +55,11 @@ defmodule GreenValidation.CLI.Validate do
       commands: ["check-project", :project_name],
       description: "Check a specific project",
       switches: @check_project_switches ++ @common_switches
+    },
+    %{
+      commands: ["setup-project", :project_name],
+      description: "Prepare a specific project for a validation run, then stop",
+      switches: @common_switches
     }
   ]
 
@@ -93,6 +99,9 @@ defmodule GreenValidation.CLI.Validate do
 
       ["check-project", project_name] ->
         check_project(project_name, switches)
+
+      ["setup-project", project_name] ->
+        setup_project(project_name, switches)
     end
   end
 
@@ -170,6 +179,32 @@ defmodule GreenValidation.CLI.Validate do
       {:error, reason} ->
         Logger.info("Error: #{reason}")
         halt(1)
+    end
+  end
+
+  defp setup_project(project_name, switches) do
+    project = Projects.load!(project_name)
+    Logger.metadata(project: project.name)
+
+    with {:ok, green_dependency} <- GreenDependency.new(switches[:green]),
+         {:ok, _cloned_repo} <- Project.clone(project),
+         :ok <- Project.install_deps(project),
+         :ok <- Project.compile(project),
+         :ok <- install_green(project, green_dependency),
+         {:ok, _action} <-
+           GreenInstaller.prepare_formatter_exs(project, Rules.all_enabled(project)) do
+      Logger.info("Project #{project.name} is ready for a validation run.")
+    else
+      {:error, reason} ->
+        Logger.info("Error: #{reason}")
+        halt(1)
+    end
+  end
+
+  defp install_green(project, green_dependency) do
+    case GreenInstaller.install_green(project, green_version: green_dependency) do
+      {:error, _reason} = error -> error
+      _action -> :ok
     end
   end
 
