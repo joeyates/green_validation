@@ -82,12 +82,12 @@ defmodule GreenValidation.ReportWriterTest do
       assert length(parsed["rules"]) == 2
 
       rule1 = Enum.find(parsed["rules"], &(&1["rule"] == "test_rule_1"))
-      assert length(rule1["changes"]) == 2
-      assert "lib/file1.ex" in rule1["changes"]
+      assert map_size(rule1["changes"]) == 2
+      assert rule1["changes"]["lib/file1.ex"] == []
     end
 
     @tag :tmp_dir
-    test "serializes Change and Warning structs as file paths matching the schema", %{
+    test "serializes changes and warnings as maps of file paths to line numbers", %{
       tmp_dir: tmp_dir
     } do
       test_run = %TestRun{
@@ -105,8 +105,14 @@ defmodule GreenValidation.ReportWriterTest do
           %RuleResult{
             rule: :avoid_needless_pipelines,
             changes: [
-              %Change{path: "lib/phoenix/endpoint.ex", diff: "-foo\n+bar"},
-              %Change{path: "lib/phoenix/router.ex", diff: "-baz\n+qux"}
+              %Change{
+                path: "lib/phoenix/endpoint.ex",
+                diff: " 3    -|  x=1\n    3 +|  x = 1\n"
+              },
+              %Change{
+                path: "lib/phoenix/router.ex",
+                diff: " 7    -|  y=2\n    7 +|  y = 2\n 9    -|  z=3\n    9 +|  z = 3\n"
+              }
             ],
             warnings: [
               %Warning{
@@ -114,6 +120,18 @@ defmodule GreenValidation.ReportWriterTest do
                 file: "test/phoenix/endpoint_test.exs",
                 line: 42,
                 message: "a warning"
+              },
+              %Warning{
+                code: "more_code()",
+                file: "test/phoenix/endpoint_test.exs",
+                line: 10,
+                message: "another warning"
+              },
+              %Warning{
+                code: "other_code()",
+                file: "test/phoenix/router_test.exs",
+                line: 5,
+                message: "a third warning"
               }
             ]
           }
@@ -129,8 +147,15 @@ defmodule GreenValidation.ReportWriterTest do
 
       rule = Enum.find(parsed["rules"], &(&1["rule"] == "avoid_needless_pipelines"))
 
-      assert rule["changes"] == ["lib/phoenix/endpoint.ex", "lib/phoenix/router.ex"]
-      assert rule["warnings"] == ["test/phoenix/endpoint_test.exs"]
+      assert rule["changes"] == %{
+               "lib/phoenix/endpoint.ex" => [3],
+               "lib/phoenix/router.ex" => [7, 9]
+             }
+
+      assert rule["warnings"] == %{
+               "test/phoenix/endpoint_test.exs" => [10, 42],
+               "test/phoenix/router_test.exs" => [5]
+             }
     end
 
     @tag :tmp_dir

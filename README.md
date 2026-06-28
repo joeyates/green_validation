@@ -127,22 +127,25 @@ When using `--format json`, each validation creates a JSON file with the followi
   "rules": [
     {
       "rule": "avoid_needless_pipelines",
-      "changes": [
-        "lib/phoenix/endpoint.ex",
-        "lib/phoenix/router.ex"
-      ],
+      "changes": {
+        "lib/phoenix/endpoint.ex": [12, 45],
+        "lib/phoenix/router.ex": [3]
+      },
       "warnings": []
     },
     {
       "rule": "prefer_pipelines",
-      "changes": [],
-      "warnings": [
-        "test/phoenix/endpoint_test.exs"
-      ]
+      "changes": {},
+      "warnings": {
+        "test/phoenix/endpoint_test.exs": [10, 42]
+      }
     }
   ]
 }
 ```
+
+`changes` and `warnings` are objects keyed by file path, where each value is the
+sorted list of line numbers the rule would change, or warn about, in that file.
 
 ### Text Result Format
 
@@ -171,8 +174,8 @@ A clean baseline means the project follows standard Elixir formatting convention
 ### Rule Results
 
 For each rule:
-- **changes**: List of files that would be changed by this rule
-- **warnings**: List of files that trigger warnings but not changes
+- **changes**: Map of files that would be changed by this rule to the line numbers changed in each file
+- **warnings**: Map of files that trigger warnings but not changes to the line numbers that warn in each file
 
 ### Common Scenarios
 

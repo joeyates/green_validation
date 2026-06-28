@@ -273,16 +273,33 @@ defmodule GreenValidation.ReportWriter do
   defp encode_rule_result(rule_result) do
     %{
       rule: rule_result.rule,
-      changes: Enum.map(rule_result.changes, &change_path/1),
-      warnings: Enum.map(rule_result.warnings, &warning_path/1)
+      changes: encode_changes(rule_result.changes),
+      warnings: encode_warnings(rule_result.warnings)
     }
   end
 
-  @spec change_path(Change.t() | String.t()) :: String.t()
-  defp change_path(%Change{path: path}), do: path
-  defp change_path(path) when is_binary(path), do: path
+  @spec encode_changes([Change.t() | String.t()]) :: %{String.t() => [pos_integer()]}
+  defp encode_changes(changes) do
+    Map.new(changes, fn
+      %Change{} = change -> {change.path, Change.line_numbers(change)}
+      path when is_binary(path) -> {path, []}
+    end)
+  end
 
-  @spec warning_path(Warning.t() | String.t()) :: String.t()
-  defp warning_path(%Warning{file: file}), do: file
-  defp warning_path(file) when is_binary(file), do: file
+  @spec encode_warnings([Warning.t() | String.t()]) :: %{String.t() => [non_neg_integer()]}
+  defp encode_warnings(warnings) do
+    warnings
+    |> Enum.group_by(&warning_file/1, &warning_line/1)
+    |> Map.new(fn {file, lines} ->
+      {file, lines |> Enum.reject(&is_nil/1) |> Enum.uniq() |> Enum.sort()}
+    end)
+  end
+
+  @spec warning_file(Warning.t() | String.t()) :: String.t()
+  defp warning_file(%Warning{file: file}), do: file
+  defp warning_file(file) when is_binary(file), do: file
+
+  @spec warning_line(Warning.t() | String.t()) :: non_neg_integer() | nil
+  defp warning_line(%Warning{line: line}), do: line
+  defp warning_line(file) when is_binary(file), do: nil
 end
