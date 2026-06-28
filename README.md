@@ -15,6 +15,14 @@ The validation system:
 
 ## Setup
 
+### Dependencies
+
+* Elixir 1.14 or later
+* asdf
+* cmake
+
+### Project Modifications
+
 The validation system includes a `GreenInstaller` module that can automatically:
 - Add Green as a path dependency to test local changes
 - Modify .formatter.exs to enable Green plugins
