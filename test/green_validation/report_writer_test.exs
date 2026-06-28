@@ -284,7 +284,8 @@ defmodule GreenValidation.ReportWriterTest do
     end
 
     test "replaces path separators so a subproject name has no directory component" do
-      filename = ReportWriter.filename("electric (packages/elixir-client)", "abc123def456789", :json)
+      filename =
+        ReportWriter.filename("electric (packages/elixir-client)", "abc123def456789", :json)
 
       refute filename =~ "/"
 
@@ -298,16 +299,12 @@ defmodule GreenValidation.ReportWriterTest do
       filename = ReportWriter.filename("phoenix", "abc123def456789", :json)
       tmp_dir |> Path.join(filename) |> File.write!("{}")
 
-      assert ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
-               output_dir: tmp_dir
-             )
+      assert ReportWriter.report_exists?("phoenix", "abc123def456789", :json, output_dir: tmp_dir)
     end
 
     @tag :tmp_dir
     test "is false when no matching report exists", %{tmp_dir: tmp_dir} do
-      refute ReportWriter.report_exists?("phoenix", "abc123def456789", :json,
-               output_dir: tmp_dir
-             )
+      refute ReportWriter.report_exists?("phoenix", "abc123def456789", :json, output_dir: tmp_dir)
     end
 
     @tag :tmp_dir
