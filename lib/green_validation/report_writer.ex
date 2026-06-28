@@ -85,15 +85,25 @@ defmodule GreenValidation.ReportWriter do
   Builds the report filename for a project and commit SHA.
 
   The name follows the convention `validation_<project_slug>_<short_sha>.<ext>`,
-  where the short SHA is the first 8 characters of the commit SHA.
+  where the short SHA is the first 8 characters of the commit SHA. Any character
+  in the project name that isn't filename-safe (e.g. the spaces, parentheses and
+  path separators in a subproject name like `"electric (packages/elixir-client)"`)
+  is collapsed to an underscore so the result is always a flat filename.
   """
   @spec filename(String.t(), String.t(), :json | :text) :: String.t()
   def filename(project_name, commit_sha, format) when format in [:json, :text] do
     short_sha = String.slice(commit_sha, 0, 8)
     extension = if format == :json, do: "json", else: "txt"
-    project_slug = String.replace(project_name, " ", "_")
+    project_slug = slugify(project_name)
 
     "validation_#{project_slug}_#{short_sha}.#{extension}"
+  end
+
+  @spec slugify(String.t()) :: String.t()
+  defp slugify(project_name) do
+    project_name
+    |> String.replace(~r/[^A-Za-z0-9._-]+/, "_")
+    |> String.trim("_")
   end
 
   @doc """
