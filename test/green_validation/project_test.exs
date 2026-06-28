@@ -27,20 +27,54 @@ defmodule GreenValidation.ProjectTest do
     end
   end
 
+  describe "has_formatter_exs?/1 and has_tool_versions?/1" do
+    @describetag :tmp_dir
+
+    setup %{tmp_dir: tmp_dir} do
+      previous = Application.get_env(:green_validation, :repos_dir)
+      Application.put_env(:green_validation, :repos_dir, Path.dirname(tmp_dir))
+      on_exit(fn -> Application.put_env(:green_validation, :repos_dir, previous) end)
+
+      name = Path.basename(tmp_dir)
+
+      {:ok, project: %Project{name: name, url: "https://example.com/x.git"}, path: tmp_dir}
+    end
+
+    test "has_formatter_exs?/1 reflects whether a .formatter.exs exists", %{
+      project: project,
+      path: path
+    } do
+      refute Project.has_formatter_exs?(project)
+
+      path |> Path.join(".formatter.exs") |> File.write!("[]\n")
+
+      assert Project.has_formatter_exs?(project)
+    end
+
+    test "has_tool_versions?/1 reflects whether a .tool-versions exists", %{
+      project: project,
+      path: path
+    } do
+      refute Project.has_tool_versions?(project)
+
+      path |> Path.join(".tool-versions") |> File.write!("elixir 1.17.0\n")
+
+      assert Project.has_tool_versions?(project)
+    end
+  end
+
   describe "clone/1 with an existing repository" do
     @describetag :tmp_dir
 
     setup %{tmp_dir: tmp_dir} do
+      previous = Application.get_env(:green_validation, :repos_dir)
+      Application.put_env(:green_validation, :repos_dir, Path.join(tmp_dir, "repos"))
+      on_exit(fn -> Application.put_env(:green_validation, :repos_dir, previous) end)
+
       upstream = Path.join(tmp_dir, "upstream")
       name = "project_test_repo_#{System.unique_integer([:positive])}"
-      clone_path = Path.join(Project.repos_dir(), name)
 
       File.mkdir_p!(upstream)
-
-      on_exit(fn ->
-        File.rm_rf!(clone_path)
-        File.rm_rf!(tmp_dir)
-      end)
 
       git!(["init", "-b", "main"], upstream)
       git!(["config", "user.email", "test@example.com"], upstream)

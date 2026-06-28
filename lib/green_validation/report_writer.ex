@@ -263,7 +263,9 @@ defmodule GreenValidation.ReportWriter do
       repository: test_run.repository,
       commit_sha: test_run.commit_sha,
       branch: test_run.branch,
-      green_version: test_run.green_version
+      green_version: test_run.green_version,
+      has_formatter_exs: test_run.has_formatter_exs,
+      has_tool_versions: test_run.has_tool_versions
     }
   end
 

@@ -116,7 +116,9 @@ When using `--format json`, each validation creates a JSON file with the followi
     "repository": "https://github.com/phoenixframework/phoenix",
     "commit_sha": "abc123def456...",
     "branch": "main",
-    "green_version": "0.1.10"
+    "green_version": "0.1.10",
+    "has_formatter_exs": true,
+    "has_tool_versions": false
   },
   "baseline": "clean",
   "rules": [

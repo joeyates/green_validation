@@ -216,13 +216,22 @@ defmodule GreenValidation.CLI.Validate do
   @spec validate_rules(ClonedRepo.t(), Project.t(), [atom], keyword) ::
           {:ok, [Result.t()]} | {:error, String.t()}
   defp validate_rules(cloned_repo, %Project{subprojects: []} = project, rules, opts) do
+    # Capture file presence before validation, since baseline formatting may
+    # create a `.formatter.exs` for projects that lack one.
+    has_formatter_exs = Project.has_formatter_exs?(project)
+    has_tool_versions = Project.has_tool_versions?(project)
+
     with :ok <- Project.install_deps(project),
          :ok <- Project.compile(project),
          {:ok, baseline_status} <- BaselineFormatter.ensure_clean(project),
          {:ok, rule_results} <- RuleValidator.validate_rules(project, rules, opts),
          {:ok, test_run} <- build_test_run(project, cloned_repo, opts[:green_dependency]) do
       result = %Result{
-        test_run: test_run,
+        test_run: %{
+          test_run
+          | has_formatter_exs: has_formatter_exs,
+            has_tool_versions: has_tool_versions
+        },
         baseline: baseline_status,
         rules: rule_results
       }

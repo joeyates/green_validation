@@ -40,7 +40,12 @@ defmodule GreenValidation.Project do
         }
 
   @spec repos_dir() :: String.t()
-  def repos_dir(), do: [__DIR__, "..", "..", "repos"] |> Path.join() |> Path.expand()
+  def repos_dir() do
+    case Application.get_env(:green_validation, :repos_dir) do
+      nil -> [__DIR__, "..", "..", "repos"] |> Path.join() |> Path.expand()
+      dir -> dir
+    end
+  end
 
   @spec path(t()) :: String.t()
   def path(%__MODULE__{name: name, path: nil}) do
@@ -250,7 +255,21 @@ defmodule GreenValidation.Project do
     :ok
   end
 
-  def uses_asdf?(%__MODULE__{} = project) do
+  def uses_asdf?(%__MODULE__{} = project), do: has_tool_versions?(project)
+
+  @doc """
+  Returns `true` if the project has a `.formatter.exs` file.
+  """
+  @spec has_formatter_exs?(t()) :: boolean()
+  def has_formatter_exs?(%__MODULE__{} = project) do
+    project |> formatter_exs_path() |> File.exists?()
+  end
+
+  @doc """
+  Returns `true` if the project has a `.tool-versions` file.
+  """
+  @spec has_tool_versions?(t()) :: boolean()
+  def has_tool_versions?(%__MODULE__{} = project) do
     project |> tool_versions_path() |> File.exists?()
   end
 

@@ -133,6 +133,29 @@ defmodule GreenValidation.ReportWriterTest do
       assert rule["warnings"] == ["test/phoenix/endpoint_test.exs"]
     end
 
+    @tag :tmp_dir
+    test "includes the has_formatter_exs and has_tool_versions flags", %{tmp_dir: tmp_dir} do
+      test_run = %TestRun{
+        project_name: "test_project",
+        repository: "https://github.com/test/project",
+        commit_sha: "abc123def456",
+        branch: "main",
+        green_version: "0.1.0",
+        has_formatter_exs: true,
+        has_tool_versions: false
+      }
+
+      result = %Result{test_run: test_run, baseline: :clean, rules: []}
+      filepath = Path.join(tmp_dir, "flags.json")
+
+      assert {:ok, ^filepath} = ReportWriter.write_json(result, filepath)
+
+      {:ok, parsed} = filepath |> File.read!() |> Jason.decode()
+
+      assert parsed["test_run"]["has_formatter_exs"] == true
+      assert parsed["test_run"]["has_tool_versions"] == false
+    end
+
     test "returns error for invalid filepath" do
       result = %Result{
         test_run: %TestRun{
