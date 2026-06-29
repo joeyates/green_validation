@@ -62,27 +62,58 @@ defmodule GreenValidation.ComparisonPdf do
     column_widths = column_widths(comparison["sources"])
     align = [:left | List.duplicate(:center, length(comparison["sources"]))]
 
-    layout =
-      Document.new()
-      |> PrawnEx.add_page()
-      |> Layout.attach(page_size: @page_size, margins: @margins)
-      |> Layout.heading("Elixir style: source comparison", font_size: 18)
-      |> Layout.paragraph(intro(comparison), font_size: 9, gap_after: 6)
-      |> Layout.paragraph(legend(comparison), font_size: 9, gap_after: 10)
+    sources = comparison["sources"]
+    sections = sections(comparison)
 
-    comparison
-    |> sections()
-    |> Enum.reduce(layout, fn {title, rules}, acc ->
-      table_rows = [header | Enum.map(rules, &body_row(&1, comparison["sources"]))]
+    Document.new()
+    |> PrawnEx.add_page()
+    |> Layout.attach(page_size: @page_size, margins: @margins)
+    |> Layout.heading("Elixir style: source comparison", font_size: 18)
+    |> Layout.paragraph(intro(comparison), font_size: 9, gap_after: 6)
+    |> Layout.paragraph(legend(comparison), font_size: 9, gap_after: 10)
+    |> render_matrix(sections, header, column_widths, align, sources)
+    |> render_examples(sections)
+    |> Layout.to_doc()
+    |> PrawnEx.to_binary()
+  end
+
+  defp render_matrix(layout, sections, header, column_widths, align, sources) do
+    Enum.reduce(sections, layout, fn {title, rules}, acc ->
+      table_rows = [header | Enum.map(rules, &body_row(&1, sources))]
 
       acc
       |> ensure_room(section_height(table_rows))
       |> Layout.heading(title, font_size: 12, gap_after: 4)
       |> table(table_rows, column_widths, align)
     end)
-    |> Layout.to_doc()
-    |> PrawnEx.to_binary()
   end
+
+  defp render_examples(layout, sections) do
+    layout = layout |> ensure_room(40) |> Layout.heading("Examples", font_size: 18, gap_after: 8)
+
+    Enum.reduce(sections, layout, fn {title, rules}, acc ->
+      acc = acc |> ensure_room(40) |> Layout.heading(title, font_size: 12, gap_after: 4)
+      Enum.reduce(rules, acc, fn rule, inner -> example_block(inner, rule) end)
+    end)
+  end
+
+  defp example_block(layout, rule) do
+    example = rule["example"]
+    code = "# bad\n" <> example["bad"] <> "\n\n# good\n" <> example["good"]
+
+    layout
+    |> ensure_room(example_height(example))
+    |> Layout.heading(rule["title"], font_size: 10, gap_after: 3)
+    |> Layout.paragraph(code, font_name: "Courier", font_size: 9, line_height: 12, gap_after: 14)
+  end
+
+  defp example_height(example) do
+    # heading + the "# bad"/"# good" labels, a spacer line, and the code lines
+    lines = 3 + count_lines(example["bad"]) + count_lines(example["good"])
+    30 + lines * 12
+  end
+
+  defp count_lines(text), do: text |> String.split("\n") |> length()
 
   defp enforced_section([]), do: []
   defp enforced_section(rules), do: [{"Enforced by mix format", rules}]

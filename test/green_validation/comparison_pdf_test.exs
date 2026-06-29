@@ -18,6 +18,7 @@ defmodule GreenValidation.ComparisonPdfTest do
         "id" => "spaces_around_binary_operators",
         "title" => "Spaces around binary operators",
         "category" => "formatting",
+        "example" => %{"bad" => "1+1", "good" => "1 + 1"},
         "proposed_by" => ["mix_format", "lexmag"],
         "sources" => %{
           "mix_format" => %{
@@ -32,6 +33,7 @@ defmodule GreenValidation.ComparisonPdfTest do
         "id" => "snake_case_atoms_and_variables",
         "title" => "snake_case",
         "category" => "naming",
+        "example" => %{"bad" => "fooBar", "good" => "foo_bar"},
         "proposed_by" => ["lexmag"],
         "sources" => %{
           "mix_format" => %{"proposed" => false, "status" => "not_enforced"},
@@ -103,6 +105,7 @@ defmodule GreenValidation.ComparisonPdfTest do
       "id" => id,
       "title" => title,
       "category" => category,
+      "example" => %{"bad" => "bad", "good" => "good"},
       "proposed_by" => [],
       "sources" => %{"mix_format" => %{"proposed" => false, "status" => "not_enforced"}}
     }

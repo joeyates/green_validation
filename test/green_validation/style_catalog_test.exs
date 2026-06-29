@@ -22,6 +22,14 @@ defmodule GreenValidation.StyleCatalogTest do
 
       assert ids == Enum.uniq(ids)
     end
+
+    test "every rule has a bad and good example" do
+      for rule <- StyleCatalog.all() do
+        assert is_binary(rule.example.bad) and rule.example.bad != ""
+        assert is_binary(rule.example.good) and rule.example.good != ""
+        assert rule.example.bad != rule.example.good
+      end
+    end
   end
 
   describe "ids/0" do

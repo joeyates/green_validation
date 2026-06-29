@@ -3,7 +3,7 @@
 << /Type /Catalog /Pages 2 0 R >>
 endobj
 2 0 obj
-<< /Type /Pages /Count 3 /Kids [ 4 0 R 6 0 R 8 0 R ] >>
+<< /Type /Pages /Count 7 /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R ] >>
 endobj
 3 0 obj
 << /Length 10627 >>
@@ -1984,7 +1984,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 5 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
 endobj
 7 0 obj
-<< /Length 1960 >>
+<< /Length 4019 >>
 stream
 /F1 12 Tf
 BT
@@ -2175,25 +2175,1120 @@ BT
 1 0 0 1 503.2500 664.0000 Tm
 (Yes) Tj
 ET
+/F1 18 Tf
+BT
+1 0 0 1 50 646.0000 Tm
+(Examples) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 620.0000 Tm
+(Enforced by mix format) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 604.0000 Tm
+(Capture operator spacing) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 591.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 579.0000 Tm
+(&\(&1\)) Tj
+ET
+BT
+1 0 0 1 50 567.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 555.0000 Tm
+(& &1) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 541.0000 Tm
+(Collapse consecutive blank lines) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 528.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 516.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 50 504.0000 Tm
+(b = 2) Tj
+ET
+BT
+1 0 0 1 50 492.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 480.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 50 468.0000 Tm
+(b = 2) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 454.0000 Tm
+(Comments on their own line) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 441.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 429.0000 Tm
+(x = 1 # set x) Tj
+ET
+BT
+1 0 0 1 50 417.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 405.0000 Tm
+(# set x) Tj
+ET
+BT
+1 0 0 1 50 393.0000 Tm
+(x = 1) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 379.0000 Tm
+(Fit collections on a single line when they fit) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 366.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 354.0000 Tm
+([1,) Tj
+ET
+BT
+1 0 0 1 50 342.0000 Tm
+(2]) Tj
+ET
+BT
+1 0 0 1 50 330.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 318.0000 Tm
+([1, 2]) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 304.0000 Tm
+(Group digits in large numbers) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 291.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 279.0000 Tm
+(1000000) Tj
+ET
+BT
+1 0 0 1 50 267.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 255.0000 Tm
+(1_000_000) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 241.0000 Tm
+(Lowercase exponent letter in floats) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 228.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 216.0000 Tm
+(1.0E3) Tj
+ET
+BT
+1 0 0 1 50 204.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 192.0000 Tm
+(1.0e3) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 178.0000 Tm
+(No parentheses around anonymous function arguments) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 165.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 153.0000 Tm
+(fn\(x\) -> x end) Tj
+ET
+BT
+1 0 0 1 50 141.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 129.0000 Tm
+(fn x -> x end) Tj
+ET
 endstream
 endobj
 8 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 7 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 7 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+9 0 obj
+<< /Length 2786 >>
+stream
+/F1 10 Tf
+BT
+1 0 0 1 50 782 Tm
+(No redundant parentheses) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 769.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 757.0000 Tm
+(\(1 + 2\)) Tj
+ET
+BT
+1 0 0 1 50 745.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 733.0000 Tm
+(1 + 2) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 719.0000 Tm
+(No semicolons between statements) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 706.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 694.0000 Tm
+(a = 1; b = 2) Tj
+ET
+BT
+1 0 0 1 50 682.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 670.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 50 658.0000 Tm
+(b = 2) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 644.0000 Tm
+(No spaces around bitstring segment options) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 631.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 619.0000 Tm
+(<<1 ::8>>) Tj
+ET
+BT
+1 0 0 1 50 607.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 595.0000 Tm
+(<<1::8>>) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 581.0000 Tm
+(No spaces around the range operator) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 568.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 556.0000 Tm
+(1 .. 2) Tj
+ET
+BT
+1 0 0 1 50 544.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 532.0000 Tm
+(1..2) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 518.0000 Tm
+(No spaces inside brackets) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 505.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 493.0000 Tm
+([ 1, 2 ]) Tj
+ET
+BT
+1 0 0 1 50 481.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 469.0000 Tm
+([1, 2]) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 455.0000 Tm
+(No trailing comma in collections) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 442.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 430.0000 Tm
+([1, 2,]) Tj
+ET
+BT
+1 0 0 1 50 418.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 406.0000 Tm
+([1, 2]) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 392.0000 Tm
+(Omit brackets from keyword lists) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 379.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 367.0000 Tm
+(foo\([a: 1]\)) Tj
+ET
+BT
+1 0 0 1 50 355.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 343.0000 Tm
+(foo\(a: 1\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 329.0000 Tm
+(Space after commas) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 316.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 304.0000 Tm
+([1,2]) Tj
+ET
+BT
+1 0 0 1 50 292.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 280.0000 Tm
+([1, 2]) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 266.0000 Tm
+(Space after the comment marker) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 253.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 241.0000 Tm
+(#comment) Tj
+ET
+BT
+1 0 0 1 50 229.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 217.0000 Tm
+(# comment) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 203.0000 Tm
+(Spaces around binary operators) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 190.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 178.0000 Tm
+(1+1) Tj
+ET
+BT
+1 0 0 1 50 166.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 154.0000 Tm
+(1 + 1) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 140.0000 Tm
+(Spaces around the -> operator) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 127.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 115.0000 Tm
+(fn x->x end) Tj
+ET
+BT
+1 0 0 1 50 103.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 91.0000 Tm
+(fn x -> x end) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 9 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+11 0 obj
+<< /Length 2859 >>
+stream
+/F1 10 Tf
+BT
+1 0 0 1 50 782 Tm
+(Unix line endings) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 769.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 757.0000 Tm
+(a = 1\\r\\nb = 2) Tj
+ET
+BT
+1 0 0 1 50 745.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 733.0000 Tm
+(a = 1\\nb = 2) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 719.0000 Tm
+(Uppercase hexadecimal literals) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 706.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 694.0000 Tm
+(0xabcd) Tj
+ET
+BT
+1 0 0 1 50 682.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 670.0000 Tm
+(0xABCD) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 656.0000 Tm
+(Formatting) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 640.0000 Tm
+(Maximum line length) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 627.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 615.0000 Tm
+({:ok, [one, two, three, four, five, six, seven, eight, nine, ten, eleven]}) Tj
+ET
+BT
+1 0 0 1 50 603.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 591.0000 Tm
+({:ok,) Tj
+ET
+BT
+1 0 0 1 50 579.0000 Tm
+([one, two, three, four, five,) Tj
+ET
+BT
+1 0 0 1 50 567.0000 Tm
+(six, seven, eight, nine, ten]}) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 553.0000 Tm
+(No trailing whitespace) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 540.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 528.0000 Tm
+(x = 1   ) Tj
+ET
+BT
+1 0 0 1 50 516.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 504.0000 Tm
+(x = 1) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 490.0000 Tm
+(Trailing newline at end of file) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 477.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 465.0000 Tm
+(\(file ends without a newline\)) Tj
+ET
+BT
+1 0 0 1 50 453.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 441.0000 Tm
+(\(file ends with one \\n\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 427.0000 Tm
+(Two-space indentation) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 414.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 402.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 50 390.0000 Tm
+(:ok) Tj
+ET
+BT
+1 0 0 1 50 378.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 50 366.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 354.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 50 342.0000 Tm
+(:ok) Tj
+ET
+BT
+1 0 0 1 50 330.0000 Tm
+(end) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 316.0000 Tm
+(Naming) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 300.0000 Tm
+(Avoid one-letter variable names) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 287.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 275.0000 Tm
+(u = get_user\(\)) Tj
+ET
+BT
+1 0 0 1 50 263.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 251.0000 Tm
+(user = get_user\(\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 237.0000 Tm
+(CamelCase for modules) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 224.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 212.0000 Tm
+(defmodule My_app do) Tj
+ET
+BT
+1 0 0 1 50 200.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 50 188.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 176.0000 Tm
+(defmodule MyApp do) Tj
+ET
+BT
+1 0 0 1 50 164.0000 Tm
+(end) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 150.0000 Tm
+(Question mark for predicate functions) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 137.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 125.0000 Tm
+(def is_valid\(x\), do: true) Tj
+ET
+BT
+1 0 0 1 50 113.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 101.0000 Tm
+(def valid?\(x\), do: true) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 11 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+13 0 obj
+<< /Length 2848 >>
+stream
+/F1 10 Tf
+BT
+1 0 0 1 50 782 Tm
+(snake_case for atoms, variables and functions) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 769.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 757.0000 Tm
+(fooBar = 1) Tj
+ET
+BT
+1 0 0 1 50 745.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 733.0000 Tm
+(foo_bar = 1) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 719.0000 Tm
+(Modules) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 703.0000 Tm
+(Consistent module attribute layout) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 690.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 678.0000 Tm
+(alias App.X) Tj
+ET
+BT
+1 0 0 1 50 666.0000 Tm
+(use GenServer) Tj
+ET
+BT
+1 0 0 1 50 654.0000 Tm
+(@moduledoc "...") Tj
+ET
+BT
+1 0 0 1 50 642.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 630.0000 Tm
+(@moduledoc "...") Tj
+ET
+BT
+1 0 0 1 50 618.0000 Tm
+(use GenServer) Tj
+ET
+BT
+1 0 0 1 50 606.0000 Tm
+(alias App.X) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 592.0000 Tm
+(Order alias/import/require alphabetically) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 579.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 567.0000 Tm
+(alias App.Zebra) Tj
+ET
+BT
+1 0 0 1 50 555.0000 Tm
+(alias App.Apple) Tj
+ET
+BT
+1 0 0 1 50 543.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 531.0000 Tm
+(alias App.Apple) Tj
+ET
+BT
+1 0 0 1 50 519.0000 Tm
+(alias App.Zebra) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 505.0000 Tm
+(Use the __MODULE__ pseudo-variable) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 492.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 480.0000 Tm
+(%MyApp.User{name: n}) Tj
+ET
+BT
+1 0 0 1 50 468.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 456.0000 Tm
+(%__MODULE__{name: n}) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 442.0000 Tm
+(Expressions) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 426.0000 Tm
+(Avoid needless pipelines) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 413.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 401.0000 Tm
+(x |> f\(\)) Tj
+ET
+BT
+1 0 0 1 50 389.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 377.0000 Tm
+(f\(x\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 363.0000 Tm
+(No anonymous functions in pipelines) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 350.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 338.0000 Tm
+(x |> \(fn v -> v + 1 end\).\(\)) Tj
+ET
+BT
+1 0 0 1 50 326.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 314.0000 Tm
+(x |> increment\(\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 300.0000 Tm
+(No else clause with unless) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 287.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 275.0000 Tm
+(unless x do) Tj
+ET
+BT
+1 0 0 1 50 263.0000 Tm
+(a) Tj
+ET
+BT
+1 0 0 1 50 251.0000 Tm
+(else) Tj
+ET
+BT
+1 0 0 1 50 239.0000 Tm
+(b) Tj
+ET
+BT
+1 0 0 1 50 227.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 50 215.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 203.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 50 191.0000 Tm
+(b) Tj
+ET
+BT
+1 0 0 1 50 179.0000 Tm
+(else) Tj
+ET
+BT
+1 0 0 1 50 167.0000 Tm
+(a) Tj
+ET
+BT
+1 0 0 1 50 155.0000 Tm
+(end) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 141.0000 Tm
+(Parentheses on zero-arity function calls) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 128.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 116.0000 Tm
+(DateTime.utc_now) Tj
+ET
+BT
+1 0 0 1 50 104.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 92.0000 Tm
+(DateTime.utc_now\(\)) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 13 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+15 0 obj
+<< /Length 1765 >>
+stream
+/F1 10 Tf
+BT
+1 0 0 1 50 782 Tm
+(Use pipelines for chained calls) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 769.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 757.0000 Tm
+(f\(g\(h\(x\)\)\)) Tj
+ET
+BT
+1 0 0 1 50 745.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 733.0000 Tm
+(x |> h\(\) |> g\(\) |> f\(\)) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 719.0000 Tm
+(Use true as the last cond clause) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 706.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 694.0000 Tm
+(cond do) Tj
+ET
+BT
+1 0 0 1 50 682.0000 Tm
+(x -> 1) Tj
+ET
+BT
+1 0 0 1 50 670.0000 Tm
+(:else -> 2) Tj
+ET
+BT
+1 0 0 1 50 658.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 50 646.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 634.0000 Tm
+(cond do) Tj
+ET
+BT
+1 0 0 1 50 622.0000 Tm
+(x -> 1) Tj
+ET
+BT
+1 0 0 1 50 610.0000 Tm
+(true -> 2) Tj
+ET
+BT
+1 0 0 1 50 598.0000 Tm
+(end) Tj
+ET
+/F1 12 Tf
+BT
+1 0 0 1 50 584.0000 Tm
+(Exceptions) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 568.0000 Tm
+(Error suffix for exception modules) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 555.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 543.0000 Tm
+(defmodule App.BadInput do) Tj
+ET
+BT
+1 0 0 1 50 531.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 50 519.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 507.0000 Tm
+(defmodule App.BadInputError do) Tj
+ET
+BT
+1 0 0 1 50 495.0000 Tm
+(end) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 481.0000 Tm
+(Lowercase exception messages) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 468.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 456.0000 Tm
+(raise "Invalid input") Tj
+ET
+BT
+1 0 0 1 50 444.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 432.0000 Tm
+(raise "invalid input") Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 418.0000 Tm
+(No trailing punctuation in exception messages) Tj
+ET
+/F2 9 Tf
+BT
+1 0 0 1 50 405.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 50 393.0000 Tm
+(raise "invalid input.") Tj
+ET
+BT
+1 0 0 1 50 381.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 50 369.0000 Tm
+(raise "invalid input") Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 15 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
 endobj
 xref
-0 9
+0 17
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
-0000000129 00000 n 
-0000010809 00000 n 
-0000010986 00000 n 
-0000021159 00000 n 
-0000021336 00000 n 
-0000023348 00000 n 
+0000000157 00000 n 
+0000010837 00000 n 
+0000011014 00000 n 
+0000021187 00000 n 
+0000021364 00000 n 
+0000025435 00000 n 
+0000025669 00000 n 
+0000028507 00000 n 
+0000028742 00000 n 
+0000031654 00000 n 
+0000031890 00000 n 
+0000034791 00000 n 
+0000035027 00000 n 
+0000036845 00000 n 
 trailer
-<< /Size 9 /Root 1 0 R >>
+<< /Size 17 /Root 1 0 R >>
 startxref
-23525
+37081
 
 %%EOF

@@ -46,6 +46,7 @@ defmodule GreenValidation.StyleComparison do
       id: rule.id,
       title: rule.title,
       category: rule.category,
+      example: rule.example,
       proposed_by: proposed_by,
       sources: sources
     }

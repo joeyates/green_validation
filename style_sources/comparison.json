@@ -21,9 +21,6 @@
       "repo_url": "https://github.com/christopheradams/elixir_style_guide"
     }
   ],
-  "rules_with_no_source": [
-    "alphabetical_alias_order"
-  ],
   "rules": [
     {
       "id": "spaces_around_binary_operators",
@@ -34,20 +31,24 @@
           "reference": "code/formatter.ex — binary operator spacing",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "1+1",
+        "good": "1 + 1"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -64,19 +65,23 @@
           "reference": "code/formatter.ex @no_space_binary_operators",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "1 .. 2",
+        "good": "1..2"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -90,19 +95,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-indentation",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-indentation",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-indentation",
+          "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "if x do\n    :ok\nend",
+        "good": "if x do\n  :ok\nend"
+      },
       "proposed_by": [
         "lexmag",
         "credo"
@@ -115,19 +124,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#character-per-line-limit",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "{:ok, [one, two, three, four, five, six, seven, eight, nine, ten, eleven]}",
+        "good": "{:ok,\n [one, two, three, four, five,\n  six, seven, eight, nine, ten]}"
+      },
       "proposed_by": [
         "credo",
         "christopher_adams"
@@ -140,20 +153,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-trailing-whitespaces",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#no-trailing-whitespace",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-trailing-whitespaces",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "x = 1   ",
+        "good": "x = 1"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -169,20 +186,24 @@
           "reference": "code/formatter.ex — collection element spacing",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "[1,2]",
+        "good": "[1, 2]"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -199,19 +220,23 @@
           "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-braces",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "[ 1, 2 ]",
+        "good": "[1, 2]"
+      },
       "proposed_by": [
         "mix_format",
         "credo",
@@ -227,19 +252,23 @@
           "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#semicolon-between-statements",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
+          "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "a = 1; b = 2",
+        "good": "a = 1\nb = 2"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -255,18 +284,22 @@
           "reference": "code/formatter.ex — trailing comma removed from single-line collections",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
+          "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "[1, 2,]",
+        "good": "[1, 2]"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag"
@@ -281,17 +314,21 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "a = 1\n\n\nb = 2",
+        "good": "a = 1\n\nb = 2"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -305,19 +342,23 @@
           "reference": "code.ex Code.format_string!/2 docs — Code comments",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#leading-space-comment",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#leading-space-comment",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "#comment",
+        "good": "# comment"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -333,19 +374,23 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#underscores-in-numerics",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
+          "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "1000000",
+        "good": "1_000_000"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag",
@@ -361,18 +406,22 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#hex-literals",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#hex-literals",
+          "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "0xabcd",
+        "good": "0xABCD"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag"
@@ -387,19 +436,23 @@
           "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#line-endings",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "a = 1\\r\\nb = 2",
+        "good": "a = 1\\nb = 2"
+      },
       "proposed_by": [
         "mix_format",
         "credo",
@@ -413,20 +466,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#newline-eof",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#newline-eof",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#newline-eof",
           "proposed": true
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "(file ends without a newline)",
+        "good": "(file ends with one \\n)"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -442,20 +499,24 @@
           "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-atoms-funs-vars-attrs",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#snake-case-attributes-functions-macros-vars",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-atoms-funs-vars-attrs",
           "proposed": true
         }
       },
       "category": "naming",
+      "example": {
+        "bad": "fooBar = 1",
+        "good": "foo_bar = 1"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -469,20 +530,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#camelcase-modules",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#camelcase-modules",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#camelcase-modules",
           "proposed": true
         }
       },
       "category": "naming",
+      "example": {
+        "bad": "defmodule My_app do\nend",
+        "good": "defmodule MyApp do\nend"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -496,20 +561,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#predicate-funs-name",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#predicates",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#predicate-funs-name",
           "proposed": true
         }
       },
       "category": "naming",
+      "example": {
+        "bad": "def is_valid(x), do: true",
+        "good": "def valid?(x), do: true"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -523,18 +592,22 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#one-letter-var",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#one-letter-var",
+          "proposed": true
         }
       },
       "category": "naming",
+      "example": {
+        "bad": "u = get_user()",
+        "good": "user = get_user()"
+      },
       "proposed_by": [
         "lexmag"
       ]
@@ -546,17 +619,21 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "modules",
+      "example": {
+        "bad": "alias App.Zebra\nalias App.Apple",
+        "good": "alias App.Apple\nalias App.Zebra"
+      },
       "proposed_by": []
     },
     {
@@ -566,20 +643,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#current-module-reference",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#reference-current-module",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#current-module-reference",
           "proposed": true
         }
       },
       "category": "modules",
+      "example": {
+        "bad": "%MyApp.User{name: n}",
+        "good": "%__MODULE__{name: n}"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -593,19 +674,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#module-layout",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#module-layout",
           "proposed": true
         }
       },
       "category": "modules",
+      "example": {
+        "bad": "alias App.X\nuse GenServer\n@moduledoc \"...\"",
+        "good": "@moduledoc \"...\"\nuse GenServer\nalias App.X"
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -620,19 +705,23 @@
           "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-operator",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-operator",
           "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "f(g(h(x)))",
+        "good": "x |> h() |> g() |> f()"
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -645,19 +734,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#needless-pipeline",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#needless-pipeline",
           "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "x |> f()",
+        "good": "f(x)"
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -670,18 +763,22 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-pipeline",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-pipeline",
+          "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "x |> (fn v -> v + 1 end).()",
+        "good": "x |> increment()"
+      },
       "proposed_by": [
         "lexmag"
       ]
@@ -693,20 +790,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-else-with-unless",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#no-unless-with-else",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-else-with-unless",
           "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "unless x do\n  a\nelse\n  b\nend",
+        "good": "if x do\n  b\nelse\n  a\nend"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -720,19 +821,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#true-in-cond",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#true-in-cond",
           "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "cond do\n  x -> 1\n  :else -> 2\nend",
+        "good": "cond do\n  x -> 1\n  true -> 2\nend"
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -745,19 +850,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
           "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "DateTime.utc_now",
+        "good": "DateTime.utc_now()"
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -772,18 +881,22 @@
           "reference": "code/formatter.ex — optional keyword-list brackets omitted",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "foo([a: 1])",
+        "good": "foo(a: 1)"
+      },
       "proposed_by": [
         "mix_format",
         "christopher_adams"
@@ -798,17 +911,21 @@
           "reference": "code/formatter.ex — spaces around the -> operator",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "fn x->x end",
+        "good": "fn x -> x end"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -822,17 +939,21 @@
           "reference": "code/formatter.ex — capture operator spacing and parens",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "&(&1)",
+        "good": "& &1"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -846,18 +967,22 @@
           "reference": "code/formatter.ex — anonymous function argument parens removed",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
+          "proposed": true
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "fn(x) -> x end",
+        "good": "fn x -> x end"
+      },
       "proposed_by": [
         "mix_format",
         "lexmag"
@@ -872,17 +997,21 @@
           "reference": "code/formatter.ex — redundant grouping parentheses removed",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "expressions",
+      "example": {
+        "bad": "(1 + 2)",
+        "good": "1 + 2"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -896,17 +1025,21 @@
           "reference": "code.ex Code.format_string!/2 docs — number normalisation",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "1.0E3",
+        "good": "1.0e3"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -920,17 +1053,21 @@
           "reference": "code/formatter.ex @no_space_binary_operators (bitstring segments)",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "<<1 ::8>>",
+        "good": "<<1::8>>"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -944,17 +1081,21 @@
           "reference": "code.ex Code.format_string!/2 docs — fit on a single line when possible",
           "proposed": true
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "[1,\n2]",
+        "good": "[1, 2]"
+      },
       "proposed_by": [
         "mix_format"
       ]
@@ -968,18 +1109,22 @@
           "reference": "code.ex Code.format_string!/2 docs — trailing comments hoisted to their own line",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         }
       },
       "category": "formatting",
+      "example": {
+        "bad": "x = 1 # set x",
+        "good": "# set x\nx = 1"
+      },
       "proposed_by": [
         "mix_format",
         "christopher_adams"
@@ -992,20 +1137,24 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-naming",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#exception-naming",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-naming",
           "proposed": true
         }
       },
       "category": "exceptions",
+      "example": {
+        "bad": "defmodule App.BadInput do\nend",
+        "good": "defmodule App.BadInputError do\nend"
+      },
       "proposed_by": [
         "lexmag",
         "credo",
@@ -1019,19 +1168,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
           "proposed": true
         }
       },
       "category": "exceptions",
+      "example": {
+        "bad": "raise \"Invalid input\"",
+        "good": "raise \"invalid input\""
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -1044,19 +1197,23 @@
         "mix_format": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
           "proposed": true
         }
       },
       "category": "exceptions",
+      "example": {
+        "bad": "raise \"invalid input.\"",
+        "good": "raise \"invalid input\""
+      },
       "proposed_by": [
         "lexmag",
         "christopher_adams"
@@ -1065,5 +1222,8 @@
   ],
   "generated_with": {
     "elixir_version": "1.19.5"
-  }
+  },
+  "rules_with_no_source": [
+    "alphabetical_alias_order"
+  ]
 }

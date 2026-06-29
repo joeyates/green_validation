@@ -21,6 +21,7 @@ defmodule GreenValidation.CLI.ComparisonPdfTest do
         "id" => "spaces_around_binary_operators",
         "title" => "Spaces around binary operators",
         "category" => "formatting",
+        "example" => %{"bad" => "1+1", "good" => "1 + 1"},
         "proposed_by" => ["mix_format"],
         "sources" => %{"mix_format" => %{"proposed" => true, "reference" => "formatter.ex"}}
       }

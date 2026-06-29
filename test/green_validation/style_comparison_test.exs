@@ -67,6 +67,14 @@ defmodule GreenValidation.StyleComparisonTest do
       assert row.sources.mix_format.status == "enforced"
     end
 
+    test "includes each rule's bad/good example" do
+      result = StyleComparison.build(@source_rules)
+      row = Enum.find(result.rules, &(&1.id == :spaces_around_binary_operators))
+
+      assert row.example.bad == "1+1"
+      assert row.example.good == "1 + 1"
+    end
+
     test "rejects an unknown rule id" do
       assert_raise ArgumentError, fn ->
         StyleComparison.build(%{mix_format: [%{id: :not_a_real_master_rule, proposed: true}]})
