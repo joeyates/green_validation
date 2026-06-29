@@ -28,5 +28,9 @@ defmodule GreenValidation.Sources.LexmagTest do
     test "maps no_trailing_comma to the trailing-comma anchor" do
       assert {:no_trailing_comma, "trailing-comma"} in Lexmag.mapping()
     end
+
+    test "maps no_parens_around_anonymous_fn_args to the anonymous-fun-parens anchor" do
+      assert {:no_parens_around_anonymous_fn_args, "anonymous-fun-parens"} in Lexmag.mapping()
+    end
   end
 end

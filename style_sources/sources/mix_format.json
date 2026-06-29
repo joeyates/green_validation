@@ -4,6 +4,12 @@
     "name": "mix format",
     "repo_url": "https://github.com/elixir-lang/elixir"
   },
+  "unmapped": [
+    {
+      "after": "foo(\n  aaaaaaaaaa,\n  bbbbbbbbbb,\n  cccccccccc,\n  dddddddddd,\n  eeeeeeeeee,\n  ffffffffff,\n  gggggggggg,\n  hhhhhhhhhh\n)",
+      "before": "foo(aaaaaaaaaa, bbbbbbbbbb, cccccccccc, dddddddddd, eeeeeeeeee, ffffffffff, gggggggggg, hhhhhhhhhh)"
+    }
+  ],
   "rules": [
     {
       "id": "spaces_around_binary_operators",
@@ -39,6 +45,60 @@
       "id": "no_trailing_comma",
       "status": "enforced",
       "reference": "code/formatter.ex — trailing comma removed from single-line collections",
+      "proposed": true
+    },
+    {
+      "id": "omit_keyword_list_brackets",
+      "status": "enforced",
+      "reference": "code/formatter.ex — optional keyword-list brackets omitted",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_arrow",
+      "status": "enforced",
+      "reference": "code/formatter.ex — spaces around the -> operator",
+      "proposed": true
+    },
+    {
+      "id": "capture_operator_spacing",
+      "status": "enforced",
+      "reference": "code/formatter.ex — capture operator spacing and parens",
+      "proposed": true
+    },
+    {
+      "id": "no_parens_around_anonymous_fn_args",
+      "status": "enforced",
+      "reference": "code/formatter.ex — anonymous function argument parens removed",
+      "proposed": true
+    },
+    {
+      "id": "no_redundant_parentheses",
+      "status": "enforced",
+      "reference": "code/formatter.ex — redundant grouping parentheses removed",
+      "proposed": true
+    },
+    {
+      "id": "lowercase_exponent",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — number normalisation",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_in_bitstring_segments",
+      "status": "enforced",
+      "reference": "code/formatter.ex @no_space_binary_operators (bitstring segments)",
+      "proposed": true
+    },
+    {
+      "id": "fit_collections_on_one_line",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — fit on a single line when possible",
+      "proposed": true
+    },
+    {
+      "id": "comments_on_own_line",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — trailing comments hoisted to their own line",
       "proposed": true
     },
     {
@@ -82,12 +142,6 @@
       "status": "not_enforced",
       "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
       "proposed": false
-    }
-  ],
-  "unmapped": [
-    {
-      "after": "foo(a: 1)",
-      "before": "foo([a: 1])"
     }
   ]
 }

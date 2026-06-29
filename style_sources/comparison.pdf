@@ -20,7 +20,7 @@ BT
 ET
 BT
 1 0 0 1 50 747.2000 Tm
-(shows "Enforced" where the formatter applies it automatically. 31 master rules. Proposed by no source:) Tj
+(shows "Enforced" where the formatter applies it automatically. 40 master rules. Proposed by no source:) Tj
 ET
 BT
 1 0 0 1 50 736.4000 Tm
@@ -1080,7 +1080,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [ 0 0 595 842 ] /Contents 3 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
 endobj
 5 0 obj
-<< /Length 4203 >>
+<< /Length 8003 >>
 stream
 0.9000 g
 50 740 495 22 re
@@ -1408,7 +1408,7 @@ S
 /F1 9 Tf
 BT
 1 0 0 1 56 592 Tm
-(Error suffix for exception modules) Tj
+(Omit brackets from keyword lists) Tj
 ET
 0.7500 G
 265 586 70 22 re
@@ -1416,8 +1416,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 300.0000 592 Tm
-() Tj
+1 0 0 1 282.0000 592 Tm
+(Enforced) Tj
 ET
 0.7500 G
 335 586 70 22 re
@@ -1425,8 +1425,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 363.2500 592 Tm
-(Yes) Tj
+1 0 0 1 370.0000 592 Tm
+() Tj
 ET
 0.7500 G
 405 586 70 22 re
@@ -1434,8 +1434,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 433.2500 592 Tm
-(Yes) Tj
+1 0 0 1 440.0000 592 Tm
+() Tj
 ET
 0.7500 G
 475 586 70 22 re
@@ -1453,7 +1453,7 @@ S
 /F1 9 Tf
 BT
 1 0 0 1 56 570 Tm
-(Lowercase exception messages) Tj
+(Spaces around the -> operator) Tj
 ET
 0.7500 G
 265 564 70 22 re
@@ -1461,8 +1461,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 300.0000 570 Tm
-() Tj
+1 0 0 1 282.0000 570 Tm
+(Enforced) Tj
 ET
 0.7500 G
 335 564 70 22 re
@@ -1470,8 +1470,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 363.2500 570 Tm
-(Yes) Tj
+1 0 0 1 370.0000 570 Tm
+() Tj
 ET
 0.7500 G
 405 564 70 22 re
@@ -1488,8 +1488,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 503.2500 570 Tm
-(Yes) Tj
+1 0 0 1 510.0000 570 Tm
+() Tj
 ET
 0.7500 G
 50 542 215 22 re
@@ -1498,7 +1498,7 @@ S
 /F1 9 Tf
 BT
 1 0 0 1 56 548 Tm
-(No trailing punctuation in exception messages) Tj
+(Capture operator spacing) Tj
 ET
 0.7500 G
 265 542 70 22 re
@@ -1506,8 +1506,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 300.0000 548 Tm
-() Tj
+1 0 0 1 282.0000 548 Tm
+(Enforced) Tj
 ET
 0.7500 G
 335 542 70 22 re
@@ -1515,8 +1515,8 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 363.2500 548 Tm
-(Yes) Tj
+1 0 0 1 370.0000 548 Tm
+() Tj
 ET
 0.7500 G
 405 542 70 22 re
@@ -1533,7 +1533,412 @@ S
 0 G
 /F1 9 Tf
 BT
-1 0 0 1 503.2500 548 Tm
+1 0 0 1 510.0000 548 Tm
+() Tj
+ET
+0.7500 G
+50 520 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 526 Tm
+(No parentheses around anonymous function arguments) Tj
+ET
+0.7500 G
+265 520 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 526 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 520 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 363.2500 526 Tm
+(Yes) Tj
+ET
+0.7500 G
+405 520 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 526 Tm
+() Tj
+ET
+0.7500 G
+475 520 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 510.0000 526 Tm
+() Tj
+ET
+0.7500 G
+50 498 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 504 Tm
+(No redundant parentheses) Tj
+ET
+0.7500 G
+265 498 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 504 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 498 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 370.0000 504 Tm
+() Tj
+ET
+0.7500 G
+405 498 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 504 Tm
+() Tj
+ET
+0.7500 G
+475 498 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 510.0000 504 Tm
+() Tj
+ET
+0.7500 G
+50 476 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 482 Tm
+(Lowercase exponent letter in floats) Tj
+ET
+0.7500 G
+265 476 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 482 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 476 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 370.0000 482 Tm
+() Tj
+ET
+0.7500 G
+405 476 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 482 Tm
+() Tj
+ET
+0.7500 G
+475 476 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 510.0000 482 Tm
+() Tj
+ET
+0.7500 G
+50 454 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 460 Tm
+(No spaces around bitstring segment options) Tj
+ET
+0.7500 G
+265 454 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 460 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 454 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 370.0000 460 Tm
+() Tj
+ET
+0.7500 G
+405 454 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 460 Tm
+() Tj
+ET
+0.7500 G
+475 454 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 510.0000 460 Tm
+() Tj
+ET
+0.7500 G
+50 432 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 438 Tm
+(Fit collections on a single line when they fit) Tj
+ET
+0.7500 G
+265 432 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 438 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 432 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 370.0000 438 Tm
+() Tj
+ET
+0.7500 G
+405 432 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 438 Tm
+() Tj
+ET
+0.7500 G
+475 432 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 510.0000 438 Tm
+() Tj
+ET
+0.7500 G
+50 410 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 416 Tm
+(Comments on their own line) Tj
+ET
+0.7500 G
+265 410 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 282.0000 416 Tm
+(Enforced) Tj
+ET
+0.7500 G
+335 410 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 370.0000 416 Tm
+() Tj
+ET
+0.7500 G
+405 410 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 416 Tm
+() Tj
+ET
+0.7500 G
+475 410 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 503.2500 416 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 388 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 394 Tm
+(Error suffix for exception modules) Tj
+ET
+0.7500 G
+265 388 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 300.0000 394 Tm
+() Tj
+ET
+0.7500 G
+335 388 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 363.2500 394 Tm
+(Yes) Tj
+ET
+0.7500 G
+405 388 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 433.2500 394 Tm
+(Yes) Tj
+ET
+0.7500 G
+475 388 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 503.2500 394 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 366 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 372 Tm
+(Lowercase exception messages) Tj
+ET
+0.7500 G
+265 366 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 300.0000 372 Tm
+() Tj
+ET
+0.7500 G
+335 366 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 363.2500 372 Tm
+(Yes) Tj
+ET
+0.7500 G
+405 366 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 372 Tm
+() Tj
+ET
+0.7500 G
+475 366 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 503.2500 372 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 344 215 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 350 Tm
+(No trailing punctuation in exception messages) Tj
+ET
+0.7500 G
+265 344 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 300.0000 350 Tm
+() Tj
+ET
+0.7500 G
+335 344 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 363.2500 350 Tm
+(Yes) Tj
+ET
+0.7500 G
+405 344 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 440.0000 350 Tm
+() Tj
+ET
+0.7500 G
+475 344 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 503.2500 350 Tm
 (Yes) Tj
 ET
 endstream
@@ -1549,10 +1954,10 @@ xref
 0000000123 00000 n 
 0000011616 00000 n 
 0000011793 00000 n 
-0000016048 00000 n 
+0000019848 00000 n 
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-16225
+20025
 
 %%EOF

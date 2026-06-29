@@ -168,6 +168,60 @@
     "category": "expressions"
   },
   {
+    "id": "omit_keyword_list_brackets",
+    "description": "Omit the square brackets around a keyword list when they are optional, e.g. `foo(a: 1)`.",
+    "title": "Omit brackets from keyword lists",
+    "category": "expressions"
+  },
+  {
+    "id": "spaces_around_arrow",
+    "description": "Surround the `->` operator with spaces, e.g. `fn x -> x end` and case clauses.",
+    "title": "Spaces around the -> operator",
+    "category": "formatting"
+  },
+  {
+    "id": "capture_operator_spacing",
+    "description": "Write the capture operator with a space and without wrapping parentheses, e.g. `& &1`.",
+    "title": "Capture operator spacing",
+    "category": "formatting"
+  },
+  {
+    "id": "no_parens_around_anonymous_fn_args",
+    "description": "Write `fn x -> … end`, not `fn(x) -> … end`.",
+    "title": "No parentheses around anonymous function arguments",
+    "category": "expressions"
+  },
+  {
+    "id": "no_redundant_parentheses",
+    "description": "Drop parentheses that only group an expression, e.g. `1 + 2` not `(1 + 2)`.",
+    "title": "No redundant parentheses",
+    "category": "expressions"
+  },
+  {
+    "id": "lowercase_exponent",
+    "description": "Write the exponent letter in lowercase, e.g. `1.0e3` not `1.0E3`.",
+    "title": "Lowercase exponent letter in floats",
+    "category": "formatting"
+  },
+  {
+    "id": "no_spaces_in_bitstring_segments",
+    "description": "Do not put spaces around `::` in bitstring segments, e.g. `<<1::8>>`.",
+    "title": "No spaces around bitstring segment options",
+    "category": "formatting"
+  },
+  {
+    "id": "fit_collections_on_one_line",
+    "description": "Collapse a list, map, tuple or call onto one line when it fits within the line length.",
+    "title": "Fit collections on a single line when they fit",
+    "category": "formatting"
+  },
+  {
+    "id": "comments_on_own_line",
+    "description": "Place a comment on the line above the code it refers to, not trailing after it.",
+    "title": "Comments on their own line",
+    "category": "formatting"
+  },
+  {
     "id": "exception_error_suffix",
     "description": "Name exception modules with an `Error` suffix.",
     "title": "Error suffix for exception modules",

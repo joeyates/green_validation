@@ -24,5 +24,13 @@ defmodule GreenValidation.Sources.ChristopherAdamsTest do
     test "maps no_spaces_inside_brackets to the spaces anchor" do
       assert {:no_spaces_inside_brackets, "spaces"} in ChristopherAdams.mapping()
     end
+
+    test "maps omit_keyword_list_brackets to the keyword-list-brackets anchor" do
+      assert {:omit_keyword_list_brackets, "keyword-list-brackets"} in ChristopherAdams.mapping()
+    end
+
+    test "maps comments_on_own_line to the comments-above-line anchor" do
+      assert {:comments_on_own_line, "comments-above-line"} in ChristopherAdams.mapping()
+    end
   end
 end

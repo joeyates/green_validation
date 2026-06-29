@@ -204,6 +204,65 @@ defmodule GreenValidation.StyleCatalog do
       description: "Call zero-arity functions with parentheses, e.g. `foo()`.",
       category: :expressions
     },
+    %{
+      id: :omit_keyword_list_brackets,
+      title: "Omit brackets from keyword lists",
+      description:
+        "Omit the square brackets around a keyword list when they are optional, e.g. `foo(a: 1)`.",
+      category: :expressions
+    },
+    %{
+      id: :spaces_around_arrow,
+      title: "Spaces around the -> operator",
+      description:
+        "Surround the `->` operator with spaces, e.g. `fn x -> x end` and case clauses.",
+      category: :formatting
+    },
+    %{
+      id: :capture_operator_spacing,
+      title: "Capture operator spacing",
+      description:
+        "Write the capture operator with a space and without wrapping parentheses, e.g. `& &1`.",
+      category: :formatting
+    },
+    %{
+      id: :no_parens_around_anonymous_fn_args,
+      title: "No parentheses around anonymous function arguments",
+      description: "Write `fn x -> … end`, not `fn(x) -> … end`.",
+      category: :expressions
+    },
+    %{
+      id: :no_redundant_parentheses,
+      title: "No redundant parentheses",
+      description: "Drop parentheses that only group an expression, e.g. `1 + 2` not `(1 + 2)`.",
+      category: :expressions
+    },
+    %{
+      id: :lowercase_exponent,
+      title: "Lowercase exponent letter in floats",
+      description: "Write the exponent letter in lowercase, e.g. `1.0e3` not `1.0E3`.",
+      category: :formatting
+    },
+    %{
+      id: :no_spaces_in_bitstring_segments,
+      title: "No spaces around bitstring segment options",
+      description: "Do not put spaces around `::` in bitstring segments, e.g. `<<1::8>>`.",
+      category: :formatting
+    },
+    %{
+      id: :fit_collections_on_one_line,
+      title: "Fit collections on a single line when they fit",
+      description:
+        "Collapse a list, map, tuple or call onto one line when it fits within the line length.",
+      category: :formatting
+    },
+    %{
+      id: :comments_on_own_line,
+      title: "Comments on their own line",
+      description:
+        "Place a comment on the line above the code it refers to, not trailing after it.",
+      category: :formatting
+    },
 
     # Exceptions.
     %{

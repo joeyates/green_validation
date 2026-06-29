@@ -6,9 +6,6 @@
   },
   "unmapped": [
     {
-      "anchor": "anonymous-fun-parens"
-    },
-    {
       "anchor": "binary-operators-at-eols"
     },
     {
@@ -213,6 +210,11 @@
     {
       "id": "no_trailing_comma",
       "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
+      "proposed": true
+    },
+    {
+      "id": "no_parens_around_anonymous_fn_args",
+      "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
       "proposed": true
     }
   ]

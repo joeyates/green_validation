@@ -14,6 +14,15 @@ defmodule GreenValidation.Sources.MixFormatTest do
       assert by_id[:no_spaces_inside_brackets].proposed
       assert by_id[:no_semicolons].proposed
       assert by_id[:no_trailing_comma].proposed
+      assert by_id[:omit_keyword_list_brackets].proposed
+      assert by_id[:spaces_around_arrow].proposed
+      assert by_id[:capture_operator_spacing].proposed
+      assert by_id[:no_parens_around_anonymous_fn_args].proposed
+      assert by_id[:lowercase_exponent].proposed
+      assert by_id[:no_redundant_parentheses].proposed
+      assert by_id[:no_spaces_in_bitstring_segments].proposed
+      assert by_id[:fit_collections_on_one_line].proposed
+      assert by_id[:comments_on_own_line].proposed
     end
 
     test "marks formatter-ignored rules as not proposed" do

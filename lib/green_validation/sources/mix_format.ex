@@ -58,6 +58,61 @@ defmodule GreenValidation.Sources.MixFormat do
       reference: "code/formatter.ex — trailing comma removed from single-line collections"
     },
     %{
+      id: :omit_keyword_list_brackets,
+      input: "foo([a: 1])",
+      expected: "foo(a: 1)",
+      reference: "code/formatter.ex — optional keyword-list brackets omitted"
+    },
+    %{
+      id: :spaces_around_arrow,
+      input: "fn x->x end",
+      expected: "fn x -> x end",
+      reference: "code/formatter.ex — spaces around the -> operator"
+    },
+    %{
+      id: :capture_operator_spacing,
+      input: "&(&1)",
+      expected: "& &1",
+      reference: "code/formatter.ex — capture operator spacing and parens"
+    },
+    %{
+      id: :no_parens_around_anonymous_fn_args,
+      input: "fn(x) -> x end",
+      expected: "fn x -> x end",
+      reference: "code/formatter.ex — anonymous function argument parens removed"
+    },
+    %{
+      id: :no_redundant_parentheses,
+      input: "(1 + 2)",
+      expected: "1 + 2",
+      reference: "code/formatter.ex — redundant grouping parentheses removed"
+    },
+    %{
+      id: :lowercase_exponent,
+      input: "1.0E3",
+      expected: "1.0e3",
+      reference: "code.ex Code.format_string!/2 docs — number normalisation"
+    },
+    %{
+      id: :no_spaces_in_bitstring_segments,
+      input: "<<1 ::8>>",
+      expected: "<<1::8>>",
+      reference: "code/formatter.ex @no_space_binary_operators (bitstring segments)"
+    },
+    %{
+      id: :fit_collections_on_one_line,
+      input: "[1,\n2]",
+      expected: "[1, 2]",
+      reference: "code.ex Code.format_string!/2 docs — fit on a single line when possible"
+    },
+    %{
+      id: :comments_on_own_line,
+      input: "x = 1 # foo",
+      expected: "# foo\nx = 1",
+      reference:
+        "code.ex Code.format_string!/2 docs — trailing comments hoisted to their own line"
+    },
+    %{
       id: :comment_leading_space,
       input: "#x",
       expected: "# x",
@@ -106,13 +161,14 @@ defmodule GreenValidation.Sources.MixFormat do
   # Snippets used to detect formatter behaviour not covered by a probe. Snippets that are
   # a probe's input are excluded (already covered); the rest, if the formatter changes
   # them, are reported as `unmapped` — candidates for a new master rule.
+  #
+  # The long call is the one deliberately-uncovered entry: it exercises the formatter's
+  # fit-or-break line wrapping, which is emergent layout (the `Inspect.Algebra` engine)
+  # rather than a discrete rule, so it stays in `unmapped` as a reminder of that gap.
   @corpus [
     "1+1",
-    ":fooBar",
-    "[ 1, 2 ]",
-    "a = 1; b = 2",
-    "[1, 2,]",
-    "foo([a: 1])"
+    "1.0E3",
+    "foo(aaaaaaaaaa, bbbbbbbbbb, cccccccccc, dddddddddd, eeeeeeeeee, ffffffffff, gggggggggg, hhhhhhhhhh)"
   ]
 
   @doc """

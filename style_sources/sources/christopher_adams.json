@@ -33,9 +33,6 @@
       "anchor": "comment-line-length"
     },
     {
-      "anchor": "comments-above-line"
-    },
-    {
       "anchor": "custom-keywords"
     },
     {
@@ -70,9 +67,6 @@
     },
     {
       "anchor": "heredocs"
-    },
-    {
-      "anchor": "keyword-list-brackets"
     },
     {
       "anchor": "keyword-list-syntax"
@@ -286,6 +280,16 @@
     {
       "id": "no_trailing_punctuation_in_exception_messages",
       "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+      "proposed": true
+    },
+    {
+      "id": "omit_keyword_list_brackets",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
+      "proposed": true
+    },
+    {
+      "id": "comments_on_own_line",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
       "proposed": true
     }
   ]
