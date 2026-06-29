@@ -4,72 +4,90 @@
     "name": "mix format",
     "repo_url": "https://github.com/elixir-lang/elixir"
   },
-  "unmapped": [
-    {
-      "after": "[1, 2]",
-      "before": "[1, 2,]"
-    }
-  ],
   "rules": [
     {
       "id": "spaces_around_binary_operators",
+      "status": "enforced",
       "reference": "code/formatter.ex — binary operator spacing",
       "proposed": true
     },
     {
       "id": "no_spaces_around_range_operator",
+      "status": "enforced",
       "reference": "code/formatter.ex @no_space_binary_operators",
       "proposed": true
     },
     {
       "id": "spaces_after_commas",
+      "status": "enforced",
       "reference": "code/formatter.ex — collection element spacing",
       "proposed": true
     },
     {
       "id": "no_spaces_inside_brackets",
+      "status": "enforced",
       "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
       "proposed": true
     },
     {
       "id": "no_semicolons",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
       "proposed": true
     },
     {
+      "id": "no_trailing_comma",
+      "status": "enforced",
+      "reference": "code/formatter.ex — trailing comma removed from single-line collections",
+      "proposed": true
+    },
+    {
       "id": "comment_leading_space",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — Code comments",
       "proposed": true
     },
     {
       "id": "digit_grouping_underscores",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
       "proposed": true
     },
     {
       "id": "uppercase_hex_literals",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
       "proposed": true
     },
     {
       "id": "collapse_consecutive_blank_lines",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
       "proposed": true
     },
     {
       "id": "unix_line_endings",
+      "status": "enforced",
       "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
       "proposed": true
     },
     {
       "id": "snake_case_atoms_and_variables",
+      "status": "not_enforced",
       "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
       "proposed": false
     },
     {
       "id": "pipeline_for_chains",
+      "status": "not_enforced",
       "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
       "proposed": false
+    }
+  ],
+  "unmapped": [
+    {
+      "after": "foo(a: 1)",
+      "before": "foo([a: 1])"
     }
   ]
 }

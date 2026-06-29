@@ -49,6 +49,24 @@ defmodule GreenValidation.StyleComparisonTest do
       assert :two_space_indentation in result.rules_with_no_source
     end
 
+    test "carries a mix format status through to the source entry" do
+      source_rules = %{
+        mix_format: [
+          %{
+            id: :spaces_around_binary_operators,
+            proposed: true,
+            reference: "f",
+            status: "enforced"
+          }
+        ]
+      }
+
+      result = StyleComparison.build(source_rules)
+      row = Enum.find(result.rules, &(&1.id == :spaces_around_binary_operators))
+
+      assert row.sources.mix_format.status == "enforced"
+    end
+
     test "rejects an unknown rule id" do
       assert_raise ArgumentError, fn ->
         StyleComparison.build(%{mix_format: [%{id: :not_a_real_master_rule, proposed: true}]})

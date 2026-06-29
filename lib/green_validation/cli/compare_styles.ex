@@ -90,8 +90,11 @@ defmodule GreenValidation.CLI.CompareStyles do
 
   defp normalize_rule(rule, known) do
     case Map.fetch(known, rule.id) do
-      {:ok, id} -> %{id: id, proposed: rule.proposed, reference: rule[:reference]}
-      :error -> raise ArgumentError, "unknown master rule id: #{rule.id}"
+      {:ok, id} ->
+        %{id: id, proposed: rule.proposed, reference: rule[:reference], status: rule[:status]}
+
+      :error ->
+        raise ArgumentError, "unknown master rule id: #{rule.id}"
     end
   end
 

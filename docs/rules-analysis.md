@@ -60,11 +60,15 @@ Each command accepts `--output-path` (and the guide/compare commands accept
 **empirically**. Each candidate rule has a probe — `%{input, expected}` — and the
 analyzer formats `input` with `Code.format_string!/2`:
 
-- formatted output equals `expected` → the formatter **enforces** the rule (`proposed:
-  true`);
-- formatted output equals `input` → the formatter **leaves it alone** (`proposed: false`);
+- formatted output equals `expected` → `status: "enforced"` — the formatter applies the
+  rule (`proposed: true`);
+- formatted output equals `input` → `status: "not_enforced"` — the formatter parses the
+  code but leaves it alone (`proposed: false`);
 - anything else → the probe is not isolated (it exercises more than one rule) and the
   task raises, so the probe can be split.
+
+Unlike the guides, which *recommend* rules, `mix format` *enforces* them — hence the
+distinct `status`, surfaced as `Enforced` in the PDF rather than `Yes`.
 
 Probes for rules the formatter is expected to ignore (naming, pipelines, …) are included
 on purpose — the negative results are what make the comparison meaningful. The analyzer
@@ -105,10 +109,12 @@ style_sources/
 ### `comparison.pdf`
 
 `mix green_validation.comparison_pdf` reads `comparison.json` and renders a printable
-matrix — one row per master rule, one column per source, with `Yes` where the source
-proposes the rule — preceded by a legend mapping the short column labels to the full
-source names. It is built with [PrawnEx](https://hex.pm/packages/prawn_ex), a pure-Elixir
-PDF library (no Chrome or HTML), so it has no external runtime dependency.
+matrix — one row per master rule, one column per source — preceded by a legend mapping
+the short column labels to the full source names. The cells distinguish the two kinds of
+source: a guide column shows **`Yes`** where it proposes the rule, while the **`mix format`**
+column shows **`Enforced`** where the formatter applies the rule automatically. It is built with
+[PrawnEx](https://hex.pm/packages/prawn_ex), a pure-Elixir PDF library (no Chrome or
+HTML), so it has no external runtime dependency.
 
 ### `master_rules.json`
 
@@ -148,11 +154,13 @@ The output of one analyzer. `<id>` is one of `mix_format`, `lexmag`, `credo`,
     {
       "id": "spaces_around_binary_operators",
       "proposed": true,
+      "status": "enforced",
       "reference": "code/formatter.ex — binary operator spacing"
     },
     {
       "id": "snake_case_atoms_and_variables",
       "proposed": false,
+      "status": "not_enforced",
       "reference": "code.ex Code.format_string!/2 docs — does not hard code names"
     }
   ],
@@ -167,6 +175,7 @@ The output of one analyzer. `<id>` is one of `mix_format`, `lexmag`, `credo`,
 | `source.id` / `name` / `repo_url` | string | Identifies the source. |
 | `rules[].id` | string | A master rule id. |
 | `rules[].proposed` | boolean | Whether this source proposes/enforces the rule. |
+| `rules[].status` | string | **`mix_format` only.** `"enforced"` or `"not_enforced"` (see above). Absent for the prose guides, which recommend rather than enforce. |
 | `rules[].reference` | string | Where in the source the rule is found — an Elixir source location for `mix_format`, or a URL into the guide anchor for the guides. |
 | `unmapped` | array | Things the analyzer found but could not map to a master rule. For `mix_format` these are `{before, after}` formatter transformations; for guides they are `{anchor}` rule anchors. These drive the refinement loop. |
 
@@ -194,7 +203,7 @@ from a partial pipeline.
       "category": "formatting",
       "proposed_by": ["mix_format", "lexmag", "credo", "christopher_adams"],
       "sources": {
-        "mix_format":        { "proposed": true,  "reference": "code/formatter.ex — binary operator spacing" },
+        "mix_format":        { "proposed": true,  "status": "enforced", "reference": "code/formatter.ex — binary operator spacing" },
         "lexmag":            { "proposed": true,  "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code" },
         "credo":             { "proposed": true,  "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators" },
         "christopher_adams": { "proposed": true,  "reference": "https://github.com/christopheradams/elixir_style_guide#spaces" }
@@ -212,7 +221,7 @@ from a partial pipeline.
 | `rules` | array | One entry per master rule. |
 | `rules[].id` / `title` / `category` | string | Copied from the master rule. |
 | `rules[].proposed_by` | array | The source ids that propose the rule (in source order). |
-| `rules[].sources` | object | Per-source verdict, keyed by source id. Each value has `proposed` (boolean) and, when known, a `reference`. |
+| `rules[].sources` | object | Per-source verdict, keyed by source id. Each value has `proposed` (boolean) and, when known, a `reference`; the `mix_format` entry also carries `status` (`enforced`/`not_enforced`). |
 | `rules_with_no_source` | array | Master rule ids that no source proposes — possible spurious or mis-named entries to revisit. This closes the refinement loop in the opposite direction to each analyzer's `unmapped`. |
 
 ## Refinement loop

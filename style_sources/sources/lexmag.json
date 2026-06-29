@@ -81,9 +81,6 @@
       "anchor": "space-before-anonymous-fun-arrow"
     },
     {
-      "anchor": "trailing-comma"
-    },
-    {
       "anchor": "with-indentation"
     }
   ],
@@ -211,6 +208,11 @@
     {
       "id": "no_semicolons",
       "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
+      "proposed": true
+    },
+    {
+      "id": "no_trailing_comma",
+      "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
       "proposed": true
     }
   ]

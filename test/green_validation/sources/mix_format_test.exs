@@ -23,6 +23,13 @@ defmodule GreenValidation.Sources.MixFormatTest do
       refute by_id[:pipeline_for_chains].proposed
     end
 
+    test "reports a status of enforced or not_enforced per rule" do
+      by_id = Map.new(MixFormat.analyze().rules, &{&1.id, &1})
+
+      assert by_id[:spaces_around_binary_operators].status == "enforced"
+      assert by_id[:snake_case_atoms_and_variables].status == "not_enforced"
+    end
+
     test "every emitted rule id is a valid master id" do
       for rule <- MixFormat.analyze().rules do
         assert StyleCatalog.valid_id?(rule.id)

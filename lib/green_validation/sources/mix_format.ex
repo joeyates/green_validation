@@ -130,9 +130,12 @@ defmodule GreenValidation.Sources.MixFormat do
   def analyze() do
     rules =
       Enum.map(@probes, fn probe ->
+        enforced? = MixFormatProbe.enforced?(probe)
+
         %{
           id: probe.id,
-          proposed: MixFormatProbe.enforced?(probe),
+          proposed: enforced?,
+          status: if(enforced?, do: "enforced", else: "not_enforced"),
           reference: probe.reference
         }
       end)

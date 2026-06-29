@@ -101,9 +101,20 @@ defmodule GreenValidation.ComparisonPdf do
     end
   end
 
+  # A source that carries a `status` (mix format) enforces rather than recommends, so its
+  # cell reads "Enforced"; the prose guides recommend, so theirs reads "Yes".
   defp cell(rule, source_id) do
-    if get_in(rule, ["sources", source_id, "proposed"]), do: "Yes", else: ""
+    entry = get_in(rule, ["sources", source_id]) || %{}
+
+    cond do
+      Map.has_key?(entry, "status") -> status_label(entry["status"])
+      entry["proposed"] -> "Yes"
+      true -> ""
+    end
   end
+
+  defp status_label("enforced"), do: "Enforced"
+  defp status_label(_), do: ""
 
   defp short_label(source) do
     Map.get(@short_labels, source["id"], source["name"])
@@ -122,8 +133,9 @@ defmodule GreenValidation.ComparisonPdf do
     no_source = comparison["rules_with_no_source"] || []
 
     base =
-      "Generated with Elixir #{version}. \"Yes\" means the source proposes the rule. " <>
-        "#{rule_count} master rules."
+      "Generated with Elixir #{version}. A guide column shows \"Yes\" where it proposes " <>
+        "the rule; the mix format column shows \"Enforced\" where the formatter applies it " <>
+        "automatically. #{rule_count} master rules."
 
     case no_source do
       [] -> base

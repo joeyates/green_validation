@@ -4,7 +4,7 @@ defmodule GreenValidation.MixFormatProbeTest do
   alias GreenValidation.MixFormatProbe
 
   describe "enforced?/1" do
-    test "is true when the formatter transforms input into expected" do
+    test "is true when the formatter turns input into expected" do
       assert MixFormatProbe.enforced?(%{input: "1+1\n", expected: "1 + 1\n"})
     end
 

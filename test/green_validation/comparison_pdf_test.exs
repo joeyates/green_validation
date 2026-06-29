@@ -20,7 +20,11 @@ defmodule GreenValidation.ComparisonPdfTest do
         "category" => "formatting",
         "proposed_by" => ["mix_format", "lexmag"],
         "sources" => %{
-          "mix_format" => %{"proposed" => true, "reference" => "formatter.ex"},
+          "mix_format" => %{
+            "proposed" => true,
+            "reference" => "formatter.ex",
+            "status" => "enforced"
+          },
           "lexmag" => %{"proposed" => true, "reference" => "https://example.com/lex#spaces"}
         }
       },
@@ -30,7 +34,7 @@ defmodule GreenValidation.ComparisonPdfTest do
         "category" => "naming",
         "proposed_by" => ["lexmag"],
         "sources" => %{
-          "mix_format" => %{"proposed" => false},
+          "mix_format" => %{"proposed" => false, "status" => "not_enforced"},
           "lexmag" => %{"proposed" => true, "reference" => "https://example.com/lex#snake"}
         }
       }
@@ -45,10 +49,10 @@ defmodule GreenValidation.ComparisonPdfTest do
       assert header == ["Rule", "mix format", "Lexmag"]
     end
 
-    test "marks proposed cells with Yes and leaves others blank" do
+    test "shows Enforced for mix format and Yes for a guide; blank otherwise" do
       [_header, spaces_row, snake_row] = ComparisonPdf.rows(@comparison)
 
-      assert spaces_row == ["Spaces around binary operators", "Yes", "Yes"]
+      assert spaces_row == ["Spaces around binary operators", "Enforced", "Yes"]
       assert snake_row == ["snake_case", "", "Yes"]
     end
   end

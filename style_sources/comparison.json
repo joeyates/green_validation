@@ -29,6 +29,7 @@
       "id": "spaces_around_binary_operators",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code/formatter.ex — binary operator spacing",
           "proposed": true
         },
@@ -58,6 +59,7 @@
       "id": "no_spaces_around_range_operator",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code/formatter.ex @no_space_binary_operators",
           "proposed": true
         },
@@ -162,6 +164,7 @@
       "id": "spaces_after_commas",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code/formatter.ex — collection element spacing",
           "proposed": true
         },
@@ -191,6 +194,7 @@
       "id": "no_spaces_inside_brackets",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
           "proposed": true
         },
@@ -218,6 +222,7 @@
       "id": "no_semicolons",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
           "proposed": true
         },
@@ -242,9 +247,36 @@
       ]
     },
     {
+      "id": "no_trailing_comma",
+      "sources": {
+        "mix_format": {
+          "status": "enforced",
+          "reference": "code/formatter.ex — trailing comma removed from single-line collections",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "proposed": false
+        }
+      },
+      "title": "No trailing comma in collections",
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag"
+      ]
+    },
+    {
       "id": "collapse_consecutive_blank_lines",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
           "proposed": true
         },
@@ -268,6 +300,7 @@
       "id": "comment_leading_space",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — Code comments",
           "proposed": true
         },
@@ -295,6 +328,7 @@
       "id": "digit_grouping_underscores",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
@@ -322,6 +356,7 @@
       "id": "uppercase_hex_literals",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
@@ -347,6 +382,7 @@
       "id": "unix_line_endings",
       "sources": {
         "mix_format": {
+          "status": "enforced",
           "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
           "proposed": true
         },
@@ -401,6 +437,7 @@
       "id": "snake_case_atoms_and_variables",
       "sources": {
         "mix_format": {
+          "status": "not_enforced",
           "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
           "proposed": false
         },
@@ -578,6 +615,7 @@
       "id": "pipeline_for_chains",
       "sources": {
         "mix_format": {
+          "status": "not_enforced",
           "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
           "proposed": false
         },

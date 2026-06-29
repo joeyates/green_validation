@@ -48,6 +48,12 @@
     "category": "formatting"
   },
   {
+    "id": "no_trailing_comma",
+    "description": "Do not leave a trailing comma after the last element of a list, map, tuple or call.",
+    "title": "No trailing comma in collections",
+    "category": "formatting"
+  },
+  {
     "id": "collapse_consecutive_blank_lines",
     "description": "Squeeze multiple blank lines into a single blank line.",
     "title": "Collapse consecutive blank lines",

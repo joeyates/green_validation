@@ -15,7 +15,8 @@ defmodule GreenValidation.StyleComparison do
   @type source_rule :: %{
           required(:id) => atom(),
           required(:proposed) => boolean(),
-          optional(:reference) => String.t() | nil
+          optional(:reference) => String.t() | nil,
+          optional(:status) => String.t() | nil
         }
 
   @spec build(%{atom() => [source_rule()]}) :: map()
@@ -59,11 +60,13 @@ defmodule GreenValidation.StyleComparison do
   defp source_entry(nil), do: %{proposed: false}
 
   defp source_entry(%{proposed: proposed} = entry) do
-    case entry[:reference] do
-      nil -> %{proposed: proposed}
-      reference -> %{proposed: proposed, reference: reference}
-    end
+    %{proposed: proposed}
+    |> maybe_put(:reference, entry[:reference])
+    |> maybe_put(:status, entry[:status])
   end
+
+  defp maybe_put(map, _key, nil), do: map
+  defp maybe_put(map, key, value), do: Map.put(map, key, value)
 
   defp validate_ids!(source_rules) do
     unknown =

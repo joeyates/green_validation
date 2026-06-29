@@ -6,10 +6,10 @@ defmodule GreenValidation.MixFormatProbe do
   A probe is a map `%{input: <violates the rule>, expected: <satisfies the rule>}`.
   `enforced?/1` formats `input` and classifies the result:
 
-    * equals `expected` → the formatter enforces the rule (`true`)
-    * equals `input` → the formatter leaves it alone (`false`)
-    * anything else → the probe is not isolated (it exercises more than one rule), so
-      it raises — the probe must be split until a single change is attributable.
+    * equals `expected` → the formatter applies the rule (`true`)
+    * equals `input` → the formatter parses the code but leaves it alone (`false`)
+    * anything else → the probe is not isolated (it exercises more than one rule), so it
+      raises — the probe must be split until a single change is attributable.
 
   Comparisons ignore a trailing newline, since `Code.format_string!/2` does not emit one.
   """
