@@ -24,5 +24,9 @@ defmodule GreenValidation.Sources.CredoTest do
     test "maps no_spaces_inside_brackets to the spaces-braces anchor" do
       assert {:no_spaces_inside_brackets, "spaces-braces"} in Credo.mapping()
     end
+
+    test "maps no_semicolons to the semicolon-between-statements anchor" do
+      assert {:no_semicolons, "semicolon-between-statements"} in Credo.mapping()
+    end
   end
 end

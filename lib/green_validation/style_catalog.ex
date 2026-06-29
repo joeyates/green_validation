@@ -70,6 +70,12 @@ defmodule GreenValidation.StyleCatalog do
       category: :formatting
     },
     %{
+      id: :no_semicolons,
+      title: "No semicolons between statements",
+      description: "Write each statement on its own line; do not use `;` to separate statements.",
+      category: :formatting
+    },
+    %{
       id: :collapse_consecutive_blank_lines,
       title: "Collapse consecutive blank lines",
       description: "Squeeze multiple blank lines into a single blank line.",

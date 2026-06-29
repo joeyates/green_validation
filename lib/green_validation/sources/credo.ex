@@ -23,7 +23,8 @@ defmodule GreenValidation.Sources.Credo do
     {:exception_error_suffix, "exception-naming"},
     {:predicate_function_question_mark, "predicates"},
     {:module_pseudo_variable, "reference-current-module"},
-    {:no_else_in_unless, "no-unless-with-else"}
+    {:no_else_in_unless, "no-unless-with-else"},
+    {:no_semicolons, "semicolon-between-statements"}
   ]
 
   @doc """

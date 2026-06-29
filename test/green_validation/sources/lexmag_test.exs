@@ -20,5 +20,9 @@ defmodule GreenValidation.Sources.LexmagTest do
         assert is_binary(anchor) and anchor != ""
       end
     end
+
+    test "maps no_semicolons to the no-semicolon anchor" do
+      assert {:no_semicolons, "no-semicolon"} in Lexmag.mapping()
+    end
   end
 end

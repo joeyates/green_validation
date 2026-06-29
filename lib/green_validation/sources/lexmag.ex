@@ -31,7 +31,8 @@ defmodule GreenValidation.Sources.Lexmag do
     {:no_spaces_around_range_operator, "no-spaces-in-code"},
     {:digit_grouping_underscores, "underscores-in-numerics"},
     {:uppercase_hex_literals, "hex-literals"},
-    {:parentheses_on_zero_arity_calls, "zero-arity-parens"}
+    {:parentheses_on_zero_arity_calls, "zero-arity-parens"},
+    {:no_semicolons, "no-semicolon"}
   ]
 
   @doc """

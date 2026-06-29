@@ -6,8 +6,8 @@
   },
   "unmapped": [
     {
-      "after": "a = 1\nb = 2",
-      "before": "a = 1; b = 2"
+      "after": "[1, 2]",
+      "before": "[1, 2,]"
     }
   ],
   "rules": [
@@ -29,6 +29,11 @@
     {
       "id": "no_spaces_inside_brackets",
       "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
+      "proposed": true
+    },
+    {
+      "id": "no_semicolons",
+      "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
       "proposed": true
     },
     {

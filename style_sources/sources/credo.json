@@ -78,9 +78,6 @@
       "anchor": "regex-sigils"
     },
     {
-      "anchor": "semicolon-between-statements"
-    },
-    {
       "anchor": "sigils"
     },
     {
@@ -167,6 +164,11 @@
     {
       "id": "no_else_in_unless",
       "reference": "https://github.com/rrrene/elixir-style-guide#no-unless-with-else",
+      "proposed": true
+    },
+    {
+      "id": "no_semicolons",
+      "reference": "https://github.com/rrrene/elixir-style-guide#semicolon-between-statements",
       "proposed": true
     }
   ]

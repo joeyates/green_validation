@@ -27,7 +27,6 @@
   "rules": [
     {
       "id": "spaces_around_binary_operators",
-      "title": "Spaces around binary operators",
       "sources": {
         "mix_format": {
           "reference": "code/formatter.ex — binary operator spacing",
@@ -46,6 +45,7 @@
           "proposed": true
         }
       },
+      "title": "Spaces around binary operators",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -56,7 +56,6 @@
     },
     {
       "id": "no_spaces_around_range_operator",
-      "title": "No spaces around the range operator",
       "sources": {
         "mix_format": {
           "reference": "code/formatter.ex @no_space_binary_operators",
@@ -74,6 +73,7 @@
           "proposed": true
         }
       },
+      "title": "No spaces around the range operator",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -83,7 +83,6 @@
     },
     {
       "id": "two_space_indentation",
-      "title": "Two-space indentation",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -100,6 +99,7 @@
           "proposed": false
         }
       },
+      "title": "Two-space indentation",
       "category": "formatting",
       "proposed_by": [
         "lexmag",
@@ -108,7 +108,6 @@
     },
     {
       "id": "max_line_length",
-      "title": "Maximum line length",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -125,6 +124,7 @@
           "proposed": true
         }
       },
+      "title": "Maximum line length",
       "category": "formatting",
       "proposed_by": [
         "credo",
@@ -133,7 +133,6 @@
     },
     {
       "id": "no_trailing_whitespace",
-      "title": "No trailing whitespace",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -151,6 +150,7 @@
           "proposed": true
         }
       },
+      "title": "No trailing whitespace",
       "category": "formatting",
       "proposed_by": [
         "lexmag",
@@ -160,7 +160,6 @@
     },
     {
       "id": "spaces_after_commas",
-      "title": "Space after commas",
       "sources": {
         "mix_format": {
           "reference": "code/formatter.ex — collection element spacing",
@@ -179,6 +178,7 @@
           "proposed": true
         }
       },
+      "title": "Space after commas",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -189,7 +189,6 @@
     },
     {
       "id": "no_spaces_inside_brackets",
-      "title": "No spaces inside brackets",
       "sources": {
         "mix_format": {
           "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
@@ -207,6 +206,7 @@
           "proposed": true
         }
       },
+      "title": "No spaces inside brackets",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -215,8 +215,34 @@
       ]
     },
     {
+      "id": "no_semicolons",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#semicolon-between-statements",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "proposed": false
+        }
+      },
+      "title": "No semicolons between statements",
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "credo"
+      ]
+    },
+    {
       "id": "collapse_consecutive_blank_lines",
-      "title": "Collapse consecutive blank lines",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
@@ -232,6 +258,7 @@
           "proposed": false
         }
       },
+      "title": "Collapse consecutive blank lines",
       "category": "formatting",
       "proposed_by": [
         "mix_format"
@@ -239,7 +266,6 @@
     },
     {
       "id": "comment_leading_space",
-      "title": "Space after the comment marker",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — Code comments",
@@ -257,6 +283,7 @@
           "proposed": true
         }
       },
+      "title": "Space after the comment marker",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -266,7 +293,6 @@
     },
     {
       "id": "digit_grouping_underscores",
-      "title": "Group digits in large numbers",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
@@ -284,6 +310,7 @@
           "proposed": false
         }
       },
+      "title": "Group digits in large numbers",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -293,7 +320,6 @@
     },
     {
       "id": "uppercase_hex_literals",
-      "title": "Uppercase hexadecimal literals",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
@@ -310,6 +336,7 @@
           "proposed": false
         }
       },
+      "title": "Uppercase hexadecimal literals",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -318,7 +345,6 @@
     },
     {
       "id": "unix_line_endings",
-      "title": "Unix line endings",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
@@ -336,6 +362,7 @@
           "proposed": true
         }
       },
+      "title": "Unix line endings",
       "category": "formatting",
       "proposed_by": [
         "mix_format",
@@ -345,7 +372,6 @@
     },
     {
       "id": "trailing_newline",
-      "title": "Trailing newline at end of file",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -363,6 +389,7 @@
           "proposed": true
         }
       },
+      "title": "Trailing newline at end of file",
       "category": "formatting",
       "proposed_by": [
         "lexmag",
@@ -372,7 +399,6 @@
     },
     {
       "id": "snake_case_atoms_and_variables",
-      "title": "snake_case for atoms, variables and functions",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
@@ -391,6 +417,7 @@
           "proposed": true
         }
       },
+      "title": "snake_case for atoms, variables and functions",
       "category": "naming",
       "proposed_by": [
         "lexmag",
@@ -400,7 +427,6 @@
     },
     {
       "id": "camel_case_modules",
-      "title": "CamelCase for modules",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -418,6 +444,7 @@
           "proposed": true
         }
       },
+      "title": "CamelCase for modules",
       "category": "naming",
       "proposed_by": [
         "lexmag",
@@ -427,7 +454,6 @@
     },
     {
       "id": "predicate_function_question_mark",
-      "title": "Question mark for predicate functions",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -445,6 +471,7 @@
           "proposed": true
         }
       },
+      "title": "Question mark for predicate functions",
       "category": "naming",
       "proposed_by": [
         "lexmag",
@@ -454,7 +481,6 @@
     },
     {
       "id": "avoid_one_letter_variables",
-      "title": "Avoid one-letter variable names",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -470,6 +496,7 @@
           "proposed": false
         }
       },
+      "title": "Avoid one-letter variable names",
       "category": "naming",
       "proposed_by": [
         "lexmag"
@@ -477,7 +504,6 @@
     },
     {
       "id": "alphabetical_alias_order",
-      "title": "Order alias/import/require alphabetically",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -492,12 +518,12 @@
           "proposed": false
         }
       },
+      "title": "Order alias/import/require alphabetically",
       "category": "modules",
       "proposed_by": []
     },
     {
       "id": "module_pseudo_variable",
-      "title": "Use the __MODULE__ pseudo-variable",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -515,6 +541,7 @@
           "proposed": true
         }
       },
+      "title": "Use the __MODULE__ pseudo-variable",
       "category": "modules",
       "proposed_by": [
         "lexmag",
@@ -524,7 +551,6 @@
     },
     {
       "id": "module_attribute_layout",
-      "title": "Consistent module attribute layout",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -541,6 +567,7 @@
           "proposed": true
         }
       },
+      "title": "Consistent module attribute layout",
       "category": "modules",
       "proposed_by": [
         "lexmag",
@@ -549,7 +576,6 @@
     },
     {
       "id": "pipeline_for_chains",
-      "title": "Use pipelines for chained calls",
       "sources": {
         "mix_format": {
           "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
@@ -567,6 +593,7 @@
           "proposed": true
         }
       },
+      "title": "Use pipelines for chained calls",
       "category": "expressions",
       "proposed_by": [
         "lexmag",
@@ -575,7 +602,6 @@
     },
     {
       "id": "no_pipeline_for_single_call",
-      "title": "Avoid needless pipelines",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -592,6 +618,7 @@
           "proposed": true
         }
       },
+      "title": "Avoid needless pipelines",
       "category": "expressions",
       "proposed_by": [
         "lexmag",
@@ -600,7 +627,6 @@
     },
     {
       "id": "no_anonymous_functions_in_pipelines",
-      "title": "No anonymous functions in pipelines",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -616,6 +642,7 @@
           "proposed": false
         }
       },
+      "title": "No anonymous functions in pipelines",
       "category": "expressions",
       "proposed_by": [
         "lexmag"
@@ -623,7 +650,6 @@
     },
     {
       "id": "no_else_in_unless",
-      "title": "No else clause with unless",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -641,6 +667,7 @@
           "proposed": true
         }
       },
+      "title": "No else clause with unless",
       "category": "expressions",
       "proposed_by": [
         "lexmag",
@@ -650,7 +677,6 @@
     },
     {
       "id": "true_as_last_cond_clause",
-      "title": "Use true as the last cond clause",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -667,6 +693,7 @@
           "proposed": true
         }
       },
+      "title": "Use true as the last cond clause",
       "category": "expressions",
       "proposed_by": [
         "lexmag",
@@ -675,7 +702,6 @@
     },
     {
       "id": "parentheses_on_zero_arity_calls",
-      "title": "Parentheses on zero-arity function calls",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -692,6 +718,7 @@
           "proposed": true
         }
       },
+      "title": "Parentheses on zero-arity function calls",
       "category": "expressions",
       "proposed_by": [
         "lexmag",
@@ -700,7 +727,6 @@
     },
     {
       "id": "exception_error_suffix",
-      "title": "Error suffix for exception modules",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -718,6 +744,7 @@
           "proposed": true
         }
       },
+      "title": "Error suffix for exception modules",
       "category": "exceptions",
       "proposed_by": [
         "lexmag",
@@ -727,7 +754,6 @@
     },
     {
       "id": "lowercase_exception_messages",
-      "title": "Lowercase exception messages",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -744,6 +770,7 @@
           "proposed": true
         }
       },
+      "title": "Lowercase exception messages",
       "category": "exceptions",
       "proposed_by": [
         "lexmag",
@@ -752,7 +779,6 @@
     },
     {
       "id": "no_trailing_punctuation_in_exception_messages",
-      "title": "No trailing punctuation in exception messages",
       "sources": {
         "mix_format": {
           "proposed": false
@@ -769,6 +795,7 @@
           "proposed": true
         }
       },
+      "title": "No trailing punctuation in exception messages",
       "category": "exceptions",
       "proposed_by": [
         "lexmag",

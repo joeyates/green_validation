@@ -42,6 +42,12 @@
     "category": "formatting"
   },
   {
+    "id": "no_semicolons",
+    "description": "Write each statement on its own line; do not use `;` to separate statements.",
+    "title": "No semicolons between statements",
+    "category": "formatting"
+  },
+  {
     "id": "collapse_consecutive_blank_lines",
     "description": "Squeeze multiple blank lines into a single blank line.",
     "title": "Collapse consecutive blank lines",

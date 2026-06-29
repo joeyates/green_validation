@@ -54,9 +54,6 @@
       "anchor": "no-nil-else"
     },
     {
-      "anchor": "no-semicolon"
-    },
-    {
       "anchor": "no-superfluous-comments"
     },
     {
@@ -209,6 +206,11 @@
     {
       "id": "parentheses_on_zero_arity_calls",
       "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
+      "proposed": true
+    },
+    {
+      "id": "no_semicolons",
+      "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
       "proposed": true
     }
   ]

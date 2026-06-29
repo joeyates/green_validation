@@ -46,6 +46,12 @@ defmodule GreenValidation.Sources.MixFormat do
       reference: "code/formatter.ex — no padding inside brackets/braces/parens"
     },
     %{
+      id: :no_semicolons,
+      input: "a = 1; b = 2",
+      expected: "a = 1\nb = 2",
+      reference: "code.ex Code.format_string!/2 docs — statements split onto separate lines"
+    },
+    %{
       id: :comment_leading_space,
       input: "#x",
       expected: "# x",
@@ -98,7 +104,8 @@ defmodule GreenValidation.Sources.MixFormat do
     "1+1",
     ":fooBar",
     "[ 1, 2 ]",
-    "a = 1; b = 2"
+    "a = 1; b = 2",
+    "[1, 2,]"
   ]
 
   @doc """
