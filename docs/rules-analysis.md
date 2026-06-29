@@ -46,6 +46,9 @@ mix green_validation.analyze_christopher_adams  # -> style_sources/sources/chris
 
 # 3. join the per-source artifacts into the comparison
 mix green_validation.compare_styles             # -> style_sources/comparison.json
+
+# 4. (optional) render the comparison as a PDF
+mix green_validation.comparison_pdf             # -> style_sources/comparison.pdf
 ```
 
 Each command accepts `--output-path` (and the guide/compare commands accept
@@ -95,8 +98,17 @@ style_sources/
 │   ├── lexmag.json
 │   ├── credo.json
 │   └── christopher_adams.json
-└── comparison.json               # the final comparison (compare_styles)
+├── comparison.json               # the final comparison (compare_styles)
+└── comparison.pdf                # printable matrix of the comparison (comparison_pdf)
 ```
+
+### `comparison.pdf`
+
+`mix green_validation.comparison_pdf` reads `comparison.json` and renders a printable
+matrix — one row per master rule, one column per source, with `Yes` where the source
+proposes the rule — preceded by a legend mapping the short column labels to the full
+source names. It is built with [PrawnEx](https://hex.pm/packages/prawn_ex), a pure-Elixir
+PDF library (no Chrome or HTML), so it has no external runtime dependency.
 
 ### `master_rules.json`
 
