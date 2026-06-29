@@ -16,6 +16,10 @@ The validation system:
 For a walkthrough of how a run flows from the command line through validation to
 the written report, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
+Separately, a pipeline of tasks builds a comparison of the four "sources of truth" for
+Elixir style (`mix format`, Lexmag, Credo and christopheradams), showing which rule is
+proposed by which source. See [docs/rules-analysis.md](docs/rules-analysis.md).
+
 ## Setup
 
 ### Dependencies
