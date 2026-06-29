@@ -63,6 +63,13 @@ defmodule GreenValidation.StyleCatalog do
       category: :formatting
     },
     %{
+      id: :no_spaces_inside_brackets,
+      title: "No spaces inside brackets",
+      description:
+        "Do not pad the inside of (), [] or {} with spaces, e.g. `[1, 2]` not `[ 1, 2 ]`.",
+      category: :formatting
+    },
+    %{
       id: :collapse_consecutive_blank_lines,
       title: "Collapse consecutive blank lines",
       description: "Squeeze multiple blank lines into a single blank line.",

@@ -40,6 +40,12 @@ defmodule GreenValidation.Sources.MixFormat do
       reference: "code/formatter.ex — collection element spacing"
     },
     %{
+      id: :no_spaces_inside_brackets,
+      input: "[ 1, 2 ]",
+      expected: "[1, 2]",
+      reference: "code/formatter.ex — no padding inside brackets/braces/parens"
+    },
+    %{
       id: :comment_leading_space,
       input: "#x",
       expected: "# x",
@@ -85,13 +91,14 @@ defmodule GreenValidation.Sources.MixFormat do
     }
   ]
 
-  # Snippets used to detect formatter behaviour not covered by a probe.
+  # Snippets used to detect formatter behaviour not covered by a probe. Snippets that are
+  # a probe's input are excluded (already covered); the rest, if the formatter changes
+  # them, are reported as `unmapped` — candidates for a new master rule.
   @corpus [
-    "foo( )",
-    "[ 1, 2 ]",
-    "%{ a: 1 }",
     "1+1",
-    ":fooBar"
+    ":fooBar",
+    "[ 1, 2 ]",
+    "a = 1; b = 2"
   ]
 
   @doc """

@@ -20,5 +20,9 @@ defmodule GreenValidation.Sources.CredoTest do
         assert is_binary(anchor) and anchor != ""
       end
     end
+
+    test "maps no_spaces_inside_brackets to the spaces-braces anchor" do
+      assert {:no_spaces_inside_brackets, "spaces-braces"} in Credo.mapping()
+    end
   end
 end

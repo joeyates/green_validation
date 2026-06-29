@@ -209,6 +209,11 @@
       "proposed": true
     },
     {
+      "id": "no_spaces_inside_brackets",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+      "proposed": true
+    },
+    {
       "id": "no_spaces_around_range_operator",
       "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
       "proposed": true

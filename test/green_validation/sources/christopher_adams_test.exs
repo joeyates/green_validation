@@ -20,5 +20,9 @@ defmodule GreenValidation.Sources.ChristopherAdamsTest do
         assert is_binary(anchor) and anchor != ""
       end
     end
+
+    test "maps no_spaces_inside_brackets to the spaces anchor" do
+      assert {:no_spaces_inside_brackets, "spaces"} in ChristopherAdams.mapping()
+    end
   end
 end

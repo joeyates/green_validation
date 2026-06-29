@@ -15,6 +15,7 @@ defmodule GreenValidation.Sources.ChristopherAdams do
     {:max_line_length, "line-length"},
     {:spaces_around_binary_operators, "spaces"},
     {:spaces_after_commas, "spaces"},
+    {:no_spaces_inside_brackets, "spaces"},
     {:no_spaces_around_range_operator, "no-spaces"},
     {:comment_leading_space, "comment-leading-spaces"},
     {:pipeline_for_chains, "pipe-operator"},

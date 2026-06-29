@@ -6,16 +6,8 @@
   },
   "unmapped": [
     {
-      "after": "foo()",
-      "before": "foo( )"
-    },
-    {
-      "after": "[1, 2]",
-      "before": "[ 1, 2 ]"
-    },
-    {
-      "after": "%{a: 1}",
-      "before": "%{ a: 1 }"
+      "after": "a = 1\nb = 2",
+      "before": "a = 1; b = 2"
     }
   ],
   "rules": [
@@ -32,6 +24,11 @@
     {
       "id": "spaces_after_commas",
       "reference": "code/formatter.ex — collection element spacing",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_inside_brackets",
+      "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
       "proposed": true
     },
     {

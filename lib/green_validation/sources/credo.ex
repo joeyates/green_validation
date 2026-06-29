@@ -15,6 +15,7 @@ defmodule GreenValidation.Sources.Credo do
     {:trailing_newline, "newline-eof"},
     {:spaces_around_binary_operators, "spaces-operators"},
     {:spaces_after_commas, "spaces-operators"},
+    {:no_spaces_inside_brackets, "spaces-braces"},
     {:max_line_length, "character-per-line-limit"},
     {:digit_grouping_underscores, "underscores-in-numerics"},
     {:camel_case_modules, "camelcase-modules"},

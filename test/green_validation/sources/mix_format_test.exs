@@ -11,6 +11,7 @@ defmodule GreenValidation.Sources.MixFormatTest do
       assert by_id[:spaces_around_binary_operators].proposed
       assert by_id[:no_spaces_around_range_operator].proposed
       assert by_id[:digit_grouping_underscores].proposed
+      assert by_id[:no_spaces_inside_brackets].proposed
     end
 
     test "marks formatter-ignored rules as not proposed" do

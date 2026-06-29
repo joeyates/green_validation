@@ -84,9 +84,6 @@
       "anchor": "sigils"
     },
     {
-      "anchor": "spaces-braces"
-    },
-    {
       "anchor": "stdlib-modules"
     },
     {
@@ -125,6 +122,11 @@
     {
       "id": "spaces_after_commas",
       "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_inside_brackets",
+      "reference": "https://github.com/rrrene/elixir-style-guide#spaces-braces",
       "proposed": true
     },
     {
