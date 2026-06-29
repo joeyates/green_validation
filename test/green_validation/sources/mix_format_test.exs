@@ -13,6 +13,7 @@ defmodule GreenValidation.Sources.MixFormatTest do
       assert by_id[:digit_grouping_underscores].proposed
       assert by_id[:no_spaces_inside_brackets].proposed
       assert by_id[:no_semicolons].proposed
+      assert by_id[:no_trailing_comma].proposed
     end
 
     test "marks formatter-ignored rules as not proposed" do

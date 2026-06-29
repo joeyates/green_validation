@@ -52,6 +52,12 @@ defmodule GreenValidation.Sources.MixFormat do
       reference: "code.ex Code.format_string!/2 docs — statements split onto separate lines"
     },
     %{
+      id: :no_trailing_comma,
+      input: "[1, 2,]",
+      expected: "[1, 2]",
+      reference: "code/formatter.ex — trailing comma removed from single-line collections"
+    },
+    %{
       id: :comment_leading_space,
       input: "#x",
       expected: "# x",
@@ -105,7 +111,8 @@ defmodule GreenValidation.Sources.MixFormat do
     ":fooBar",
     "[ 1, 2 ]",
     "a = 1; b = 2",
-    "[1, 2,]"
+    "[1, 2,]",
+    "foo([a: 1])"
   ]
 
   @doc """

@@ -76,6 +76,13 @@ defmodule GreenValidation.StyleCatalog do
       category: :formatting
     },
     %{
+      id: :no_trailing_comma,
+      title: "No trailing comma in collections",
+      description:
+        "Do not leave a trailing comma after the last element of a list, map, tuple or call.",
+      category: :formatting
+    },
+    %{
       id: :collapse_consecutive_blank_lines,
       title: "Collapse consecutive blank lines",
       description: "Squeeze multiple blank lines into a single blank line.",

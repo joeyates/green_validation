@@ -32,7 +32,8 @@ defmodule GreenValidation.Sources.Lexmag do
     {:digit_grouping_underscores, "underscores-in-numerics"},
     {:uppercase_hex_literals, "hex-literals"},
     {:parentheses_on_zero_arity_calls, "zero-arity-parens"},
-    {:no_semicolons, "no-semicolon"}
+    {:no_semicolons, "no-semicolon"},
+    {:no_trailing_comma, "trailing-comma"}
   ]
 
   @doc """

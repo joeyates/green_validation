@@ -24,5 +24,9 @@ defmodule GreenValidation.Sources.LexmagTest do
     test "maps no_semicolons to the no-semicolon anchor" do
       assert {:no_semicolons, "no-semicolon"} in Lexmag.mapping()
     end
+
+    test "maps no_trailing_comma to the trailing-comma anchor" do
+      assert {:no_trailing_comma, "trailing-comma"} in Lexmag.mapping()
+    end
   end
 end
