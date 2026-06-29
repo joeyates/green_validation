@@ -57,6 +57,37 @@ defmodule GreenValidation.ComparisonPdfTest do
     end
   end
 
+  describe "sections/1" do
+    test "puts mix-format-enforced rules first, then a section per category" do
+      sections = ComparisonPdf.sections(@comparison)
+
+      assert Enum.map(sections, &elem(&1, 0)) == ["Enforced by mix format", "Naming"]
+    end
+
+    test "groups the rules into the right blocks" do
+      [{_enforced_title, enforced}, {_naming_title, naming}] = ComparisonPdf.sections(@comparison)
+
+      assert Enum.map(enforced, & &1["id"]) == ["spaces_around_binary_operators"]
+      assert Enum.map(naming, & &1["id"]) == ["snake_case_atoms_and_variables"]
+    end
+
+    test "sorts the rules within a section alphabetically by title" do
+      comparison = %{
+        "sources" => [%{"id" => "mix_format", "name" => "mix format", "repo_url" => "x"}],
+        "rules" => [
+          rule("zebra", "Zebra rule", "naming"),
+          rule("apple", "Apple rule", "naming"),
+          rule("mango", "mango rule", "naming")
+        ],
+        "rules_with_no_source" => []
+      }
+
+      [{"Naming", rules}] = ComparisonPdf.sections(comparison)
+
+      assert Enum.map(rules, & &1["title"]) == ["Apple rule", "mango rule", "Zebra rule"]
+    end
+  end
+
   describe "render/1" do
     test "produces PDF bytes" do
       pdf = ComparisonPdf.render(@comparison)
@@ -65,5 +96,15 @@ defmodule GreenValidation.ComparisonPdfTest do
       assert String.starts_with?(pdf, "%PDF-")
       assert byte_size(pdf) > 500
     end
+  end
+
+  defp rule(id, title, category) do
+    %{
+      "id" => id,
+      "title" => title,
+      "category" => category,
+      "proposed_by" => [],
+      "sources" => %{"mix_format" => %{"proposed" => false, "status" => "not_enforced"}}
+    }
   end
 end

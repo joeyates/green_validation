@@ -3,9 +3,11 @@ defmodule GreenValidation.ComparisonPdf do
   Renders a parsed `comparison.json` (the output of `mix green_validation.compare_styles`)
   into a printable PDF via PrawnEx — a pure-Elixir PDF library, no Chrome or HTML.
 
-  The PDF is a matrix: one row per master rule, one column per source, with `Yes` where
-  the source proposes the rule. A legend maps the short column labels to the full source
-  names. `PrawnEx.Layout` does not paginate, so rows are chunked across A4 pages here.
+  The rules are split into blocks: first the rules `mix format` enforces, then one section
+  per category for the rest. Each block is a heading plus a matrix (one row per rule, one
+  column per source) with `Enforced`/`Yes` cells. A legend maps the short column labels to
+  the full source names. `PrawnEx.Layout` does not paginate, so a new page is started
+  between blocks when one would not fit (each block is assumed to fit on a page).
   """
 
   alias PrawnEx.Document
@@ -20,68 +22,105 @@ defmodule GreenValidation.ComparisonPdf do
     "christopher_adams" => "Adams"
   }
 
+  @category_order ["formatting", "naming", "modules", "expressions", "exceptions"]
+
   @page_size :a4
   @margins %{top: 60, left: 50, right: 50, bottom: 50}
   @source_col_width 70
   @row_height 22
-  # Conservative row counts that fit an A4 page (less on page 1, which carries the intro).
-  @first_page_rows 22
-  @page_rows 28
 
   @doc """
   Builds the table rows: a header row (`"Rule"` plus a short label per source) followed
-  by one row per master rule, with `"Yes"` where the source proposes it and `""` otherwise.
+  by one row per master rule.
   """
   @spec rows(map()) :: [[String.t()]]
   def rows(comparison) do
     sources = comparison["sources"]
-    header = ["Rule" | Enum.map(sources, &short_label/1)]
-
-    body =
-      Enum.map(comparison["rules"], fn rule ->
-        cells = Enum.map(sources, fn source -> cell(rule, source["id"]) end)
-        [rule["title"] | cells]
-      end)
-
-    [header | body]
+    [header_row(comparison) | Enum.map(comparison["rules"], &body_row(&1, sources))]
   end
+
+  @doc """
+  Splits the rules into display blocks: first `{"Enforced by mix format", rules}` for the
+  rules `mix format` enforces, then one `{category_title, rules}` per category (in
+  `@category_order`) for the rest. Empty blocks are omitted.
+  """
+  @spec sections(map()) :: [{String.t(), [map()]}]
+  def sections(comparison) do
+    {enforced, rest} = Enum.split_with(comparison["rules"], &mix_format_enforced?/1)
+
+    (enforced |> sort_rules() |> enforced_section()) ++ category_sections(rest)
+  end
+
+  defp sort_rules(rules), do: Enum.sort_by(rules, &String.downcase(&1["title"]))
 
   @doc """
   Renders the comparison to PDF bytes.
   """
   @spec render(map()) :: binary()
   def render(comparison) do
-    [header | body] = rows(comparison)
+    header = header_row(comparison)
     column_widths = column_widths(comparison["sources"])
     align = [:left | List.duplicate(:center, length(comparison["sources"]))]
-    [first_chunk | rest_chunks] = paginate(body)
 
-    Document.new()
-    |> first_page(comparison, header, first_chunk, column_widths, align)
-    |> more_pages(header, rest_chunks, column_widths, align)
+    layout =
+      Document.new()
+      |> PrawnEx.add_page()
+      |> Layout.attach(page_size: @page_size, margins: @margins)
+      |> Layout.heading("Elixir style: source comparison", font_size: 18)
+      |> Layout.paragraph(intro(comparison), font_size: 9, gap_after: 6)
+      |> Layout.paragraph(legend(comparison), font_size: 9, gap_after: 10)
+
+    comparison
+    |> sections()
+    |> Enum.reduce(layout, fn {title, rules}, acc ->
+      table_rows = [header | Enum.map(rules, &body_row(&1, comparison["sources"]))]
+
+      acc
+      |> ensure_room(section_height(table_rows))
+      |> Layout.heading(title, font_size: 12, gap_after: 4)
+      |> table(table_rows, column_widths, align)
+    end)
+    |> Layout.to_doc()
     |> PrawnEx.to_binary()
   end
 
-  defp first_page(doc, comparison, header, chunk, column_widths, align) do
-    doc
-    |> PrawnEx.add_page()
-    |> Layout.attach(page_size: @page_size, margins: @margins)
-    |> Layout.heading("Elixir style: source comparison", font_size: 18)
-    |> Layout.paragraph(intro(comparison), font_size: 9, gap_after: 6)
-    |> Layout.paragraph(legend(comparison), font_size: 9, gap_after: 10)
-    |> table([header | chunk], column_widths, align)
-    |> Layout.to_doc()
+  defp enforced_section([]), do: []
+  defp enforced_section(rules), do: [{"Enforced by mix format", rules}]
+
+  defp category_sections(rules) do
+    by_category = Enum.group_by(rules, & &1["category"])
+    extra = by_category |> Map.keys() |> Enum.reject(&(&1 in @category_order)) |> Enum.sort()
+
+    (@category_order ++ extra)
+    |> Enum.map(fn category ->
+      {humanize(category), by_category |> Map.get(category, []) |> sort_rules()}
+    end)
+    |> Enum.reject(fn {_title, rules} -> rules == [] end)
   end
 
-  defp more_pages(doc, header, chunks, column_widths, align) do
-    Enum.reduce(chunks, doc, fn chunk, acc ->
-      acc
-      |> PrawnEx.add_page()
-      |> Layout.attach(page_size: @page_size, margins: @margins)
-      |> table([header | chunk], column_widths, align)
-      |> Layout.to_doc()
-    end)
+  defp mix_format_enforced?(rule), do: get_in(rule, ["sources", "mix_format", "proposed"]) == true
+
+  defp humanize(category), do: String.capitalize(category)
+
+  defp header_row(comparison) do
+    ["Rule" | Enum.map(comparison["sources"], &short_label/1)]
   end
+
+  defp body_row(rule, sources) do
+    [rule["title"] | Enum.map(sources, fn source -> cell(rule, source["id"]) end)]
+  end
+
+  # Start a new page if `needed` points would overflow the bottom margin.
+  defp ensure_room(layout, needed) do
+    if layout.cursor_y - needed < layout.margins.bottom do
+      layout.doc |> PrawnEx.add_page() |> Layout.attach(page_size: @page_size, margins: @margins)
+    else
+      layout
+    end
+  end
+
+  # Heading + table clearance/after-gap (~48pt) plus one row height per row.
+  defp section_height(table_rows), do: 48 + length(table_rows) * @row_height
 
   defp table(layout, rows, column_widths, align) do
     Layout.table(layout, rows,
@@ -92,13 +131,6 @@ defmodule GreenValidation.ComparisonPdf do
       header_font_size: 9,
       row_height: @row_height
     )
-  end
-
-  defp paginate(body) do
-    case Enum.split(body, @first_page_rows) do
-      {first, []} -> [first]
-      {first, rest} -> [first | Enum.chunk_every(rest, @page_rows)]
-    end
   end
 
   # A source that carries a `status` (mix format) enforces rather than recommends, so its
