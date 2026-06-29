@@ -32,7 +32,8 @@ defmodule GreenValidation.Sources.ChristopherAdams do
     {:lowercase_exception_messages, "lowercase-error-messages"},
     {:no_trailing_punctuation_in_exception_messages, "lowercase-error-messages"},
     {:omit_keyword_list_brackets, "keyword-list-brackets"},
-    {:comments_on_own_line, "comments-above-line"}
+    {:comments_on_own_line, "comments-above-line"},
+    {:alphabetical_alias_order, "module-attribute-ordering"}
   ]
 
   @doc """

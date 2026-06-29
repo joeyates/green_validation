@@ -32,5 +32,9 @@ defmodule GreenValidation.Sources.ChristopherAdamsTest do
     test "maps comments_on_own_line to the comments-above-line anchor" do
       assert {:comments_on_own_line, "comments-above-line"} in ChristopherAdams.mapping()
     end
+
+    test "maps alphabetical_alias_order to the module-attribute-ordering anchor" do
+      assert {:alphabetical_alias_order, "module-attribute-ordering"} in ChristopherAdams.mapping()
+    end
   end
 end

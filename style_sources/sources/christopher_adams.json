@@ -291,6 +291,11 @@
       "id": "comments_on_own_line",
       "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
       "proposed": true
+    },
+    {
+      "id": "alphabetical_alias_order",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+      "proposed": true
     }
   ]
 }

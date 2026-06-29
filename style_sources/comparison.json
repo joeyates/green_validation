@@ -21,6 +21,7 @@
       "repo_url": "https://github.com/christopheradams/elixir_style_guide"
     }
   ],
+  "rules_with_no_source": [],
   "rules": [
     {
       "id": "spaces_around_binary_operators",
@@ -31,16 +32,16 @@
           "reference": "code/formatter.ex — binary operator spacing",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
           "proposed": true
         }
       },
@@ -65,15 +66,15 @@
           "reference": "code/formatter.ex @no_space_binary_operators",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
           "proposed": true
         }
       },
@@ -95,16 +96,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-indentation",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-indentation",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-indentation",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "formatting",
@@ -124,16 +125,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#character-per-line-limit",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
+          "proposed": true
         }
       },
       "category": "formatting",
@@ -153,16 +154,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-trailing-whitespaces",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#no-trailing-whitespace",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-trailing-whitespaces",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
           "proposed": true
         }
       },
@@ -186,16 +187,16 @@
           "reference": "code/formatter.ex — collection element spacing",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
           "proposed": true
         }
       },
@@ -220,16 +221,16 @@
           "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#spaces-braces",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+          "proposed": true
         }
       },
       "category": "formatting",
@@ -252,16 +253,16 @@
           "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#semicolon-between-statements",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-semicolon",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "formatting",
@@ -284,15 +285,15 @@
           "reference": "code/formatter.ex — trailing comma removed from single-line collections",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#trailing-comma",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "formatting",
@@ -314,13 +315,13 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -342,15 +343,15 @@
           "reference": "code.ex Code.format_string!/2 docs — Code comments",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#leading-space-comment",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#leading-space-comment",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
           "proposed": true
         }
       },
@@ -374,16 +375,16 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
+          "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#underscores-in-numerics",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "formatting",
@@ -406,15 +407,15 @@
           "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#hex-literals",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#hex-literals",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "formatting",
@@ -436,16 +437,16 @@
           "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#line-endings",
           "proposed": true
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
+          "proposed": true
         }
       },
       "category": "formatting",
@@ -466,16 +467,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#newline-eof",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#newline-eof",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#newline-eof",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
           "proposed": true
         }
       },
@@ -499,16 +500,16 @@
           "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-atoms-funs-vars-attrs",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#snake-case-attributes-functions-macros-vars",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-atoms-funs-vars-attrs",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
           "proposed": true
         }
       },
@@ -530,16 +531,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#camelcase-modules",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#camelcase-modules",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#camelcase-modules",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
           "proposed": true
         }
       },
@@ -561,16 +562,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#predicate-funs-name",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#predicates",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#predicate-funs-name",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
           "proposed": true
         }
       },
@@ -592,15 +593,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#one-letter-var",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#one-letter-var",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "naming",
@@ -619,14 +620,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+          "proposed": true
         }
       },
       "category": "modules",
@@ -634,7 +636,9 @@
         "bad": "alias App.Zebra\nalias App.Apple",
         "good": "alias App.Apple\nalias App.Zebra"
       },
-      "proposed_by": []
+      "proposed_by": [
+        "christopher_adams"
+      ]
     },
     {
       "id": "module_pseudo_variable",
@@ -643,16 +647,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#current-module-reference",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#reference-current-module",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#current-module-reference",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
           "proposed": true
         }
       },
@@ -674,15 +678,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#module-layout",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#module-layout",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
           "proposed": true
         }
       },
@@ -705,15 +709,15 @@
           "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-operator",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-operator",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
           "proposed": true
         }
       },
@@ -734,15 +738,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#needless-pipeline",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#needless-pipeline",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
           "proposed": true
         }
       },
@@ -763,15 +767,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-pipeline",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-pipeline",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "expressions",
@@ -790,16 +794,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-else-with-unless",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#no-unless-with-else",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#no-else-with-unless",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
           "proposed": true
         }
       },
@@ -821,15 +825,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#true-in-cond",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#true-in-cond",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
           "proposed": true
         }
       },
@@ -850,15 +854,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
           "proposed": true
         }
       },
@@ -881,15 +885,15 @@
           "reference": "code/formatter.ex — optional keyword-list brackets omitted",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
+          "proposed": true
         }
       },
       "category": "expressions",
@@ -911,13 +915,13 @@
           "reference": "code/formatter.ex — spaces around the -> operator",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -939,13 +943,13 @@
           "reference": "code/formatter.ex — capture operator spacing and parens",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -967,15 +971,15 @@
           "reference": "code/formatter.ex — anonymous function argument parens removed",
           "proposed": true
         },
-        "christopher_adams": {
-          "proposed": false
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
+          "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
-          "proposed": true
+        "christopher_adams": {
+          "proposed": false
         }
       },
       "category": "expressions",
@@ -997,13 +1001,13 @@
           "reference": "code/formatter.ex — redundant grouping parentheses removed",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -1025,13 +1029,13 @@
           "reference": "code.ex Code.format_string!/2 docs — number normalisation",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -1053,13 +1057,13 @@
           "reference": "code/formatter.ex @no_space_binary_operators (bitstring segments)",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -1081,13 +1085,13 @@
           "reference": "code.ex Code.format_string!/2 docs — fit on a single line when possible",
           "proposed": true
         },
-        "christopher_adams": {
+        "lexmag": {
           "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
+        "christopher_adams": {
           "proposed": false
         }
       },
@@ -1109,15 +1113,15 @@
           "reference": "code.ex Code.format_string!/2 docs — trailing comments hoisted to their own line",
           "proposed": true
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
-          "proposed": true
+        "lexmag": {
+          "proposed": false
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "proposed": false
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
+          "proposed": true
         }
       },
       "category": "formatting",
@@ -1137,16 +1141,16 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-naming",
           "proposed": true
         },
         "credo": {
           "reference": "https://github.com/rrrene/elixir-style-guide#exception-naming",
           "proposed": true
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-naming",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
           "proposed": true
         }
       },
@@ -1168,15 +1172,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
           "proposed": true
         }
       },
@@ -1197,15 +1201,15 @@
         "mix_format": {
           "proposed": false
         },
-        "christopher_adams": {
-          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
           "proposed": true
         },
         "credo": {
           "proposed": false
         },
-        "lexmag": {
-          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
           "proposed": true
         }
       },
@@ -1222,8 +1226,5 @@
   ],
   "generated_with": {
     "elixir_version": "1.19.5"
-  },
-  "rules_with_no_source": [
-    "alphabetical_alias_order"
-  ]
+  }
 }

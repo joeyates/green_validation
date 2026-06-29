@@ -191,7 +191,9 @@ defmodule GreenValidation.StyleCatalog do
       id: :module_attribute_layout,
       title: "Consistent module attribute layout",
       description:
-        "Order module-level forms consistently: @moduledoc, use, import, alias, require, then attributes.",
+        "Order module-level directives (@moduledoc, use, import, require, alias, attributes, …) " <>
+          "in a consistent, defined sequence. The exact sequence differs between guides — see " <>
+          "each source's reference (e.g. Lexmag orders alias before require, christopheradams the reverse).",
       category: :modules,
       example: %{
         bad: "alias App.X\nuse GenServer\n@moduledoc \"...\"",

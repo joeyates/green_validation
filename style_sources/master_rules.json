@@ -3,240 +3,400 @@
     "id": "spaces_around_binary_operators",
     "description": "Surround binary operators with a single space, e.g. `1 + 1`.",
     "title": "Spaces around binary operators",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "1+1",
+      "good": "1 + 1"
+    }
   },
   {
     "id": "no_spaces_around_range_operator",
     "description": "Write ranges without surrounding spaces, e.g. `1..2`.",
     "title": "No spaces around the range operator",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "1 .. 2",
+      "good": "1..2"
+    }
   },
   {
     "id": "two_space_indentation",
     "description": "Indent with two spaces per level; never use tabs.",
     "title": "Two-space indentation",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "if x do\n    :ok\nend",
+      "good": "if x do\n  :ok\nend"
+    }
   },
   {
     "id": "max_line_length",
     "description": "Keep lines within a maximum length (98 columns for `mix format`).",
     "title": "Maximum line length",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "{:ok, [one, two, three, four, five, six, seven, eight, nine, ten, eleven]}",
+      "good": "{:ok,\n [one, two, three, four, five,\n  six, seven, eight, nine, ten]}"
+    }
   },
   {
     "id": "no_trailing_whitespace",
     "description": "Strip whitespace from the end of lines.",
     "title": "No trailing whitespace",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "x = 1   ",
+      "good": "x = 1"
+    }
   },
   {
     "id": "spaces_after_commas",
     "description": "Put a single space after each comma and none before it.",
     "title": "Space after commas",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "[1,2]",
+      "good": "[1, 2]"
+    }
   },
   {
     "id": "no_spaces_inside_brackets",
     "description": "Do not pad the inside of (), [] or {} with spaces, e.g. `[1, 2]` not `[ 1, 2 ]`.",
     "title": "No spaces inside brackets",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "[ 1, 2 ]",
+      "good": "[1, 2]"
+    }
   },
   {
     "id": "no_semicolons",
     "description": "Write each statement on its own line; do not use `;` to separate statements.",
     "title": "No semicolons between statements",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1; b = 2",
+      "good": "a = 1\nb = 2"
+    }
   },
   {
     "id": "no_trailing_comma",
     "description": "Do not leave a trailing comma after the last element of a list, map, tuple or call.",
     "title": "No trailing comma in collections",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "[1, 2,]",
+      "good": "[1, 2]"
+    }
   },
   {
     "id": "collapse_consecutive_blank_lines",
     "description": "Squeeze multiple blank lines into a single blank line.",
     "title": "Collapse consecutive blank lines",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1\n\n\nb = 2",
+      "good": "a = 1\n\nb = 2"
+    }
   },
   {
     "id": "comment_leading_space",
     "description": "Write comments as `# comment`, with one space after the `#`.",
     "title": "Space after the comment marker",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "#comment",
+      "good": "# comment"
+    }
   },
   {
     "id": "digit_grouping_underscores",
     "description": "Use underscores to group digits in numbers over five digits, e.g. `1_000_000`.",
     "title": "Group digits in large numbers",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "1000000",
+      "good": "1_000_000"
+    }
   },
   {
     "id": "uppercase_hex_literals",
     "description": "Write hexadecimal digits in uppercase, e.g. `0xABCD`.",
     "title": "Uppercase hexadecimal literals",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "0xabcd",
+      "good": "0xABCD"
+    }
   },
   {
     "id": "unix_line_endings",
     "description": "Use `\\n` line endings; convert `\\r\\n` to `\\n`.",
     "title": "Unix line endings",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1\\r\\nb = 2",
+      "good": "a = 1\\nb = 2"
+    }
   },
   {
     "id": "trailing_newline",
     "description": "End every file with a single trailing newline.",
     "title": "Trailing newline at end of file",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "(file ends without a newline)",
+      "good": "(file ends with one \\n)"
+    }
   },
   {
     "id": "snake_case_atoms_and_variables",
     "description": "Name atoms, variables and functions in snake_case.",
     "title": "snake_case for atoms, variables and functions",
-    "category": "naming"
+    "category": "naming",
+    "example": {
+      "bad": "fooBar = 1",
+      "good": "foo_bar = 1"
+    }
   },
   {
     "id": "camel_case_modules",
     "description": "Name modules in CamelCase (PascalCase).",
     "title": "CamelCase for modules",
-    "category": "naming"
+    "category": "naming",
+    "example": {
+      "bad": "defmodule My_app do\nend",
+      "good": "defmodule MyApp do\nend"
+    }
   },
   {
     "id": "predicate_function_question_mark",
     "description": "Name boolean-returning functions with a trailing `?` and no `is_` prefix.",
     "title": "Question mark for predicate functions",
-    "category": "naming"
+    "category": "naming",
+    "example": {
+      "bad": "def is_valid(x), do: true",
+      "good": "def valid?(x), do: true"
+    }
   },
   {
     "id": "avoid_one_letter_variables",
     "description": "Prefer descriptive names over single letters.",
     "title": "Avoid one-letter variable names",
-    "category": "naming"
+    "category": "naming",
+    "example": {
+      "bad": "u = get_user()",
+      "good": "user = get_user()"
+    }
   },
   {
     "id": "alphabetical_alias_order",
     "description": "Sort module references (alias, import, require, use) alphabetically.",
     "title": "Order alias/import/require alphabetically",
-    "category": "modules"
+    "category": "modules",
+    "example": {
+      "bad": "alias App.Zebra\nalias App.Apple",
+      "good": "alias App.Apple\nalias App.Zebra"
+    }
   },
   {
     "id": "module_pseudo_variable",
     "description": "Refer to the current module with `__MODULE__` rather than its full name.",
     "title": "Use the __MODULE__ pseudo-variable",
-    "category": "modules"
+    "category": "modules",
+    "example": {
+      "bad": "%MyApp.User{name: n}",
+      "good": "%__MODULE__{name: n}"
+    }
   },
   {
     "id": "module_attribute_layout",
-    "description": "Order module-level forms consistently: @moduledoc, use, import, alias, require, then attributes.",
+    "description": "Order module-level directives (@moduledoc, use, import, require, alias, attributes, …) in a consistent, defined sequence. The exact sequence differs between guides — see each source's reference (e.g. Lexmag orders alias before require, christopheradams the reverse).",
     "title": "Consistent module attribute layout",
-    "category": "modules"
+    "category": "modules",
+    "example": {
+      "bad": "alias App.X\nuse GenServer\n@moduledoc \"...\"",
+      "good": "@moduledoc \"...\"\nuse GenServer\nalias App.X"
+    }
   },
   {
     "id": "pipeline_for_chains",
     "description": "Use the pipe operator for chains of function calls.",
     "title": "Use pipelines for chained calls",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "f(g(h(x)))",
+      "good": "x |> h() |> g() |> f()"
+    }
   },
   {
     "id": "no_pipeline_for_single_call",
     "description": "Do not use a pipeline for a single function call.",
     "title": "Avoid needless pipelines",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "x |> f()",
+      "good": "f(x)"
+    }
   },
   {
     "id": "no_anonymous_functions_in_pipelines",
     "description": "Do not invoke anonymous functions directly inside a pipeline.",
     "title": "No anonymous functions in pipelines",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "x |> (fn v -> v + 1 end).()",
+      "good": "x |> increment()"
+    }
   },
   {
     "id": "no_else_in_unless",
     "description": "Never use `unless` with an `else` branch; rewrite as `if`.",
     "title": "No else clause with unless",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "unless x do\n  a\nelse\n  b\nend",
+      "good": "if x do\n  b\nelse\n  a\nend"
+    }
   },
   {
     "id": "true_as_last_cond_clause",
     "description": "Use `true` (not `:else` or similar) for the catch-all `cond` clause.",
     "title": "Use true as the last cond clause",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "cond do\n  x -> 1\n  :else -> 2\nend",
+      "good": "cond do\n  x -> 1\n  true -> 2\nend"
+    }
   },
   {
     "id": "parentheses_on_zero_arity_calls",
     "description": "Call zero-arity functions with parentheses, e.g. `foo()`.",
     "title": "Parentheses on zero-arity function calls",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "DateTime.utc_now",
+      "good": "DateTime.utc_now()"
+    }
   },
   {
     "id": "omit_keyword_list_brackets",
     "description": "Omit the square brackets around a keyword list when they are optional, e.g. `foo(a: 1)`.",
     "title": "Omit brackets from keyword lists",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "foo([a: 1])",
+      "good": "foo(a: 1)"
+    }
   },
   {
     "id": "spaces_around_arrow",
     "description": "Surround the `->` operator with spaces, e.g. `fn x -> x end` and case clauses.",
     "title": "Spaces around the -> operator",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "fn x->x end",
+      "good": "fn x -> x end"
+    }
   },
   {
     "id": "capture_operator_spacing",
     "description": "Write the capture operator with a space and without wrapping parentheses, e.g. `& &1`.",
     "title": "Capture operator spacing",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "&(&1)",
+      "good": "& &1"
+    }
   },
   {
     "id": "no_parens_around_anonymous_fn_args",
     "description": "Write `fn x -> … end`, not `fn(x) -> … end`.",
     "title": "No parentheses around anonymous function arguments",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "fn(x) -> x end",
+      "good": "fn x -> x end"
+    }
   },
   {
     "id": "no_redundant_parentheses",
     "description": "Drop parentheses that only group an expression, e.g. `1 + 2` not `(1 + 2)`.",
     "title": "No redundant parentheses",
-    "category": "expressions"
+    "category": "expressions",
+    "example": {
+      "bad": "(1 + 2)",
+      "good": "1 + 2"
+    }
   },
   {
     "id": "lowercase_exponent",
     "description": "Write the exponent letter in lowercase, e.g. `1.0e3` not `1.0E3`.",
     "title": "Lowercase exponent letter in floats",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "1.0E3",
+      "good": "1.0e3"
+    }
   },
   {
     "id": "no_spaces_in_bitstring_segments",
     "description": "Do not put spaces around `::` in bitstring segments, e.g. `<<1::8>>`.",
     "title": "No spaces around bitstring segment options",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "<<1 ::8>>",
+      "good": "<<1::8>>"
+    }
   },
   {
     "id": "fit_collections_on_one_line",
     "description": "Collapse a list, map, tuple or call onto one line when it fits within the line length.",
     "title": "Fit collections on a single line when they fit",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "[1,\n2]",
+      "good": "[1, 2]"
+    }
   },
   {
     "id": "comments_on_own_line",
     "description": "Place a comment on the line above the code it refers to, not trailing after it.",
     "title": "Comments on their own line",
-    "category": "formatting"
+    "category": "formatting",
+    "example": {
+      "bad": "x = 1 # set x",
+      "good": "# set x\nx = 1"
+    }
   },
   {
     "id": "exception_error_suffix",
     "description": "Name exception modules with an `Error` suffix.",
     "title": "Error suffix for exception modules",
-    "category": "exceptions"
+    "category": "exceptions",
+    "example": {
+      "bad": "defmodule App.BadInput do\nend",
+      "good": "defmodule App.BadInputError do\nend"
+    }
   },
   {
     "id": "lowercase_exception_messages",
     "description": "Begin exception messages with a lowercase letter.",
     "title": "Lowercase exception messages",
-    "category": "exceptions"
+    "category": "exceptions",
+    "example": {
+      "bad": "raise \"Invalid input\"",
+      "good": "raise \"invalid input\""
+    }
   },
   {
     "id": "no_trailing_punctuation_in_exception_messages",
     "description": "Do not end exception messages with punctuation.",
     "title": "No trailing punctuation in exception messages",
-    "category": "exceptions"
+    "category": "exceptions",
+    "example": {
+      "bad": "raise \"invalid input.\"",
+      "good": "raise \"invalid input\""
+    }
   }
 ]
