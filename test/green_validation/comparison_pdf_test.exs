@@ -45,17 +45,17 @@ defmodule GreenValidation.ComparisonPdfTest do
   }
 
   describe "rows/1" do
-    test "the header row is Rule plus a short label per source" do
+    test "the header row is Rule plus a label per guide (no mix format column)" do
       [header | _] = ComparisonPdf.rows(@comparison)
 
-      assert header == ["Rule", "mix format", "Lexmag"]
+      assert header == ["Rule", "Lexmag"]
     end
 
-    test "shows Enforced for mix format and Yes for a guide; blank otherwise" do
+    test "marks guide proposals with Yes; the rule cell carries no mix format column" do
       [_header, spaces_row, snake_row] = ComparisonPdf.rows(@comparison)
 
-      assert spaces_row == ["Spaces around binary operators", "Enforced", "Yes"]
-      assert snake_row == ["snake_case", "", "Yes"]
+      assert spaces_row == ["Spaces around binary operators", "Yes"]
+      assert snake_row == ["snake_case", "Yes"]
     end
   end
 
@@ -73,6 +73,22 @@ defmodule GreenValidation.ComparisonPdfTest do
       assert Enum.map(naming, & &1["id"]) == ["snake_case_atoms_and_variables"]
     end
 
+    test "sorts the Enforced-by-mix-format block by category then title" do
+      comparison = %{
+        "sources" => [%{"id" => "mix_format", "name" => "mix format", "repo_url" => "x"}],
+        "rules" => [
+          enforced_rule("z_fmt", "Z rule", "formatting"),
+          enforced_rule("a_name", "A rule", "naming"),
+          enforced_rule("a_fmt", "A rule", "formatting")
+        ],
+        "rules_with_no_source" => []
+      }
+
+      [{"Enforced by mix format", rules}] = ComparisonPdf.sections(comparison)
+
+      assert Enum.map(rules, & &1["id"]) == ["a_fmt", "z_fmt", "a_name"]
+    end
+
     test "sorts the rules within a section alphabetically by title" do
       comparison = %{
         "sources" => [%{"id" => "mix_format", "name" => "mix format", "repo_url" => "x"}],
@@ -87,6 +103,20 @@ defmodule GreenValidation.ComparisonPdfTest do
       [{"Naming", rules}] = ComparisonPdf.sections(comparison)
 
       assert Enum.map(rules, & &1["title"]) == ["Apple rule", "mango rule", "Zebra rule"]
+    end
+  end
+
+  describe "example_sections/1" do
+    test "groups every rule by category with no separate Enforced block" do
+      sections = ComparisonPdf.example_sections(@comparison)
+
+      assert Enum.map(sections, &elem(&1, 0)) == ["Formatting", "Naming"]
+    end
+
+    test "keeps mix-format-enforced rules in their own category" do
+      [{"Formatting", formatting}, _naming] = ComparisonPdf.example_sections(@comparison)
+
+      assert Enum.map(formatting, & &1["id"]) == ["spaces_around_binary_operators"]
     end
   end
 
@@ -130,6 +160,15 @@ defmodule GreenValidation.ComparisonPdfTest do
     end
   end
 
+  describe "render/2" do
+    test "embeds the git version and generation date in the intro" do
+      pdf = ComparisonPdf.render(@comparison, version: "abc1234", generated_on: ~D[2026-06-30])
+
+      assert pdf =~ "abc1234"
+      assert pdf =~ "2026-06-30"
+    end
+  end
+
   defp rule(id, title, category) do
     %{
       "id" => id,
@@ -138,6 +177,14 @@ defmodule GreenValidation.ComparisonPdfTest do
       "example" => %{"bad" => "bad", "good" => "good"},
       "proposed_by" => [],
       "sources" => %{"mix_format" => %{"proposed" => false, "status" => "not_enforced"}}
+    }
+  end
+
+  defp enforced_rule(id, title, category) do
+    %{
+      rule(id, title, category)
+      | "proposed_by" => ["mix_format"],
+        "sources" => %{"mix_format" => %{"proposed" => true, "status" => "enforced"}}
     }
   end
 end

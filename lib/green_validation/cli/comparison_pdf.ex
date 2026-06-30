@@ -48,7 +48,7 @@ defmodule GreenValidation.CLI.ComparisonPdf do
 
     with {:ok, content} <- File.read(input_path),
          {:ok, comparison} <- Jason.decode(content),
-         pdf <- ComparisonPdf.render(comparison),
+         pdf <- ComparisonPdf.render(comparison, version: git_head_sha(), generated_on: Date.utc_today()),
          :ok <- output_path |> Path.dirname() |> File.mkdir_p(),
          :ok <- File.write(output_path, pdf) do
       Logger.info("Wrote comparison PDF to #{output_path}")
@@ -57,6 +57,13 @@ defmodule GreenValidation.CLI.ComparisonPdf do
       {:error, reason} ->
         Logger.info("Error: #{inspect(reason)}")
         System.halt(1)
+    end
+  end
+
+  defp git_head_sha() do
+    case System.cmd("git", ["rev-parse", "--short", "HEAD"], stderr_to_stdout: true) do
+      {sha, 0} -> String.trim(sha)
+      _ -> nil
     end
   end
 
