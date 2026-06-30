@@ -34,10 +34,27 @@ defmodule GreenValidation.StyleComparison do
     }
   end
 
+  # Curated parameter-level notes, keyed by `{rule_id, source_id}`. These annotate rules
+  # the sources agree on but parameterise differently (so the boolean matrix can't show
+  # the disagreement), surfaced as numbered footnotes in the PDF.
+  @notes %{
+    {:max_line_length, :mix_format} => "98-column default",
+    {:max_line_length, :credo} => "keep lines under 80 characters",
+    {:max_line_length, :christopher_adams} => "limit lines to 98 characters",
+    {:module_attribute_layout, :lexmag} => "order: use, import, alias, require",
+    {:module_attribute_layout, :christopher_adams} => "order: use, import, require, alias"
+  }
+
   defp row(rule, source_ids, source_rules) do
     sources =
       Map.new(source_ids, fn source_id ->
-        {source_id, source_rules |> find(source_id, rule.id) |> source_entry()}
+        entry =
+          source_rules
+          |> find(source_id, rule.id)
+          |> source_entry()
+          |> maybe_put(:note, Map.get(@notes, {rule.id, source_id}))
+
+        {source_id, entry}
       end)
 
     proposed_by = Enum.filter(source_ids, &sources[&1].proposed)

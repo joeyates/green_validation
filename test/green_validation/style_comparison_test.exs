@@ -75,6 +75,13 @@ defmodule GreenValidation.StyleComparisonTest do
       assert row.example.good == "1 + 1"
     end
 
+    test "attaches parameter-disagreement notes to source entries" do
+      result = StyleComparison.build(%{credo: [%{id: :max_line_length, proposed: true}]})
+      row = Enum.find(result.rules, &(&1.id == :max_line_length))
+
+      assert row.sources.credo.note =~ "80"
+    end
+
     test "rejects an unknown rule id" do
       assert_raise ArgumentError, fn ->
         StyleComparison.build(%{mix_format: [%{id: :not_a_real_master_rule, proposed: true}]})

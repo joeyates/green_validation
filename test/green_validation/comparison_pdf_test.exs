@@ -90,6 +90,36 @@ defmodule GreenValidation.ComparisonPdfTest do
     end
   end
 
+  describe "notes/1" do
+    test "numbers parameter-disagreement notes in table order" do
+      comparison = %{
+        "sources" => [
+          %{"id" => "mix_format", "name" => "mix format", "repo_url" => "x"},
+          %{"id" => "credo", "name" => "Credo", "repo_url" => "y"}
+        ],
+        "rules" => [
+          %{
+            "id" => "max_line_length",
+            "title" => "Maximum line length",
+            "category" => "formatting",
+            "example" => %{"bad" => "a", "good" => "b"},
+            "proposed_by" => ["mix_format", "credo"],
+            "sources" => %{
+              "mix_format" => %{"proposed" => true, "status" => "enforced", "note" => "98 cols"},
+              "credo" => %{"proposed" => true, "note" => "80 cols"}
+            }
+          }
+        ],
+        "rules_with_no_source" => []
+      }
+
+      notes = ComparisonPdf.notes(comparison)
+
+      assert Enum.map(notes, & &1.number) == [1, 2]
+      assert Enum.map(notes, & &1.note) == ["98 cols", "80 cols"]
+    end
+  end
+
   describe "render/1" do
     test "produces PDF bytes" do
       pdf = ComparisonPdf.render(@comparison)

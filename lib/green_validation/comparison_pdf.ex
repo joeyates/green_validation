@@ -47,7 +47,8 @@ defmodule GreenValidation.ComparisonPdf do
   @spec rows(map()) :: [[String.t()]]
   def rows(comparison) do
     sources = comparison["sources"]
-    [header_row(comparison) | Enum.map(comparison["rules"], &body_row(&1, sources))]
+    numbers = comparison |> notes() |> number_map()
+    [header_row(comparison) | Enum.map(comparison["rules"], &body_row(&1, sources, numbers))]
   end
 
   @doc """
@@ -65,6 +66,36 @@ defmodule GreenValidation.ComparisonPdf do
   defp sort_rules(rules), do: Enum.sort_by(rules, &String.downcase(&1["title"]))
 
   @doc """
+  Returns the parameter-level notes, numbered in table order. Each entry is a map with
+  `:number`, `:rule_id`, `:source_id`, `:rule_title`, `:source_label` and `:note`.
+  """
+  @spec notes(map()) :: [map()]
+  def notes(comparison) do
+    sources = comparison["sources"]
+
+    comparison
+    |> sections()
+    |> Enum.flat_map(fn {_title, rules} -> rules end)
+    |> Enum.flat_map(fn rule ->
+      for source <- sources,
+          note = get_in(rule, ["sources", source["id"], "note"]),
+          note != nil do
+        %{
+          rule_id: rule["id"],
+          source_id: source["id"],
+          rule_title: rule["title"],
+          source_label: short_label(source),
+          note: note
+        }
+      end
+    end)
+    |> Enum.with_index(1)
+    |> Enum.map(fn {entry, number} -> Map.put(entry, :number, number) end)
+  end
+
+  defp number_map(notes), do: Map.new(notes, &{{&1.rule_id, &1.source_id}, &1.number})
+
+  @doc """
   Renders the comparison to PDF bytes.
   """
   @spec render(map()) :: binary()
@@ -75,6 +106,8 @@ defmodule GreenValidation.ComparisonPdf do
 
     sources = comparison["sources"]
     sections = sections(comparison)
+    notes = notes(comparison)
+    numbers = number_map(notes)
 
     Document.new()
     |> PrawnEx.add_page()
@@ -82,20 +115,32 @@ defmodule GreenValidation.ComparisonPdf do
     |> Layout.heading("Elixir style: source comparison", font_size: 18)
     |> Layout.paragraph(intro(comparison), font_size: 9, gap_after: 6)
     |> Layout.paragraph(legend(comparison), font_size: 9, gap_after: 10)
-    |> render_matrix(sections, header, column_widths, align, sources)
+    |> render_matrix(sections, header, column_widths, align, sources, numbers)
+    |> render_notes(notes)
     |> render_examples(sections)
     |> Layout.to_doc()
     |> PrawnEx.to_binary()
   end
 
-  defp render_matrix(layout, sections, header, column_widths, align, sources) do
+  defp render_matrix(layout, sections, header, column_widths, align, sources, numbers) do
     Enum.reduce(sections, layout, fn {title, rules}, acc ->
-      table_rows = [header | Enum.map(rules, &body_row(&1, sources))]
+      table_rows = [header | Enum.map(rules, &body_row(&1, sources, numbers))]
 
       acc
       |> ensure_room(section_height(table_rows))
       |> Layout.heading(title, font_size: 12, gap_after: 4)
       |> table(table_rows, column_widths, align)
+    end)
+  end
+
+  defp render_notes(layout, []), do: layout
+
+  defp render_notes(layout, notes) do
+    layout = layout |> ensure_room(40) |> Layout.heading("Notes", font_size: 14, gap_after: 6)
+
+    Enum.reduce(notes, layout, fn note, acc ->
+      text = "[#{note.number}] #{note.rule_title} — #{note.source_label}: #{note.note}"
+      acc |> ensure_room(24) |> Layout.paragraph(text, font_size: 9, gap_after: 4)
     end)
   end
 
@@ -148,8 +193,8 @@ defmodule GreenValidation.ComparisonPdf do
     ["Rule" | Enum.map(comparison["sources"], &short_label/1)]
   end
 
-  defp body_row(rule, sources) do
-    [rule["title"] | Enum.map(sources, fn source -> cell(rule, source["id"]) end)]
+  defp body_row(rule, sources, numbers) do
+    [rule["title"] | Enum.map(sources, fn source -> cell(rule, source["id"], numbers) end)]
   end
 
   # Start a new page if `needed` points would overflow the bottom margin.
@@ -177,13 +222,19 @@ defmodule GreenValidation.ComparisonPdf do
 
   # A source that carries a `status` (mix format) enforces rather than recommends, so its
   # cell reads "Enforced"; the prose guides recommend, so theirs reads "Yes".
-  defp cell(rule, source_id) do
+  defp cell(rule, source_id, numbers) do
     entry = get_in(rule, ["sources", source_id]) || %{}
 
-    cond do
-      Map.has_key?(entry, "status") -> status_label(entry["status"])
-      entry["proposed"] -> "Yes"
-      true -> ""
+    base =
+      cond do
+        Map.has_key?(entry, "status") -> status_label(entry["status"])
+        entry["proposed"] -> "Yes"
+        true -> ""
+      end
+
+    case Map.get(numbers, {rule["id"], source_id}) do
+      nil -> base
+      number -> "#{base} [#{number}]"
     end
   end
 
