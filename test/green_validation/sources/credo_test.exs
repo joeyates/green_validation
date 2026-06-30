@@ -11,7 +11,8 @@ defmodule GreenValidation.Sources.CredoTest do
 
     test "references only valid master rule ids" do
       for {id, _anchor} <- Credo.mapping() do
-        id |> StyleCatalog.valid_id?() |> assert "#{id} is not a master rule id"
+        valid? = StyleCatalog.valid_id?(id)
+        assert valid?, "#{id} is not a master rule id"
       end
     end
 
@@ -27,6 +28,16 @@ defmodule GreenValidation.Sources.CredoTest do
 
     test "maps no_semicolons to the semicolon-between-statements anchor" do
       assert {:no_semicolons, "semicolon-between-statements"} in Credo.mapping()
+    end
+
+    test "covers the formerly-unmapped Credo anchors" do
+      anchors = Enum.map(Credo.mapping(), &elem(&1, 1))
+
+      for anchor <- ~w(caret-and-dollar-regex function-parens multi-line-call alias-modules
+                       avoid-double-negations no-nested-conditionals iex-pry io-inspect
+                       pipe-chains no-space-bang doc-false fixme todo) do
+        assert anchor in anchors, "Credo anchor #{anchor} is not mapped"
+      end
     end
   end
 end

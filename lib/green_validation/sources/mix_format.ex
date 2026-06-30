@@ -18,6 +18,7 @@ defmodule GreenValidation.Sources.MixFormat do
   """
 
   alias GreenValidation.MixFormatProbe
+  alias GreenValidation.StyleCatalog
 
   @probes [
     # Enforced by the formatter.
@@ -32,6 +33,21 @@ defmodule GreenValidation.Sources.MixFormat do
       input: "1 .. 2",
       expected: "1..2",
       reference: "code/formatter.ex @no_space_binary_operators"
+    },
+    %{
+      id: :trailing_newline,
+      input: "x = 1",
+      expected: "x = 1\n",
+      level: :file,
+      reference: "mix/tasks/format.ex elixir_format/2 — appends a trailing newline (?\\n)"
+    },
+    %{
+      id: :max_line_length,
+      input:
+        "result = some_function(argument_one, argument_two, argument_three, argument_four, argument_five, argument_six)",
+      expected:
+        "result =\n  some_function(\n    argument_one,\n    argument_two,\n    argument_three,\n    argument_four,\n    argument_five,\n    argument_six\n  )",
+      reference: "code.ex Code.format_string!/2 docs — line length (98) drives wrapping"
     },
     %{
       id: :spaces_after_commas,
@@ -142,6 +158,60 @@ defmodule GreenValidation.Sources.MixFormat do
       expected: "a = 1\nb = 2",
       reference: "code.ex Code.format_string!/2 docs — Newlines converted to \\n"
     },
+    %{
+      id: :parens_on_definition_args,
+      input: "def add a, b do\n  a + b\nend",
+      expected: "def add(a, b) do\n  a + b\nend",
+      reference: "code/formatter.ex — parentheses added around definition arguments"
+    },
+    %{
+      id: :consistent_atom_quoting,
+      input: ":\"valid\"",
+      expected: ":valid",
+      reference: "code.ex Code.format_string!/2 docs — atom quoting normalisation"
+    },
+    %{
+      id: :space_before_zero_arity_arrow,
+      input: "fn-> :ok end",
+      expected: "fn -> :ok end",
+      reference: "code/formatter.ex — space before -> "
+    },
+    %{
+      id: :spaces_around_default_arguments,
+      input: "def f(x \\\\0), do: x",
+      expected: "def f(x \\\\ 0), do: x",
+      reference: "code/formatter.ex — spaces around the \\\\ operator"
+    },
+    %{
+      id: :no_expression_group_alignment,
+      input: "a   = 1\nbbb = 2",
+      expected: "a = 1\nbbb = 2",
+      reference: "code.ex Code.format_string!/2 docs — alignment is not preserved"
+    },
+    %{
+      id: :pipeline_indentation,
+      input: "x\n    |> f()\n      |> g()",
+      expected: "x\n|> f()\n|> g()",
+      reference: "code.ex Code.format_string!/2 docs — pipeline indentation"
+    },
+    %{
+      id: :no_space_after_unary_bang,
+      input: "! ready",
+      expected: "!ready",
+      reference: "code/formatter.ex — no space after unary !"
+    },
+    %{
+      id: :no_blank_line_after_defmodule,
+      input: "defmodule A do\n\n  def x, do: 1\nend",
+      expected: "defmodule A do\n  def x, do: 1\nend",
+      reference: "code.ex Code.format_string!/2 docs — blank line after defmodule removed"
+    },
+    %{
+      id: :omit_defstruct_brackets,
+      input: "defstruct [a: 1]",
+      expected: "defstruct a: 1",
+      reference: "code/formatter.ex — optional keyword-list brackets omitted"
+    },
 
     # Not enforced by the formatter (it never changes names or semantics by default).
     %{
@@ -180,23 +250,41 @@ defmodule GreenValidation.Sources.MixFormat do
   def probes(), do: @probes
 
   @doc """
-  Runs every probe and the gap sweep, returning `%{rules: [...], unmapped: [...]}`.
+  Probes every master rule and runs the gap sweep, returning `%{rules: [...], unmapped:
+  [...]}`.
+
+  Each rule is probed through `Code.format_string!/2`: a curated probe from `@probes` is
+  used when present (isolated input + an Elixir source reference), otherwise the rule's
+  catalog `example` (`bad` → `good`) is used. The result is `status: "enforced"`,
+  `"not_enforced"` or `"indeterminate"` (the probe couldn't decide — see
+  `GreenValidation.MixFormatProbe`). `proposed` is true only for `"enforced"`.
   """
   @spec analyze() :: %{rules: [map()], unmapped: [map()]}
   def analyze() do
+    curated = Map.new(@probes, &{&1.id, &1})
+
     rules =
-      Enum.map(@probes, fn probe ->
-        enforced? = MixFormatProbe.enforced?(probe)
+      Enum.map(StyleCatalog.all(), fn rule ->
+        probe = Map.get(curated, rule.id, example_probe(rule))
+        status = MixFormatProbe.classify(probe)
 
         %{
-          id: probe.id,
-          proposed: enforced?,
-          status: if(enforced?, do: "enforced", else: "not_enforced"),
-          reference: probe.reference
+          id: rule.id,
+          proposed: status == :enforced,
+          status: Atom.to_string(status),
+          reference: probe[:reference]
         }
       end)
 
     %{rules: rules, unmapped: gaps()}
+  end
+
+  defp example_probe(rule) do
+    %{
+      input: rule.example.bad,
+      expected: rule.example.good,
+      reference: "Determined from the rule's catalog example via Code.format_string!/2."
+    }
   end
 
   defp gaps() do

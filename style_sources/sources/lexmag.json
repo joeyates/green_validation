@@ -4,83 +4,7 @@
     "name": "Lexmag's Elixir Style Guide",
     "repo_url": "https://github.com/lexmag/elixir-style-guide"
   },
-  "unmapped": [
-    {
-      "anchor": "binary-operators-at-eols"
-    },
-    {
-      "anchor": "binary-ops-indentation"
-    },
-    {
-      "anchor": "bitstring-segment-options"
-    },
-    {
-      "anchor": "boolean-operators"
-    },
-    {
-      "anchor": "caret-and-dollar-regexp"
-    },
-    {
-      "anchor": "critical-comments"
-    },
-    {
-      "anchor": "default-arguments"
-    },
-    {
-      "anchor": "defstruct-fields-default"
-    },
-    {
-      "anchor": "expression-group-alignment"
-    },
-    {
-      "anchor": "exunit-assertion-side"
-    },
-    {
-      "anchor": "for-indentation"
-    },
-    {
-      "anchor": "fun-parens"
-    },
-    {
-      "anchor": "guard-clauses"
-    },
-    {
-      "anchor": "multi-line-expr-assignment"
-    },
-    {
-      "anchor": "no-nil-else"
-    },
-    {
-      "anchor": "no-superfluous-comments"
-    },
-    {
-      "anchor": "non-capturing-regexp"
-    },
-    {
-      "anchor": "parens-in-zero-arity-types"
-    },
-    {
-      "anchor": "pattern-matching-over-regexp"
-    },
-    {
-      "anchor": "patterns-matching-binaries"
-    },
-    {
-      "anchor": "pipeline-indentation"
-    },
-    {
-      "anchor": "quotes-around-atoms"
-    },
-    {
-      "anchor": "snake-case-dirs-files"
-    },
-    {
-      "anchor": "space-before-anonymous-fun-arrow"
-    },
-    {
-      "anchor": "with-indentation"
-    }
-  ],
+  "unmapped": [],
   "rules": [
     {
       "id": "pipeline_for_chains",
@@ -188,6 +112,11 @@
       "proposed": true
     },
     {
+      "id": "no_space_after_unary_bang",
+      "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
+      "proposed": true
+    },
+    {
       "id": "digit_grouping_underscores",
       "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
       "proposed": true
@@ -215,6 +144,131 @@
     {
       "id": "no_parens_around_anonymous_fn_args",
       "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-fun-parens",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_in_bitstring_segments",
+      "reference": "https://github.com/lexmag/elixir-style-guide#bitstring-segment-options",
+      "proposed": true
+    },
+    {
+      "id": "boolean_operators",
+      "reference": "https://github.com/lexmag/elixir-style-guide#boolean-operators",
+      "proposed": true
+    },
+    {
+      "id": "no_nil_else",
+      "reference": "https://github.com/lexmag/elixir-style-guide#no-nil-else",
+      "proposed": true
+    },
+    {
+      "id": "concatenation_when_matching_binaries",
+      "reference": "https://github.com/lexmag/elixir-style-guide#patterns-matching-binaries",
+      "proposed": true
+    },
+    {
+      "id": "parens_on_definition_args",
+      "reference": "https://github.com/lexmag/elixir-style-guide#fun-parens",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_files",
+      "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-dirs-files",
+      "proposed": true
+    },
+    {
+      "id": "no_explicit_nil_struct_defaults",
+      "reference": "https://github.com/lexmag/elixir-style-guide#defstruct-fields-default",
+      "proposed": true
+    },
+    {
+      "id": "parens_on_zero_arity_types",
+      "reference": "https://github.com/lexmag/elixir-style-guide#parens-in-zero-arity-types",
+      "proposed": true
+    },
+    {
+      "id": "consistent_atom_quoting",
+      "reference": "https://github.com/lexmag/elixir-style-guide#quotes-around-atoms",
+      "proposed": true
+    },
+    {
+      "id": "space_before_zero_arity_arrow",
+      "reference": "https://github.com/lexmag/elixir-style-guide#space-before-anonymous-fun-arrow",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_default_arguments",
+      "reference": "https://github.com/lexmag/elixir-style-guide#default-arguments",
+      "proposed": true
+    },
+    {
+      "id": "no_expression_group_alignment",
+      "reference": "https://github.com/lexmag/elixir-style-guide#expression-group-alignment",
+      "proposed": true
+    },
+    {
+      "id": "pipeline_indentation",
+      "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-indentation",
+      "proposed": true
+    },
+    {
+      "id": "binary_operator_at_line_end",
+      "reference": "https://github.com/lexmag/elixir-style-guide#binary-operators-at-eols",
+      "proposed": true
+    },
+    {
+      "id": "multiline_binary_operand_indentation",
+      "reference": "https://github.com/lexmag/elixir-style-guide#binary-ops-indentation",
+      "proposed": true
+    },
+    {
+      "id": "guard_clause_indentation",
+      "reference": "https://github.com/lexmag/elixir-style-guide#guard-clauses",
+      "proposed": true
+    },
+    {
+      "id": "multiline_expression_assignment",
+      "reference": "https://github.com/lexmag/elixir-style-guide#multi-line-expr-assignment",
+      "proposed": true
+    },
+    {
+      "id": "with_clause_indentation",
+      "reference": "https://github.com/lexmag/elixir-style-guide#with-indentation",
+      "proposed": true
+    },
+    {
+      "id": "for_clause_indentation",
+      "reference": "https://github.com/lexmag/elixir-style-guide#for-indentation",
+      "proposed": true
+    },
+    {
+      "id": "comments_for_important_details",
+      "reference": "https://github.com/lexmag/elixir-style-guide#critical-comments",
+      "proposed": true
+    },
+    {
+      "id": "no_superfluous_comments",
+      "reference": "https://github.com/lexmag/elixir-style-guide#no-superfluous-comments",
+      "proposed": true
+    },
+    {
+      "id": "assertion_argument_order",
+      "reference": "https://github.com/lexmag/elixir-style-guide#exunit-assertion-side",
+      "proposed": true
+    },
+    {
+      "id": "prefer_pattern_matching_over_regex",
+      "reference": "https://github.com/lexmag/elixir-style-guide#pattern-matching-over-regexp",
+      "proposed": true
+    },
+    {
+      "id": "non_capturing_regex_groups",
+      "reference": "https://github.com/lexmag/elixir-style-guide#non-capturing-regexp",
+      "proposed": true
+    },
+    {
+      "id": "regex_string_anchors",
+      "reference": "https://github.com/lexmag/elixir-style-guide#caret-and-dollar-regexp",
       "proposed": true
     }
   ]

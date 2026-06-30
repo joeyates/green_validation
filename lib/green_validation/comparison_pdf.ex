@@ -22,7 +22,18 @@ defmodule GreenValidation.ComparisonPdf do
     "christopher_adams" => "Adams"
   }
 
-  @category_order ["formatting", "naming", "modules", "expressions", "exceptions"]
+  @category_order [
+    "formatting",
+    "naming",
+    "modules",
+    "typespecs",
+    "expressions",
+    "documentation",
+    "comments",
+    "testing",
+    "exceptions",
+    "regex"
+  ]
 
   @page_size :a4
   @margins %{top: 60, left: 50, right: 50, bottom: 50}

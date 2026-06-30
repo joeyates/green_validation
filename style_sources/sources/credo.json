@@ -6,31 +6,7 @@
   },
   "unmapped": [
     {
-      "anchor": "alias-modules"
-    },
-    {
-      "anchor": "avoid-double-negations"
-    },
-    {
-      "anchor": "caret-and-dollar-regex"
-    },
-    {
-      "anchor": "conditional-parens"
-    },
-    {
-      "anchor": "debugging-conditionals"
-    },
-    {
-      "anchor": "doc-comments"
-    },
-    {
       "anchor": "doc-comments-on-own-lines"
-    },
-    {
-      "anchor": "doc-false"
-    },
-    {
-      "anchor": "doc-style"
     },
     {
       "anchor": "documentation"
@@ -39,55 +15,10 @@
       "anchor": "exdoc"
     },
     {
-      "anchor": "fixme"
-    },
-    {
-      "anchor": "function-calling-parens"
-    },
-    {
-      "anchor": "function-parens"
-    },
-    {
-      "anchor": "group-function-definitions"
-    },
-    {
-      "anchor": "iex-pry"
-    },
-    {
-      "anchor": "io-inspect"
-    },
-    {
-      "anchor": "kernel-functions"
-    },
-    {
       "anchor": "macro-parens"
     },
     {
-      "anchor": "multi-line-call"
-    },
-    {
-      "anchor": "no-nested-conditionals"
-    },
-    {
-      "anchor": "no-space-bang"
-    },
-    {
-      "anchor": "pipe-chains"
-    },
-    {
-      "anchor": "regex-sigils"
-    },
-    {
       "anchor": "sigils"
-    },
-    {
-      "anchor": "stdlib-modules"
-    },
-    {
-      "anchor": "todo"
-    },
-    {
-      "anchor": "vertical-space"
     }
   ],
   "rules": [
@@ -169,6 +100,121 @@
     {
       "id": "no_semicolons",
       "reference": "https://github.com/rrrene/elixir-style-guide#semicolon-between-statements",
+      "proposed": true
+    },
+    {
+      "id": "regex_string_anchors",
+      "reference": "https://github.com/rrrene/elixir-style-guide#caret-and-dollar-regex",
+      "proposed": true
+    },
+    {
+      "id": "parens_on_definition_args",
+      "reference": "https://github.com/rrrene/elixir-style-guide#function-parens",
+      "proposed": true
+    },
+    {
+      "id": "multiline_expression_assignment",
+      "reference": "https://github.com/rrrene/elixir-style-guide#multi-line-call",
+      "proposed": true
+    },
+    {
+      "id": "alias_all_used_modules",
+      "reference": "https://github.com/rrrene/elixir-style-guide#alias-modules",
+      "proposed": true
+    },
+    {
+      "id": "no_negated_unless",
+      "reference": "https://github.com/rrrene/elixir-style-guide#avoid-double-negations",
+      "proposed": true
+    },
+    {
+      "id": "no_parens_around_conditionals",
+      "reference": "https://github.com/rrrene/elixir-style-guide#conditional-parens",
+      "proposed": true
+    },
+    {
+      "id": "no_constant_conditionals",
+      "reference": "https://github.com/rrrene/elixir-style-guide#debugging-conditionals",
+      "proposed": true
+    },
+    {
+      "id": "prefer_docs_over_comments",
+      "reference": "https://github.com/rrrene/elixir-style-guide#doc-comments",
+      "proposed": true
+    },
+    {
+      "id": "moduledoc_false_when_undocumented",
+      "reference": "https://github.com/rrrene/elixir-style-guide#doc-false",
+      "proposed": true
+    },
+    {
+      "id": "blank_line_after_moduledoc",
+      "reference": "https://github.com/rrrene/elixir-style-guide#doc-style",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/rrrene/elixir-style-guide#fixme",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/rrrene/elixir-style-guide#todo",
+      "proposed": true
+    },
+    {
+      "id": "parens_in_function_calls",
+      "reference": "https://github.com/rrrene/elixir-style-guide#function-calling-parens",
+      "proposed": true
+    },
+    {
+      "id": "group_function_clauses",
+      "reference": "https://github.com/rrrene/elixir-style-guide#group-function-definitions",
+      "proposed": true
+    },
+    {
+      "id": "no_iex_pry_in_production",
+      "reference": "https://github.com/rrrene/elixir-style-guide#iex-pry",
+      "proposed": true
+    },
+    {
+      "id": "no_io_inspect_in_production",
+      "reference": "https://github.com/rrrene/elixir-style-guide#io-inspect",
+      "proposed": true
+    },
+    {
+      "id": "no_shadowing_kernel_names",
+      "reference": "https://github.com/rrrene/elixir-style-guide#kernel-functions",
+      "proposed": true
+    },
+    {
+      "id": "no_shadowing_stdlib_modules",
+      "reference": "https://github.com/rrrene/elixir-style-guide#stdlib-modules",
+      "proposed": true
+    },
+    {
+      "id": "no_nested_conditionals",
+      "reference": "https://github.com/rrrene/elixir-style-guide#no-nested-conditionals",
+      "proposed": true
+    },
+    {
+      "id": "no_space_after_unary_bang",
+      "reference": "https://github.com/rrrene/elixir-style-guide#no-space-bang",
+      "proposed": true
+    },
+    {
+      "id": "pipe_chains_start_with_raw_value",
+      "reference": "https://github.com/rrrene/elixir-style-guide#pipe-chains",
+      "proposed": true
+    },
+    {
+      "id": "prefer_regex_sigil",
+      "reference": "https://github.com/rrrene/elixir-style-guide#regex-sigils",
+      "proposed": true
+    },
+    {
+      "id": "vertical_space_for_readability",
+      "reference": "https://github.com/rrrene/elixir-style-guide#vertical-space",
       "proposed": true
     }
   ]
