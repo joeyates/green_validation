@@ -6,6 +6,7 @@ defmodule GreenValidation.CLI.CompareStyles do
   has run.
   """
 
+  alias GreenValidation.StyleCatalog
   alias GreenValidation.StyleComparison
   alias GreenValidation.StyleSource
 
@@ -68,13 +69,17 @@ defmodule GreenValidation.CLI.CompareStyles do
   end
 
   defp read_sources(sources_path) do
+    # Build the string -> atom lookup from the master list. This both validates ids and
+    # ensures the master rule atoms exist (a bare Mix task may not have loaded them yet).
+    known = Map.new(StyleCatalog.ids(), &{Atom.to_string(&1), &1})
+
     Enum.reduce(StyleSource.all(), %{}, fn source, acc ->
       path = Path.join(sources_path, "#{source.id}.json")
 
       case File.read(path) do
         {:ok, content} ->
           %{rules: rules} = Jason.decode!(content, keys: :atoms)
-          Map.put(acc, source.id, Enum.map(rules, &normalize_rule/1))
+          Map.put(acc, source.id, Enum.map(rules, &normalize_rule(&1, known)))
 
         {:error, _reason} ->
           Logger.info("No artifact for #{source.id} at #{path}; treating as absent")
@@ -83,8 +88,11 @@ defmodule GreenValidation.CLI.CompareStyles do
     end)
   end
 
-  defp normalize_rule(rule) do
-    %{id: String.to_existing_atom(rule.id), proposed: rule.proposed, reference: rule[:reference]}
+  defp normalize_rule(rule, known) do
+    case Map.fetch(known, rule.id) do
+      {:ok, id} -> %{id: id, proposed: rule.proposed, reference: rule[:reference]}
+      :error -> raise ArgumentError, "unknown master rule id: #{rule.id}"
+    end
   end
 
   defp log_no_source([]), do: :ok
