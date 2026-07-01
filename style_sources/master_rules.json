@@ -1,0 +1,1142 @@
+[
+  {
+    "id": "spaces_around_binary_operators",
+    "description": "Surround binary operators with a single space, e.g. `1 + 1`.",
+    "title": "Spaces around binary operators",
+    "category": "formatting",
+    "example": {
+      "bad": "1+1",
+      "good": "1 + 1"
+    }
+  },
+  {
+    "id": "no_spaces_around_range_operator",
+    "description": "Write ranges without surrounding spaces, e.g. `1..2`.",
+    "title": "No spaces around the range operator",
+    "category": "formatting",
+    "example": {
+      "bad": "1 .. 2",
+      "good": "1..2"
+    }
+  },
+  {
+    "id": "two_space_indentation",
+    "description": "Indent with two spaces per level; never use tabs.",
+    "title": "Two-space indentation",
+    "category": "formatting",
+    "example": {
+      "bad": "if x do\n    :ok\nend",
+      "good": "if x do\n  :ok\nend"
+    }
+  },
+  {
+    "id": "max_line_length",
+    "description": "Keep lines within a maximum length (98 columns for `mix format`).",
+    "title": "Maximum line length",
+    "category": "formatting",
+    "example": {
+      "bad": "{:ok, [one, two, three, four, five, six, seven, eight, nine, ten, eleven]}",
+      "good": "{:ok,\n [one, two, three, four, five,\n  six, seven, eight, nine, ten]}"
+    }
+  },
+  {
+    "id": "no_trailing_whitespace",
+    "description": "Strip whitespace from the end of lines.",
+    "title": "No trailing whitespace",
+    "category": "formatting",
+    "example": {
+      "bad": "x = 1   ",
+      "good": "x = 1"
+    }
+  },
+  {
+    "id": "spaces_after_commas",
+    "description": "Put a single space after each comma and none before it.",
+    "title": "Space after commas",
+    "category": "formatting",
+    "example": {
+      "bad": "[1,2]",
+      "good": "[1, 2]"
+    }
+  },
+  {
+    "id": "no_spaces_inside_brackets",
+    "description": "Do not pad the inside of (), [] or {} with spaces, e.g. `[1, 2]` not `[ 1, 2 ]`.",
+    "title": "No spaces inside brackets",
+    "category": "formatting",
+    "example": {
+      "bad": "[ 1, 2 ]",
+      "good": "[1, 2]"
+    }
+  },
+  {
+    "id": "no_semicolons",
+    "description": "Write each statement on its own line; do not use `;` to separate statements.",
+    "title": "No semicolons between statements",
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1; b = 2",
+      "good": "a = 1\nb = 2"
+    }
+  },
+  {
+    "id": "no_trailing_comma",
+    "description": "Do not leave a trailing comma after the last element of a list, map, tuple or call.",
+    "title": "No trailing comma in collections",
+    "category": "formatting",
+    "example": {
+      "bad": "[1, 2,]",
+      "good": "[1, 2]"
+    }
+  },
+  {
+    "id": "collapse_consecutive_blank_lines",
+    "description": "Squeeze multiple blank lines into a single blank line.",
+    "title": "Collapse consecutive blank lines",
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1\n\n\nb = 2",
+      "good": "a = 1\n\nb = 2"
+    }
+  },
+  {
+    "id": "comment_leading_space",
+    "description": "Write comments as `# comment`, with one space after the `#`.",
+    "title": "Space after the comment marker",
+    "category": "formatting",
+    "example": {
+      "bad": "#comment",
+      "good": "# comment"
+    }
+  },
+  {
+    "id": "digit_grouping_underscores",
+    "description": "Use underscores to group digits in numbers over five digits, e.g. `1_000_000`.",
+    "title": "Group digits in large numbers",
+    "category": "formatting",
+    "example": {
+      "bad": "1000000",
+      "good": "1_000_000"
+    }
+  },
+  {
+    "id": "uppercase_hex_literals",
+    "description": "Write hexadecimal digits in uppercase, e.g. `0xABCD`.",
+    "title": "Uppercase hexadecimal literals",
+    "category": "formatting",
+    "example": {
+      "bad": "0xabcd",
+      "good": "0xABCD"
+    }
+  },
+  {
+    "id": "unix_line_endings",
+    "description": "Use `\\n` line endings; convert `\\r\\n` to `\\n`.",
+    "title": "Unix line endings",
+    "category": "formatting",
+    "example": {
+      "bad": "a = 1\\r\\nb = 2",
+      "good": "a = 1\\nb = 2"
+    }
+  },
+  {
+    "id": "trailing_newline",
+    "description": "End every file with a single trailing newline.",
+    "title": "Trailing newline at end of file",
+    "category": "formatting",
+    "example": {
+      "bad": "(file ends without a newline)",
+      "good": "(file ends with one \\n)"
+    }
+  },
+  {
+    "id": "snake_case_atoms_and_variables",
+    "description": "Name atoms, variables and functions in snake_case.",
+    "title": "snake_case for atoms, variables and functions",
+    "category": "naming",
+    "example": {
+      "bad": "fooBar = 1",
+      "good": "foo_bar = 1"
+    }
+  },
+  {
+    "id": "camel_case_modules",
+    "description": "Name modules in CamelCase (PascalCase).",
+    "title": "CamelCase for modules",
+    "category": "naming",
+    "example": {
+      "bad": "defmodule My_app do\nend",
+      "good": "defmodule MyApp do\nend"
+    }
+  },
+  {
+    "id": "predicate_function_question_mark",
+    "description": "Name boolean-returning functions with a trailing `?` and no `is_` prefix.",
+    "title": "Question mark for predicate functions",
+    "category": "naming",
+    "example": {
+      "bad": "def is_valid(x), do: true",
+      "good": "def valid?(x), do: true"
+    }
+  },
+  {
+    "id": "avoid_one_letter_variables",
+    "description": "Prefer descriptive names over single letters.",
+    "title": "Avoid one-letter variable names",
+    "category": "naming",
+    "example": {
+      "bad": "u = get_user()",
+      "good": "user = get_user()"
+    }
+  },
+  {
+    "id": "alphabetical_alias_order",
+    "description": "Sort module references (alias, import, require, use) alphabetically.",
+    "title": "Order alias/import/require alphabetically",
+    "category": "modules",
+    "example": {
+      "bad": "alias App.Zebra\nalias App.Apple",
+      "good": "alias App.Apple\nalias App.Zebra"
+    }
+  },
+  {
+    "id": "module_pseudo_variable",
+    "description": "Refer to the current module with `__MODULE__` rather than its full name.",
+    "title": "Use the __MODULE__ pseudo-variable",
+    "category": "modules",
+    "example": {
+      "bad": "%MyApp.User{name: n}",
+      "good": "%__MODULE__{name: n}"
+    }
+  },
+  {
+    "id": "module_attribute_layout",
+    "description": "Order module-level directives (@moduledoc, use, import, require, alias, attributes, …) in a consistent, defined sequence. The exact sequence differs between guides — see each source's reference (e.g. Lexmag orders alias before require, christopheradams the reverse).",
+    "title": "Consistent module attribute layout",
+    "category": "modules",
+    "example": {
+      "bad": "alias App.X\nuse GenServer\n@moduledoc \"...\"",
+      "good": "@moduledoc \"...\"\nuse GenServer\nalias App.X"
+    }
+  },
+  {
+    "id": "pipeline_for_chains",
+    "description": "Use the pipe operator for chains of function calls.",
+    "title": "Use pipelines for chained calls",
+    "category": "expressions",
+    "example": {
+      "bad": "f(g(h(x)))",
+      "good": "x |> h() |> g() |> f()"
+    }
+  },
+  {
+    "id": "no_pipeline_for_single_call",
+    "description": "Do not use a pipeline for a single function call.",
+    "title": "Avoid needless pipelines",
+    "category": "expressions",
+    "example": {
+      "bad": "x |> f()",
+      "good": "f(x)"
+    }
+  },
+  {
+    "id": "no_anonymous_functions_in_pipelines",
+    "description": "Do not invoke anonymous functions directly inside a pipeline.",
+    "title": "No anonymous functions in pipelines",
+    "category": "expressions",
+    "example": {
+      "bad": "x |> (fn v -> v + 1 end).()",
+      "good": "x |> increment()"
+    }
+  },
+  {
+    "id": "no_else_in_unless",
+    "description": "Never use `unless` with an `else` branch; rewrite as `if`.",
+    "title": "No else clause with unless",
+    "category": "expressions",
+    "example": {
+      "bad": "unless x do\n  a\nelse\n  b\nend",
+      "good": "if x do\n  b\nelse\n  a\nend"
+    }
+  },
+  {
+    "id": "true_as_last_cond_clause",
+    "description": "Use `true` (not `:else` or similar) for the catch-all `cond` clause.",
+    "title": "Use true as the last cond clause",
+    "category": "expressions",
+    "example": {
+      "bad": "cond do\n  x -> 1\n  :else -> 2\nend",
+      "good": "cond do\n  x -> 1\n  true -> 2\nend"
+    }
+  },
+  {
+    "id": "parentheses_on_zero_arity_calls",
+    "description": "Call zero-arity functions with parentheses, e.g. `foo()`.",
+    "title": "Parentheses on zero-arity function calls",
+    "category": "expressions",
+    "example": {
+      "bad": "DateTime.utc_now",
+      "good": "DateTime.utc_now()"
+    }
+  },
+  {
+    "id": "omit_keyword_list_brackets",
+    "description": "Omit the square brackets around a keyword list when they are optional, e.g. `foo(a: 1)`.",
+    "title": "Omit brackets from keyword lists",
+    "category": "expressions",
+    "example": {
+      "bad": "foo([a: 1])",
+      "good": "foo(a: 1)"
+    }
+  },
+  {
+    "id": "spaces_around_arrow",
+    "description": "Surround the `->` operator with spaces, e.g. `fn x -> x end` and case clauses.",
+    "title": "Spaces around the -> operator",
+    "category": "formatting",
+    "example": {
+      "bad": "fn x->x end",
+      "good": "fn x -> x end"
+    }
+  },
+  {
+    "id": "capture_operator_spacing",
+    "description": "Write the capture operator with a space and without wrapping parentheses, e.g. `& &1`.",
+    "title": "Capture operator spacing",
+    "category": "formatting",
+    "example": {
+      "bad": "&(&1)",
+      "good": "& &1"
+    }
+  },
+  {
+    "id": "no_parens_around_anonymous_fn_args",
+    "description": "Write `fn x -> … end`, not `fn(x) -> … end`.",
+    "title": "No parentheses around anonymous function arguments",
+    "category": "expressions",
+    "example": {
+      "bad": "fn(x) -> x end",
+      "good": "fn x -> x end"
+    }
+  },
+  {
+    "id": "no_redundant_parentheses",
+    "description": "Drop parentheses that only group an expression, e.g. `1 + 2` not `(1 + 2)`.",
+    "title": "No redundant parentheses",
+    "category": "expressions",
+    "example": {
+      "bad": "(1 + 2)",
+      "good": "1 + 2"
+    }
+  },
+  {
+    "id": "lowercase_exponent",
+    "description": "Write the exponent letter in lowercase, e.g. `1.0e3` not `1.0E3`.",
+    "title": "Lowercase exponent letter in floats",
+    "category": "formatting",
+    "example": {
+      "bad": "1.0E3",
+      "good": "1.0e3"
+    }
+  },
+  {
+    "id": "no_spaces_in_bitstring_segments",
+    "description": "Do not put spaces around `::` in bitstring segments, e.g. `<<1::8>>`.",
+    "title": "No spaces around bitstring segment options",
+    "category": "formatting",
+    "example": {
+      "bad": "<<1 ::8>>",
+      "good": "<<1::8>>"
+    }
+  },
+  {
+    "id": "fit_collections_on_one_line",
+    "description": "Collapse a list, map, tuple or call onto one line when it fits within the line length.",
+    "title": "Fit collections on a single line when they fit",
+    "category": "formatting",
+    "example": {
+      "bad": "[1,\n2]",
+      "good": "[1, 2]"
+    }
+  },
+  {
+    "id": "comments_on_own_line",
+    "description": "Place a comment on the line above the code it refers to, not trailing after it.",
+    "title": "Comments on their own line",
+    "category": "formatting",
+    "example": {
+      "bad": "x = 1 # set x",
+      "good": "# set x\nx = 1"
+    }
+  },
+  {
+    "id": "exception_error_suffix",
+    "description": "Name exception modules with an `Error` suffix.",
+    "title": "Error suffix for exception modules",
+    "category": "exceptions",
+    "example": {
+      "bad": "defmodule App.BadInput do\nend",
+      "good": "defmodule App.BadInputError do\nend"
+    }
+  },
+  {
+    "id": "lowercase_exception_messages",
+    "description": "Begin exception messages with a lowercase letter.",
+    "title": "Lowercase exception messages",
+    "category": "exceptions",
+    "example": {
+      "bad": "raise \"Invalid input\"",
+      "good": "raise \"invalid input\""
+    }
+  },
+  {
+    "id": "no_trailing_punctuation_in_exception_messages",
+    "description": "Do not end exception messages with punctuation.",
+    "title": "No trailing punctuation in exception messages",
+    "category": "exceptions",
+    "example": {
+      "bad": "raise \"invalid input.\"",
+      "good": "raise \"invalid input\""
+    }
+  },
+  {
+    "id": "boolean_operators",
+    "description": "Use `and`, `or` and `not` for strictly boolean checks; keep `&&`/`||`/`!` for non-boolean values.",
+    "title": "Use and/or/not for boolean checks",
+    "category": "expressions",
+    "example": {
+      "bad": "ready && ok",
+      "good": "ready and ok"
+    }
+  },
+  {
+    "id": "no_nil_else",
+    "description": "Omit the `else` branch in `if`/`unless` when it would return `nil`.",
+    "title": "Omit else that returns nil",
+    "category": "expressions",
+    "example": {
+      "bad": "if x, do: a, else: nil",
+      "good": "if x, do: a"
+    }
+  },
+  {
+    "id": "concatenation_when_matching_binaries",
+    "description": "Favour the `<>` operator over bitstring syntax when pattern-matching binaries.",
+    "title": "Use <> to match binaries",
+    "category": "expressions",
+    "example": {
+      "bad": "<<\"foo\", rest::binary>> = str",
+      "good": "\"foo\" <> rest = str"
+    }
+  },
+  {
+    "id": "parens_on_definition_args",
+    "description": "Always use parentheses around arguments to definitions (`def`, `defp`, `defmacro`, …).",
+    "title": "Parentheses around definition arguments",
+    "category": "expressions",
+    "example": {
+      "bad": "def add a, b do\n  a + b\nend",
+      "good": "def add(a, b) do\n  a + b\nend"
+    }
+  },
+  {
+    "id": "snake_case_files",
+    "description": "Name files and directories in snake_case, matching the CamelCase module name.",
+    "title": "snake_case for files and directories",
+    "category": "naming",
+    "example": {
+      "bad": "lib/MyApp/UserProfile.ex",
+      "good": "lib/my_app/user_profile.ex"
+    }
+  },
+  {
+    "id": "no_explicit_nil_struct_defaults",
+    "description": "In `defstruct`, list fields that default to `nil` as plain atoms instead of `field: nil`.",
+    "title": "No explicit nil struct field defaults",
+    "category": "modules",
+    "example": {
+      "bad": "defstruct name: nil, age: nil",
+      "good": "defstruct [:name, :age]"
+    }
+  },
+  {
+    "id": "parens_on_zero_arity_types",
+    "description": "Always use parentheses on zero-arity types, e.g. `@type t :: foo()`.",
+    "title": "Parentheses on zero-arity types",
+    "category": "typespecs",
+    "example": {
+      "bad": "@type t :: foo",
+      "good": "@type t :: foo()"
+    }
+  },
+  {
+    "id": "consistent_atom_quoting",
+    "description": "Quote atom literals only when they contain characters that require it.",
+    "title": "Quote atoms only when required",
+    "category": "formatting",
+    "example": {
+      "bad": ":\"valid\"",
+      "good": ":valid"
+    }
+  },
+  {
+    "id": "space_before_zero_arity_arrow",
+    "description": "Put a space before `->` in zero-arity anonymous functions, e.g. `fn -> :ok end`.",
+    "title": "Space before -> in 0-arity anonymous functions",
+    "category": "formatting",
+    "example": {
+      "bad": "fn-> :ok end",
+      "good": "fn -> :ok end"
+    }
+  },
+  {
+    "id": "spaces_around_default_arguments",
+    "description": "Surround the `\\\\` default-argument operator with spaces.",
+    "title": "Spaces around the default-argument operator",
+    "category": "formatting",
+    "example": {
+      "bad": "def f(x \\\\0), do: x",
+      "good": "def f(x \\\\ 0), do: x"
+    }
+  },
+  {
+    "id": "no_expression_group_alignment",
+    "description": "Do not pad consecutive assignments or expressions to align them into columns.",
+    "title": "Avoid aligning expression groups",
+    "category": "formatting",
+    "example": {
+      "bad": "a   = 1\nbbb = 2",
+      "good": "a = 1\nbbb = 2"
+    }
+  },
+  {
+    "id": "pipeline_indentation",
+    "description": "Indent the calls of a multi-line pipeline by a single level.",
+    "title": "Single-level pipeline indentation",
+    "category": "formatting",
+    "example": {
+      "bad": "x\n    |> f()\n      |> g()",
+      "good": "x\n|> f()\n|> g()"
+    }
+  },
+  {
+    "id": "binary_operator_at_line_end",
+    "description": "When breaking a multi-line expression, keep binary operators at the end of each line.",
+    "title": "Binary operators at end of line",
+    "category": "formatting",
+    "example": {
+      "bad": "total =\n  a\n  + b",
+      "good": "total =\n  a +\n    b"
+    }
+  },
+  {
+    "id": "multiline_binary_operand_indentation",
+    "description": "Indent the right-hand operand of a multi-line binary operator one level deeper.",
+    "title": "Indent multi-line binary operands",
+    "category": "formatting",
+    "example": {
+      "bad": "x =\n  foo() +\n  bar()",
+      "good": "x =\n  foo() +\n    bar()"
+    }
+  },
+  {
+    "id": "guard_clause_indentation",
+    "description": "Indent a multi-line `when` guard one level deeper than the function head.",
+    "title": "Guard clause indentation",
+    "category": "formatting",
+    "example": {
+      "bad": "def f(x)\nwhen x > 0 do\n  x\nend",
+      "good": "def f(x)\n    when x > 0 do\n  x\nend"
+    }
+  },
+  {
+    "id": "multiline_expression_assignment",
+    "description": "When assigning a multi-line expression, begin it on a new line after the `=`.",
+    "title": "Multi-line expression on its own line after =",
+    "category": "formatting",
+    "example": {
+      "bad": "x = foo()\n    |> bar()",
+      "good": "x =\n  foo()\n  |> bar()"
+    }
+  },
+  {
+    "id": "with_clause_indentation",
+    "description": "Align successive `with` clauses with the first clause.",
+    "title": "with clause indentation",
+    "category": "formatting",
+    "example": {
+      "bad": "with {:ok, a} <- f(),\n  {:ok, b} <- g() do\n  a + b\nend",
+      "good": "with {:ok, a} <- f(),\n     {:ok, b} <- g() do\n  a + b\nend"
+    }
+  },
+  {
+    "id": "for_clause_indentation",
+    "description": "Align successive `for` generators and filters consistently.",
+    "title": "for clause indentation",
+    "category": "formatting",
+    "example": {
+      "bad": "for a <- as,\n  b <- bs do\n  {a, b}\nend",
+      "good": "for a <- as,\n    b <- bs do\n  {a, b}\nend"
+    }
+  },
+  {
+    "id": "comments_for_important_details",
+    "description": "Use comments only to communicate important details the code cannot express itself.",
+    "title": "Comments only for important details",
+    "category": "comments",
+    "example": {
+      "bad": "# add one to x\nx = x + 1",
+      "good": "# round half-up for legacy invoices\nx = round_up(x)"
+    }
+  },
+  {
+    "id": "no_superfluous_comments",
+    "description": "Avoid comments that merely restate what the code already says.",
+    "title": "Avoid superfluous comments",
+    "category": "comments",
+    "example": {
+      "bad": "# increment counter\ncounter = counter + 1",
+      "good": "counter = counter + 1"
+    }
+  },
+  {
+    "id": "assertion_argument_order",
+    "description": "In ExUnit comparison assertions, put the expression under test on the left and the expected value on the right.",
+    "title": "Expected value on the right in assertions",
+    "category": "testing",
+    "example": {
+      "bad": "assert 200 == status",
+      "good": "assert status == 200"
+    }
+  },
+  {
+    "id": "prefer_pattern_matching_over_regex",
+    "description": "Reach for pattern matching and the `String` module before regular expressions.",
+    "title": "Prefer pattern matching over regular expressions",
+    "category": "regex",
+    "example": {
+      "bad": "Regex.match?(~r/^foo/, s)",
+      "good": "match?(\"foo\" <> _, s)"
+    }
+  },
+  {
+    "id": "non_capturing_regex_groups",
+    "description": "Use non-capturing groups `(?:...)` when the captured result is not used.",
+    "title": "Use non-capturing regex groups",
+    "category": "regex",
+    "example": {
+      "bad": "~r/(foo|bar)/",
+      "good": "~r/(?:foo|bar)/"
+    }
+  },
+  {
+    "id": "regex_string_anchors",
+    "description": "`^` and `$` match line boundaries; use `\\A` and `\\z` to match the start and end of the whole string.",
+    "title": "Use \\A and \\z for string boundaries",
+    "category": "regex",
+    "example": {
+      "bad": "~r/^foo$/",
+      "good": "~r/\\Afoo\\z/"
+    }
+  },
+  {
+    "id": "alias_all_used_modules",
+    "description": "Alias modules you reference repeatedly to keep call sites short.",
+    "title": "Alias the modules you use",
+    "category": "modules",
+    "example": {
+      "bad": "MyApp.Accounts.User.changeset(u)",
+      "good": "alias MyApp.Accounts.User\nUser.changeset(u)"
+    }
+  },
+  {
+    "id": "no_negated_unless",
+    "description": "Never use `unless` with a negated condition; rewrite as `if`.",
+    "title": "No unless with a negated condition",
+    "category": "expressions",
+    "example": {
+      "bad": "unless not ready do\n  go()\nend",
+      "good": "if ready do\n  go()\nend"
+    }
+  },
+  {
+    "id": "no_parens_around_conditionals",
+    "description": "Never wrap the condition of `if`/`unless` in parentheses.",
+    "title": "No parentheses around if/unless conditions",
+    "category": "expressions",
+    "example": {
+      "bad": "if(ready) do\n  go()\nend",
+      "good": "if ready do\n  go()\nend"
+    }
+  },
+  {
+    "id": "no_constant_conditionals",
+    "description": "A conditional should not contain an expression that always evaluates the same way.",
+    "title": "No always-true conditionals",
+    "category": "expressions",
+    "example": {
+      "bad": "if true do\n  go()\nend",
+      "good": "go()"
+    }
+  },
+  {
+    "id": "prefer_docs_over_comments",
+    "description": "Favour `@moduledoc`/`@doc` over plain comments for documentation.",
+    "title": "Prefer @doc/@moduledoc over comments",
+    "category": "comments",
+    "example": {
+      "bad": "# Adds two numbers\ndef add(a, b), do: a + b",
+      "good": "@doc \"Adds two numbers\"\ndef add(a, b), do: a + b"
+    }
+  },
+  {
+    "id": "moduledoc_false_when_undocumented",
+    "description": "Give every module a `@moduledoc`, using `@moduledoc false` when it is intentionally undocumented.",
+    "title": "@moduledoc false when undocumented",
+    "category": "documentation",
+    "example": {
+      "bad": "defmodule Internal do\nend",
+      "good": "defmodule Internal do\n  @moduledoc false\nend"
+    }
+  },
+  {
+    "id": "blank_line_after_moduledoc",
+    "description": "Separate the code after `@moduledoc` with a single blank line.",
+    "title": "Blank line after @moduledoc",
+    "category": "documentation",
+    "example": {
+      "bad": "@moduledoc \"X\"\ndef f, do: 1",
+      "good": "@moduledoc \"X\"\n\ndef f, do: 1"
+    }
+  },
+  {
+    "id": "annotation_keywords",
+    "description": "Mark notes with uppercase annotation keywords followed by a colon, e.g. `TODO:`, `FIXME:`, `OPTIMIZE:`, `HACK:`, `REVIEW:`.",
+    "title": "Uppercase annotation keywords (TODO/FIXME/…)",
+    "category": "comments",
+    "example": {
+      "bad": "# fix this later",
+      "good": "# FIXME: handle the timeout case"
+    }
+  },
+  {
+    "id": "parens_in_function_calls",
+    "description": "Use parentheses when calling functions with arguments, especially inside pipelines.",
+    "title": "Parentheses on function calls with arguments",
+    "category": "expressions",
+    "example": {
+      "bad": "rem 10, 3",
+      "good": "rem(10, 3)"
+    }
+  },
+  {
+    "id": "group_function_clauses",
+    "description": "Keep the clauses of a function with the same name and arity together.",
+    "title": "Group clauses of the same function",
+    "category": "modules",
+    "example": {
+      "bad": "def f(1), do: 1\ndef g(), do: 0\ndef f(2), do: 2",
+      "good": "def f(1), do: 1\ndef f(2), do: 2\n\ndef g(), do: 0"
+    }
+  },
+  {
+    "id": "no_iex_pry_in_production",
+    "description": "Never leave a call to `IEx.pry/0` in committed code.",
+    "title": "No IEx.pry in production code",
+    "category": "expressions",
+    "example": {
+      "bad": "def f(x) do\n  IEx.pry()\n  x\nend",
+      "good": "def f(x) do\n  x\nend"
+    }
+  },
+  {
+    "id": "no_io_inspect_in_production",
+    "description": "Remove debugging `IO.inspect/2` calls from committed code.",
+    "title": "No IO.inspect in production code",
+    "category": "expressions",
+    "example": {
+      "bad": "value |> IO.inspect() |> use()",
+      "good": "use(value)"
+    }
+  },
+  {
+    "id": "no_shadowing_kernel_names",
+    "description": "Avoid naming functions and variables the same as `Kernel` functions.",
+    "title": "Don't shadow Kernel functions",
+    "category": "naming",
+    "example": {
+      "bad": "def length(list), do: count(list)",
+      "good": "def list_length(list), do: count(list)"
+    }
+  },
+  {
+    "id": "no_shadowing_stdlib_modules",
+    "description": "Avoid naming modules the same as standard-library modules.",
+    "title": "Don't shadow stdlib modules",
+    "category": "modules",
+    "example": {
+      "bad": "defmodule String do\nend",
+      "good": "defmodule MyApp.Text do\nend"
+    }
+  },
+  {
+    "id": "no_nested_conditionals",
+    "description": "Never nest `if`, `unless` and `case` more than one level deep.",
+    "title": "Don't deeply nest conditionals",
+    "category": "expressions",
+    "example": {
+      "bad": "if a do\n  if b, do: c\nend",
+      "good": "if a and b, do: c"
+    }
+  },
+  {
+    "id": "no_space_after_unary_bang",
+    "description": "Do not put a space after `!` when negating an expression.",
+    "title": "No space after the ! operator",
+    "category": "formatting",
+    "example": {
+      "bad": "! ready",
+      "good": "!ready"
+    }
+  },
+  {
+    "id": "pipe_chains_start_with_raw_value",
+    "description": "Begin a pipe chain with a plain value or variable rather than a function call.",
+    "title": "Start pipe chains with a raw value",
+    "category": "expressions",
+    "example": {
+      "bad": "Repo.all(query) |> Enum.map(&f/1)",
+      "good": "query |> Repo.all() |> Enum.map(&f/1)"
+    }
+  },
+  {
+    "id": "prefer_regex_sigil",
+    "description": "Use `~r//` as the go-to sigil for regular expressions.",
+    "title": "Use the ~r sigil for regexes",
+    "category": "regex",
+    "example": {
+      "bad": "Regex.compile!(\"foo\")",
+      "good": "~r/foo/"
+    }
+  },
+  {
+    "id": "vertical_space_for_readability",
+    "description": "Use blank lines between definitions and sections to aid readability.",
+    "title": "Use vertical space between definitions",
+    "category": "formatting",
+    "example": {
+      "bad": "def a, do: 1\ndef b, do: 2",
+      "good": "def a, do: 1\n\ndef b, do: 2"
+    }
+  },
+  {
+    "id": "blank_line_after_multiline_assignment",
+    "description": "Add a blank line after a multi-line assignment.",
+    "title": "Blank line after a multi-line assignment",
+    "category": "formatting",
+    "example": {
+      "bad": "x =\n  foo()\n  |> bar()\ny = 1",
+      "good": "x =\n  foo()\n  |> bar()\n\ny = 1"
+    }
+  },
+  {
+    "id": "alias_self_reference",
+    "description": "Use `alias __MODULE__, as: …` for a prettier self-reference.",
+    "title": "Alias a long module self-reference",
+    "category": "modules",
+    "example": {
+      "bad": "%MyApp.Deeply.Nested.Thing{}",
+      "good": "alias __MODULE__, as: Thing\n%Thing{}"
+    }
+  },
+  {
+    "id": "avoid_metaprogramming",
+    "description": "Reach for ordinary functions before macros.",
+    "title": "Avoid needless metaprogramming",
+    "category": "expressions",
+    "example": {
+      "bad": "defmacro add(a, b), do: quote(do: unquote(a) + unquote(b))",
+      "good": "def add(a, b), do: a + b"
+    }
+  },
+  {
+    "id": "comment_grammar",
+    "description": "Comments longer than a word are capitalised and use punctuation.",
+    "title": "Capitalise and punctuate comments",
+    "category": "comments",
+    "example": {
+      "bad": "# round the total",
+      "good": "# Round the total."
+    }
+  },
+  {
+    "id": "comment_line_length",
+    "description": "Keep comment lines within 100 characters.",
+    "title": "Limit comment lines to 100 characters",
+    "category": "comments",
+    "example": {
+      "bad": "# one very long comment line that runs well past the hundred-character limit and keeps going",
+      "good": "# A shorter comment,\n# wrapped across lines."
+    }
+  },
+  {
+    "id": "no_blank_line_after_defmodule",
+    "description": "Do not leave a blank line immediately after `defmodule … do`.",
+    "title": "No blank line after defmodule",
+    "category": "formatting",
+    "example": {
+      "bad": "defmodule A do\n\n  def x, do: 1\nend",
+      "good": "defmodule A do\n  def x, do: 1\nend"
+    }
+  },
+  {
+    "id": "do_colon_for_single_line_if",
+    "description": "Use the `do:` form for single-line `if`/`unless`.",
+    "title": "Use do: for single-line if/unless",
+    "category": "expressions",
+    "example": {
+      "bad": "if x do\n  a\nend",
+      "good": "if x, do: a"
+    }
+  },
+  {
+    "id": "omit_parens_on_zero_arg_defs",
+    "description": "Use parentheses when a `def` has arguments and omit them when it has none. (Conflicts with the always-parenthesise convention.)",
+    "title": "Omit parentheses on zero-argument definitions",
+    "category": "expressions",
+    "example": {
+      "bad": "def go(), do: :ok",
+      "good": "def go, do: :ok"
+    }
+  },
+  {
+    "id": "no_space_before_call_parens",
+    "description": "Never put a space between a function name and its opening parenthesis.",
+    "title": "No space between a function name and (",
+    "category": "formatting",
+    "example": {
+      "bad": "foo (x)",
+      "good": "foo(x)"
+    }
+  },
+  {
+    "id": "heredocs_for_documentation",
+    "description": "Use markdown heredocs for `@doc`/`@moduledoc` content.",
+    "title": "Use heredocs for documentation",
+    "category": "documentation",
+    "example": {
+      "bad": "@doc \"line one\\nline two\"",
+      "good": "@doc \"\"\"\nline one\nline two\n\"\"\""
+    }
+  },
+  {
+    "id": "keyword_list_special_syntax",
+    "description": "Always use the special `key: value` syntax for keyword lists.",
+    "title": "Use keyword-list shorthand",
+    "category": "expressions",
+    "example": {
+      "bad": "[{:a, 1}, {:b, 2}]",
+      "good": "[a: 1, b: 2]"
+    }
+  },
+  {
+    "id": "long_do_clause_on_new_line",
+    "description": "When a function head and `do:` clause are too long for one line, put `do:` on a new line.",
+    "title": "Long do: clause on its own line",
+    "category": "formatting",
+    "example": {
+      "bad": "def handle(arg), do: a_rather_long_expression_that_overflows(arg)",
+      "good": "def handle(arg),\n  do: a_rather_long_expression_that_overflows(arg)"
+    }
+  },
+  {
+    "id": "verbose_map_syntax_for_mixed_keys",
+    "description": "If any map key is not an atom, use the verbose `=>` syntax for every key.",
+    "title": "Verbose map syntax for non-atom keys",
+    "category": "expressions",
+    "example": {
+      "bad": "%{a: 1, \"b\" => 2}",
+      "good": "%{:a => 1, \"b\" => 2}"
+    }
+  },
+  {
+    "id": "shorthand_map_syntax_for_atom_keys",
+    "description": "Use the `key: value` shorthand when all map keys are atoms.",
+    "title": "Shorthand map syntax for atom keys",
+    "category": "expressions",
+    "example": {
+      "bad": "%{:a => 1, :b => 2}",
+      "good": "%{a: 1, b: 2}"
+    }
+  },
+  {
+    "id": "module_name_matches_path",
+    "description": "Represent each level of module nesting as a directory in the file path.",
+    "title": "Module name mirrors its file path",
+    "category": "modules",
+    "example": {
+      "bad": "lib/parser.ex defining MyApp.Lexer.Parser",
+      "good": "lib/my_app/lexer/parser.ex defining MyApp.Lexer.Parser"
+    }
+  },
+  {
+    "id": "always_moduledoc",
+    "description": "Include a `@moduledoc` on the line right after `defmodule`.",
+    "title": "Always include @moduledoc",
+    "category": "documentation",
+    "example": {
+      "bad": "defmodule X do\n  def f, do: 1\nend",
+      "good": "defmodule X do\n  @moduledoc \"…\"\n  def f, do: 1\nend"
+    }
+  },
+  {
+    "id": "multiline_case_clause_blank_lines",
+    "description": "If any `case`/`cond` clause needs more than one line, separate all clauses with blank lines.",
+    "title": "Blank lines around multi-line case clauses",
+    "category": "formatting",
+    "example": {
+      "bad": "case x do\n  1 -> a\n  2 ->\n    b\nend",
+      "good": "case x do\n  1 ->\n    a\n\n  2 ->\n    b\nend"
+    }
+  },
+  {
+    "id": "multiline_collection_one_per_line",
+    "description": "If a list, map or struct spans multiple lines, put each element on its own line.",
+    "title": "One element per line in multi-line collections",
+    "category": "formatting",
+    "example": {
+      "bad": "[1, 2,\n 3]",
+      "good": "[\n  1,\n  2,\n  3\n]"
+    }
+  },
+  {
+    "id": "multiline_assign_bracket_placement",
+    "description": "When assigning a multi-line list/map/struct, keep the opening bracket on the first line.",
+    "title": "Opening bracket stays on the assignment line",
+    "category": "formatting",
+    "example": {
+      "bad": "x =\n  [\n    1,\n    2\n  ]",
+      "good": "x = [\n  1,\n  2\n]"
+    }
+  },
+  {
+    "id": "no_single_line_def_among_multiline",
+    "description": "If a function has more than one multi-line clause, don't mix in single-line `def`s.",
+    "title": "Consistent def line style",
+    "category": "modules",
+    "example": {
+      "bad": "def f(0), do: 0\ndef f(n) do\n  n\nend",
+      "good": "def f(0) do\n  0\nend\n\ndef f(n) do\n  n\nend"
+    }
+  },
+  {
+    "id": "main_type_named_t",
+    "description": "Name a module's main type `t`.",
+    "title": "Name the main type t",
+    "category": "typespecs",
+    "example": {
+      "bad": "@type user :: map()",
+      "good": "@type t :: map()"
+    }
+  },
+  {
+    "id": "one_module_per_file",
+    "description": "Define one module per file unless a module is only used internally by another.",
+    "title": "One module per file",
+    "category": "modules",
+    "example": {
+      "bad": "defmodule A do\nend\n\ndefmodule B do\nend",
+      "good": "# A and B in separate files"
+    }
+  },
+  {
+    "id": "parens_on_piped_calls",
+    "description": "Use parentheses for one-arity functions when used in a pipeline.",
+    "title": "Parentheses on piped one-arity calls",
+    "category": "expressions",
+    "example": {
+      "bad": "x |> Enum.reverse",
+      "good": "x |> Enum.reverse()"
+    }
+  },
+  {
+    "id": "predicate_guard_is_prefix",
+    "description": "Name boolean checks usable in guards with an `is_` prefix (no trailing `?`).",
+    "title": "is_ prefix for guard-safe predicates",
+    "category": "naming",
+    "example": {
+      "bad": "defguard valid?(x) when x > 0",
+      "good": "defguard is_valid(x) when x > 0"
+    }
+  },
+  {
+    "id": "no_private_fn_same_name_as_public",
+    "description": "Private functions should not share a name with public functions.",
+    "title": "Private function names differ from public",
+    "category": "naming",
+    "example": {
+      "bad": "def run(x), do: run(x, [])\ndefp run(x, opts), do: …",
+      "good": "def run(x), do: do_run(x, [])\ndefp do_run(x, opts), do: …"
+    }
+  },
+  {
+    "id": "no_repetitive_module_names",
+    "description": "Avoid repeating fragments across a module's namespace.",
+    "title": "Avoid repetitive module names",
+    "category": "modules",
+    "example": {
+      "bad": "MyApp.User.UserHelper",
+      "good": "MyApp.User.Helper"
+    }
+  },
+  {
+    "id": "spec_directly_before_function",
+    "description": "Place a `@spec` on the line directly before the function it describes.",
+    "title": "@spec directly before the function",
+    "category": "typespecs",
+    "example": {
+      "bad": "@spec f() :: :ok\n\ndef f, do: :ok",
+      "good": "@spec f() :: :ok\ndef f, do: :ok"
+    }
+  },
+  {
+    "id": "omit_defstruct_brackets",
+    "description": "Omit the square brackets when the argument to `defstruct` is a keyword list.",
+    "title": "Omit brackets from a defstruct keyword list",
+    "category": "modules",
+    "example": {
+      "bad": "defstruct [name: nil, age: 0]",
+      "good": "defstruct name: nil, age: 0"
+    }
+  },
+  {
+    "id": "group_typedoc_with_type",
+    "description": "Place `@typedoc` and `@type` definitions together.",
+    "title": "Keep @typedoc with its @type",
+    "category": "typespecs",
+    "example": {
+      "bad": "@type t :: map()\n# …later…\n@typedoc \"a thing\"",
+      "good": "@typedoc \"a thing\"\n@type t :: map()"
+    }
+  },
+  {
+    "id": "multiline_union_type",
+    "description": "If a union type is too long for one line, put each part on its own line.",
+    "title": "One part per line in long union types",
+    "category": "typespecs",
+    "example": {
+      "bad": "@type t :: :a | :b | :c | :d | :e | :f | :g | :h | :i | :j | :k | :l",
+      "good": "@type t ::\n  :a\n  | :b\n  | :c"
+    }
+  },
+  {
+    "id": "with_else_formatting",
+    "description": "When a `with` has a multi-line `do` block, format its `else` clauses on their own lines.",
+    "title": "Format with/else over multiple lines",
+    "category": "expressions",
+    "example": {
+      "bad": "with {:ok, x} <- f() do\n  x\nelse _ -> :error end",
+      "good": "with {:ok, x} <- f() do\n  x\nelse\n  _ -> :error\nend"
+    }
+  }
+]

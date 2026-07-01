@@ -18,6 +18,7 @@ defmodule Green.Validation.MixProject do
       {:green, "~> 0.1.10"},
       {:helpful_options, "~> 0.4.4"},
       {:jason, "~> 1.4"},
+      {:prawn_ex, "~> 0.2.0"},
       {:req, "~> 0.5.17"}
     ]
   end

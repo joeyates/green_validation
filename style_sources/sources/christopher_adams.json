@@ -1,0 +1,410 @@
+{
+  "source": {
+    "id": "christopher_adams",
+    "name": "The Elixir Style Guide",
+    "repo_url": "https://github.com/christopheradams/elixir_style_guide"
+  },
+  "unmapped": [
+    {
+      "anchor": "autocrlf"
+    },
+    {
+      "anchor": "expressive-code"
+    },
+    {
+      "anchor": "translations"
+    }
+  ],
+  "rules": [
+    {
+      "id": "no_trailing_whitespace",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
+      "proposed": true
+    },
+    {
+      "id": "trailing_newline",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
+      "proposed": true
+    },
+    {
+      "id": "unix_line_endings",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
+      "proposed": true
+    },
+    {
+      "id": "max_line_length",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_binary_operators",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+      "proposed": true
+    },
+    {
+      "id": "spaces_after_commas",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_inside_brackets",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_around_range_operator",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
+      "proposed": true
+    },
+    {
+      "id": "no_space_after_unary_bang",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
+      "proposed": true
+    },
+    {
+      "id": "comment_leading_space",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
+      "proposed": true
+    },
+    {
+      "id": "pipeline_for_chains",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
+      "proposed": true
+    },
+    {
+      "id": "no_pipeline_for_single_call",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
+      "proposed": true
+    },
+    {
+      "id": "no_else_in_unless",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
+      "proposed": true
+    },
+    {
+      "id": "true_as_last_cond_clause",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
+      "proposed": true
+    },
+    {
+      "id": "parentheses_on_zero_arity_calls",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_atoms_and_variables",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
+      "proposed": true
+    },
+    {
+      "id": "camel_case_modules",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
+      "proposed": true
+    },
+    {
+      "id": "predicate_function_question_mark",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
+      "proposed": true
+    },
+    {
+      "id": "module_pseudo_variable",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
+      "proposed": true
+    },
+    {
+      "id": "module_attribute_layout",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+      "proposed": true
+    },
+    {
+      "id": "exception_error_suffix",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
+      "proposed": true
+    },
+    {
+      "id": "lowercase_exception_messages",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+      "proposed": true
+    },
+    {
+      "id": "no_trailing_punctuation_in_exception_messages",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+      "proposed": true
+    },
+    {
+      "id": "omit_keyword_list_brackets",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-brackets",
+      "proposed": true
+    },
+    {
+      "id": "comments_on_own_line",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#comments-above-line",
+      "proposed": true
+    },
+    {
+      "id": "alphabetical_alias_order",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+      "proposed": true
+    },
+    {
+      "id": "assertion_argument_order",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#testing-assert-order",
+      "proposed": true
+    },
+    {
+      "id": "concatenation_when_matching_binaries",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#strings-matching-with-concatenator",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_files",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#underscored-filenames",
+      "proposed": true
+    },
+    {
+      "id": "with_clause_indentation",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#with-clauses",
+      "proposed": true
+    },
+    {
+      "id": "no_explicit_nil_struct_defaults",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#nil-struct-field-defaults",
+      "proposed": true
+    },
+    {
+      "id": "moduledoc_false_when_undocumented",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#moduledoc-false",
+      "proposed": true
+    },
+    {
+      "id": "blank_line_after_moduledoc",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#moduledoc-spacing",
+      "proposed": true
+    },
+    {
+      "id": "parens_in_function_calls",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#function-calls-and-parentheses",
+      "proposed": true
+    },
+    {
+      "id": "group_function_clauses",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#single-line-defs",
+      "proposed": true
+    },
+    {
+      "id": "pipe_chains_start_with_raw_value",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#bare-variables",
+      "proposed": true
+    },
+    {
+      "id": "vertical_space_for_readability",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#def-spacing",
+      "proposed": true
+    },
+    {
+      "id": "blank_line_after_multiline_assignment",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#add-blank-line-after-multiline-assignment",
+      "proposed": true
+    },
+    {
+      "id": "alias_self_reference",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#alias-self-referencing-modules",
+      "proposed": true
+    },
+    {
+      "id": "avoid_metaprogramming",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-metaprogramming",
+      "proposed": true
+    },
+    {
+      "id": "comment_grammar",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#comment-grammar",
+      "proposed": true
+    },
+    {
+      "id": "comment_line_length",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#comment-line-length",
+      "proposed": true
+    },
+    {
+      "id": "no_blank_line_after_defmodule",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#defmodule-spacing",
+      "proposed": true
+    },
+    {
+      "id": "do_colon_for_single_line_if",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#do-with-single-line-if-unless",
+      "proposed": true
+    },
+    {
+      "id": "omit_parens_on_zero_arg_defs",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#fun-def-parentheses",
+      "proposed": true
+    },
+    {
+      "id": "no_space_before_call_parens",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#function-names-with-parentheses",
+      "proposed": true
+    },
+    {
+      "id": "heredocs_for_documentation",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#heredocs",
+      "proposed": true
+    },
+    {
+      "id": "keyword_list_special_syntax",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#keyword-list-syntax",
+      "proposed": true
+    },
+    {
+      "id": "long_do_clause_on_new_line",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#long-dos",
+      "proposed": true
+    },
+    {
+      "id": "verbose_map_syntax_for_mixed_keys",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#map-key-arrow",
+      "proposed": true
+    },
+    {
+      "id": "shorthand_map_syntax_for_atom_keys",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#map-key-atom",
+      "proposed": true
+    },
+    {
+      "id": "module_name_matches_path",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#module-name-nesting",
+      "proposed": true
+    },
+    {
+      "id": "always_moduledoc",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#moduledocs",
+      "proposed": true
+    },
+    {
+      "id": "multiline_case_clause_blank_lines",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#multiline-case-clauses",
+      "proposed": true
+    },
+    {
+      "id": "multiline_collection_one_per_line",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#multiline-enums",
+      "proposed": true
+    },
+    {
+      "id": "multiline_collection_one_per_line",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#multiline-structs",
+      "proposed": true
+    },
+    {
+      "id": "multiline_assign_bracket_placement",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#multiline-list-assign",
+      "proposed": true
+    },
+    {
+      "id": "no_single_line_def_among_multiline",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#multiple-function-defs",
+      "proposed": true
+    },
+    {
+      "id": "main_type_named_t",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#naming-main-types",
+      "proposed": true
+    },
+    {
+      "id": "one_module_per_file",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#one-module-per-file",
+      "proposed": true
+    },
+    {
+      "id": "parens_on_piped_calls",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-pipe-operator",
+      "proposed": true
+    },
+    {
+      "id": "predicate_guard_is_prefix",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-is-prefix",
+      "proposed": true
+    },
+    {
+      "id": "no_private_fn_same_name_as_public",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#private-functions-with-same-name-as-public",
+      "proposed": true
+    },
+    {
+      "id": "no_repetitive_module_names",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#repetitive-module-names",
+      "proposed": true
+    },
+    {
+      "id": "spec_directly_before_function",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#spec-spacing",
+      "proposed": true
+    },
+    {
+      "id": "omit_defstruct_brackets",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#struct-def-brackets",
+      "proposed": true
+    },
+    {
+      "id": "group_typedoc_with_type",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#typedocs",
+      "proposed": true
+    },
+    {
+      "id": "multiline_union_type",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#union-types",
+      "proposed": true
+    },
+    {
+      "id": "with_else_formatting",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#with-else",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#annotations",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#annotation-keyword",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#todo-notes",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#fixme-notes",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#optimize-notes",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#hack-notes",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#review-notes",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#custom-keywords",
+      "proposed": true
+    },
+    {
+      "id": "annotation_keywords",
+      "reference": "https://github.com/christopheradams/elixir_style_guide#exceptions-to-annotations",
+      "proposed": true
+    }
+  ]
+}

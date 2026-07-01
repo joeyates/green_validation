@@ -1,0 +1,699 @@
+{
+  "source": {
+    "id": "mix_format",
+    "name": "mix format",
+    "repo_url": "https://github.com/elixir-lang/elixir"
+  },
+  "rules": [
+    {
+      "id": "spaces_around_binary_operators",
+      "status": "enforced",
+      "reference": "code/formatter.ex — binary operator spacing",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_around_range_operator",
+      "status": "enforced",
+      "reference": "code/formatter.ex @no_space_binary_operators",
+      "proposed": true
+    },
+    {
+      "id": "two_space_indentation",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "max_line_length",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — line length (98) drives wrapping",
+      "proposed": true
+    },
+    {
+      "id": "no_trailing_whitespace",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "spaces_after_commas",
+      "status": "enforced",
+      "reference": "code/formatter.ex — collection element spacing",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_inside_brackets",
+      "status": "enforced",
+      "reference": "code/formatter.ex — no padding inside brackets/braces/parens",
+      "proposed": true
+    },
+    {
+      "id": "no_semicolons",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — statements split onto separate lines",
+      "proposed": true
+    },
+    {
+      "id": "no_trailing_comma",
+      "status": "enforced",
+      "reference": "code/formatter.ex — trailing comma removed from single-line collections",
+      "proposed": true
+    },
+    {
+      "id": "collapse_consecutive_blank_lines",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
+      "proposed": true
+    },
+    {
+      "id": "comment_leading_space",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — Code comments",
+      "proposed": true
+    },
+    {
+      "id": "digit_grouping_underscores",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
+      "proposed": true
+    },
+    {
+      "id": "uppercase_hex_literals",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
+      "proposed": true
+    },
+    {
+      "id": "unix_line_endings",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
+      "proposed": true
+    },
+    {
+      "id": "trailing_newline",
+      "status": "enforced",
+      "reference": "mix/tasks/format.ex elixir_format/2 — appends a trailing newline (?\\n)",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_atoms_and_variables",
+      "status": "not_enforced",
+      "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
+      "proposed": false
+    },
+    {
+      "id": "camel_case_modules",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "predicate_function_question_mark",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "avoid_one_letter_variables",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "alphabetical_alias_order",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "module_pseudo_variable",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "module_attribute_layout",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "pipeline_for_chains",
+      "status": "not_enforced",
+      "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
+      "proposed": false
+    },
+    {
+      "id": "no_pipeline_for_single_call",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_anonymous_functions_in_pipelines",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_else_in_unless",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "true_as_last_cond_clause",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "parentheses_on_zero_arity_calls",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "omit_keyword_list_brackets",
+      "status": "enforced",
+      "reference": "code/formatter.ex — optional keyword-list brackets omitted",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_arrow",
+      "status": "enforced",
+      "reference": "code/formatter.ex — spaces around the -> operator",
+      "proposed": true
+    },
+    {
+      "id": "capture_operator_spacing",
+      "status": "enforced",
+      "reference": "code/formatter.ex — capture operator spacing and parens",
+      "proposed": true
+    },
+    {
+      "id": "no_parens_around_anonymous_fn_args",
+      "status": "enforced",
+      "reference": "code/formatter.ex — anonymous function argument parens removed",
+      "proposed": true
+    },
+    {
+      "id": "no_redundant_parentheses",
+      "status": "enforced",
+      "reference": "code/formatter.ex — redundant grouping parentheses removed",
+      "proposed": true
+    },
+    {
+      "id": "lowercase_exponent",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — number normalisation",
+      "proposed": true
+    },
+    {
+      "id": "no_spaces_in_bitstring_segments",
+      "status": "enforced",
+      "reference": "code/formatter.ex @no_space_binary_operators (bitstring segments)",
+      "proposed": true
+    },
+    {
+      "id": "fit_collections_on_one_line",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — fit on a single line when possible",
+      "proposed": true
+    },
+    {
+      "id": "comments_on_own_line",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — trailing comments hoisted to their own line",
+      "proposed": true
+    },
+    {
+      "id": "exception_error_suffix",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "lowercase_exception_messages",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_trailing_punctuation_in_exception_messages",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "boolean_operators",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_nil_else",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "concatenation_when_matching_binaries",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "parens_on_definition_args",
+      "status": "enforced",
+      "reference": "code/formatter.ex — parentheses added around definition arguments",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_files",
+      "status": "indeterminate",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_explicit_nil_struct_defaults",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "parens_on_zero_arity_types",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "consistent_atom_quoting",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — atom quoting normalisation",
+      "proposed": true
+    },
+    {
+      "id": "space_before_zero_arity_arrow",
+      "status": "enforced",
+      "reference": "code/formatter.ex — space before -> ",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_default_arguments",
+      "status": "enforced",
+      "reference": "code/formatter.ex — spaces around the \\\\ operator",
+      "proposed": true
+    },
+    {
+      "id": "no_expression_group_alignment",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — alignment is not preserved",
+      "proposed": true
+    },
+    {
+      "id": "pipeline_indentation",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — pipeline indentation",
+      "proposed": true
+    },
+    {
+      "id": "binary_operator_at_line_end",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "multiline_binary_operand_indentation",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "guard_clause_indentation",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "multiline_expression_assignment",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "with_clause_indentation",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "for_clause_indentation",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "comments_for_important_details",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_superfluous_comments",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "assertion_argument_order",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "prefer_pattern_matching_over_regex",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "non_capturing_regex_groups",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "regex_string_anchors",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "alias_all_used_modules",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_negated_unless",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_parens_around_conditionals",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_constant_conditionals",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "prefer_docs_over_comments",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "moduledoc_false_when_undocumented",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "blank_line_after_moduledoc",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "annotation_keywords",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "parens_in_function_calls",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "group_function_clauses",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_iex_pry_in_production",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_io_inspect_in_production",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_shadowing_kernel_names",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_shadowing_stdlib_modules",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_nested_conditionals",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_space_after_unary_bang",
+      "status": "enforced",
+      "reference": "code/formatter.ex — no space after unary !",
+      "proposed": true
+    },
+    {
+      "id": "pipe_chains_start_with_raw_value",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "prefer_regex_sigil",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "vertical_space_for_readability",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "blank_line_after_multiline_assignment",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "alias_self_reference",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "avoid_metaprogramming",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "comment_grammar",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "comment_line_length",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_blank_line_after_defmodule",
+      "status": "enforced",
+      "reference": "code.ex Code.format_string!/2 docs — blank line after defmodule removed",
+      "proposed": true
+    },
+    {
+      "id": "do_colon_for_single_line_if",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "omit_parens_on_zero_arg_defs",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_space_before_call_parens",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "heredocs_for_documentation",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "keyword_list_special_syntax",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "long_do_clause_on_new_line",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "verbose_map_syntax_for_mixed_keys",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "shorthand_map_syntax_for_atom_keys",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "module_name_matches_path",
+      "status": "indeterminate",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "always_moduledoc",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "multiline_case_clause_blank_lines",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "multiline_collection_one_per_line",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "multiline_assign_bracket_placement",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_single_line_def_among_multiline",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "main_type_named_t",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "one_module_per_file",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "parens_on_piped_calls",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "predicate_guard_is_prefix",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_private_fn_same_name_as_public",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "no_repetitive_module_names",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "spec_directly_before_function",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "omit_defstruct_brackets",
+      "status": "enforced",
+      "reference": "code/formatter.ex — optional keyword-list brackets omitted",
+      "proposed": true
+    },
+    {
+      "id": "group_typedoc_with_type",
+      "status": "not_enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": false
+    },
+    {
+      "id": "multiline_union_type",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    },
+    {
+      "id": "with_else_formatting",
+      "status": "enforced",
+      "reference": "Determined from the rule's catalog example via Code.format_string!/2.",
+      "proposed": true
+    }
+  ],
+  "unmapped": [
+    {
+      "after": "foo(\n  aaaaaaaaaa,\n  bbbbbbbbbb,\n  cccccccccc,\n  dddddddddd,\n  eeeeeeeeee,\n  ffffffffff,\n  gggggggggg,\n  hhhhhhhhhh\n)",
+      "before": "foo(aaaaaaaaaa, bbbbbbbbbb, cccccccccc, dddddddddd, eeeeeeeeee, ffffffffff, gggggggggg, hhhhhhhhhh)"
+    }
+  ]
+}

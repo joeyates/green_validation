@@ -1,0 +1,10494 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 45 /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R 26 0 R 28 0 R 30 0 R 32 0 R 34 0 R 36 0 R 38 0 R 40 0 R 42 0 R 44 0 R 46 0 R 48 0 R 50 0 R 52 0 R 54 0 R 56 0 R 58 0 R 60 0 R 62 0 R 64 0 R 66 0 R 68 0 R 70 0 R 72 0 R 74 0 R 76 0 R 78 0 R 80 0 R 82 0 R 84 0 R 86 0 R 88 0 R 90 0 R 92 0 R ] >>
+endobj
+3 0 obj
+<< /Length 1665 >>
+stream
+0.0000 g
+/F1 20 Tf
+BT
+1 0 0 1 50 519.0000 Tm
+(Elixir style: source comparison) Tj
+ET
+/F1 10 Tf
+BT
+1 0 0 1 50 499.0000 Tm
+(This comparison is produced by the green_validation project, a companion to green, the Elixir code formatter plugin. This document compares the four) Tj
+ET
+BT
+1 0 0 1 50 484.0000 Tm
+(most widely used sources of truth for Elixir code style \(the mix format formatter, Lexmag's style guide, Credo's style guide, and christopheradams') Tj
+ET
+BT
+1 0 0 1 50 469.0000 Tm
+("The Elixir Style Guide"\) across 114 catalogued rules, showing which sources propose each one. Generated with Elixir 1.19.5. \(version 27dae67,) Tj
+ET
+BT
+1 0 0 1 50 454.0000 Tm
+(generated on 2026-07-01\).) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 440.0000 Tm
+(How to read it: each column is a style guide, and "Yes" marks where that guide proposes the rule. Rules are grouped first into those mix format enforces \(shown with) Tj
+ET
+BT
+1 0 0 1 50 427.0000 Tm
+(their category\) and then by category. Numbered footnotes record parameter-level differences between sources, such as the maximum line length.) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 385.4000 Tm
+(Sources) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 369.0000 Tm
+(mix format = mix format: https://github.com/elixir-lang/elixir) Tj
+ET
+BT
+1 0 0 1 50 355.0000 Tm
+(Lexmag = Lexmag's Elixir Style Guide: https://github.com/lexmag/elixir-style-guide) Tj
+ET
+BT
+1 0 0 1 50 341.0000 Tm
+(Credo = Credo's Elixir Style Guide: https://github.com/rrrene/elixir-style-guide) Tj
+ET
+BT
+1 0 0 1 50 327.0000 Tm
+(Adams = The Elixir Style Guide: https://github.com/christopheradams/elixir_style_guide) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 1 of 45) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 3 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+5 0 obj
+<< /Length 7251 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Enforced by mix format) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Category) Tj
+ET
+0.7500 G
+140 494.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 472.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 478.0000 Tm
+(Format with/else over multiple lines) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 450.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 450.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 456.0000 Tm
+(No parentheses around anonymous function arguments) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+50 428.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 428.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 434.0000 Tm
+(No redundant parentheses) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+50 406.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 406.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 412.0000 Tm
+(Omit brackets from keyword lists) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 384.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 390.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 384.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 390.0000 Tm
+(Parentheses around definition arguments) Tj
+ET
+0.7500 G
+582 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 390.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 390.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+50 362.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 368.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 362.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 368.0000 Tm
+(Parentheses on function calls with arguments) Tj
+ET
+0.7500 G
+582 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 368.0000 Tm
+() Tj
+ET
+0.7500 G
+652 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 340.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 346.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 340.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 346.0000 Tm
+(Parentheses on piped one-arity calls) Tj
+ET
+0.7500 G
+582 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 346.0000 Tm
+() Tj
+ET
+0.7500 G
+652 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 346.0000 Tm
+() Tj
+ET
+0.7500 G
+722 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 318.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 324.0000 Tm
+(Expressions) Tj
+ET
+0.7500 G
+140 318.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 324.0000 Tm
+(Parentheses on zero-arity function calls) Tj
+ET
+0.7500 G
+582 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+722 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 296.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 302.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 296.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 302.0000 Tm
+(Avoid aligning expression groups) Tj
+ET
+0.7500 G
+582 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 302.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 302.0000 Tm
+() Tj
+ET
+0.7500 G
+722 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 302.0000 Tm
+() Tj
+ET
+0.7500 G
+50 274.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 280.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 274.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 280.0000 Tm
+(Binary operators at end of line) Tj
+ET
+0.7500 G
+582 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 280.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+722 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+50 252.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 258.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 252.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 258.0000 Tm
+(Blank line after a multi-line assignment) Tj
+ET
+0.7500 G
+582 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+652 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+722 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 258.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 230.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 236.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 230.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 236.0000 Tm
+(Blank lines around multi-line case clauses) Tj
+ET
+0.7500 G
+582 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 236.0000 Tm
+() Tj
+ET
+0.7500 G
+652 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 236.0000 Tm
+() Tj
+ET
+0.7500 G
+722 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 236.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 208.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 214.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 208.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 214.0000 Tm
+(Capture operator spacing) Tj
+ET
+0.7500 G
+582 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 214.0000 Tm
+() Tj
+ET
+0.7500 G
+652 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 214.0000 Tm
+() Tj
+ET
+0.7500 G
+722 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 214.0000 Tm
+() Tj
+ET
+0.7500 G
+50 186.0000 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 192.0000 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 186.0000 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 192.0000 Tm
+(Collapse consecutive blank lines) Tj
+ET
+0.7500 G
+582 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 192.0000 Tm
+() Tj
+ET
+0.7500 G
+652 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 192.0000 Tm
+() Tj
+ET
+0.7500 G
+722 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 192.0000 Tm
+() Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 2 of 45) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 5 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+7 0 obj
+<< /Length 6384 >>
+stream
+0.9000 g
+50 510 742 22 re
+f
+0 g
+0.7500 G
+50 510 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 516 Tm
+(Category) Tj
+ET
+0.7500 G
+140 510 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 516 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 516 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 516 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 516 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 488 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 494 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 488 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 494 Tm
+(Comments on their own line) Tj
+ET
+0.7500 G
+582 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 494 Tm
+() Tj
+ET
+0.7500 G
+652 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 494 Tm
+() Tj
+ET
+0.7500 G
+722 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 466 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 472 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 466 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 472 Tm
+(Fit collections on a single line when they fit) Tj
+ET
+0.7500 G
+582 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 472 Tm
+() Tj
+ET
+0.7500 G
+652 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 472 Tm
+() Tj
+ET
+0.7500 G
+722 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 472 Tm
+() Tj
+ET
+0.7500 G
+50 444 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 450 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 444 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 450 Tm
+(for clause indentation) Tj
+ET
+0.7500 G
+582 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 450 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 450 Tm
+() Tj
+ET
+0.7500 G
+722 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 450 Tm
+() Tj
+ET
+0.7500 G
+50 422 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 428 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 422 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 428 Tm
+(Group digits in large numbers) Tj
+ET
+0.7500 G
+582 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 428 Tm
+() Tj
+ET
+0.7500 G
+50 400 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 406 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 400 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 406 Tm
+(Guard clause indentation) Tj
+ET
+0.7500 G
+582 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 406 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 406 Tm
+() Tj
+ET
+0.7500 G
+722 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 406 Tm
+() Tj
+ET
+0.7500 G
+50 378 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 384 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 378 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 384 Tm
+(Indent multi-line binary operands) Tj
+ET
+0.7500 G
+582 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 384 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 384 Tm
+() Tj
+ET
+0.7500 G
+722 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 384 Tm
+() Tj
+ET
+0.7500 G
+50 356 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 362 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 356 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 362 Tm
+(Lowercase exponent letter in floats) Tj
+ET
+0.7500 G
+582 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 362 Tm
+() Tj
+ET
+0.7500 G
+652 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 362 Tm
+() Tj
+ET
+0.7500 G
+722 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 362 Tm
+() Tj
+ET
+0.7500 G
+50 334 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 340 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 334 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 340 Tm
+(Maximum line length [1]) Tj
+ET
+0.7500 G
+582 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 340 Tm
+() Tj
+ET
+0.7500 G
+652 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 671.2500 340 Tm
+(Yes [2]) Tj
+ET
+0.7500 G
+722 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 741.2500 340 Tm
+(Yes [3]) Tj
+ET
+0.7500 G
+50 312 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 318 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 312 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 318 Tm
+(Multi-line expression on its own line after =) Tj
+ET
+0.7500 G
+582 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 318 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 318 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 318 Tm
+() Tj
+ET
+0.7500 G
+50 290 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 296 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 290 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 296 Tm
+(No blank line after defmodule) Tj
+ET
+0.7500 G
+582 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 296 Tm
+() Tj
+ET
+0.7500 G
+652 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 296 Tm
+() Tj
+ET
+0.7500 G
+722 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 296 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 268 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 274 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 268 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 274 Tm
+(No semicolons between statements) Tj
+ET
+0.7500 G
+582 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 274 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 274 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 274 Tm
+() Tj
+ET
+0.7500 G
+50 246 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 252 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 246 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 252 Tm
+(No space after the ! operator) Tj
+ET
+0.7500 G
+582 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 252 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 252 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 252 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 224 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 230 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 224 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 230 Tm
+(No space between a function name and \() Tj
+ET
+0.7500 G
+582 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 230 Tm
+() Tj
+ET
+0.7500 G
+652 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 230 Tm
+() Tj
+ET
+0.7500 G
+722 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 230 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 202 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 208 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 202 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 208 Tm
+(No spaces around bitstring segment options) Tj
+ET
+0.7500 G
+582 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 208 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 208 Tm
+() Tj
+ET
+0.7500 G
+722 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 208 Tm
+() Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 3 of 45) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 7 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+9 0 obj
+<< /Length 6390 >>
+stream
+0.9000 g
+50 510 742 22 re
+f
+0 g
+0.7500 G
+50 510 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 516 Tm
+(Category) Tj
+ET
+0.7500 G
+140 510 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 516 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 516 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 516 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 516 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 488 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 494 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 488 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 494 Tm
+(No spaces around the range operator) Tj
+ET
+0.7500 G
+582 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 494 Tm
+() Tj
+ET
+0.7500 G
+722 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 466 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 472 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 466 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 472 Tm
+(No spaces inside brackets) Tj
+ET
+0.7500 G
+582 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 472 Tm
+() Tj
+ET
+0.7500 G
+652 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 472 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 472 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 444 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 450 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 444 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 450 Tm
+(No trailing comma in collections) Tj
+ET
+0.7500 G
+582 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 450 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 450 Tm
+() Tj
+ET
+0.7500 G
+722 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 450 Tm
+() Tj
+ET
+0.7500 G
+50 422 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 428 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 422 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 428 Tm
+(No trailing whitespace) Tj
+ET
+0.7500 G
+582 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 400 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 406 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 400 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 406 Tm
+(One element per line in multi-line collections) Tj
+ET
+0.7500 G
+582 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 406 Tm
+() Tj
+ET
+0.7500 G
+652 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 406 Tm
+() Tj
+ET
+0.7500 G
+722 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 406 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 378 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 384 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 378 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 384 Tm
+(Quote atoms only when required) Tj
+ET
+0.7500 G
+582 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 384 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 384 Tm
+() Tj
+ET
+0.7500 G
+722 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 384 Tm
+() Tj
+ET
+0.7500 G
+50 356 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 362 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 356 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 362 Tm
+(Single-level pipeline indentation) Tj
+ET
+0.7500 G
+582 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 362 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 362 Tm
+() Tj
+ET
+0.7500 G
+722 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 362 Tm
+() Tj
+ET
+0.7500 G
+50 334 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 340 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 334 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 340 Tm
+(Space after commas) Tj
+ET
+0.7500 G
+582 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 340 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 340 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 334 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 340 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 312 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 318 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 312 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 318 Tm
+(Space after the comment marker) Tj
+ET
+0.7500 G
+582 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 318 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 318 Tm
+() Tj
+ET
+0.7500 G
+722 312 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 318 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 290 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 296 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 290 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 296 Tm
+(Space before -> in 0-arity anonymous functions) Tj
+ET
+0.7500 G
+582 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 296 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 296 Tm
+() Tj
+ET
+0.7500 G
+722 290 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 296 Tm
+() Tj
+ET
+0.7500 G
+50 268 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 274 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 268 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 274 Tm
+(Spaces around binary operators) Tj
+ET
+0.7500 G
+582 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 274 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 274 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 268 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 274 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 246 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 252 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 246 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 252 Tm
+(Spaces around the -> operator) Tj
+ET
+0.7500 G
+582 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 252 Tm
+() Tj
+ET
+0.7500 G
+652 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 252 Tm
+() Tj
+ET
+0.7500 G
+722 246 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 252 Tm
+() Tj
+ET
+0.7500 G
+50 224 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 230 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 224 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 230 Tm
+(Spaces around the default-argument operator) Tj
+ET
+0.7500 G
+582 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 230 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 230 Tm
+() Tj
+ET
+0.7500 G
+722 224 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 230 Tm
+() Tj
+ET
+0.7500 G
+50 202 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 208 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 202 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 208 Tm
+(Trailing newline at end of file) Tj
+ET
+0.7500 G
+582 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 208 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 208 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 202 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 208 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 4 of 45) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 9 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+11 0 obj
+<< /Length 4604 >>
+stream
+0.9000 g
+50 510 742 22 re
+f
+0 g
+0.7500 G
+50 510 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 516 Tm
+(Category) Tj
+ET
+0.7500 G
+140 510 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 516 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 516 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 516 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 516 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 488 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 494 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 488 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 494 Tm
+(Two-space indentation) Tj
+ET
+0.7500 G
+582 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 494 Tm
+() Tj
+ET
+0.7500 G
+50 466 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 472 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 466 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 472 Tm
+(Unix line endings) Tj
+ET
+0.7500 G
+582 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 472 Tm
+() Tj
+ET
+0.7500 G
+652 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 472 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 472 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 444 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 450 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 444 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 450 Tm
+(Uppercase hexadecimal literals) Tj
+ET
+0.7500 G
+582 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 450 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 450 Tm
+() Tj
+ET
+0.7500 G
+722 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 450 Tm
+() Tj
+ET
+0.7500 G
+50 422 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 428 Tm
+(Formatting) Tj
+ET
+0.7500 G
+140 422 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 428 Tm
+(with clause indentation) Tj
+ET
+0.7500 G
+582 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 428 Tm
+() Tj
+ET
+0.7500 G
+722 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 400 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 406 Tm
+(Modules) Tj
+ET
+0.7500 G
+140 400 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 406 Tm
+(Omit brackets from a defstruct keyword list) Tj
+ET
+0.7500 G
+582 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 406 Tm
+() Tj
+ET
+0.7500 G
+652 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 406 Tm
+() Tj
+ET
+0.7500 G
+722 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 406 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 378 90 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 384 Tm
+(Typespecs) Tj
+ET
+0.7500 G
+140 378 442 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 146 384 Tm
+(One part per line in long union types) Tj
+ET
+0.7500 G
+582 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 384 Tm
+() Tj
+ET
+0.7500 G
+652 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 384 Tm
+() Tj
+ET
+0.7500 G
+722 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 384 Tm
+(Yes) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 340.4000 Tm
+(Formatting) Tj
+ET
+0.9000 g
+50 309.0000 742 22 re
+f
+0 g
+0.7500 G
+50 309.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 315.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 309.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 315.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 309.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 315.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 309.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 315.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 287.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 293.0000 Tm
+(Long do: clause on its own line) Tj
+ET
+0.7500 G
+582 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 293.0000 Tm
+() Tj
+ET
+0.7500 G
+652 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 293.0000 Tm
+() Tj
+ET
+0.7500 G
+722 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 293.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 265.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 271.0000 Tm
+(Opening bracket stays on the assignment line) Tj
+ET
+0.7500 G
+582 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 271.0000 Tm
+() Tj
+ET
+0.7500 G
+652 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 271.0000 Tm
+() Tj
+ET
+0.7500 G
+722 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 271.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 243.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 249.0000 Tm
+(Use vertical space between definitions) Tj
+ET
+0.7500 G
+582 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 249.0000 Tm
+() Tj
+ET
+0.7500 G
+652 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 249.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 249.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 5 of 45) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 11 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+13 0 obj
+<< /Length 3574 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Naming) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Avoid one-letter variable names) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(CamelCase for modules) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Don't shadow Kernel functions) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(is_ prefix for guard-safe predicates) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 384.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 390.0000 Tm
+(Private function names differ from public) Tj
+ET
+0.7500 G
+582 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+652 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+722 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 390.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 362.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 368.0000 Tm
+(Question mark for predicate functions) Tj
+ET
+0.7500 G
+582 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 340.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 346.0000 Tm
+(snake_case for atoms, variables and functions) Tj
+ET
+0.7500 G
+582 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 318.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 324.0000 Tm
+(snake_case for files and directories) Tj
+ET
+0.7500 G
+582 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+722 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 6 of 45) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 13 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+15 0 obj
+<< /Length 5053 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Modules) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Alias a long module self-reference) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Alias the modules you use) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Avoid repetitive module names) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(Consistent def line style) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 384.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 390.0000 Tm
+(Consistent module attribute layout) Tj
+ET
+0.7500 G
+582 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 601.2500 390.0000 Tm
+(Yes [4]) Tj
+ET
+0.7500 G
+652 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+722 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 741.2500 390.0000 Tm
+(Yes [5]) Tj
+ET
+0.7500 G
+50 362.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 368.0000 Tm
+(Don't shadow stdlib modules) Tj
+ET
+0.7500 G
+582 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 368.0000 Tm
+() Tj
+ET
+0.7500 G
+652 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 368.0000 Tm
+() Tj
+ET
+0.7500 G
+50 340.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 346.0000 Tm
+(Group clauses of the same function) Tj
+ET
+0.7500 G
+582 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 346.0000 Tm
+() Tj
+ET
+0.7500 G
+652 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 318.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 324.0000 Tm
+(Module name mirrors its file path) Tj
+ET
+0.7500 G
+582 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+652 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+722 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 296.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 302.0000 Tm
+(No explicit nil struct field defaults) Tj
+ET
+0.7500 G
+582 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 302.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 302.0000 Tm
+() Tj
+ET
+0.7500 G
+722 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 302.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 274.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 280.0000 Tm
+(One module per file) Tj
+ET
+0.7500 G
+582 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+652 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+722 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 280.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 252.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 258.0000 Tm
+(Order alias/import/require alphabetically) Tj
+ET
+0.7500 G
+582 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+652 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+722 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 258.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 230.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 236.0000 Tm
+(Use the __MODULE__ pseudo-variable) Tj
+ET
+0.7500 G
+582 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 236.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 236.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 236.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 7 of 45) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 15 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+17 0 obj
+<< /Length 2013 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Typespecs) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(@spec directly before the function) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Keep @typedoc with its @type) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Name the main type t) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(Parentheses on zero-arity types) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 412.0000 Tm
+() Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 8 of 45) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 17 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+19 0 obj
+<< /Length 5812 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Expressions) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Avoid needless metaprogramming) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Avoid needless pipelines) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Don't deeply nest conditionals) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(No always-true conditionals) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+50 384.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 390.0000 Tm
+(No anonymous functions in pipelines) Tj
+ET
+0.7500 G
+582 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 390.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+722 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+50 362.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 368.0000 Tm
+(No else clause with unless) Tj
+ET
+0.7500 G
+582 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 340.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 346.0000 Tm
+(No IEx.pry in production code) Tj
+ET
+0.7500 G
+582 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 346.0000 Tm
+() Tj
+ET
+0.7500 G
+652 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 346.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 340.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 346.0000 Tm
+() Tj
+ET
+0.7500 G
+50 318.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 324.0000 Tm
+(No IO.inspect in production code) Tj
+ET
+0.7500 G
+582 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+652 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 324.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 318.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 324.0000 Tm
+() Tj
+ET
+0.7500 G
+50 296.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 302.0000 Tm
+(No parentheses around if/unless conditions) Tj
+ET
+0.7500 G
+582 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 302.0000 Tm
+() Tj
+ET
+0.7500 G
+652 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 302.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 296.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 302.0000 Tm
+() Tj
+ET
+0.7500 G
+50 274.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 280.0000 Tm
+(No unless with a negated condition) Tj
+ET
+0.7500 G
+582 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+652 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 280.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 274.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 280.0000 Tm
+() Tj
+ET
+0.7500 G
+50 252.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 258.0000 Tm
+(Omit else that returns nil) Tj
+ET
+0.7500 G
+582 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 258.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+722 252.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 258.0000 Tm
+() Tj
+ET
+0.7500 G
+50 230.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 236.0000 Tm
+(Omit parentheses on zero-argument definitions) Tj
+ET
+0.7500 G
+582 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 236.0000 Tm
+() Tj
+ET
+0.7500 G
+652 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 236.0000 Tm
+() Tj
+ET
+0.7500 G
+722 230.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 236.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 208.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 214.0000 Tm
+(Shorthand map syntax for atom keys) Tj
+ET
+0.7500 G
+582 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 214.0000 Tm
+() Tj
+ET
+0.7500 G
+652 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 214.0000 Tm
+() Tj
+ET
+0.7500 G
+722 208.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 214.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 186.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 192.0000 Tm
+(Start pipe chains with a raw value) Tj
+ET
+0.7500 G
+582 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 192.0000 Tm
+() Tj
+ET
+0.7500 G
+652 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 192.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 186.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 192.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 9 of 45) Tj
+ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 19 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+21 0 obj
+<< /Length 4740 >>
+stream
+0.9000 g
+50 510 742 22 re
+f
+0 g
+0.7500 G
+50 510 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 516 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 516 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 516 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 510 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 516 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 488 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 494 Tm
+(Use <> to match binaries) Tj
+ET
+0.7500 G
+582 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 494 Tm
+() Tj
+ET
+0.7500 G
+722 488 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 494 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 466 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 472 Tm
+(Use and/or/not for boolean checks) Tj
+ET
+0.7500 G
+582 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 472 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 472 Tm
+() Tj
+ET
+0.7500 G
+722 466 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 472 Tm
+() Tj
+ET
+0.7500 G
+50 444 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 450 Tm
+(Use do: for single-line if/unless) Tj
+ET
+0.7500 G
+582 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 450 Tm
+() Tj
+ET
+0.7500 G
+652 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 450 Tm
+() Tj
+ET
+0.7500 G
+722 444 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 450 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 422 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 428 Tm
+(Use keyword-list shorthand) Tj
+ET
+0.7500 G
+582 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 428 Tm
+() Tj
+ET
+0.7500 G
+652 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 428 Tm
+() Tj
+ET
+0.7500 G
+722 422 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 428 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 400 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 406 Tm
+(Use pipelines for chained calls) Tj
+ET
+0.7500 G
+582 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 406 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 406 Tm
+() Tj
+ET
+0.7500 G
+722 400 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 406 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 378 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 384 Tm
+(Use true as the last cond clause) Tj
+ET
+0.7500 G
+582 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 384 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 384 Tm
+() Tj
+ET
+0.7500 G
+722 378 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 384 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 356 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 362 Tm
+(Verbose map syntax for non-atom keys) Tj
+ET
+0.7500 G
+582 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 362 Tm
+() Tj
+ET
+0.7500 G
+652 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 362 Tm
+() Tj
+ET
+0.7500 G
+722 356 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 362 Tm
+(Yes) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 318.4000 Tm
+(Documentation) Tj
+ET
+0.9000 g
+50 287.0000 742 22 re
+f
+0 g
+0.7500 G
+50 287.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 293.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 293.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 293.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 287.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 293.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 265.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 271.0000 Tm
+(@moduledoc false when undocumented) Tj
+ET
+0.7500 G
+582 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 271.0000 Tm
+() Tj
+ET
+0.7500 G
+652 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 271.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 265.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 271.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 243.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 249.0000 Tm
+(Always include @moduledoc) Tj
+ET
+0.7500 G
+582 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 249.0000 Tm
+() Tj
+ET
+0.7500 G
+652 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 249.0000 Tm
+() Tj
+ET
+0.7500 G
+722 243.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 249.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 221.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 227.0000 Tm
+(Blank line after @moduledoc) Tj
+ET
+0.7500 G
+582 221.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 227.0000 Tm
+() Tj
+ET
+0.7500 G
+652 221.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 227.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 221.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 227.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 199.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 205.0000 Tm
+(Use heredocs for documentation) Tj
+ET
+0.7500 G
+582 199.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 205.0000 Tm
+() Tj
+ET
+0.7500 G
+652 199.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 205.0000 Tm
+() Tj
+ET
+0.7500 G
+722 199.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 205.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 10 of 45) Tj
+ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 21 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+23 0 obj
+<< /Length 5274 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Comments) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Avoid superfluous comments) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Capitalise and punctuate comments) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Comments only for important details) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(Limit comment lines to 100 characters) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 384.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 390.0000 Tm
+(Prefer @doc/@moduledoc over comments) Tj
+ET
+0.7500 G
+582 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+652 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 390.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 384.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 390.0000 Tm
+() Tj
+ET
+0.7500 G
+50 362.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 368.0000 Tm
+(Uppercase annotation keywords \(TODO/FIXME/…\)) Tj
+ET
+0.7500 G
+582 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 368.0000 Tm
+() Tj
+ET
+0.7500 G
+652 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 362.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 368.0000 Tm
+(Yes) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 324.4000 Tm
+(Testing) Tj
+ET
+0.9000 g
+50 293.0000 742 22 re
+f
+0 g
+0.7500 G
+50 293.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 299.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 293.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 299.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 293.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 299.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 293.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 299.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 271.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 277.0000 Tm
+(Expected value on the right in assertions) Tj
+ET
+0.7500 G
+582 271.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 277.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 271.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 277.0000 Tm
+() Tj
+ET
+0.7500 G
+722 271.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 277.0000 Tm
+(Yes) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 233.4000 Tm
+(Exceptions) Tj
+ET
+0.9000 g
+50 202.0000 742 22 re
+f
+0 g
+0.7500 G
+50 202.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 208.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 202.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 208.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 202.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 208.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 202.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 208.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 180.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 186.0000 Tm
+(Error suffix for exception modules) Tj
+ET
+0.7500 G
+582 180.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 186.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 180.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 186.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 180.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 186.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 158.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 164.0000 Tm
+(Lowercase exception messages) Tj
+ET
+0.7500 G
+582 158.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 164.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 158.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 164.0000 Tm
+() Tj
+ET
+0.7500 G
+722 158.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 164.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+50 136.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 142.0000 Tm
+(No trailing punctuation in exception messages) Tj
+ET
+0.7500 G
+582 136.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 142.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 136.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 142.0000 Tm
+() Tj
+ET
+0.7500 G
+722 136.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 750.2500 142.0000 Tm
+(Yes) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 11 of 45) Tj
+ET
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 23 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >> >> >>
+endobj
+25 0 obj
+<< /Length 3226 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Regex) Tj
+ET
+0.9000 g
+50 494.0000 742 22 re
+f
+0 g
+0.7500 G
+50 494.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 500.0000 Tm
+(Rule) Tj
+ET
+0.7500 G
+582 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 603.5000 500.0000 Tm
+(Lexmag) Tj
+ET
+0.7500 G
+652 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 675.7500 500.0000 Tm
+(Credo) Tj
+ET
+0.7500 G
+722 494.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 745.7500 500.0000 Tm
+(Adams) Tj
+ET
+0.7500 G
+50 472.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 478.0000 Tm
+(Prefer pattern matching over regular expressions) Tj
+ET
+0.7500 G
+582 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 478.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+722 472.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 478.0000 Tm
+() Tj
+ET
+0.7500 G
+50 450.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 456.0000 Tm
+(Use \\A and \\z for string boundaries) Tj
+ET
+0.7500 G
+582 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 456.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 450.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 456.0000 Tm
+() Tj
+ET
+0.7500 G
+50 428.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 434.0000 Tm
+(Use non-capturing regex groups) Tj
+ET
+0.7500 G
+582 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 610.2500 434.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+652 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 687.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+722 428.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 434.0000 Tm
+() Tj
+ET
+0.7500 G
+50 406.0000 532 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 56 412.0000 Tm
+(Use the ~r sigil for regexes) Tj
+ET
+0.7500 G
+582 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 617.0000 412.0000 Tm
+() Tj
+ET
+0.7500 G
+652 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 680.2500 412.0000 Tm
+(Yes) Tj
+ET
+0.7500 G
+722 406.0000 70 22 re
+S
+0 G
+/F1 9 Tf
+BT
+1 0 0 1 757.0000 412.0000 Tm
+() Tj
+ET
+0.0000 g
+/F1 14 Tf
+BT
+1 0 0 1 50 366.8000 Tm
+(Notes) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 356.0000 Tm
+([1] Maximum line length \(mix format\): 98-column default) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 343.0000 Tm
+([2] Maximum line length \(Credo\): keep lines under 80 characters) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 330.0000 Tm
+([3] Maximum line length \(Adams\): limit lines to 98 characters) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 317.0000 Tm
+([4] Consistent module attribute layout \(Lexmag\): order: use, import, alias, require) Tj
+ET
+/F1 9 Tf
+BT
+1 0 0 1 50 304.0000 Tm
+([5] Consistent module attribute layout \(Adams\): order: use, import, require, alias) Tj
+ET
+0.0000 g
+/F1 18 Tf
+BT
+1 0 0 1 50 260.6000 Tm
+(Examples) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 221.4000 Tm
+(Formatting) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 191.0000 Tm
+(Avoid aligning expression groups) Tj
+ET
+0.9500 g
+50 101.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 177.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(a   = 1) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(bbb = 2) Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(bbb = 2) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 12 of 45) Tj
+ET
+endstream
+endobj
+26 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 25 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+27 0 obj
+<< /Length 1376 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Binary operators at end of line) Tj
+ET
+0.9500 g
+50 437.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(value = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb and cccccccccccccccccccccccccccccccccccccccc) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(value =) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb and) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(    cccccccccccccccccccccccccccccccccccccccc) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 399.0000 Tm
+(Blank line after a multi-line assignment) Tj
+ET
+0.9500 g
+50 249.0000 742 145.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 385.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(  foo\(\)) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(  |> bar\(\)) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(y = 1) Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+(  foo\(\)) Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+(  |> bar\(\)) Tj
+ET
+BT
+1 0 0 1 55 265.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 253.0000 Tm
+(y = 1) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 13 of 45) Tj
+ET
+endstream
+endobj
+28 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 27 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+29 0 obj
+<< /Length 1665 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Blank lines around multi-line case clauses) Tj
+ET
+0.9500 g
+50 341.0000 742 181.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(case x do) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  1 -> a) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(  2 ->) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(    b) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(case x do) Tj
+ET
+BT
+1 0 0 1 55 405.0000 Tm
+(  1 ->) Tj
+ET
+BT
+1 0 0 1 55 393.0000 Tm
+(    a) Tj
+ET
+BT
+1 0 0 1 55 381.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 369.0000 Tm
+(  2 ->) Tj
+ET
+BT
+1 0 0 1 55 357.0000 Tm
+(    b) Tj
+ET
+BT
+1 0 0 1 55 345.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 303.0000 Tm
+(Capture operator spacing) Tj
+ET
+0.9500 g
+50 237.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 289.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+(&\(&1\)) Tj
+ET
+BT
+1 0 0 1 55 265.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 253.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 241.0000 Tm
+(& &1) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 199.0000 Tm
+(Collapse consecutive blank lines) Tj
+ET
+0.9500 g
+50 73.0000 742 121.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 185.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 137.0000 Tm
+(b = 2) Tj
+ET
+BT
+1 0 0 1 55 125.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 113.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 101.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 55 89.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 77.0000 Tm
+(b = 2) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 14 of 45) Tj
+ET
+endstream
+endobj
+30 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 29 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+31 0 obj
+<< /Length 1430 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Comments on their own line) Tj
+ET
+0.9500 g
+50 449.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(x = 1 # set x) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(# set x) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(x = 1) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 411.0000 Tm
+(Fit collections on a single line when they fit) Tj
+ET
+0.9500 g
+50 333.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 397.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+([1,) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(2]) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+([1, 2]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 295.0000 Tm
+(for clause indentation) Tj
+ET
+0.9500 g
+50 157.0000 742 133.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 281.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(for a <- as,) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(  b <- bs do) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(  {a, b}) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(for a <- as,) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(    b <- bs do) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(  {a, b}) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 15 of 45) Tj
+ET
+endstream
+endobj
+32 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 31 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+33 0 obj
+<< /Length 1511 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Group digits in large numbers) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(1000000) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(1_000_000) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Guard clause indentation) Tj
+ET
+0.9500 g
+50 285.0000 742 133.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(def f\(x\)) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+(when x > 0 do) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(def f\(x\)) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(    when x > 0 do) Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 247.0000 Tm
+(Indent multi-line binary operands) Tj
+ET
+0.9500 g
+50 133.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 233.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(  foo\(\) +) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(  bar\(\)) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(  foo\(\) +) Tj
+ET
+BT
+1 0 0 1 55 137.0000 Tm
+(    bar\(\)) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 16 of 45) Tj
+ET
+endstream
+endobj
+34 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 33 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+35 0 obj
+<< /Length 1743 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Long do: clause on its own line) Tj
+ET
+0.9500 g
+50 449.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(def handle\(arg\), do: a_rather_long_expression_that_overflows\(arg\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(def handle\(arg\),) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(  do: a_rather_long_expression_that_overflows\(arg\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 411.0000 Tm
+(Lowercase exponent letter in floats) Tj
+ET
+0.9500 g
+50 345.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 397.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+(1.0E3) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(1.0e3) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 307.0000 Tm
+(Maximum line length) Tj
+ET
+0.9500 g
+50 145.0000 742 157.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 293.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(result = some_function\(argument_one, argument_two, argument_three, argument_four, argument_five, argument_six\)) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(result =) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(  some_function\() Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(    argument_one,) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(    argument_two,) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(    argument_three,) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(    argument_four,) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(    argument_five,) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(    argument_six) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(  \)) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 17 of 45) Tj
+ET
+endstream
+endobj
+36 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 35 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+37 0 obj
+<< /Length 1502 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Multi-line expression on its own line after =) Tj
+ET
+0.9500 g
+50 425.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(x = foo\(\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(    |> bar\(\)) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(  foo\(\)) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(  |> bar\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 387.0000 Tm
+(No blank line after defmodule) Tj
+ET
+0.9500 g
+50 261.0000 742 121.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 373.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(defmodule A do) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(  def x, do: 1) Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+(defmodule A do) Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+(  def x, do: 1) Tj
+ET
+BT
+1 0 0 1 55 265.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 223.0000 Tm
+(No semicolons between statements) Tj
+ET
+0.9500 g
+50 145.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 209.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(a = 1; b = 2) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(a = 1) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(b = 2) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 18 of 45) Tj
+ET
+endstream
+endobj
+38 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 37 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+39 0 obj
+<< /Length 1445 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(No space after the ! operator) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(! ready) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(!ready) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(No space between a function name and \() Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(foo \(x\)) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(foo\(x\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(No spaces around bitstring segment options) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(<<1 ::8>>) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(<<1::8>>) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(No spaces around the range operator) Tj
+ET
+0.9500 g
+50 149.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(1 .. 2) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(1..2) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 19 of 45) Tj
+ET
+endstream
+endobj
+40 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 39 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+41 0 obj
+<< /Length 1675 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(No spaces inside brackets) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+([ 1, 2 ]) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+([1, 2]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(No trailing comma in collections) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+([1, 2,]) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+([1, 2]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(No trailing whitespace) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(x = 1   ) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(x = 1) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(One element per line in multi-line collections) Tj
+ET
+0.9500 g
+50 65.0000 742 145.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+([) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(  1, 2,) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(  3) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(]) Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+([) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(  1,) Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(  2,) Tj
+ET
+BT
+1 0 0 1 55 81.0000 Tm
+(  3) Tj
+ET
+BT
+1 0 0 1 55 69.0000 Tm
+(]) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 20 of 45) Tj
+ET
+endstream
+endobj
+42 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 41 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+43 0 obj
+<< /Length 1532 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Opening bracket stays on the assignment line) Tj
+ET
+0.9500 g
+50 377.0000 742 145.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(x =) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  [) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(    1,) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(    2) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(  ]) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(x = [) Tj
+ET
+BT
+1 0 0 1 55 405.0000 Tm
+(  1,) Tj
+ET
+BT
+1 0 0 1 55 393.0000 Tm
+(  2) Tj
+ET
+BT
+1 0 0 1 55 381.0000 Tm
+(]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 339.0000 Tm
+(Quote atoms only when required) Tj
+ET
+0.9500 g
+50 273.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 325.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(:"valid") Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+(:valid) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 235.0000 Tm
+(Single-level pipeline indentation) Tj
+ET
+0.9500 g
+50 121.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 221.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(x) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(    |> f\(\)) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(      |> g\(\)) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(x) Tj
+ET
+BT
+1 0 0 1 55 137.0000 Tm
+(|> f\(\)) Tj
+ET
+BT
+1 0 0 1 55 125.0000 Tm
+(|> g\(\)) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 21 of 45) Tj
+ET
+endstream
+endobj
+44 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 43 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+45 0 obj
+<< /Length 1428 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Space after commas) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+([1,2]) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+([1, 2]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Space after the comment marker) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(#comment) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(# comment) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Space before -> in 0-arity anonymous functions) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(fn-> :ok end) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(fn -> :ok end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Spaces around binary operators) Tj
+ET
+0.9500 g
+50 149.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(1+1) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(1 + 1) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 22 of 45) Tj
+ET
+endstream
+endobj
+46 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 45 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+47 0 obj
+<< /Length 1668 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Spaces around the -> operator) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(fn x->x end) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(fn x -> x end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Spaces around the default-argument operator) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(def f\(x \\\\0\), do: x) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(def f\(x \\\\ 0\), do: x) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Trailing newline at end of file) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(\(file ends without a newline\)) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(\(file ends with one \\n\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Two-space indentation) Tj
+ET
+0.9500 g
+50 101.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(    :ok) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(  :ok) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 23 of 45) Tj
+ET
+endstream
+endobj
+48 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 47 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+49 0 obj
+<< /Length 1226 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Unix line endings) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(a = 1\\r\\nb = 2) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(a = 1\\nb = 2) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Uppercase hexadecimal literals) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(0xabcd) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(0xABCD) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Use vertical space between definitions) Tj
+ET
+0.9500 g
+50 217.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(def a, do: 1) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(def b, do: 2) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(def a, do: 1) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(def b, do: 2) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 24 of 45) Tj
+ET
+endstream
+endobj
+50 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 49 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+51 0 obj
+<< /Length 1554 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(with clause indentation) Tj
+ET
+0.9500 g
+50 389.0000 742 133.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(with {:ok, a} <- f\(\),) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  {:ok, b} <- g\(\) do) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(  a + b) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(with {:ok, a} <- f\(\),) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(     {:ok, b} <- g\(\) do) Tj
+ET
+BT
+1 0 0 1 55 405.0000 Tm
+(  a + b) Tj
+ET
+BT
+1 0 0 1 55 393.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 349.4000 Tm
+(Naming) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Avoid one-letter variable names) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(u = get_user\(\)) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(user = get_user\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(CamelCase for modules) Tj
+ET
+0.9500 g
+50 125.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(defmodule My_app do) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+(defmodule MyApp do) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 25 of 45) Tj
+ET
+endstream
+endobj
+52 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 51 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+53 0 obj
+<< /Length 1738 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Don't shadow Kernel functions) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(def length\(list\), do: count\(list\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(def list_length\(list\), do: count\(list\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(is_ prefix for guard-safe predicates) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(defguard valid?\(x\) when x > 0) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(defguard is_valid\(x\) when x > 0) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Private function names differ from public) Tj
+ET
+0.9500 g
+50 229.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(def f\(x\), do: x) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(defp f\(x, y\), do: x + y) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(def f\(x\), do: x) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(defp do_f\(x, y\), do: x + y) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 191.0000 Tm
+(Question mark for predicate functions) Tj
+ET
+0.9500 g
+50 125.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 177.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(def is_valid\(x\), do: true) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(def valid?\(x\), do: true) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 26 of 45) Tj
+ET
+endstream
+endobj
+54 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 53 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+55 0 obj
+<< /Length 1724 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(snake_case for atoms, variables and functions) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(fooBar = 1) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(foo_bar = 1) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(snake_case for files and directories) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(lib/MyApp/UserProfile.ex) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(lib/my_app/user_profile.ex) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 317.4000 Tm
+(Modules) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 287.0000 Tm
+(Alias a long module self-reference) Tj
+ET
+0.9500 g
+50 209.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 273.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 261.0000 Tm
+(%MyApp.Deeply.Nested.Thing{}) Tj
+ET
+BT
+1 0 0 1 55 249.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 237.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 225.0000 Tm
+(alias __MODULE__, as: Thing) Tj
+ET
+BT
+1 0 0 1 55 213.0000 Tm
+(%Thing{}) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 171.0000 Tm
+(Alias the modules you use) Tj
+ET
+0.9500 g
+50 93.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 157.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 145.0000 Tm
+(MyApp.Accounts.User.changeset\(u\)) Tj
+ET
+BT
+1 0 0 1 55 133.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 121.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 109.0000 Tm
+(alias MyApp.Accounts.User) Tj
+ET
+BT
+1 0 0 1 55 97.0000 Tm
+(User.changeset\(u\)) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 27 of 45) Tj
+ET
+endstream
+endobj
+56 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 55 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+57 0 obj
+<< /Length 1725 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Avoid repetitive module names) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(MyApp.User.UserHelper) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(MyApp.User.Helper) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Consistent def line style) Tj
+ET
+0.9500 g
+50 237.0000 742 181.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(def f\(0\), do: 0) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(def f\(n\) do) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(  n + 1) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(def f\(0\) do) Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(  0) Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 265.0000 Tm
+(def f\(n\) do) Tj
+ET
+BT
+1 0 0 1 55 253.0000 Tm
+(  n + 1) Tj
+ET
+BT
+1 0 0 1 55 241.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 199.0000 Tm
+(Consistent module attribute layout) Tj
+ET
+0.9500 g
+50 85.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 185.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(alias App.X) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(use GenServer) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(@moduledoc "...") Tj
+ET
+BT
+1 0 0 1 55 137.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 125.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 113.0000 Tm
+(@moduledoc "...") Tj
+ET
+BT
+1 0 0 1 55 101.0000 Tm
+(use GenServer) Tj
+ET
+BT
+1 0 0 1 55 89.0000 Tm
+(alias App.X) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 28 of 45) Tj
+ET
+endstream
+endobj
+58 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 57 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+59 0 obj
+<< /Length 1911 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Don't shadow stdlib modules) Tj
+ET
+0.9500 g
+50 437.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(defmodule String do) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(defmodule MyApp.Text do) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 399.0000 Tm
+(Group clauses of the same function) Tj
+ET
+0.9500 g
+50 273.0000 742 121.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 385.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(def f\(1\), do: 1) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(def g\(\), do: 0) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(def f\(2\), do: 2) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(def f\(1\), do: 1) Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(def f\(2\), do: 2) Tj
+ET
+BT
+1 0 0 1 55 289.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 277.0000 Tm
+(def g\(\), do: 0) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 235.0000 Tm
+(Module name mirrors its file path) Tj
+ET
+0.9500 g
+50 169.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 221.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(lib/parser.ex defining MyApp.Lexer.Parser) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(lib/my_app/lexer/parser.ex defining MyApp.Lexer.Parser) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 131.0000 Tm
+(No explicit nil struct field defaults) Tj
+ET
+0.9500 g
+50 65.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 117.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(defstruct name: nil, age: nil) Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 81.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 69.0000 Tm
+(defstruct [:name, :age]) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 29 of 45) Tj
+ET
+endstream
+endobj
+60 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 59 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+61 0 obj
+<< /Length 1805 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Omit brackets from a defstruct keyword list) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(defstruct [name: nil, age: 0]) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(defstruct name: nil, age: 0) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(One module per file) Tj
+ET
+0.9500 g
+50 309.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(defmodule A do) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(defmodule B do) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(# A and B in separate files) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 271.0000 Tm
+(Order alias/import/require alphabetically) Tj
+ET
+0.9500 g
+50 181.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 257.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(alias App.Zebra) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(alias App.Apple) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(alias App.Apple) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(alias App.Zebra) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 143.0000 Tm
+(Use the __MODULE__ pseudo-variable) Tj
+ET
+0.9500 g
+50 77.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 129.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(%MyApp.User{name: n}) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 81.0000 Tm
+(%__MODULE__{name: n}) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 30 of 45) Tj
+ET
+endstream
+endobj
+62 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 61 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+63 0 obj
+<< /Length 1490 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Typespecs) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 495.0000 Tm
+(@spec directly before the function) Tj
+ET
+0.9500 g
+50 393.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 481.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 469.0000 Tm
+(@spec f\(\) :: :ok) Tj
+ET
+BT
+1 0 0 1 55 457.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 445.0000 Tm
+(def f, do: :ok) Tj
+ET
+BT
+1 0 0 1 55 433.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 421.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 409.0000 Tm
+(@spec f\(\) :: :ok) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(def f, do: :ok) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 355.0000 Tm
+(Keep @typedoc with its @type) Tj
+ET
+0.9500 g
+50 253.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 341.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 329.0000 Tm
+(@type t :: map\(\)) Tj
+ET
+BT
+1 0 0 1 55 317.0000 Tm
+(# …later…) Tj
+ET
+BT
+1 0 0 1 55 305.0000 Tm
+(@typedoc "a thing") Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(@typedoc "a thing") Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(@type t :: map\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Name the main type t) Tj
+ET
+0.9500 g
+50 149.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(@type user :: map\(\)) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(@type t :: map\(\)) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 31 of 45) Tj
+ET
+endstream
+endobj
+64 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 63 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+65 0 obj
+<< /Length 1909 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(One part per line in long union types) Tj
+ET
+0.9500 g
+50 329.0000 742 193.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(@type t :: :aaaaa | :bbbbb | :ccccc | :ddddd | :eeeee | :fffff | :ggggg | :hhhhh | :iiiii | :jjjjj | :kkkkk) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(@type t ::) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(        :aaaaa) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(        | :bbbbb) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(        | :ccccc) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(        | :ddddd) Tj
+ET
+BT
+1 0 0 1 55 405.0000 Tm
+(        | :eeeee) Tj
+ET
+BT
+1 0 0 1 55 393.0000 Tm
+(        | :fffff) Tj
+ET
+BT
+1 0 0 1 55 381.0000 Tm
+(        | :ggggg) Tj
+ET
+BT
+1 0 0 1 55 369.0000 Tm
+(        | :hhhhh) Tj
+ET
+BT
+1 0 0 1 55 357.0000 Tm
+(        | :iiiii) Tj
+ET
+BT
+1 0 0 1 55 345.0000 Tm
+(        | :jjjjj) Tj
+ET
+BT
+1 0 0 1 55 333.0000 Tm
+(        | :kkkkk) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 291.0000 Tm
+(Parentheses on zero-arity types) Tj
+ET
+0.9500 g
+50 225.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 277.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 265.0000 Tm
+(@type t :: foo) Tj
+ET
+BT
+1 0 0 1 55 253.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 241.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 229.0000 Tm
+(@type t :: foo\(\)) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 185.4000 Tm
+(Expressions) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 155.0000 Tm
+(Avoid needless metaprogramming) Tj
+ET
+0.9500 g
+50 89.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 141.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(defmacro add\(a, b\), do: quote\(do: unquote\(a\) + unquote\(b\)\)) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(def add\(a, b\), do: a + b) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 32 of 45) Tj
+ET
+endstream
+endobj
+66 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 65 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+67 0 obj
+<< /Length 1470 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Avoid needless pipelines) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(x |> f\(\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(f\(x\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Don't deeply nest conditionals) Tj
+ET
+0.9500 g
+50 333.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(if a do) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+(  if b, do: c) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(if a and b, do: c) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 295.0000 Tm
+(Format with/else over multiple lines) Tj
+ET
+0.9500 g
+50 157.0000 742 133.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 281.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(with {:ok, x} <- f\(\) do) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(else _ -> :error end) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(with {:ok, x} <- f\(\) do) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(else) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(  _ -> :error) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 33 of 45) Tj
+ET
+endstream
+endobj
+68 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 67 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+69 0 obj
+<< /Length 1506 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(No always-true conditionals) Tj
+ET
+0.9500 g
+50 437.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(if true do) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  go\(\)) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(go\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 399.0000 Tm
+(No anonymous functions in pipelines) Tj
+ET
+0.9500 g
+50 333.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 385.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(x |> \(fn v -> v + 1 end\).\(\)) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(x |> increment\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 295.0000 Tm
+(No else clause with unless) Tj
+ET
+0.9500 g
+50 133.0000 742 157.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 281.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(unless x do) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(  a) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(else) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(  b) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(  b) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(else) Tj
+ET
+BT
+1 0 0 1 55 149.0000 Tm
+(  a) Tj
+ET
+BT
+1 0 0 1 55 137.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 34 of 45) Tj
+ET
+endstream
+endobj
+70 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 69 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+71 0 obj
+<< /Length 1360 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(No IEx.pry in production code) Tj
+ET
+0.9500 g
+50 401.0000 742 121.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(def f\(x\) do) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  IEx.pry\(\)) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(def f\(x\) do) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(  x) Tj
+ET
+BT
+1 0 0 1 55 405.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 363.0000 Tm
+(No IO.inspect in production code) Tj
+ET
+0.9500 g
+50 297.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 349.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(value |> IO.inspect\(\) |> use\(\)) Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 301.0000 Tm
+(use\(value\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 259.0000 Tm
+(No parentheses around anonymous function arguments) Tj
+ET
+0.9500 g
+50 193.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 245.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(fn\(x\) -> x end) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(fn x -> x end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 35 of 45) Tj
+ET
+endstream
+endobj
+72 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 71 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+73 0 obj
+<< /Length 1442 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(No parentheses around if/unless conditions) Tj
+ET
+0.9500 g
+50 413.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(if\(ready\) do) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(  go\(\)) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(if ready do) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(  go\(\)) Tj
+ET
+BT
+1 0 0 1 55 417.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 375.0000 Tm
+(No redundant parentheses) Tj
+ET
+0.9500 g
+50 309.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 361.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(\(1 + 2\)) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 313.0000 Tm
+(1 + 2) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 271.0000 Tm
+(No unless with a negated condition) Tj
+ET
+0.9500 g
+50 157.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 257.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(unless not ready do) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(  go\(\)) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(if ready do) Tj
+ET
+BT
+1 0 0 1 55 173.0000 Tm
+(  go\(\)) Tj
+ET
+BT
+1 0 0 1 55 161.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 36 of 45) Tj
+ET
+endstream
+endobj
+74 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 73 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+75 0 obj
+<< /Length 1670 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Omit brackets from keyword lists) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(foo\([a: 1]\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(foo\(a: 1\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Omit else that returns nil) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(if x, do: a, else: nil) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(if x, do: a) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Omit parentheses on zero-argument definitions) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(def go\(\), do: :ok) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(def go, do: :ok) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Parentheses around definition arguments) Tj
+ET
+0.9500 g
+50 101.0000 742 109.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(def add a, b do) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(  a + b) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(def add\(a, b\) do) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(  a + b) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(end) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 37 of 45) Tj
+ET
+endstream
+endobj
+76 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 75 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+77 0 obj
+<< /Length 1524 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Parentheses on function calls with arguments) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(rem 10, 3) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(rem\(10, 3\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Parentheses on piped one-arity calls) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(x |> Enum.reverse) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(x |> Enum.reverse\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Parentheses on zero-arity function calls) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(DateTime.utc_now) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(DateTime.utc_now\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Shorthand map syntax for atom keys) Tj
+ET
+0.9500 g
+50 149.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(%{:a => 1, :b => 2}) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(%{a: 1, b: 2}) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 38 of 45) Tj
+ET
+endstream
+endobj
+78 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 77 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+79 0 obj
+<< /Length 1610 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Start pipe chains with a raw value) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(Repo.all\(query\) |> Enum.map\(&f/1\)) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(query |> Repo.all\(\) |> Enum.map\(&f/1\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Use <> to match binaries) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(<<"foo", rest::binary>> = str) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+("foo" <> rest = str) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Use and/or/not for boolean checks) Tj
+ET
+0.9500 g
+50 253.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(ready && ok) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(ready and ok) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 215.0000 Tm
+(Use do: for single-line if/unless) Tj
+ET
+0.9500 g
+50 125.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 201.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(if x do) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(  a) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(if x, do: a) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 39 of 45) Tj
+ET
+endstream
+endobj
+80 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 79 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+81 0 obj
+<< /Length 1746 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Use keyword-list shorthand) Tj
+ET
+0.9500 g
+50 461.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+([{:a, 1}, {:b, 2}]) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+([a: 1, b: 2]) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 423.0000 Tm
+(Use pipelines for chained calls) Tj
+ET
+0.9500 g
+50 357.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 409.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(f\(g\(h\(x\)\)\)) Tj
+ET
+BT
+1 0 0 1 55 385.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+(x |> h\(\) |> g\(\) |> f\(\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 319.0000 Tm
+(Use true as the last cond clause) Tj
+ET
+0.9500 g
+50 181.0000 742 133.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 305.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(cond do) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(  x -> 1) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(  :else -> 2) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(cond do) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(  x -> 1) Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(  true -> 2) Tj
+ET
+BT
+1 0 0 1 55 185.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 143.0000 Tm
+(Verbose map syntax for non-atom keys) Tj
+ET
+0.9500 g
+50 77.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 129.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(%{"b" => 2, a: 1}) Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 81.0000 Tm
+(%{"b" => 2, :a => 1}) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 40 of 45) Tj
+ET
+endstream
+endobj
+82 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 81 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+83 0 obj
+<< /Length 1682 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Documentation) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 495.0000 Tm
+(@moduledoc false when undocumented) Tj
+ET
+0.9500 g
+50 393.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 481.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 469.0000 Tm
+(defmodule Internal do) Tj
+ET
+BT
+1 0 0 1 55 457.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 445.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 433.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 421.0000 Tm
+(defmodule Internal do) Tj
+ET
+BT
+1 0 0 1 55 409.0000 Tm
+(  @moduledoc false) Tj
+ET
+BT
+1 0 0 1 55 397.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 355.0000 Tm
+(Always include @moduledoc) Tj
+ET
+0.9500 g
+50 229.0000 742 121.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 341.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 329.0000 Tm
+(defmodule X do) Tj
+ET
+BT
+1 0 0 1 55 317.0000 Tm
+(  def f, do: 1) Tj
+ET
+BT
+1 0 0 1 55 305.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 269.0000 Tm
+(defmodule X do) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(  @moduledoc "…") Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(  def f, do: 1) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 191.0000 Tm
+(Blank line after @moduledoc) Tj
+ET
+0.9500 g
+50 89.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 177.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 165.0000 Tm
+(@moduledoc "X") Tj
+ET
+BT
+1 0 0 1 55 153.0000 Tm
+(def f, do: 1) Tj
+ET
+BT
+1 0 0 1 55 141.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+(@moduledoc "X") Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(def f, do: 1) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 41 of 45) Tj
+ET
+endstream
+endobj
+84 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 83 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+85 0 obj
+<< /Length 1387 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Use heredocs for documentation) Tj
+ET
+0.9500 g
+50 425.0000 742 97.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(@doc "line one\\nline two") Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(@doc """) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(line one) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(line two) Tj
+ET
+BT
+1 0 0 1 55 429.0000 Tm
+(""") Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 385.4000 Tm
+(Comments) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 355.0000 Tm
+(Avoid superfluous comments) Tj
+ET
+0.9500 g
+50 277.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 341.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 329.0000 Tm
+(# increment counter) Tj
+ET
+BT
+1 0 0 1 55 317.0000 Tm
+(counter = counter + 1) Tj
+ET
+BT
+1 0 0 1 55 305.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 293.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 281.0000 Tm
+(counter = counter + 1) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 239.0000 Tm
+(Capitalise and punctuate comments) Tj
+ET
+0.9500 g
+50 173.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 225.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 213.0000 Tm
+(# round the total) Tj
+ET
+BT
+1 0 0 1 55 201.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 189.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 177.0000 Tm
+(# Round the total.) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 42 of 45) Tj
+ET
+endstream
+endobj
+86 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 85 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+87 0 obj
+<< /Length 1923 >>
+stream
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 527.0000 Tm
+(Comments only for important details) Tj
+ET
+0.9500 g
+50 437.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 513.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 501.0000 Tm
+(# add one to x) Tj
+ET
+BT
+1 0 0 1 55 489.0000 Tm
+(x = x + 1) Tj
+ET
+BT
+1 0 0 1 55 477.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 465.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 453.0000 Tm
+(# round half-up for legacy invoices) Tj
+ET
+BT
+1 0 0 1 55 441.0000 Tm
+(x = round_up\(x\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 399.0000 Tm
+(Limit comment lines to 100 characters) Tj
+ET
+0.9500 g
+50 321.0000 742 73.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 385.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 373.0000 Tm
+(# one very long comment line that runs well past the hundred-character limit and keeps going) Tj
+ET
+BT
+1 0 0 1 55 361.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 349.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 337.0000 Tm
+(# A shorter comment,) Tj
+ET
+BT
+1 0 0 1 55 325.0000 Tm
+(# wrapped across lines.) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 283.0000 Tm
+(Prefer @doc/@moduledoc over comments) Tj
+ET
+0.9500 g
+50 193.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 269.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 257.0000 Tm
+(# Adds two numbers) Tj
+ET
+BT
+1 0 0 1 55 245.0000 Tm
+(def add\(a, b\), do: a + b) Tj
+ET
+BT
+1 0 0 1 55 233.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 221.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 209.0000 Tm
+(@doc "Adds two numbers") Tj
+ET
+BT
+1 0 0 1 55 197.0000 Tm
+(def add\(a, b\), do: a + b) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 155.0000 Tm
+(Uppercase annotation keywords \(TODO/FIXME/…\)) Tj
+ET
+0.9500 g
+50 89.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 141.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 129.0000 Tm
+(# fix this later) Tj
+ET
+BT
+1 0 0 1 55 117.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 105.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 93.0000 Tm
+(# FIXME: handle the timeout case) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 43 of 45) Tj
+ET
+endstream
+endobj
+88 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 87 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+89 0 obj
+<< /Length 1768 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Testing) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 495.0000 Tm
+(Expected value on the right in assertions) Tj
+ET
+0.9500 g
+50 429.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 481.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 469.0000 Tm
+(assert 200 == status) Tj
+ET
+BT
+1 0 0 1 55 457.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 445.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 433.0000 Tm
+(assert status == 200) Tj
+ET
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 389.4000 Tm
+(Exceptions) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 359.0000 Tm
+(Error suffix for exception modules) Tj
+ET
+0.9500 g
+50 269.0000 742 85.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 345.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 333.0000 Tm
+(defmodule App.BadInput do) Tj
+ET
+BT
+1 0 0 1 55 321.0000 Tm
+(end) Tj
+ET
+BT
+1 0 0 1 55 309.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 297.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 285.0000 Tm
+(defmodule App.BadInputError do) Tj
+ET
+BT
+1 0 0 1 55 273.0000 Tm
+(end) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 231.0000 Tm
+(Lowercase exception messages) Tj
+ET
+0.9500 g
+50 165.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 217.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 205.0000 Tm
+(raise "Invalid input") Tj
+ET
+BT
+1 0 0 1 55 193.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 181.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 169.0000 Tm
+(raise "invalid input") Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 127.0000 Tm
+(No trailing punctuation in exception messages) Tj
+ET
+0.9500 g
+50 61.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 113.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 101.0000 Tm
+(raise "invalid input.") Tj
+ET
+BT
+1 0 0 1 55 89.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 77.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 65.0000 Tm
+(raise "invalid input") Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 44 of 45) Tj
+ET
+endstream
+endobj
+90 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 89 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+91 0 obj
+<< /Length 1579 >>
+stream
+0.0000 g
+/F1 12 Tf
+BT
+1 0 0 1 50 525.4000 Tm
+(Regex) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 495.0000 Tm
+(Prefer pattern matching over regular expressions) Tj
+ET
+0.9500 g
+50 429.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 481.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 469.0000 Tm
+(Regex.match?\(~r/^foo/, s\)) Tj
+ET
+BT
+1 0 0 1 55 457.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 445.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 433.0000 Tm
+(match?\("foo" <> _, s\)) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 391.0000 Tm
+(Use \\A and \\z for string boundaries) Tj
+ET
+0.9500 g
+50 325.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 377.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 365.0000 Tm
+(~r/^foo$/) Tj
+ET
+BT
+1 0 0 1 55 353.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 341.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 329.0000 Tm
+(~r/\\Afoo\\z/) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 287.0000 Tm
+(Use non-capturing regex groups) Tj
+ET
+0.9500 g
+50 221.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 273.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 261.0000 Tm
+(~r/\(foo|bar\)/) Tj
+ET
+BT
+1 0 0 1 55 249.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 237.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 225.0000 Tm
+(~r/\(?:foo|bar\)/) Tj
+ET
+0.0000 g
+/F1 10 Tf
+BT
+1 0 0 1 50 183.0000 Tm
+(Use the ~r sigil for regexes) Tj
+ET
+0.9500 g
+50 117.0000 742 61.0000 re
+f
+0.0000 g
+/F2 9 Tf
+BT
+1 0 0 1 55 169.0000 Tm
+(# bad) Tj
+ET
+BT
+1 0 0 1 55 157.0000 Tm
+(Regex.compile!\("foo"\)) Tj
+ET
+BT
+1 0 0 1 55 145.0000 Tm
+() Tj
+ET
+BT
+1 0 0 1 55 133.0000 Tm
+(# good) Tj
+ET
+BT
+1 0 0 1 55 121.0000 Tm
+(~r/foo/) Tj
+ET
+0.5000 g
+/F1 8 Tf
+BT
+1 0 0 1 50 28 Tm
+(Page 45 of 45) Tj
+ET
+endstream
+endobj
+92 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [ 0 0 842 595 ] /Contents 91 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Courier >> >> >> >>
+endobj
+xref
+0 93
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000424 00000 n 
+0000002141 00000 n 
+0000002318 00000 n 
+0000009621 00000 n 
+0000009798 00000 n 
+0000016234 00000 n 
+0000016411 00000 n 
+0000022853 00000 n 
+0000023031 00000 n 
+0000027688 00000 n 
+0000027867 00000 n 
+0000031494 00000 n 
+0000031673 00000 n 
+0000036779 00000 n 
+0000036958 00000 n 
+0000039024 00000 n 
+0000039203 00000 n 
+0000045068 00000 n 
+0000045247 00000 n 
+0000050040 00000 n 
+0000050219 00000 n 
+0000055546 00000 n 
+0000055725 00000 n 
+0000059004 00000 n 
+0000059240 00000 n 
+0000060669 00000 n 
+0000060905 00000 n 
+0000062623 00000 n 
+0000062859 00000 n 
+0000064342 00000 n 
+0000064578 00000 n 
+0000066142 00000 n 
+0000066378 00000 n 
+0000068174 00000 n 
+0000068410 00000 n 
+0000069965 00000 n 
+0000070201 00000 n 
+0000071699 00000 n 
+0000071935 00000 n 
+0000073663 00000 n 
+0000073899 00000 n 
+0000075484 00000 n 
+0000075720 00000 n 
+0000077201 00000 n 
+0000077437 00000 n 
+0000079158 00000 n 
+0000079394 00000 n 
+0000080673 00000 n 
+0000080909 00000 n 
+0000082516 00000 n 
+0000082752 00000 n 
+0000084543 00000 n 
+0000084779 00000 n 
+0000086556 00000 n 
+0000086792 00000 n 
+0000088570 00000 n 
+0000088806 00000 n 
+0000090770 00000 n 
+0000091006 00000 n 
+0000092864 00000 n 
+0000093100 00000 n 
+0000094643 00000 n 
+0000094879 00000 n 
+0000096841 00000 n 
+0000097077 00000 n 
+0000098600 00000 n 
+0000098836 00000 n 
+0000100395 00000 n 
+0000100631 00000 n 
+0000102044 00000 n 
+0000102280 00000 n 
+0000103775 00000 n 
+0000104011 00000 n 
+0000105734 00000 n 
+0000105970 00000 n 
+0000107547 00000 n 
+0000107783 00000 n 
+0000109446 00000 n 
+0000109682 00000 n 
+0000111481 00000 n 
+0000111717 00000 n 
+0000113452 00000 n 
+0000113688 00000 n 
+0000115128 00000 n 
+0000115364 00000 n 
+0000117340 00000 n 
+0000117576 00000 n 
+0000119397 00000 n 
+0000119633 00000 n 
+0000121265 00000 n 
+trailer
+<< /Size 93 /Root 1 0 R >>
+startxref
+121501
+
+%%EOF
