@@ -8,6 +8,7 @@ defmodule Mix.Tasks.GreenValidation.FetchStyleGuides do
 
   @shortdoc "Vendors the prose style guides' markdown"
   def run(args) do
+    Mix.Task.run("app.start")
     FetchStyleGuides.main(args)
   end
 end
