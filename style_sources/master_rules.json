@@ -1,0 +1,170 @@
+[
+  {
+    "id": "spaces_around_binary_operators",
+    "description": "Surround binary operators with a single space, e.g. `1 + 1`.",
+    "title": "Spaces around binary operators",
+    "category": "formatting"
+  },
+  {
+    "id": "no_spaces_around_range_operator",
+    "description": "Write ranges without surrounding spaces, e.g. `1..2`.",
+    "title": "No spaces around the range operator",
+    "category": "formatting"
+  },
+  {
+    "id": "two_space_indentation",
+    "description": "Indent with two spaces per level; never use tabs.",
+    "title": "Two-space indentation",
+    "category": "formatting"
+  },
+  {
+    "id": "max_line_length",
+    "description": "Keep lines within a maximum length (98 columns for `mix format`).",
+    "title": "Maximum line length",
+    "category": "formatting"
+  },
+  {
+    "id": "no_trailing_whitespace",
+    "description": "Strip whitespace from the end of lines.",
+    "title": "No trailing whitespace",
+    "category": "formatting"
+  },
+  {
+    "id": "spaces_after_commas",
+    "description": "Put a single space after each comma and none before it.",
+    "title": "Space after commas",
+    "category": "formatting"
+  },
+  {
+    "id": "collapse_consecutive_blank_lines",
+    "description": "Squeeze multiple blank lines into a single blank line.",
+    "title": "Collapse consecutive blank lines",
+    "category": "formatting"
+  },
+  {
+    "id": "comment_leading_space",
+    "description": "Write comments as `# comment`, with one space after the `#`.",
+    "title": "Space after the comment marker",
+    "category": "formatting"
+  },
+  {
+    "id": "digit_grouping_underscores",
+    "description": "Use underscores to group digits in numbers over five digits, e.g. `1_000_000`.",
+    "title": "Group digits in large numbers",
+    "category": "formatting"
+  },
+  {
+    "id": "uppercase_hex_literals",
+    "description": "Write hexadecimal digits in uppercase, e.g. `0xABCD`.",
+    "title": "Uppercase hexadecimal literals",
+    "category": "formatting"
+  },
+  {
+    "id": "unix_line_endings",
+    "description": "Use `\\n` line endings; convert `\\r\\n` to `\\n`.",
+    "title": "Unix line endings",
+    "category": "formatting"
+  },
+  {
+    "id": "trailing_newline",
+    "description": "End every file with a single trailing newline.",
+    "title": "Trailing newline at end of file",
+    "category": "formatting"
+  },
+  {
+    "id": "snake_case_atoms_and_variables",
+    "description": "Name atoms, variables and functions in snake_case.",
+    "title": "snake_case for atoms, variables and functions",
+    "category": "naming"
+  },
+  {
+    "id": "camel_case_modules",
+    "description": "Name modules in CamelCase (PascalCase).",
+    "title": "CamelCase for modules",
+    "category": "naming"
+  },
+  {
+    "id": "predicate_function_question_mark",
+    "description": "Name boolean-returning functions with a trailing `?` and no `is_` prefix.",
+    "title": "Question mark for predicate functions",
+    "category": "naming"
+  },
+  {
+    "id": "avoid_one_letter_variables",
+    "description": "Prefer descriptive names over single letters.",
+    "title": "Avoid one-letter variable names",
+    "category": "naming"
+  },
+  {
+    "id": "alphabetical_alias_order",
+    "description": "Sort module references (alias, import, require, use) alphabetically.",
+    "title": "Order alias/import/require alphabetically",
+    "category": "modules"
+  },
+  {
+    "id": "module_pseudo_variable",
+    "description": "Refer to the current module with `__MODULE__` rather than its full name.",
+    "title": "Use the __MODULE__ pseudo-variable",
+    "category": "modules"
+  },
+  {
+    "id": "module_attribute_layout",
+    "description": "Order module-level forms consistently: @moduledoc, use, import, alias, require, then attributes.",
+    "title": "Consistent module attribute layout",
+    "category": "modules"
+  },
+  {
+    "id": "pipeline_for_chains",
+    "description": "Use the pipe operator for chains of function calls.",
+    "title": "Use pipelines for chained calls",
+    "category": "expressions"
+  },
+  {
+    "id": "no_pipeline_for_single_call",
+    "description": "Do not use a pipeline for a single function call.",
+    "title": "Avoid needless pipelines",
+    "category": "expressions"
+  },
+  {
+    "id": "no_anonymous_functions_in_pipelines",
+    "description": "Do not invoke anonymous functions directly inside a pipeline.",
+    "title": "No anonymous functions in pipelines",
+    "category": "expressions"
+  },
+  {
+    "id": "no_else_in_unless",
+    "description": "Never use `unless` with an `else` branch; rewrite as `if`.",
+    "title": "No else clause with unless",
+    "category": "expressions"
+  },
+  {
+    "id": "true_as_last_cond_clause",
+    "description": "Use `true` (not `:else` or similar) for the catch-all `cond` clause.",
+    "title": "Use true as the last cond clause",
+    "category": "expressions"
+  },
+  {
+    "id": "parentheses_on_zero_arity_calls",
+    "description": "Call zero-arity functions with parentheses, e.g. `foo()`.",
+    "title": "Parentheses on zero-arity function calls",
+    "category": "expressions"
+  },
+  {
+    "id": "exception_error_suffix",
+    "description": "Name exception modules with an `Error` suffix.",
+    "title": "Error suffix for exception modules",
+    "category": "exceptions"
+  },
+  {
+    "id": "lowercase_exception_messages",
+    "description": "Begin exception messages with a lowercase letter.",
+    "title": "Lowercase exception messages",
+    "category": "exceptions"
+  },
+  {
+    "id": "no_trailing_punctuation_in_exception_messages",
+    "description": "Do not end exception messages with punctuation.",
+    "title": "No trailing punctuation in exception messages",
+    "category": "exceptions"
+  }
+]

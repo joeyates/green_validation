@@ -1,0 +1,755 @@
+{
+  "sources": [
+    {
+      "id": "mix_format",
+      "name": "mix format",
+      "repo_url": "https://github.com/elixir-lang/elixir"
+    },
+    {
+      "id": "lexmag",
+      "name": "Lexmag's Elixir Style Guide",
+      "repo_url": "https://github.com/lexmag/elixir-style-guide"
+    },
+    {
+      "id": "credo",
+      "name": "Credo's Elixir Style Guide",
+      "repo_url": "https://github.com/rrrene/elixir-style-guide"
+    },
+    {
+      "id": "christopher_adams",
+      "name": "The Elixir Style Guide",
+      "repo_url": "https://github.com/christopheradams/elixir_style_guide"
+    }
+  ],
+  "rules": [
+    {
+      "id": "spaces_around_binary_operators",
+      "title": "Spaces around binary operators",
+      "sources": {
+        "mix_format": {
+          "reference": "code/formatter.ex — binary operator spacing",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "no_spaces_around_range_operator",
+      "title": "No spaces around the range operator",
+      "sources": {
+        "mix_format": {
+          "reference": "code/formatter.ex @no_space_binary_operators",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#no-spaces",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-spaces-in-code",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "two_space_indentation",
+      "title": "Two-space indentation",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#spaces-indentation",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-indentation",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "lexmag",
+        "credo"
+      ]
+    },
+    {
+      "id": "max_line_length",
+      "title": "Maximum line length",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-length",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#character-per-line-limit",
+          "proposed": true
+        },
+        "lexmag": {
+          "proposed": false
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "no_trailing_whitespace",
+      "title": "No trailing whitespace",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#trailing-whitespace",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#no-trailing-whitespace",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-trailing-whitespaces",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "spaces_after_commas",
+      "title": "Space after commas",
+      "sources": {
+        "mix_format": {
+          "reference": "code/formatter.ex — collection element spacing",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#spaces",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#spaces-in-code",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "collapse_consecutive_blank_lines",
+      "title": "Collapse consecutive blank lines",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (newlines)",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "proposed": false
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format"
+      ]
+    },
+    {
+      "id": "comment_leading_space",
+      "title": "Space after the comment marker",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — Code comments",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#comment-leading-spaces",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#leading-space-comment",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "digit_grouping_underscores",
+      "title": "Group digits in large numbers",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#underscores-in-numerics",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#underscores-in-numerics",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag",
+        "credo"
+      ]
+    },
+    {
+      "id": "uppercase_hex_literals",
+      "title": "Uppercase hexadecimal literals",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — Keeping user's formatting (numbers)",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#hex-literals",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "lexmag"
+      ]
+    },
+    {
+      "id": "unix_line_endings",
+      "title": "Unix line endings",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — Newlines converted to \\n",
+          "proposed": true
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#line-endings",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#line-endings",
+          "proposed": true
+        },
+        "lexmag": {
+          "proposed": false
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "mix_format",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "trailing_newline",
+      "title": "Trailing newline at end of file",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#newline-eof",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#newline-eof",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#newline-eof",
+          "proposed": true
+        }
+      },
+      "category": "formatting",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "snake_case_atoms_and_variables",
+      "title": "snake_case for atoms, variables and functions",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — does not hard code names",
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#snake-case",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#snake-case-attributes-functions-macros-vars",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#snake-case-atoms-funs-vars-attrs",
+          "proposed": true
+        }
+      },
+      "category": "naming",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "camel_case_modules",
+      "title": "CamelCase for modules",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#camel-case",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#camelcase-modules",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#camelcase-modules",
+          "proposed": true
+        }
+      },
+      "category": "naming",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "predicate_function_question_mark",
+      "title": "Question mark for predicate functions",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#predicate-function-trailing-question-mark",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#predicates",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#predicate-funs-name",
+          "proposed": true
+        }
+      },
+      "category": "naming",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "avoid_one_letter_variables",
+      "title": "Avoid one-letter variable names",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#one-letter-var",
+          "proposed": true
+        }
+      },
+      "category": "naming",
+      "proposed_by": [
+        "lexmag"
+      ]
+    },
+    {
+      "id": "alphabetical_alias_order",
+      "title": "Order alias/import/require alphabetically",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "proposed": false
+        }
+      },
+      "category": "modules",
+      "proposed_by": []
+    },
+    {
+      "id": "module_pseudo_variable",
+      "title": "Use the __MODULE__ pseudo-variable",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-pseudo-variable",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#reference-current-module",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#current-module-reference",
+          "proposed": true
+        }
+      },
+      "category": "modules",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "module_attribute_layout",
+      "title": "Consistent module attribute layout",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#module-attribute-ordering",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#module-layout",
+          "proposed": true
+        }
+      },
+      "category": "modules",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "pipeline_for_chains",
+      "title": "Use pipelines for chained calls",
+      "sources": {
+        "mix_format": {
+          "reference": "code.ex Code.format_string!/2 docs — never changes semantics",
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#pipe-operator",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#pipeline-operator",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "no_pipeline_for_single_call",
+      "title": "Avoid needless pipelines",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#avoid-single-pipelines",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#needless-pipeline",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "no_anonymous_functions_in_pipelines",
+      "title": "No anonymous functions in pipelines",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "proposed": false
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#anonymous-pipeline",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag"
+      ]
+    },
+    {
+      "id": "no_else_in_unless",
+      "title": "No else clause with unless",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#unless-with-else",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#no-unless-with-else",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#no-else-with-unless",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "true_as_last_cond_clause",
+      "title": "Use true as the last cond clause",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#true-as-last-condition",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#true-in-cond",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "parentheses_on_zero_arity_calls",
+      "title": "Parentheses on zero-arity function calls",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#parentheses-and-functions-with-zero-arity",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#zero-arity-parens",
+          "proposed": true
+        }
+      },
+      "category": "expressions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "exception_error_suffix",
+      "title": "Error suffix for exception modules",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#exception-names",
+          "proposed": true
+        },
+        "credo": {
+          "reference": "https://github.com/rrrene/elixir-style-guide#exception-naming",
+          "proposed": true
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-naming",
+          "proposed": true
+        }
+      },
+      "category": "exceptions",
+      "proposed_by": [
+        "lexmag",
+        "credo",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "lowercase_exception_messages",
+      "title": "Lowercase exception messages",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+          "proposed": true
+        }
+      },
+      "category": "exceptions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    },
+    {
+      "id": "no_trailing_punctuation_in_exception_messages",
+      "title": "No trailing punctuation in exception messages",
+      "sources": {
+        "mix_format": {
+          "proposed": false
+        },
+        "christopher_adams": {
+          "reference": "https://github.com/christopheradams/elixir_style_guide#lowercase-error-messages",
+          "proposed": true
+        },
+        "credo": {
+          "proposed": false
+        },
+        "lexmag": {
+          "reference": "https://github.com/lexmag/elixir-style-guide#exception-message",
+          "proposed": true
+        }
+      },
+      "category": "exceptions",
+      "proposed_by": [
+        "lexmag",
+        "christopher_adams"
+      ]
+    }
+  ],
+  "generated_with": {
+    "elixir_version": "1.19.5"
+  },
+  "rules_with_no_source": [
+    "alphabetical_alias_order"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "source": {
+    "id": "credo",
+    "name": "Credo's Elixir Style Guide",
+    "repo_url": "https://github.com/rrrene/elixir-style-guide"
+  },
+  "unmapped": [
+    {
+      "anchor": "alias-modules"
+    },
+    {
+      "anchor": "avoid-double-negations"
+    },
+    {
+      "anchor": "caret-and-dollar-regex"
+    },
+    {
+      "anchor": "conditional-parens"
+    },
+    {
+      "anchor": "debugging-conditionals"
+    },
+    {
+      "anchor": "doc-comments"
+    },
+    {
+      "anchor": "doc-comments-on-own-lines"
+    },
+    {
+      "anchor": "doc-false"
+    },
+    {
+      "anchor": "doc-style"
+    },
+    {
+      "anchor": "documentation"
+    },
+    {
+      "anchor": "exdoc"
+    },
+    {
+      "anchor": "fixme"
+    },
+    {
+      "anchor": "function-calling-parens"
+    },
+    {
+      "anchor": "function-parens"
+    },
+    {
+      "anchor": "group-function-definitions"
+    },
+    {
+      "anchor": "iex-pry"
+    },
+    {
+      "anchor": "io-inspect"
+    },
+    {
+      "anchor": "kernel-functions"
+    },
+    {
+      "anchor": "macro-parens"
+    },
+    {
+      "anchor": "multi-line-call"
+    },
+    {
+      "anchor": "no-nested-conditionals"
+    },
+    {
+      "anchor": "no-space-bang"
+    },
+    {
+      "anchor": "pipe-chains"
+    },
+    {
+      "anchor": "regex-sigils"
+    },
+    {
+      "anchor": "semicolon-between-statements"
+    },
+    {
+      "anchor": "sigils"
+    },
+    {
+      "anchor": "spaces-braces"
+    },
+    {
+      "anchor": "stdlib-modules"
+    },
+    {
+      "anchor": "todo"
+    },
+    {
+      "anchor": "vertical-space"
+    }
+  ],
+  "rules": [
+    {
+      "id": "two_space_indentation",
+      "reference": "https://github.com/rrrene/elixir-style-guide#spaces-indentation",
+      "proposed": true
+    },
+    {
+      "id": "unix_line_endings",
+      "reference": "https://github.com/rrrene/elixir-style-guide#line-endings",
+      "proposed": true
+    },
+    {
+      "id": "no_trailing_whitespace",
+      "reference": "https://github.com/rrrene/elixir-style-guide#no-trailing-whitespace",
+      "proposed": true
+    },
+    {
+      "id": "trailing_newline",
+      "reference": "https://github.com/rrrene/elixir-style-guide#newline-eof",
+      "proposed": true
+    },
+    {
+      "id": "spaces_around_binary_operators",
+      "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
+      "proposed": true
+    },
+    {
+      "id": "spaces_after_commas",
+      "reference": "https://github.com/rrrene/elixir-style-guide#spaces-operators",
+      "proposed": true
+    },
+    {
+      "id": "max_line_length",
+      "reference": "https://github.com/rrrene/elixir-style-guide#character-per-line-limit",
+      "proposed": true
+    },
+    {
+      "id": "digit_grouping_underscores",
+      "reference": "https://github.com/rrrene/elixir-style-guide#underscores-in-numerics",
+      "proposed": true
+    },
+    {
+      "id": "camel_case_modules",
+      "reference": "https://github.com/rrrene/elixir-style-guide#camelcase-modules",
+      "proposed": true
+    },
+    {
+      "id": "snake_case_atoms_and_variables",
+      "reference": "https://github.com/rrrene/elixir-style-guide#snake-case-attributes-functions-macros-vars",
+      "proposed": true
+    },
+    {
+      "id": "exception_error_suffix",
+      "reference": "https://github.com/rrrene/elixir-style-guide#exception-naming",
+      "proposed": true
+    },
+    {
+      "id": "predicate_function_question_mark",
+      "reference": "https://github.com/rrrene/elixir-style-guide#predicates",
+      "proposed": true
+    },
+    {
+      "id": "module_pseudo_variable",
+      "reference": "https://github.com/rrrene/elixir-style-guide#reference-current-module",
+      "proposed": true
+    },
+    {
+      "id": "no_else_in_unless",
+      "reference": "https://github.com/rrrene/elixir-style-guide#no-unless-with-else",
+      "proposed": true
+    }
+  ]
+}

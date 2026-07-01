@@ -1,0 +1,17 @@
+[
+  {
+    "id": "lexmag",
+    "branch": "master",
+    "raw_url": "https://raw.githubusercontent.com/lexmag/elixir-style-guide/master/README.md"
+  },
+  {
+    "id": "credo",
+    "branch": "master",
+    "raw_url": "https://raw.githubusercontent.com/rrrene/elixir-style-guide/master/README.md"
+  },
+  {
+    "id": "christopher_adams",
+    "branch": "master",
+    "raw_url": "https://raw.githubusercontent.com/christopheradams/elixir_style_guide/master/README.md"
+  }
+]
